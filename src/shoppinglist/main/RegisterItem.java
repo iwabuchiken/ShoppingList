@@ -123,7 +123,7 @@ public class RegisterItem extends Activity {
 		//
 		bt.setOnClickListener(new OnClickListener(){
 
-			@Override
+//			@Override
 			public void onClick(View v) {
 				// Get views
 //				EditText et_store = (EditText) findViewById(R.id.v1_et_store);
@@ -209,7 +209,7 @@ public class RegisterItem extends Activity {
 
 		bt.setOnTouchListener(new OnTouchListener(){
 
-			@Override
+//			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 				// TODO 自動生成されたメソッド・スタブ
 				switch (event.getActionMasked()) {

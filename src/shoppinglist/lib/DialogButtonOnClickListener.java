@@ -41,7 +41,7 @@ public class DialogButtonOnClickListener implements OnClickListener {
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
 	}
 
-	@Override
+//	@Override
 	public void onClick(View v) {
 		//
 		Methods.DialogTags tag_name = (Methods.DialogTags) v.getTag();
