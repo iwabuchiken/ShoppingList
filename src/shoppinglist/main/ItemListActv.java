@@ -7,6 +7,7 @@ import java.util.List;
 import shoppinglist.listeners.ButtonOnClickListener;
 import shoppinglist.listeners.ButtonOnTouchListener;
 import shoppinglist.main.R;
+import shoppinglist.utils.DBManager;
 import shoppinglist.utils.Methods;
 
 import android.app.ListActivity;

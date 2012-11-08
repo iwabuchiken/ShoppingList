@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 
 import shoppinglist.listeners.ButtonOnClickListener;
 import shoppinglist.listeners.ButtonOnTouchListener;
+import shoppinglist.utils.DBManager;
 import shoppinglist.utils.Methods;
 
 import android.app.Activity;
@@ -30,6 +31,19 @@ import android.widget.Toast;
 public class SLActv extends Activity {
 	
 	public static Vibrator vib;
+
+	/*********************************
+	 * Paths
+	 *********************************/
+	String dirName_ExternalStorage = "/mnt/sdcard-ext";
+
+	String dirPath_db = "/data/data/shoppinglist.main/databases";
+
+	String fileName_db_backup_trunk = "shoppinglist_backup";
+
+	String fileName_db_backup_ext = ".bk";
+
+	String dirPath_db_backup = dirName_ExternalStorage + "/ShoppingList_backup";
 	
 //	public static String[] registerItems = {"•i•¨", "“X•Ü", "ƒWƒƒƒ“ƒ‹"};
 	
@@ -62,23 +76,59 @@ public class SLActv extends Activity {
 		add_listeners();
         
         //debug
-		backup_db();
+//		backup_db();
+//        debug_restore_db();
+        
 		
     }//public void onCreate(Bundle savedInstanceState)
 
     
+	private void debug_restore_db() {
+		/*********************************
+		 * memo
+		 *********************************/
+		String src = StringUtils.join(
+				new String[]{this.dirPath_db_backup,
+						"shoppinglist_backup_20121108_122426.bk"},
+				File.separator);
+		
+		String dst = StringUtils.join(
+				new String[]{this.dirPath_db,
+						DBManager.name},
+				File.separator);
+		
+		// Restore db
+		Methods.restore_db(this, DBManager.name, src, dst);
+		
+		
+		File f = new File(this.dirPath_db);
+		
+		String[] f_list = f.list();
+		
+		for (String fname : f_list) {
+			
+			// Log
+			Log.d("SLActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "fname=" + fname);
+			
+		}
+		
+	}//
+
+
 	private void backup_db() {
 		/*----------------------------
 		 * memo
 			----------------------------*/
-		String dirName_ExternalStorage = "/mnt/sdcard-ext";
+//		String dirName_ExternalStorage = "/mnt/sdcard-ext";
 		
-		String dirPath_db_backup = dirName_ExternalStorage + "/ShoppingList_backup";
+//		String dirPath_db_backup = dirName_ExternalStorage + "/ShoppingList_backup";
 
-		String dirPath_db = "/data/data/shoppinglist.main/databases";
+//		String dirPath_db = "/data/data/shoppinglist.main/databases";
 		
-		String fileName_db_backup_trunk = "shoppinglist_backup";
-		String fileName_db_backup_ext = ".bk";
+//		String fileName_db_backup_trunk = "shoppinglist_backup";
+//		String fileName_db_backup_ext = ".bk";
 
 		
 		
