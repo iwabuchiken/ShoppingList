@@ -12,7 +12,7 @@
         android:icon="@drawable/icon_shopping_list"
         android:label="@string/app_name" >
         <activity
-            android:name=".ShoppingListActivity"
+            android:name=".SLActv"
             android:label="@string/app_name" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

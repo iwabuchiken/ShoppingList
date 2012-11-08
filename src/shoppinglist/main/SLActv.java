@@ -9,9 +9,9 @@ import java.nio.channels.FileChannel;
 
 import org.apache.commons.lang.StringUtils;
 
-import shoppinglist.lib.ButtonOnClickListener;
-import shoppinglist.lib.ButtonOnTouchListener;
-import shoppinglist.lib.Methods;
+import shoppinglist.listeners.ButtonOnClickListener;
+import shoppinglist.listeners.ButtonOnTouchListener;
+import shoppinglist.utils.Methods;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -27,7 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //public class ShoppingListActivity extends ListActivity {
-public class ShoppingListActivity extends Activity {
+public class SLActv extends Activity {
 	
 	public static Vibrator vib;
 	

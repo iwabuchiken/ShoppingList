@@ -1,7 +1,7 @@
 a
-cd C:\WORKS\WORKSPACES_ANDROID\ShoppingList
-C:\WORKS\WORKSPACES_ANDROID\FM\a
-C:\WORKS\PROGRAMS\FreeMind\FreeMind.exe C:\WORKS\WORKSPACES_ANDROID\FM\ShoppingList.mm
+cd C:\WORKS\WS\WS_Android~\ShoppingList
+C:\WORKS\WS\a
+C:\WORKS\PROGRAMS\FreeMind\FreeMind.exe C:\WORKS\WS\WS_Android~\FM\ShoppingList\ShoppingList.mm
 gitk
 
 C:\WORKS\PROGRAMS\FreeMind\FreeMind.exe C:\WORKS\WORKSPACES_ANDROID\FM\ShoppingList.mm
