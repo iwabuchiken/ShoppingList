@@ -3,7 +3,9 @@ package shoppinglist.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import shoppinglist.lib.*;
+import shoppinglist.listeners.*;
+import shoppinglist.utils.DBManager;
+import shoppinglist.utils.Methods;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;

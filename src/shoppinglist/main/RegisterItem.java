@@ -1,5 +1,6 @@
 package shoppinglist.main;
 
+import shoppinglist.utils.DBManager;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

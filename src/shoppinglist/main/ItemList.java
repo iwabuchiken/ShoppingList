@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import shoppinglist.lib.ButtonOnClickListener;
-import shoppinglist.lib.ButtonOnTouchListener;
-import shoppinglist.lib.Methods;
+import shoppinglist.listeners.ButtonOnClickListener;
+import shoppinglist.listeners.ButtonOnTouchListener;
+import shoppinglist.utils.DBManager;
+import shoppinglist.utils.Methods;
 
 import android.app.ListActivity;
 import android.database.Cursor;
