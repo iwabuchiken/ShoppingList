@@ -1,5 +1,8 @@
-package shoppinglist.main;
+package sl.items;
 
+import shoppinglist.main.R;
+import shoppinglist.main.R.id;
+import shoppinglist.main.R.layout;
 import shoppinglist.utils.DBManager;
 import android.app.Activity;
 import android.database.Cursor;

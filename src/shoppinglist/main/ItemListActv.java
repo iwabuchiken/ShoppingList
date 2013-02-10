@@ -9,6 +9,8 @@ import shoppinglist.listeners.ButtonOnTouchListener;
 import shoppinglist.main.R;
 import shoppinglist.utils.DBManager;
 import shoppinglist.utils.Methods;
+import sl.adapters.ItemListAdapter;
+import sl.items.ShoppingItem;
 
 import android.app.ListActivity;
 import android.database.Cursor;

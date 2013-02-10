@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".RegisterItem" android:screenOrientation="portrait"></activity>
         <activity android:name=".ItemList" android:screenOrientation="portrait"></activity>
-        <activity android:name=".DBAdminActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="shoppinglist.main.DBAdminActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

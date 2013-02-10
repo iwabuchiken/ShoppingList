@@ -1,4 +1,4 @@
-package shoppinglist.main;
+package sl.items;
 
 public class ShoppingItem {
 

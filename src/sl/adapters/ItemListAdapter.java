@@ -1,6 +1,11 @@
-package shoppinglist.main;
+package sl.adapters;
 
 import java.util.List;
+
+import shoppinglist.main.ItemList;
+import shoppinglist.main.R;
+import shoppinglist.main.R.id;
+import sl.items.ShoppingItem;
 
 import android.content.Context;
 import android.graphics.Color;

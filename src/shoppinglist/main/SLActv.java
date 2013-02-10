@@ -13,6 +13,7 @@ import shoppinglist.listeners.ButtonOnClickListener;
 import shoppinglist.listeners.ButtonOnTouchListener;
 import shoppinglist.utils.DBManager;
 import shoppinglist.utils.Methods;
+import sl.items.RegisterItem;
 
 import android.app.Activity;
 import android.app.ListActivity;
