@@ -1,4 +1,4 @@
-package shoppinglist.utils;
+package sl.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,15 +17,15 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import shoppinglist.listeners.ButtonOnTouchListener;
-import shoppinglist.main.ItemList;
-import shoppinglist.main.R;
-import shoppinglist.main.SLActv;
 import sl.items.RegisterItem;
 import sl.items.ShoppingItem;
+import sl.listeners.ButtonOnTouchListener;
 import sl.listeners.dialog.DialogButtonOnClickListener;
 import sl.listeners.dialog.DialogButtonOnTouchListener;
 import sl.listeners.dialog.DialogOnItemClickListener;
+import sl.main.ItemList;
+import sl.main.R;
+import sl.main.SLActv;
 import android.app.Activity;
 import android.app.Dialog;
 import android.database.Cursor;
@@ -231,9 +231,9 @@ public class Methods {
 			 * 1-2. If not => Create table
 				----------------------------*/
 			//
-			String[] columns = DBManager.columns_for_table_stores;
+			String[] columns = CONS.columns_for_table_stores;
 			
-			String[] types = DBManager.column_types_for_table_stores;
+			String[] types = CONS.column_types_for_table_stores;
 			
 			dbm.createTable_generic(db, tableName, columns, types);
 			
@@ -367,7 +367,7 @@ public class Methods {
 		boolean result = dbm.storeData(
 										db, 
 										tableName, 
-										DBManager.columns_for_table_stores, 
+										CONS.columns_for_table_stores, 
 										new String[]{storeName, ""});
 		
 		// Log
@@ -387,7 +387,7 @@ public class Methods {
 		//
 		if (result == true) {
 			// debug
-			Toast.makeText(actv, "“X•Ü–¼‚ª“o˜^‚³‚ê‚Ü‚µ‚½@=>@" + storeName, 3000).show();
+			Toast.makeText(actv, "“X•Ü–¼‚ª“o˜^‚³‚ê‚Ü‚µ‚½@=>@" + storeName, Toast.LENGTH_LONG).show();
 			
 			//
 			dlg2.dismiss();
@@ -395,7 +395,7 @@ public class Methods {
 			
 		} else {//if (result == true)
 			// debug
-			Toast.makeText(actv, "“X•Ü–¼“o˜^@=>@‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", 3000).show();
+			Toast.makeText(actv, "“X•Ü–¼“o˜^@=>@‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", Toast.LENGTH_LONG).show();
 			
 			//
 			dlg2.dismiss();
@@ -600,8 +600,8 @@ public class Methods {
 			result = dbm.createTable_generic(
 					db, 
 					tableName, 
-					DBManager.columns_for_table_genres, 
-					DBManager.column_types_for_table_genres);
+					CONS.columns_for_table_genres, 
+					CONS.column_types_for_table_genres);
 			
 			if (result == false) {
 				/*----------------------------
@@ -617,7 +617,7 @@ public class Methods {
 								.getLineNumber() + "]", "Create table => Failed: " + tableName);
 				
 				// debug
-				Toast.makeText(actv, "Create table => Failed: " + tableName, 3000).show();
+				Toast.makeText(actv, "Create table => Failed: " + tableName, Toast.LENGTH_LONG).show();
 				
 				db.close();
 				
@@ -640,7 +640,7 @@ public class Methods {
 		result = dbm.storeData(
 										db, 
 										tableName, 
-										DBManager.columns_for_table_genres, 
+										CONS.columns_for_table_genres, 
 										new String[]{genreName, ""});
 
 //		/*----------------------------
@@ -689,7 +689,7 @@ public class Methods {
 		//
 		if (result == true) {
 			// debug
-			Toast.makeText(actv, "ƒWƒƒƒ“ƒ‹–¼‚ª“o˜^‚³‚ê‚Ü‚µ‚½@=>@" + genreName, 3000).show();
+			Toast.makeText(actv, "ƒWƒƒƒ“ƒ‹–¼‚ª“o˜^‚³‚ê‚Ü‚µ‚½@=>@" + genreName, Toast.LENGTH_LONG).show();
 			
 			//
 			dlg2.dismiss();
@@ -703,7 +703,7 @@ public class Methods {
 				----------------------------*/		
 
 			// debug
-			Toast.makeText(actv, "ƒWƒƒƒ“ƒ‹–¼“o˜^@=>@‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", 3000).show();
+			Toast.makeText(actv, "ƒWƒƒƒ“ƒ‹–¼“o˜^@=>@‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", Toast.LENGTH_LONG).show();
 			
 			//
 			dlg2.dismiss();
@@ -818,14 +818,14 @@ public class Methods {
 		
 		if (result == true) {
 			// debug
-			Toast.makeText(actv, "Table created => " + tableName, 3000).show();
+			Toast.makeText(actv, "Table created => " + tableName, Toast.LENGTH_LONG).show();
 			
 			//
 			dlg.dismiss();
 			
 		} else {//if (result == true)
 			// debug
-			Toast.makeText(actv, "Create table => failed: " + tableName, 3000).show();
+			Toast.makeText(actv, "Create table => failed: " + tableName, Toast.LENGTH_LONG).show();
 		}//if (result == true)
 		
 		
@@ -852,12 +852,12 @@ public class Methods {
 			et_data_type.getText().length() == 0
 				) {
 			// debug
-			Toast.makeText(actv, "Empty box", 3000).show();
+			Toast.makeText(actv, "Empty box", Toast.LENGTH_LONG).show();
 			
 			return;
 		} else {//if (et_column_name.getText().length() == 0)
 			// debug
-			Toast.makeText(actv, "Input complete", 3000).show();
+			Toast.makeText(actv, "Input complete", Toast.LENGTH_LONG).show();
 			
 //			dlg.dismiss();
 		}//if (et_column_name.getText().length() == 0)
@@ -874,7 +874,7 @@ public class Methods {
 			----------------------------*/
 		if (columns.length != types.length) {
 			// debug
-			Toast.makeText(actv, "Columns and data types don't match", 3000).show();
+			Toast.makeText(actv, "Columns and data types don't match", Toast.LENGTH_LONG).show();
 			
 			return;
 		}//if (columns.length != types.length)
@@ -1119,7 +1119,7 @@ public class Methods {
 		
 		if (result == true) {
 			// debug
-			Toast.makeText(actv, "Table dropped => " + tableName, 3000).show();
+			Toast.makeText(actv, "Table dropped => " + tableName, Toast.LENGTH_LONG).show();
 			
 			// Log
 			Log.d("Methods.java" + "["
@@ -1128,7 +1128,7 @@ public class Methods {
 			
 		} else {//if (result == true)
 			// debug
-			Toast.makeText(actv, "Drop table => Failed: " + tableName, 3000).show();
+			Toast.makeText(actv, "Drop table => Failed: " + tableName, Toast.LENGTH_LONG).show();
 			
 			// Log
 			Log.d("Methods.java" + "["
@@ -1190,7 +1190,7 @@ public class Methods {
 		
 		SQLiteDatabase db = dbm.getReadableDatabase();
 		
-		Cursor c = dbm.getAllData(db, "stores", DBManager.columns_for_table_stores_with_index);
+		Cursor c = dbm.getAllData(db, "stores", CONS.columns_for_table_stores_with_index);
 		
 		// All
 		storeList.add(actv.getString(R.string.generic_label_all));
@@ -1211,7 +1211,7 @@ public class Methods {
 			----------------------------*/
 		List<String> genreList = new ArrayList<String>();
 		
-		c = dbm.getAllData(db, "genres", DBManager.columns_for_table_genres_with_index);
+		c = dbm.getAllData(db, "genres", CONS.columns_for_table_genres_with_index);
 		
 		// All
 		genreList.add(actv.getString(R.string.generic_label_all));
@@ -1334,26 +1334,26 @@ public class Methods {
 		// Both are "All"
 		if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
 				genreName.equals(actv.getString(R.string.generic_label_all))) {
-			query = "SELECT * FROM " + DBManager.tableName;
+			query = "SELECT * FROM " + CONS.tableName;
 
 		// Store => All, Genre => Specific
 		} else if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
 						!genreName.equals(actv.getString(R.string.generic_label_all))) {
 			
-			query = "SELECT * FROM " + DBManager.tableName + 
+			query = "SELECT * FROM " + CONS.tableName + 
 							" WHERE genre is '" + genreName + "'";
 					
 		// Store => Specific, Genre => All
 		} else if (!storeName.equals(actv.getString(R.string.generic_label_all)) &&
 						genreName.equals(actv.getString(R.string.generic_label_all))) {
 			
-			query = "SELECT * FROM " + DBManager.tableName + 
+			query = "SELECT * FROM " + CONS.tableName + 
 					" WHERE store is '" + storeName + "'";
 
 		// Store => Specific, Genre => Specific
 		} else {
 			
-			query = "SELECT * FROM " + DBManager.tableName + 
+			query = "SELECT * FROM " + CONS.tableName + 
 					" WHERE store is '" + storeName + "'" + " AND " +
 					"genre is '" + genreName + "'";
 			
@@ -1528,18 +1528,18 @@ public class Methods {
 		 * 2.2. Prepare list data
 			----------------------------*/
 //		List<String> registerItems = new ArrayList<String>();
-		List<SLActv.registerChoice> registerItems = 
-					new ArrayList<SLActv.registerChoice>();
+		List<CONS.registerChoice> registerItems = 
+					new ArrayList<CONS.registerChoice>();
 		
-		for (SLActv.registerChoice item : SLActv.registerChoice.values()) {
+		for (CONS.registerChoice item : CONS.registerChoice.values()) {
 			
 			registerItems.add(item);
 			
 		}//for (String string : ShoppingListActivity.registerItems)
 		
 //		ArrayAdapter<String> adp = new ArrayAdapter<String>(
-		ArrayAdapter<SLActv.registerChoice> adp = 
-				new ArrayAdapter<SLActv.registerChoice>(
+		ArrayAdapter<CONS.registerChoice> adp = 
+				new ArrayAdapter<CONS.registerChoice>(
 		
 				actv,
 				android.R.layout.simple_list_item_1,
@@ -1699,7 +1699,7 @@ public class Methods {
 					+ "]", "File copied");
 			
 			// debug
-			Toast.makeText(actv, "DB backup => Done", 3000).show();
+			Toast.makeText(actv, "DB backup => Done", Toast.LENGTH_LONG).show();
 			
 		} catch (FileNotFoundException e) {
 			// Log
@@ -1784,7 +1784,7 @@ public class Methods {
 					+ "]", "File copied: " + src);
 			
 			// debug
-			Toast.makeText(actv, "DB restoration => Done", 3000).show();
+			Toast.makeText(actv, "DB restoration => Done", Toast.LENGTH_LONG).show();
 			
 			return true;
 	
@@ -1808,4 +1808,4 @@ public class Methods {
 		
 }//private boolean restore_db()
 
-}
+}//public class Methods

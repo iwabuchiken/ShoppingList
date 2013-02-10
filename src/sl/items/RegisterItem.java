@@ -1,9 +1,10 @@
 package sl.items;
 
-import shoppinglist.main.R;
-import shoppinglist.main.R.id;
-import shoppinglist.main.R.layout;
-import shoppinglist.utils.DBManager;
+import sl.main.R;
+import sl.main.R.id;
+import sl.main.R.layout;
+import sl.utils.CONS;
+import sl.utils.DBManager;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -58,7 +59,7 @@ public class RegisterItem extends Activity {
 		
 		SQLiteDatabase db = dbm.getWritableDatabase();
 		
-		boolean result = dbm.createTable(db, DBManager.tableName);
+		boolean result = dbm.createTable(db, CONS.tableName);
 		
 		db.close();
 
@@ -175,8 +176,8 @@ public class RegisterItem extends Activity {
 				
 				boolean result = dbm.storeData(
 								db, 
-								DBManager.tableName, 
-								DBManager.columns, 
+								CONS.tableName, 
+								CONS.columns, 
 								new String[]{
 //										et_store.getText().toString(),
 										sp_store_name.getSelectedItem().toString(),
@@ -253,7 +254,7 @@ public class RegisterItem extends Activity {
 		
 		SQLiteDatabase db = dbm.getReadableDatabase();
 		
-		Cursor c = dbm.getAllData(db, "stores", DBManager.columns_for_table_stores_with_index);
+		Cursor c = dbm.getAllData(db, "stores", CONS.columns_for_table_stores_with_index);
 		
 		// Log
 		Log.d("RegisterItem.java" + "["
@@ -320,7 +321,7 @@ public class RegisterItem extends Activity {
 		
 		SQLiteDatabase db = dbm.getReadableDatabase();
 		
-		Cursor c = dbm.getAllData(db, "genres", DBManager.columns_for_table_genres_with_index);
+		Cursor c = dbm.getAllData(db, "genres", CONS.columns_for_table_genres_with_index);
 		
 		// Log
 		Log.d("RegisterItem.java" + "["

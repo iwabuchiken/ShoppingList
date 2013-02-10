@@ -1,9 +1,9 @@
-package shoppinglist.listeners;
+package sl.listeners;
 
-import shoppinglist.main.DBAdminActivity;
-import shoppinglist.main.ItemList;
-import shoppinglist.main.R;
-import shoppinglist.utils.Methods;
+import sl.main.DBAdminActivity;
+import sl.main.ItemList;
+import sl.main.R;
+import sl.utils.Methods;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;

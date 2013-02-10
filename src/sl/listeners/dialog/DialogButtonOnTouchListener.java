@@ -1,6 +1,6 @@
 package sl.listeners.dialog;
 
-import shoppinglist.utils.Methods;
+import sl.utils.Methods;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;

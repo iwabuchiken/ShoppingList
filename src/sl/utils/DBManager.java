@@ -1,4 +1,4 @@
-package shoppinglist.utils;
+package sl.utils;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -28,31 +28,31 @@ public class DBManager extends SQLiteOpenHelper {
 	
 	String dbName;
 	//
-	public static String tableName = "shopping_item";
-
-	public static String[] columns = {"store", "name", "price", "genre"};
-	public static String[] columns_with_index = 
-					{"store", "name", "price", "genre", android.provider.BaseColumns._ID};
-
-	public static String[] columns_for_table_stores = 
-					{"store_name", "memo"};
-	
-	public static String[] columns_for_table_stores_with_index = 
-		{android.provider.BaseColumns._ID, "store_name", "memo"};
-
-	public static String[] column_types_for_table_stores = 
-																	{"TEXT", "TEXT"};
-	
-	public static String[] columns_for_table_genres = 
-					{"genre_name", "memo"};
-
-	
-	public static String[] columns_for_table_genres_with_index = 
-		{android.provider.BaseColumns._ID, "genre_name", "memo"};
-
-	public static String[] column_types_for_table_genres = 
-																	{"TEXT", "TEXT"};
-	
+//	public static String tableName = "shopping_item";
+//
+//	public static String[] columns = {"store", "name", "price", "genre"};
+//	public static String[] columns_with_index = 
+//					{"store", "name", "price", "genre", android.provider.BaseColumns._ID};
+//
+//	public static String[] columns_for_table_stores = 
+//					{"store_name", "memo"};
+//	
+//	public static String[] columns_for_table_stores_with_index = 
+//		{android.provider.BaseColumns._ID, "store_name", "memo"};
+//
+//	public static String[] column_types_for_table_stores = 
+//																	{"TEXT", "TEXT"};
+//	
+//	public static String[] columns_for_table_genres = 
+//					{"genre_name", "memo"};
+//
+//	
+//	public static String[] columns_for_table_genres_with_index = 
+//		{android.provider.BaseColumns._ID, "genre_name", "memo"};
+//
+//	public static String[] column_types_for_table_genres = 
+//																	{"TEXT", "TEXT"};
+//	
 
 	
 	public DBManager(Context context) {

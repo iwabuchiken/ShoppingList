@@ -1,16 +1,17 @@
-package shoppinglist.main;
+package sl.main;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import shoppinglist.listeners.ButtonOnClickListener;
-import shoppinglist.listeners.ButtonOnTouchListener;
-import shoppinglist.main.R;
-import shoppinglist.utils.DBManager;
-import shoppinglist.utils.Methods;
 import sl.adapters.ItemListAdapter;
 import sl.items.ShoppingItem;
+import sl.listeners.ButtonOnClickListener;
+import sl.listeners.ButtonOnTouchListener;
+import sl.main.R;
+import sl.utils.CONS;
+import sl.utils.DBManager;
+import sl.utils.Methods;
 
 import android.app.ListActivity;
 import android.database.Cursor;
@@ -25,7 +26,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class ItemListActv extends ListActivity {
+public class ItemList extends ListActivity {
 
 	//
 	public static List<ShoppingItem> list;
@@ -53,8 +54,6 @@ public class ItemListActv extends ListActivity {
 		//
 		setContentView(R.layout.itemlist);
 
-		setTitle(this.getClass().getName());
-		
 		/*----------------------------
 		 * 3. setList()
 			----------------------------*/
@@ -111,9 +110,9 @@ public class ItemListActv extends ListActivity {
 		SQLiteDatabase db = dbm.getReadableDatabase();
 		
 		Cursor c = db.query(
-										DBManager.tableName, 
+				CONS.tableName, 
 //										DBManager.columns,
-										DBManager.columns_with_index,
+				CONS.columns_with_index,
 										null, null, null, null, null);
 		
 		//

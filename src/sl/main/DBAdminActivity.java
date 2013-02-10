@@ -1,13 +1,13 @@
-package shoppinglist.main;
+package sl.main;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import shoppinglist.listeners.ButtonOnClickListener;
-import shoppinglist.listeners.ButtonOnTouchListener;
-import shoppinglist.main.R;
-import shoppinglist.utils.DBManager;
-import shoppinglist.utils.Methods;
+import sl.listeners.*;
+import sl.main.R;
+import sl.utils.CONS;
+import sl.utils.DBManager;
+import sl.utils.Methods;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -18,7 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-public class DBAdminActv extends Activity {
+public class DBAdminActivity extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -51,7 +51,7 @@ public class DBAdminActv extends Activity {
 		SQLiteDatabase wdb = dbm.getWritableDatabase();
 
 		// REF=> http://stackoverflow.com/questions/947215/how-to-get-a-list-of-column-names-on-sqlite3-iphone
-		String sql = "PRAGMA table_info('" + DBManager.tableName + "')";
+		String sql = "PRAGMA table_info('" + CONS.tableName + "')";
 		
 		Cursor c = wdb.rawQuery(sql, null);
 		
@@ -107,14 +107,14 @@ public class DBAdminActv extends Activity {
 		
 		SQLiteDatabase wdb = dbm.getWritableDatabase();
 		
-		boolean result = dbm.tableExists(wdb, DBManager.tableName);
+		boolean result = dbm.tableExists(wdb, CONS.tableName);
 		
 		if (result == false) {
 			
 			// Log
 			Log.d("DBAdminActivity.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "Table doesn't exist: " + DBManager.tableName);
+					+ "]", "Table doesn't exist: " + CONS.tableName);
 			
 			wdb.close();
 			
@@ -124,7 +124,7 @@ public class DBAdminActv extends Activity {
 		
 		// REF=> http://www.dbonline.jp/sqlite/table/index4.html
 		//
-		String sql = "ALTER TABLE " + DBManager.tableName + " ADD COLUMN " + "yomi TEXT";
+		String sql = "ALTER TABLE " + CONS.tableName + " ADD COLUMN " + "yomi TEXT";
 		
 		try {
 			wdb.execSQL(sql);

@@ -1,9 +1,10 @@
 package sl.listeners.dialog;
 
-import shoppinglist.main.SLActv;
-import shoppinglist.utils.Methods;
-import shoppinglist.utils.Methods.DialogTags;
 import sl.items.RegisterItem;
+import sl.main.SLActv;
+import sl.utils.CONS;
+import sl.utils.Methods;
+import sl.utils.Methods.DialogTags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -79,8 +80,8 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			
 		} else if (dlgTag != null && dlgTag == DialogTags.dlg_register_main) {
 			
-			SLActv.registerChoice item = 
-							(SLActv.registerChoice) parent.getItemAtPosition(position);
+			CONS.registerChoice item = 
+							(CONS.registerChoice) parent.getItemAtPosition(position);
 			
 			switch (item) {
 			case items:

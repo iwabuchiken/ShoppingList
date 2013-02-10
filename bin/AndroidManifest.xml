@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="shoppinglist.main"
+    package="sl.main"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".RegisterItem" android:screenOrientation="portrait"></activity>
         <activity android:name=".ItemList" android:screenOrientation="portrait"></activity>
-        <activity android:name="shoppinglist.main.DBAdminActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="sl.main.DBAdminActivity" android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

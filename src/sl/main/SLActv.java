@@ -1,4 +1,4 @@
-package shoppinglist.main;
+package sl.main;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,11 +9,13 @@ import java.nio.channels.FileChannel;
 
 import org.apache.commons.lang.StringUtils;
 
-import shoppinglist.listeners.ButtonOnClickListener;
-import shoppinglist.listeners.ButtonOnTouchListener;
-import shoppinglist.utils.DBManager;
-import shoppinglist.utils.Methods;
 import sl.items.RegisterItem;
+import sl.listeners.ButtonOnClickListener;
+import sl.listeners.ButtonOnTouchListener;
+import sl.main.R;
+import sl.utils.CONS;
+import sl.utils.DBManager;
+import sl.utils.Methods;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -33,26 +35,26 @@ public class SLActv extends Activity {
 	
 	public static Vibrator vib;
 
-	/*********************************
-	 * Paths
-	 *********************************/
-	String dirName_ExternalStorage = "/mnt/sdcard-ext";
-
-	String dirPath_db = "/data/data/shoppinglist.main/databases";
-
-	String fileName_db_backup_trunk = "shoppinglist_backup";
-
-	String fileName_db_backup_ext = ".bk";
-
-	String dirPath_db_backup = dirName_ExternalStorage + "/ShoppingList_backup";
-	
-//	public static String[] registerItems = {"•i•¨", "“X•Ü", "ƒWƒƒƒ“ƒ‹"};
-	
-//	public static enum registerChoice = {
-	public static enum registerChoice {
-		items, stores, genres,
-	};
-			
+//	/*********************************
+//	 * Paths
+//	 *********************************/
+//	String dirName_ExternalStorage = "/mnt/sdcard-ext";
+//
+//	String dirPath_db = "/data/data/shoppinglist.main/databases";
+//
+//	String fileName_db_backup_trunk = "shoppinglist_backup";
+//
+//	String fileName_db_backup_ext = ".bk";
+//
+//	String dirPath_db_backup = dirName_ExternalStorage + "/ShoppingList_backup";
+//	
+////	public static String[] registerItems = {"•i•¨", "“X•Ü", "ƒWƒƒƒ“ƒ‹"};
+//	
+////	public static enum registerChoice = {
+//	public static enum registerChoice {
+//		items, stores, genres,
+//	};
+//			
 	
     /** Called when the activity is first created. */
     @Override
@@ -79,22 +81,50 @@ public class SLActv extends Activity {
         //debug
 //		backup_db();
 //        debug_restore_db();
+		debug_B13_v_1_0();
         
 		
     }//public void onCreate(Bundle savedInstanceState)
 
     
+	private void debug_B13_v_1_0() {
+		
+		File f = new File(CONS.dirPath_db);
+		
+		String[] fileNames = f.list();
+
+		// Log
+		Log.d("SLActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "f.exists() => " + f.exists());
+		
+//		for (String name : fileNames) {
+//			
+//			// Log
+//			Log.d("SLActv.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "name=" + name);
+//			
+//		}//for (String name : fileNames)
+		
+	}
+
+
 	private void debug_restore_db() {
 		/*********************************
 		 * memo
 		 *********************************/
 		String src = StringUtils.join(
-				new String[]{this.dirPath_db_backup,
+				new String[]{CONS.dirPath_db_backup,
 						"shoppinglist_backup_20121108_122426.bk"},
 				File.separator);
 		
 		String dst = StringUtils.join(
-				new String[]{this.dirPath_db,
+				new String[]{CONS.dirPath_db,
 						DBManager.name},
 				File.separator);
 		
@@ -102,7 +132,7 @@ public class SLActv extends Activity {
 		Methods.restore_db(this, DBManager.name, src, dst);
 		
 		
-		File f = new File(this.dirPath_db);
+		File f = new File(CONS.dirPath_db);
 		
 		String[] f_list = f.list();
 		
@@ -135,10 +165,19 @@ public class SLActv extends Activity {
 		
 		String time_label = Methods.get_TimeLabel(Methods.getMillSeconds_now());
 		
-		String db_src = StringUtils.join(new String[]{dirPath_db, DBManager.name}, File.separator);
+		String db_src = StringUtils.join(
+							new String[]{
+								CONS.dirPath_db,
+								DBManager.name},
+							File.separator);
 		
-		String db_dst = StringUtils.join(new String[]{dirPath_db_backup, fileName_db_backup_trunk}, File.separator);
-		db_dst = db_dst + "_" + time_label + fileName_db_backup_ext;
+		String db_dst = StringUtils.join(
+							new String[]{
+								CONS.dirPath_db_backup,
+								CONS.fileName_db_backup_trunk},
+							File.separator);
+		
+		db_dst = db_dst + "_" + time_label + CONS.fileName_db_backup_ext;
 		
 		// Log
 		Log.d("Methods.java" + "["
@@ -156,7 +195,7 @@ public class SLActv extends Activity {
 		/*----------------------------
 		 * 2-2. Folder exists?
 			----------------------------*/
-		File db_backup = new File(dirPath_db_backup);
+		File db_backup = new File(CONS.dirPath_db_backup);
 		
 		if (!db_backup.exists()) {
 			
