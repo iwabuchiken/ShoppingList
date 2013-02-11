@@ -68,7 +68,7 @@ public class MainActv extends Activity {
 			----------------------------*/
 		
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.shoppinglist);
+        setContentView(R.layout.actv_main);
         
         setTitle(this.getClass().getName());
         
@@ -382,15 +382,15 @@ public class MainActv extends Activity {
 		tv_register.setOnTouchListener(new ButtonOnTouchListener(this));
 		tv_register.setOnClickListener(new ButtonOnClickListener(this));
 		
-		/*----------------------------
-		 * 3. tv_db
-			----------------------------*/
-		TextView tv_db = (TextView) findViewById(R.id.sl_tv_db);
-		
-		tv_db.setTag(Methods.ButtonTags.sl_main_bt_db);
-		
-		tv_db.setOnTouchListener(new ButtonOnTouchListener(this));
-		tv_db.setOnClickListener(new ButtonOnClickListener(this));
+//		/*----------------------------
+//		 * 3. tv_db
+//			----------------------------*/
+//		TextView tv_db = (TextView) findViewById(R.id.sl_tv_db);
+//		
+//		tv_db.setTag(Methods.ButtonTags.sl_main_bt_db);
+//		
+//		tv_db.setOnTouchListener(new ButtonOnTouchListener(this));
+//		tv_db.setOnClickListener(new ButtonOnClickListener(this));
 		
 //		Methods.setOnTouchListener_button(this, Methods.ViewNames.TV, 
 //				Methods.ButtonTags.sl_main_bt_item_list, R.id.sl_tv_item_list);

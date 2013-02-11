@@ -88,17 +88,17 @@ public class ButtonOnClickListener implements OnClickListener {
 			
 			break;
 			
-		case sl_main_bt_db://-----------------------------------
-			
-			vib.vibrate(Methods.vibLength);
-			
-			//
-			i = new Intent();
-			i.setClass(actv, DBAdminActv.class);
-			actv.startActivity(i);
-
-			break;
-			
+//		case sl_main_bt_db://-----------------------------------
+//			
+//			vib.vibrate(Methods.vibLength);
+//			
+//			//
+//			i = new Intent();
+//			i.setClass(actv, DBAdminActv.class);
+//			actv.startActivity(i);
+//
+//			break;
+//			
 		case itemlist_bt_choose://-----------------------------------
 			
 			ItemListActv.toBuys.addAll(ItemListActv.checkedPositions);
