@@ -4,7 +4,7 @@ import sl.main.R;
 import sl.main.R.id;
 import sl.main.R.layout;
 import sl.utils.CONS;
-import sl.utils.DBManager;
+import sl.utils.DBUtils;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -55,7 +55,7 @@ public class RegisterItem extends Activity {
 		/*----------------------------
 		 * 3. DBManager => Create table
 			----------------------------*/
-		DBManager dbm = new DBManager(this);
+		DBUtils dbm = new DBUtils(this);
 		
 		SQLiteDatabase db = dbm.getWritableDatabase();
 		
@@ -170,7 +170,7 @@ public class RegisterItem extends Activity {
 				
 				
 				//
-				DBManager dbm = new DBManager(RegisterItem.this);
+				DBUtils dbm = new DBUtils(RegisterItem.this);
 				
 				SQLiteDatabase db = dbm.getWritableDatabase();
 				
@@ -250,7 +250,7 @@ public class RegisterItem extends Activity {
 		/*----------------------------
 		 * 2. Get store names from db
 			----------------------------*/
-		DBManager dbm = new DBManager(this);
+		DBUtils dbm = new DBUtils(this);
 		
 		SQLiteDatabase db = dbm.getReadableDatabase();
 		
@@ -317,7 +317,7 @@ public class RegisterItem extends Activity {
 		/*----------------------------
 		 * 2. Get genre names from db
 			----------------------------*/
-		DBManager dbm = new DBManager(this);
+		DBUtils dbm = new DBUtils(this);
 		
 		SQLiteDatabase db = dbm.getReadableDatabase();
 		

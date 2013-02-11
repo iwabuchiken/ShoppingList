@@ -11,15 +11,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-public class DBManager extends SQLiteOpenHelper {
-	// Name
-	public static final String name = "shopping_list.db";
-	
-	// Version
-	static final int version = 1;
-	
-	// Factory
-	static final CursorFactory factory = null;
+public class DBUtils extends SQLiteOpenHelper {
+//	// Name
+//	public static final String name = "shopping_list.db";
+//	
+//	// Version
+//	static final int version = 1;
+//	
+//	// Factory
+//	static final CursorFactory factory = null;
 
 	//
 	Context context;
@@ -54,9 +54,9 @@ public class DBManager extends SQLiteOpenHelper {
 //																	{"TEXT", "TEXT"};
 //	
 
-	
-	public DBManager(Context context) {
-		super(context, name, factory, version);
+	// DB name => Use default: CONS.dbName
+	public DBUtils(Context context) {
+		super(context, CONS.dbName, CONS.factory, CONS.version);
 		// 
 		this.context = context;
 		
@@ -67,9 +67,10 @@ public class DBManager extends SQLiteOpenHelper {
 		
 	}//public DBManager(Context context)
 
-	public DBManager(Context context, String dbName) {
+	// DB name => From parameter
+	public DBUtils(Context context, String dbName) {
 		// TODO Auto-generated constructor stub
-		super(context, name, factory, version);
+		super(context, dbName, CONS.factory, CONS.version);
 		
 		this.context = context;;
 		

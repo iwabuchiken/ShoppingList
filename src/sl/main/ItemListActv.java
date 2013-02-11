@@ -10,7 +10,7 @@ import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
 import sl.main.R;
 import sl.utils.CONS;
-import sl.utils.DBManager;
+import sl.utils.DBUtils;
 import sl.utils.Methods;
 
 import android.app.ListActivity;
@@ -107,7 +107,7 @@ public class ItemListActv extends ListActivity {
 		list = new ArrayList<ShoppingItem>();
 		
 		//
-		DBManager dbm = new DBManager(this);
+		DBUtils dbm = new DBUtils(this);
 		
 		SQLiteDatabase db = dbm.getReadableDatabase();
 		

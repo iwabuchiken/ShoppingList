@@ -1,5 +1,7 @@
 package sl.utils;
 
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+
 public class CONS {
 
 	/*********************************
@@ -55,4 +57,21 @@ public class CONS {
 	public static String[] column_types_for_table_genres = 
 												{"TEXT", "TEXT"};
 		
+	/*********************************
+	 * DB
+	 *********************************/
+	public static String dbName = "sl";
+	
+	/*********************************
+	 * From: DBUtils.java (formerly, DBManager.java)
+	 *********************************/
+	// Name
+//	public static final String name = "shopping_list.db";
+	
+	// Version
+	static final int version = 1;
+	
+	// Factory
+	public static final CursorFactory factory = null;
+
 }//public class CONS

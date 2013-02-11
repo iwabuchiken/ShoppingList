@@ -214,7 +214,7 @@ public class Methods {
 			----------------------------*/
 		
 		// 
-		DBManager dbm = new DBManager(actv);
+		DBUtils dbm = new DBUtils(actv);
 		
 		SQLiteDatabase db = dbm.getWritableDatabase();
 		
@@ -356,7 +356,7 @@ public class Methods {
 		
 		
 		// 
-		DBManager dbm = new DBManager(actv);
+		DBUtils dbm = new DBUtils(actv);
 		
 		SQLiteDatabase db = dbm.getWritableDatabase();
 
@@ -578,7 +578,7 @@ public class Methods {
 		
 		
 		// 
-		DBManager dbm = new DBManager(actv);
+		DBUtils dbm = new DBUtils(actv);
 		
 		SQLiteDatabase db = dbm.getWritableDatabase();
 		
@@ -793,7 +793,7 @@ public class Methods {
 		 * 3. Create table
 			----------------------------*/
 		// 
-		DBManager dbm = new DBManager(actv);
+		DBUtils dbm = new DBUtils(actv);
 		
 		SQLiteDatabase db = dbm.getWritableDatabase();
 		
@@ -947,7 +947,7 @@ public class Methods {
 		 * 2. Adapter
 			----------------------------*/
 		// 
-		DBManager dbm = new DBManager(actv);
+		DBUtils dbm = new DBUtils(actv);
 		
 		SQLiteDatabase db = dbm.getWritableDatabase();
 
@@ -1111,7 +1111,7 @@ public class Methods {
 		String tableName = tv_table_name.getText().toString();
 		
 		// 
-		DBManager dbm = new DBManager(actv);
+		DBUtils dbm = new DBUtils(actv);
 		
 		SQLiteDatabase db = dbm.getWritableDatabase();
 
@@ -1186,7 +1186,7 @@ public class Methods {
 			----------------------------*/
 		List<String> storeList = new ArrayList<String>();
 		
-		DBManager dbm = new DBManager(actv);
+		DBUtils dbm = new DBUtils(actv);
 		
 		SQLiteDatabase db = dbm.getReadableDatabase();
 		
@@ -1307,7 +1307,7 @@ public class Methods {
 		 * 8. Sort adapter
 			----------------------------*/
 		// 
-		DBManager dbm = new DBManager(actv);
+		DBUtils dbm = new DBUtils(actv);
 		
 		SQLiteDatabase db = dbm.getReadableDatabase();
 
@@ -1742,13 +1742,82 @@ public class Methods {
 		 * 4. Copy file
 		 * 
 		 *********************************/
-		// Setup db
-		DBManager dbu = new DBManager(actv, dbName);
+//		// Setup db
+//		DBUtils dbu = new DBUtils(actv, dbName);
+//		
+//		SQLiteDatabase wdb = dbu.getWritableDatabase();
+//	
+//		wdb.close();
+	
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"src=" + src
+				+ "/"
+				+ "dst=" + dst);
 		
-		SQLiteDatabase wdb = dbu.getWritableDatabase();
-	
-		wdb.close();
-	
+		/*********************************
+		 * \/data/data
+		 *********************************/
+//		String dir = "/data";
+//		
+//		File f = new File("/data/data");
+//		File f2 = new File(dir);
+//		
+//		
+//		String[] dirList = f.list();
+//		String[] dirList2 = f2.list();
+//		
+//		// Log
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "f2.exists()=" + f2.exists());
+//		
+//		// Log
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "dirList2=" + dirList2);
+		/////////////////////////////////////////////////////
+		
+		
+//		if (dirList.length < 1) {
+//			
+//			// Log
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "dirList.length < 1");
+//			
+//		} else {//if (dirList.length < 1)
+//
+//			for (String name : dirList) {
+//				
+//				// Log
+//				Log.d("Methods.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]",
+//						"name=" + name);
+//				
+//			}//for (String name : dirList)
+//			
+//		}//if (dirList.length < 1)
+		
+		
+		
+//		return false;
+		///////////////////////////////////// Log
 		
 		/*********************************
 		 * 2. Setup: File paths
@@ -1779,8 +1848,10 @@ public class Methods {
 			oChannel.close();
 			
 			// Log
-			Log.d("ThumbnailActivity.java" + "["
+			Log.d("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", "File copied: " + src);
 			
 			// debug
@@ -1789,23 +1860,61 @@ public class Methods {
 			return true;
 	
 		} catch (FileNotFoundException e) {
+
 			// Log
 			Log.d("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", "Exception: " + e.toString());
 			
 			return false;
 			
 		} catch (IOException e) {
+
 			// Log
 			Log.d("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", "Exception: " + e.toString());
 			
 			return false;
 			
 		}//try
 		
-}//private boolean restore_db()
+	}//private boolean restore_db()
 
+
+	public static String getFileNameFromDir_latest(Activity actv,
+							String dirPath_dbBackup) {
+		
+		File f = new File(dirPath_dbBackup);
+		
+		File[] fileList = f.listFiles();
+		
+		if (fileList.length < 1) {
+			
+			return null;
+			
+		}//if (fileList.length < 1)
+		
+		String latestFileName = fileList[0].getName();
+	
+		for (int i = 0; i < fileList.length - 1; i++) {
+			
+			if (fileList[i].lastModified() < fileList[i+1].lastModified()) {
+				
+				latestFileName = fileList[i+1].getName();
+				
+			}//if (fileList[0])
+			
+		}//for (int i = 0; i < fileList.length; i++)
+		
+		return latestFileName;
+		
+	}//public static String getFileNameFromDir_latest
+
+	
+	
 }//public class Methods

@@ -14,7 +14,7 @@ import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
 import sl.main.R;
 import sl.utils.CONS;
-import sl.utils.DBManager;
+import sl.utils.DBUtils;
 import sl.utils.Methods;
 
 import android.app.Activity;
@@ -81,7 +81,7 @@ public class SLActv extends Activity {
         //debug
 //		backup_db();
 //        debug_restore_db();
-		debug_B13_v_1_0();
+//		debug_B13_v_1_0();
         
 		
     }//public void onCreate(Bundle savedInstanceState)
@@ -99,6 +99,83 @@ public class SLActv extends Activity {
 				+ ":"
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "f.exists() => " + f.exists());
+	
+		if (fileNames != null) {
+		
+			// Log
+			Log.d("SLActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "fileNames.length=" + fileNames.length);
+			
+			for (String name : fileNames) {
+				
+				// Log
+				Log.d("SLActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "name=" + name);
+				
+			}//for (String name : fileNames)
+			
+		} else {//if (fileNames != null)
+			
+			// Log
+			Log.d("SLActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "fileNames == null");
+			
+		}//if (fileNames != null)
+		
+		/*********************************
+		 * Create a db file
+		 *********************************/
+		DBUtils dbm = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase db = dbm.getWritableDatabase();
+		
+		db.close();
+		
+		// Log
+		Log.d("SLActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "db => Done");
+		
+		// Log
+		Log.d("SLActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "f.exists() => " + f.exists());
+		
+
+		/*********************************
+		 * Restore db
+		 *********************************/
+		String srcFileName = Methods.getFileNameFromDir_latest(
+										this, CONS.dirPath_db_backup);
+		
+		String src = StringUtils.join(
+							new String[]{CONS.dirPath_db_backup,
+									srcFileName},
+							File.separator);
+		
+		String dst = StringUtils.join(
+							new String[]{
+									CONS.dirPath_db,
+									CONS.dbName},
+							File.separator);
+//		String dst = CONS.dirPath_db;
+		
+		Methods.restore_db(this, CONS.dbName, src, dst);
 		
 //		for (String name : fileNames) {
 //			
@@ -125,11 +202,11 @@ public class SLActv extends Activity {
 		
 		String dst = StringUtils.join(
 				new String[]{CONS.dirPath_db,
-						DBManager.name},
+						CONS.dbName},
 				File.separator);
 		
 		// Restore db
-		Methods.restore_db(this, DBManager.name, src, dst);
+		Methods.restore_db(this, CONS.dbName, src, dst);
 		
 		
 		File f = new File(CONS.dirPath_db);
@@ -145,8 +222,7 @@ public class SLActv extends Activity {
 			
 		}
 		
-	}//
-
+	}//private void debug_restore_db()
 
 	private void backup_db() {
 		/*----------------------------
@@ -168,7 +244,7 @@ public class SLActv extends Activity {
 		String db_src = StringUtils.join(
 							new String[]{
 								CONS.dirPath_db,
-								DBManager.name},
+								CONS.dbName},
 							File.separator);
 		
 		String db_dst = StringUtils.join(
@@ -186,77 +262,77 @@ public class SLActv extends Activity {
 				"db_src: " + db_src + " * " + "db_dst: " + db_dst);
 //				"db_dst: " + db_dst);
 		
-		/*----------------------------
-		 * 2. Prep => Files
-			----------------------------*/
-		File src = new File(db_src);
-		File dst = new File(db_dst);
-		
-		/*----------------------------
-		 * 2-2. Folder exists?
-			----------------------------*/
-		File db_backup = new File(CONS.dirPath_db_backup);
-		
-		if (!db_backup.exists()) {
-			
-			try {
-				db_backup.mkdir();
-				
-				// Log
-				Log.d("Methods.java" + "["
-						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-						+ "]", "Folder created: " + db_backup.getAbsolutePath());
-			} catch (Exception e) {
-				
-				// Log
-				Log.d("Methods.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber() + "]", "Create folder => Failed");
-				
-				return;
-				
-			}
-			
-		} else {//if (!db_backup.exists())
-			
-			// Log
-			Log.d("Methods.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "Folder exists: ");
-			
-		}//if (!db_backup.exists())
-		
-		/*----------------------------
-		 * 3. Copy
-			----------------------------*/
-		try {
-			FileChannel iChannel = new FileInputStream(src).getChannel();
-			FileChannel oChannel = new FileOutputStream(dst).getChannel();
-			iChannel.transferTo(0, iChannel.size(), oChannel);
-			iChannel.close();
-			oChannel.close();
-			
-			// Log
-			Log.d("ThumbnailActivity.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "File copied");
-			
-			// debug
-			Toast.makeText(this, "DB backup => Done", 3000).show();
-
-		} catch (FileNotFoundException e) {
-			// Log
-			Log.d("MainActv.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "Exception: " + e.toString());
-			
-		} catch (IOException e) {
-			// Log
-			Log.d("MainActv.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "Exception: " + e.toString());
-		}//try
+//		/*----------------------------
+//		 * 2. Prep => Files
+//			----------------------------*/
+//		File src = new File(db_src);
+//		File dst = new File(db_dst);
+//		
+//		/*----------------------------
+//		 * 2-2. Folder exists?
+//			----------------------------*/
+//		File db_backup = new File(CONS.dirPath_db_backup);
+//		
+//		if (!db_backup.exists()) {
+//			
+//			try {
+//				db_backup.mkdir();
+//				
+//				// Log
+//				Log.d("Methods.java" + "["
+//						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//						+ "]", "Folder created: " + db_backup.getAbsolutePath());
+//			} catch (Exception e) {
+//				
+//				// Log
+//				Log.d("Methods.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber() + "]", "Create folder => Failed");
+//				
+//				return;
+//				
+//			}
+//			
+//		} else {//if (!db_backup.exists())
+//			
+//			// Log
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "Folder exists: ");
+//			
+//		}//if (!db_backup.exists())
+//		
+//		/*----------------------------
+//		 * 3. Copy
+//			----------------------------*/
+//		try {
+//			FileChannel iChannel = new FileInputStream(src).getChannel();
+//			FileChannel oChannel = new FileOutputStream(dst).getChannel();
+//			iChannel.transferTo(0, iChannel.size(), oChannel);
+//			iChannel.close();
+//			oChannel.close();
+//			
+//			// Log
+//			Log.d("ThumbnailActivity.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "File copied");
+//			
+//			// debug
+//			Toast.makeText(this, "DB backup => Done", 3000).show();
+//
+//		} catch (FileNotFoundException e) {
+//			// Log
+//			Log.d("MainActv.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "Exception: " + e.toString());
+//			
+//		} catch (IOException e) {
+//			// Log
+//			Log.d("MainActv.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "Exception: " + e.toString());
+//		}//try
 
 		
 

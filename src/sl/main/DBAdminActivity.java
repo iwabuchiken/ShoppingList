@@ -6,7 +6,7 @@ import java.util.List;
 import sl.listeners.*;
 import sl.main.R;
 import sl.utils.CONS;
-import sl.utils.DBManager;
+import sl.utils.DBUtils;
 import sl.utils.Methods;
 import android.app.Activity;
 import android.database.Cursor;
@@ -46,7 +46,7 @@ public class DBAdminActivity extends Activity {
 
 	private List<String> getColNames() {
 		//
-		DBManager dbm = new DBManager(this);
+		DBUtils dbm = new DBUtils(this);
 		
 		SQLiteDatabase wdb = dbm.getWritableDatabase();
 
@@ -103,7 +103,7 @@ public class DBAdminActivity extends Activity {
 	private void modify_table() {
 		// TODO 自動生成されたメソッド・スタブ
 		//
-		DBManager dbm = new DBManager(this);
+		DBUtils dbm = new DBUtils(this);
 		
 		SQLiteDatabase wdb = dbm.getWritableDatabase();
 		
