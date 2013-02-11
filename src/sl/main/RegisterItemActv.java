@@ -1,4 +1,4 @@
-package sl.items;
+package sl.main;
 
 import sl.main.R;
 import sl.main.R.id;
@@ -23,7 +23,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class RegisterItem extends Activity {
+public class RegisterItemActv extends Activity {
 
 	//
 	Activity actv;
@@ -148,7 +148,7 @@ public class RegisterItem extends Activity {
 //						et_genre.getText().toString().equals("")
 						) {
 					// debug
-					Toast.makeText(RegisterItem.this, "Empty item exists", 2000)
+					Toast.makeText(RegisterItemActv.this, "Empty item exists", 2000)
 							.show();
 				}//if
 				
@@ -170,7 +170,7 @@ public class RegisterItem extends Activity {
 				
 				
 				//
-				DBUtils dbm = new DBUtils(RegisterItem.this);
+				DBUtils dbm = new DBUtils(RegisterItemActv.this);
 				
 				SQLiteDatabase db = dbm.getWritableDatabase();
 				
@@ -197,7 +197,7 @@ public class RegisterItem extends Activity {
 							+ Thread.currentThread().getStackTrace()[2]
 									.getLineNumber() + "]", "Data stored");
 					// debug
-					Toast.makeText(RegisterItem.this, "Data stored", 2000)
+					Toast.makeText(RegisterItemActv.this, "Data stored", 2000)
 							.show();
 					
 				} else {//if (result == true)
@@ -245,7 +245,7 @@ public class RegisterItem extends Activity {
 		sp_store_name = (Spinner) findViewById(R.id.v1_sp_store);
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-	              RegisterItem.this, android.R.layout.simple_spinner_item);
+	              RegisterItemActv.this, android.R.layout.simple_spinner_item);
 
 		/*----------------------------
 		 * 2. Get store names from db
@@ -312,7 +312,7 @@ public class RegisterItem extends Activity {
 		sp_genre_name = (Spinner) findViewById(R.id.v1_sp_genre);
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-	              RegisterItem.this, android.R.layout.simple_spinner_item);
+	              RegisterItemActv.this, android.R.layout.simple_spinner_item);
 //
 		/*----------------------------
 		 * 2. Get genre names from db

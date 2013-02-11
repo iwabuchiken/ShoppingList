@@ -3,8 +3,7 @@ package sl.main;
 import java.util.ArrayList;
 import java.util.List;
 
-import sl.listeners.ButtonOnClickListener;
-import sl.listeners.ButtonOnTouchListener;
+import sl.listeners.*;
 import sl.main.R;
 import sl.utils.CONS;
 import sl.utils.DBUtils;

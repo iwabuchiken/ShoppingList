@@ -9,7 +9,6 @@ import java.nio.channels.FileChannel;
 
 import org.apache.commons.lang.StringUtils;
 
-import sl.items.RegisterItem;
 import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
 import sl.main.R;
@@ -31,7 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 //public class ShoppingListActivity extends ListActivity {
-public class SLActv extends Activity {
+public class MainActv extends Activity {
 	
 	public static Vibrator vib;
 
@@ -423,7 +422,7 @@ public class SLActv extends Activity {
 				Intent i = new Intent();
 				
 				//
-				i.setClass(this, RegisterItem.class);
+				i.setClass(this, RegisterItemActv.class);
 				
 				//
 				startActivity(i);
@@ -433,7 +432,7 @@ public class SLActv extends Activity {
 			case R.id.v1_menu_item_list:
 				//
 				i = new Intent();
-				i.setClass(this, ItemList.class);
+				i.setClass(this, ItemListActv.class);
 				startActivity(i);
 				
 				break;
@@ -453,7 +452,7 @@ public class SLActv extends Activity {
 			case R.id.v1_menu_db_manager:
 				//
 				i = new Intent();
-				i.setClass(this, DBAdminActivity.class);
+				i.setClass(this, DBAdminActv.class);
 				startActivity(i);
 				
 				break;

@@ -17,15 +17,15 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import sl.items.RegisterItem;
 import sl.items.ShoppingItem;
 import sl.listeners.ButtonOnTouchListener;
 import sl.listeners.dialog.DialogButtonOnClickListener;
 import sl.listeners.dialog.DialogButtonOnTouchListener;
 import sl.listeners.dialog.DialogOnItemClickListener;
-import sl.main.ItemList;
+import sl.main.ItemListActv;
 import sl.main.R;
-import sl.main.SLActv;
+import sl.main.MainActv;
+import sl.main.RegisterItemActv;
 import android.app.Activity;
 import android.app.Dialog;
 import android.database.Cursor;
@@ -1375,7 +1375,7 @@ public class Methods {
 		//
 		c.moveToFirst();
 		
-		ItemList.list.clear();
+		ItemListActv.list.clear();
 		
 		//
 		for (int i = 0; i < c.getCount(); i++) {
@@ -1398,7 +1398,7 @@ public class Methods {
 					+ "]", "c.getString(1) => " + c.getString(1));
 			
 			//
-			ItemList.list.add(item);
+			ItemListActv.list.add(item);
 			
 			//
 			c.moveToNext();
@@ -1417,7 +1417,7 @@ public class Methods {
 		/*----------------------------
 		 * 7. Notify adapter
 			----------------------------*/
-		ItemList.adapter.notifyDataSetChanged();
+		ItemListActv.adapter.notifyDataSetChanged();
 		
 		/*----------------------------
 		 * 8. Sort adapter
@@ -1436,7 +1436,7 @@ public class Methods {
 		};//Comparator<Object> cmp = new Comparator<Object>()
 		
 		// Sort
-		ItemList.adapter.sort(cmp);
+		ItemListActv.adapter.sort(cmp);
 		
 	}//public static void filterList(Activity actv, Dialog dlg)
 	

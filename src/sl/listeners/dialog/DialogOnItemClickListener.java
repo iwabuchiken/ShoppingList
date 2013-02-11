@@ -1,7 +1,7 @@
 package sl.listeners.dialog;
 
-import sl.items.RegisterItem;
-import sl.main.SLActv;
+import sl.main.MainActv;
+import sl.main.RegisterItemActv;
 import sl.utils.CONS;
 import sl.utils.Methods;
 import sl.utils.Methods.DialogTags;
@@ -90,7 +90,7 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 				Intent i = new Intent();
 				
 				//
-				i.setClass(actv, RegisterItem.class);
+				i.setClass(actv, RegisterItemActv.class);
 				
 				//
 				actv.startActivity(i);

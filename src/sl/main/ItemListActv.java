@@ -54,8 +54,6 @@ public class ItemListActv extends ListActivity {
 		//
 		setContentView(R.layout.itemlist);
 
-		setTitle(this.getClass().getName());
-		
 		/*----------------------------
 		 * 3. setList()
 			----------------------------*/

@@ -3,7 +3,7 @@ package sl.adapters;
 import java.util.List;
 
 import sl.items.ShoppingItem;
-import sl.main.ItemList;
+import sl.main.ItemListActv;
 import sl.main.R;
 import sl.main.R.id;
 
@@ -84,11 +84,11 @@ public class ItemListAdapter extends ArrayAdapter<ShoppingItem> {
 		/*----------------------------
 		 * 5. Set background
 			----------------------------*/
-		if (ItemList.toBuys.contains((Integer) position)) {
+		if (ItemListActv.toBuys.contains((Integer) position)) {
 			
 			convertView.setBackgroundColor(Color.GREEN);
 			
-		} else if (ItemList.checkedPositions.contains((Integer) position)) {
+		} else if (ItemListActv.checkedPositions.contains((Integer) position)) {
 			
 			convertView.setBackgroundColor(Color.BLUE);
 			

@@ -1,7 +1,7 @@
 package sl.listeners;
 
-import sl.main.DBAdminActivity;
-import sl.main.ItemList;
+import sl.main.DBAdminActv;
+import sl.main.ItemListActv;
 import sl.main.R;
 import sl.utils.Methods;
 import android.app.Activity;
@@ -67,7 +67,7 @@ public class ButtonOnClickListener implements OnClickListener {
 			vib.vibrate(Methods.vibLength);
 			
 			Intent i = new Intent();
-			i.setClass(actv, ItemList.class);
+			i.setClass(actv, ItemListActv.class);
 			actv.startActivity(i);
 			
 //			// debug
@@ -94,16 +94,16 @@ public class ButtonOnClickListener implements OnClickListener {
 			
 			//
 			i = new Intent();
-			i.setClass(actv, DBAdminActivity.class);
+			i.setClass(actv, DBAdminActv.class);
 			actv.startActivity(i);
 
 			break;
 			
 		case itemlist_bt_choose://-----------------------------------
 			
-			ItemList.toBuys.addAll(ItemList.checkedPositions);
+			ItemListActv.toBuys.addAll(ItemListActv.checkedPositions);
 			
-			ItemList.adapter.notifyDataSetChanged();
+			ItemListActv.adapter.notifyDataSetChanged();
 			
 			break;
 			
