@@ -54,58 +54,58 @@ public class Methods {
 	 * Variables
 		----------------------------*/
 	//
-	public static enum DialogTags {
-		// dlg_generic
-		dlg_generic_cancel,
-		
-		// dlg_register_store.xml
-		dlg_register_store_ok, dlg_register_store_cancel,
-
-		// dlg_input_empty.xml
-		dlg_input_empty_btn_reenter, dlg_input_empty_btn_cancel,
-		
-		// dlg_reconfirm_store_name.xml
-		dlg_reconfirm_store_name_btn_yes, dlg_reconfirm_store_name_btn_cancel,
-		
-		// dlg_register_genre.xml
-		dlg_register_genre_register, dlg_register_genre_cancel,
-		
-		// dlg_reconfirm_genre_name.xml
-		dlg_reconfirm_genre_name_btn_register, dlg_reconfirm_genre_name_btn_cancel,
-		
-		// dlg_create_table.xml
-		dlg_create_table_create, dlg_create_table_cancel,
-
-		// dlg_drop_table.xml
-		dlg_drop_table_btn_cancel, dlg_drop_table,
-		
-		// dlg_confirm_drop_table.xml
-		dlg_confirm_drop_table_btn_ok, dlg_confirm_drop_table_btn_cancel, dlg_confirm_drop_table,
-
-		// dlg_filter_list.xml
-		dlg_filter_list_ok, dlg_filter_list_cancel,
-		
-		// dlg_register_main.xml
-		dlg_register_main,
-		
-	}//public static enum DialogTags
-	
-	public static enum ButtonTags {
-		// DBAdminActivity.java
-		db_manager_activity_create_table, db_manager_activity_drop_table,
-
-		// ShoppingList.java
-		sl_main_bt_item_list, sl_main_bt_register, sl_main_bt_db,
-		
-		// itemlist.xml
-		itemlist_bt_choose, itemlist_bt_see_chosen,
-		
-	}//public static enum ButtonTags
-
-	public static enum ViewNames {
-		TV, BT,
-	}
-	
+//	public static enum DialogTags {
+//		// dlg_generic
+//		dlg_generic_cancel,
+//		
+//		// dlg_register_store.xml
+//		dlg_register_store_ok, dlg_register_store_cancel,
+//
+//		// dlg_input_empty.xml
+//		dlg_input_empty_btn_reenter, dlg_input_empty_btn_cancel,
+//		
+//		// dlg_reconfirm_store_name.xml
+//		dlg_reconfirm_store_name_btn_yes, dlg_reconfirm_store_name_btn_cancel,
+//		
+//		// dlg_register_genre.xml
+//		dlg_register_genre_register, dlg_register_genre_cancel,
+//		
+//		// dlg_reconfirm_genre_name.xml
+//		dlg_reconfirm_genre_name_btn_register, dlg_reconfirm_genre_name_btn_cancel,
+//		
+//		// dlg_create_table.xml
+//		dlg_create_table_create, dlg_create_table_cancel,
+//
+//		// dlg_drop_table.xml
+//		dlg_drop_table_btn_cancel, dlg_drop_table,
+//		
+//		// dlg_confirm_drop_table.xml
+//		dlg_confirm_drop_table_btn_ok, dlg_confirm_drop_table_btn_cancel, dlg_confirm_drop_table,
+//
+//		// dlg_filter_list.xml
+//		dlg_filter_list_ok, dlg_filter_list_cancel,
+//		
+//		// dlg_register_main.xml
+//		dlg_register_main,
+//		
+//	}//public static enum DialogTags
+//	
+//	public static enum ButtonTags {
+//		// DBAdminActivity.java
+//		db_manager_activity_create_table, db_manager_activity_drop_table,
+//
+//		// ShoppingList.java
+//		sl_main_bt_item_list, sl_main_bt_register, sl_main_bt_db,
+//		
+//		// itemlist.xml
+//		itemlist_bt_choose, itemlist_bt_see_chosen,
+//		
+//	}//public static enum ButtonTags
+//
+//	public static enum ViewNames {
+//		TV, BT,
+//	}
+//	
 	public static void register_store(Activity actv) {
 		/*----------------------------
 		 * Steps
@@ -134,8 +134,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg.findViewById(R.id.dlg_register_store_btn_cancel);
 		
 		//
-		btn_ok.setTag(DialogTags.dlg_register_store_ok);
-		btn_cancel.setTag(DialogTags.dlg_register_store_cancel);
+		btn_ok.setTag(Tags.DialogTags.dlg_register_store_ok);
+		btn_cancel.setTag(Tags.DialogTags.dlg_register_store_cancel);
 		
 		//
 		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
@@ -183,8 +183,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg_new.findViewById(R.id.dlg_input_empty_btn_cancel);
 		
 		//
-		btn_ok.setTag(DialogTags.dlg_input_empty_btn_reenter);
-		btn_cancel.setTag(DialogTags.dlg_input_empty_btn_cancel);
+		btn_ok.setTag(Tags.DialogTags.dlg_input_empty_btn_reenter);
+		btn_cancel.setTag(Tags.DialogTags.dlg_input_empty_btn_cancel);
 		
 		//
 		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg_new));
@@ -301,8 +301,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg_new.findViewById(R.id.dlg_reconfirm_store_name_btn_cancel);
 		
 		//
-		btn_ok.setTag(DialogTags.dlg_reconfirm_store_name_btn_yes);
-		btn_cancel.setTag(DialogTags.dlg_reconfirm_store_name_btn_cancel);
+		btn_ok.setTag(Tags.DialogTags.dlg_reconfirm_store_name_btn_yes);
+		btn_cancel.setTag(Tags.DialogTags.dlg_reconfirm_store_name_btn_cancel);
 		
 		//
 		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv));
@@ -460,8 +460,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg.findViewById(R.id.dlg_register_genre_btn_cancel);
 		
 		//
-		btn_ok.setTag(DialogTags.dlg_register_genre_register);
-		btn_cancel.setTag(DialogTags.dlg_register_genre_cancel);
+		btn_ok.setTag(Tags.DialogTags.dlg_register_genre_register);
+		btn_cancel.setTag(Tags.DialogTags.dlg_register_genre_cancel);
 		
 		//
 		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
@@ -510,8 +510,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg_new.findViewById(R.id.dlg_reconfirm_genre_name_btn_cancel);
 		
 		//
-		btn_ok.setTag(DialogTags.dlg_reconfirm_genre_name_btn_register);
-		btn_cancel.setTag(DialogTags.dlg_reconfirm_genre_name_btn_cancel);
+		btn_ok.setTag(Tags.DialogTags.dlg_reconfirm_genre_name_btn_register);
+		btn_cancel.setTag(Tags.DialogTags.dlg_reconfirm_genre_name_btn_cancel);
 		
 		//
 		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv));
@@ -764,8 +764,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg.findViewById(R.id.dlg_create_table_btn_cancel);
 		
 		//
-		btn_ok.setTag(DialogTags.dlg_create_table_create);
-		btn_cancel.setTag(DialogTags.dlg_create_table_cancel);
+		btn_ok.setTag(Tags.DialogTags.dlg_create_table_create);
+		btn_cancel.setTag(Tags.DialogTags.dlg_create_table_cancel);
 		
 		//
 		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
@@ -931,7 +931,7 @@ public class Methods {
 		Button btn_cancel = (Button) dlg.findViewById(R.id.dlg_drop_table_btn_cancel);
 		
 		//
-		btn_cancel.setTag(DialogTags.dlg_drop_table_btn_cancel);
+		btn_cancel.setTag(Tags.DialogTags.dlg_drop_table_btn_cancel);
 		
 		//
 		btn_cancel.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
@@ -1021,7 +1021,7 @@ public class Methods {
 		 * 4. Set listener to list view
 			----------------------------*/
 //		lv.setOnItemClickListener(new DialogOnItemClickListener(actv, dlg));
-		lv.setOnItemClickListener(new DialogOnItemClickListener(actv, dlg, DialogTags.dlg_drop_table));
+		lv.setOnItemClickListener(new DialogOnItemClickListener(actv, dlg, Tags.DialogTags.dlg_drop_table));
 		
 		
 		
@@ -1070,8 +1070,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg2.findViewById(R.id.dlg_confirm_drop_table_btn_cancel);
 		
 		// Tags
-		btn_ok.setTag(DialogTags.dlg_confirm_drop_table_btn_ok);
-		btn_cancel.setTag(DialogTags.dlg_confirm_drop_table_btn_cancel);
+		btn_ok.setTag(Tags.DialogTags.dlg_confirm_drop_table_btn_ok);
+		btn_cancel.setTag(Tags.DialogTags.dlg_confirm_drop_table_btn_cancel);
 		
 		// Set
 		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
@@ -1271,8 +1271,8 @@ public class Methods {
 		Button btn_cancel = (Button) dlg.findViewById(R.id.dlg_filter_list_bt_cancel);
 		
 		// Tags
-		btn_ok.setTag(DialogTags.dlg_filter_list_ok);
-		btn_cancel.setTag(DialogTags.dlg_filter_list_cancel);
+		btn_ok.setTag(Tags.DialogTags.dlg_filter_list_ok);
+		btn_cancel.setTag(Tags.DialogTags.dlg_filter_list_cancel);
 		
 		// Set
 		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv));
@@ -1455,8 +1455,8 @@ public class Methods {
 	 * 
 	 * <Steps> 1.
 	 ****************************************/
-	public static void setOnTouchListener_button(Activity actv, Methods.ViewNames viewName, 
-				Methods.ButtonTags tagName, int resourceId) {
+	public static void setOnTouchListener_button(Activity actv, Tags.ViewNames viewName, 
+			Tags.ButtonTags tagName, int resourceId) {
 		//
 	//		if (viewName.equals("tv")) {
 		/*----------------------------
@@ -1464,7 +1464,7 @@ public class Methods {
 		 * 				I decieded to use enum instead of raw string :20120721_182940
 			----------------------------*/
 		
-		if (viewName == Methods.ViewNames.TV) {
+		if (viewName == Tags.ViewNames.TV) {
 			// Get the view
 			TextView tv = (TextView) actv.findViewById(resourceId);
 			  
@@ -1481,7 +1481,7 @@ public class Methods {
 			
 			
 //		} else if (viewName.equals("bt")) {//if (viewName.equals("textview"))
-		} else if (viewName == Methods.ViewNames.BT) {//if (viewName.equals("textview"))
+		} else if (viewName == Tags.ViewNames.BT) {//if (viewName.equals("textview"))
 			// Get the view
 			Button bt = (Button) actv.findViewById(resourceId);
 			  
@@ -1511,9 +1511,9 @@ public class Methods {
 		 * 9. Show dialog
 			----------------------------*/
 		 
-		Dialog dlg = dlg_template_cancel(actv, 
+		Dialog dlg = Methods_dlg.dlg_template_cancel(actv, 
 				R.layout.dlg_register_main, R.string.generic_register,
-				R.id.dlg_register_main_btn_cancel, Methods.DialogTags.dlg_generic_cancel);
+				R.id.dlg_register_main_btn_cancel, Tags.DialogTags.dlg_generic_cancel);
 		
 		/*----------------------------
 		 * 2. List view
@@ -1558,7 +1558,7 @@ public class Methods {
 						new DialogOnItemClickListener(
 								actv, 
 								dlg, 
-								Methods.DialogTags.dlg_register_main));
+								Tags.DialogTags.dlg_register_main));
 		
 		/*----------------------------
 		 * 9. Show dialog
@@ -1567,50 +1567,6 @@ public class Methods {
 		
 	}//public static void dlg_register_main(Activity actv)
 	
-	public static Dialog dlg_template_cancel(Activity actv, 
-			int layoutId, int titleStringId,
-			int cancelButtonId, DialogTags cancelTag) {
-		/*----------------------------
-		* Steps
-		* 1. Set up
-		* 2. Add listeners => OnTouch
-		* 3. Add listeners => OnClick
-		----------------------------*/
-		
-		// 
-		Dialog dlg = new Dialog(actv);
-		
-		//
-		dlg.setContentView(layoutId);
-		
-		// Title
-		dlg.setTitle(titleStringId);
-		
-		/*----------------------------
-		* 2. Add listeners => OnTouch
-		----------------------------*/
-		//
-		Button btn_cancel = (Button) dlg.findViewById(cancelButtonId);
-		
-		//
-		btn_cancel.setTag(cancelTag);
-		
-		//
-		btn_cancel.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
-		
-		/*----------------------------
-		* 3. Add listeners => OnClick
-		----------------------------*/
-		//
-		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
-		
-		//
-		//dlg.show();
-		
-		return dlg;
-	
-	}//public static Dialog dlg_template_okCancel()
-
 	public static void db_backup(Activity actv) {
 		/*----------------------------
 		 * 1. Prep => File names
@@ -1915,6 +1871,171 @@ public class Methods {
 		
 	}//public static String getFileNameFromDir_latest
 
+	public static int backupDb(Activity actv,
+						String dbName, String dirPathBk) {
+		/*----------------------------
+		 * 1. Prep => File names
+		 * 2. Prep => Files
+		 * 2-2. Folder exists?
+		 * 3. Copy
+			----------------------------*/
+//		String time_label = Methods.get_TimeLabel(Methods.getMillSeconds_now());
+		String timeLabel = Methods.getTimeLabel(Methods.getMillSeconds_now());
+		
+		String db_src = StringUtils.join(
+						new String[]{
+								CONS.dirPath_db,
+								dbName},
+						File.separator);
+		
+		String db_dst = StringUtils.join(
+						new String[]{
+								dirPathBk,
+								CONS.fileName_db_backup_trunk},
+						File.separator);
+		
+		db_dst = db_dst + "_" + timeLabel + CONS.fileName_db_backup_ext;
+		
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "db_src: " + db_src + " * " + "db_dst: " + db_dst);
+		
+		/*----------------------------
+		 * 2. Prep => Files
+			----------------------------*/
+		File src = new File(db_src);
+		File dst = new File(db_dst);
+		
+		/*********************************
+		 * DB file exists?
+		 *********************************/
+		File f = new File(db_src);
+		
+		if (f.exists()) {
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "DB file exists=" + f.getAbsolutePath());
+		} else {//if (f.exists())
+			
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "File doesn't exist=");
+			
+			return CONS.DB_DOESNT_EXIST;
+			
+		}//if (f.exists())
+		
+		
+		/*----------------------------
+		 * 2-2. Folder exists?
+			----------------------------*/
+		File db_backup = new File(dirPathBk);
+		
+		if (!db_backup.exists()) {
+			
+			try {
+				db_backup.mkdir();
+
+				// Log
+				Log.d("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Folder created: " + db_backup.getAbsolutePath());
+				
+			} catch (Exception e) {
+				
+				// Log
+				Log.d("Methods.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Create folder => Failed");
+				
+				return CONS.DB_CANT_CREATE_FOLDER;
+				
+			}
+			
+		} else {//if (!db_backup.exists())
+
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Folder exists: " + db_backup.getAbsolutePath());
+			
+		}//if (!db_backup.exists())
+		
+		/*----------------------------
+		 * 3. Copy
+			----------------------------*/
+		try {
+			FileChannel iChannel = new FileInputStream(src).getChannel();
+			FileChannel oChannel = new FileOutputStream(dst).getChannel();
+			iChannel.transferTo(0, iChannel.size(), oChannel);
+			iChannel.close();
+			oChannel.close();
+			
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "File copied");
+			
+//			// debug
+//			Toast.makeText(actv,
+//					"DB backup => Done",
+//					Toast.LENGTH_LONG).show();
+			
+			return CONS.DB_BACKUP_SUCCESSFUL;
+
+		} catch (FileNotFoundException e) {
+
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Exception: " + e.toString());
+			
+			return CONS.DB_FILE_COPY_EXCEPTION;
+			
+		} catch (IOException e) {
+
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Exception: " + e.toString());
+			
+			return CONS.DB_FILE_COPY_EXCEPTION;
+			
+		}//try
+		
+	}//public static void backupDb()
 	
+	public static String getTimeLabel(long millSec) {
+		
+		 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd_HHmmss");
+		 
+		return sdf1.format(new Date(millSec));
+		
+	}//public static String get_TimeLabel(long millSec)
 	
 }//public class Methods

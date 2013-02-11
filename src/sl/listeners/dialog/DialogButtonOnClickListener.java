@@ -2,6 +2,7 @@ package sl.listeners.dialog;
 
 import sl.main.R;
 import sl.utils.Methods;
+import sl.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Vibrator;
@@ -45,7 +46,7 @@ public class DialogButtonOnClickListener implements OnClickListener {
 //	@Override
 	public void onClick(View v) {
 		//
-		Methods.DialogTags tag_name = (Methods.DialogTags) v.getTag();
+		Tags.DialogTags tag_name = (Tags.DialogTags) v.getTag();
 
 		//
 		switch (tag_name) {
@@ -238,6 +239,11 @@ public class DialogButtonOnClickListener implements OnClickListener {
 			
 			break;
 		
+		case dlg_generic_dismiss://------------------------------------------
+			
+			dlg.dismiss();
+			
+			break;
 			
 		default:
 			break;

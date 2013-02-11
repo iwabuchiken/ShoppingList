@@ -8,6 +8,7 @@ import sl.main.R;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Tags;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.SQLException;
@@ -18,7 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
-public class DBAdminActv extends Activity {
+public class DBActv extends Activity {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class DBAdminActv extends Activity {
 		super.onCreate(savedInstanceState);
 
 		//
-		setContentView(R.layout.db_manager);
+		setContentView(R.layout.actv_db);
 		
 		//
 		setListeners();
@@ -160,8 +161,8 @@ public class DBAdminActv extends Activity {
     	/*----------------------------
 		 * 3.2. Tags
 			----------------------------*/
-    	bt_create.setTag(Methods.ButtonTags.db_manager_activity_create_table);
-    	bt_drop.setTag(Methods.ButtonTags.db_manager_activity_drop_table);
+    	bt_create.setTag(Tags.ButtonTags.db_manager_activity_create_table);
+    	bt_drop.setTag(Tags.ButtonTags.db_manager_activity_drop_table);
     	
     	/*----------------------------
 		 * 3.3. Listeners

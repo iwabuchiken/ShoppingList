@@ -15,6 +15,8 @@ import sl.main.R;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_dlg;
+import sl.utils.Tags;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -367,7 +369,7 @@ public class MainActv extends Activity {
 		
 		
 		
-		tv_list.setTag(Methods.ButtonTags.sl_main_bt_item_list);
+		tv_list.setTag(Tags.ButtonTags.sl_main_bt_item_list);
 		
 		tv_list.setOnTouchListener(new ButtonOnTouchListener(this));
 		tv_list.setOnClickListener(new ButtonOnClickListener(this));
@@ -377,7 +379,7 @@ public class MainActv extends Activity {
 			----------------------------*/
 		TextView tv_register = (TextView) findViewById(R.id.sl_tv_register);
 		
-		tv_register.setTag(Methods.ButtonTags.sl_main_bt_register);
+		tv_register.setTag(Tags.ButtonTags.sl_main_bt_register);
 		
 		tv_register.setOnTouchListener(new ButtonOnTouchListener(this));
 		tv_register.setOnClickListener(new ButtonOnClickListener(this));
@@ -387,19 +389,19 @@ public class MainActv extends Activity {
 //			----------------------------*/
 //		TextView tv_db = (TextView) findViewById(R.id.sl_tv_db);
 //		
-//		tv_db.setTag(Methods.ButtonTags.sl_main_bt_db);
+//		tv_db.setTag(Tags.ButtonTags.sl_main_bt_db);
 //		
 //		tv_db.setOnTouchListener(new ButtonOnTouchListener(this));
 //		tv_db.setOnClickListener(new ButtonOnClickListener(this));
 		
 //		Methods.setOnTouchListener_button(this, Methods.ViewNames.TV, 
-//				Methods.ButtonTags.sl_main_bt_item_list, R.id.sl_tv_item_list);
+//				Tags.ButtonTags.sl_main_bt_item_list, R.id.sl_tv_item_list);
 //		
 //		Methods.setOnTouchListener_button(this, Methods.ViewNames.TV, 
-//				Methods.ButtonTags.sl_main_bt_register, R.id.sl_tv_register);
+//				Tags.ButtonTags.sl_main_bt_register, R.id.sl_tv_register);
 //		
 //		Methods.setOnTouchListener_button(this, Methods.ViewNames.TV, 
-//				Methods.ButtonTags.sl_main_bt_db, R.id.sl_tv_db);
+//				Tags.ButtonTags.sl_main_bt_db, R.id.sl_tv_db);
 		
 		
 	}//private void add_listeners()
@@ -421,16 +423,19 @@ public class MainActv extends Activity {
 		switch (item.getItemId()) {
 				
 			case R.id.v1_menu_db_manager:
+				
+				Methods_dlg.dlg_db_activity(this);
+				
 				//
-				Intent i = new Intent();
-				
-				i = new Intent();
-				
-				i.setClass(this, DBAdminActv.class);
-				
-				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-				
-				startActivity(i);
+//				Intent i = new Intent();
+//				
+//				i = new Intent();
+//				
+//				i.setClass(this, DBActv.class);
+//				
+//				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+//				
+//				startActivity(i);
 				
 				break;
 				

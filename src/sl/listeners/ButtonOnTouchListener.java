@@ -1,6 +1,7 @@
 package sl.listeners;
 
 import sl.utils.Methods;
+import sl.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -26,7 +27,7 @@ public class ButtonOnTouchListener implements OnTouchListener {
 	
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO 自動生成されたメソッド・スタブ
-		Methods.ButtonTags tag_name = (Methods.ButtonTags) v.getTag();
+		Tags.ButtonTags tag_name = (Tags.ButtonTags) v.getTag();
 		
 		// Log
 		Log.d("ButtonOnTouchListener.java" + "["

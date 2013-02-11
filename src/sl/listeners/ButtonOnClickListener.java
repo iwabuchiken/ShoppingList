@@ -1,9 +1,10 @@
 package sl.listeners;
 
-import sl.main.DBAdminActv;
+import sl.main.DBActv;
 import sl.main.ItemListActv;
 import sl.main.R;
 import sl.utils.Methods;
+import sl.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -34,7 +35,7 @@ public class ButtonOnClickListener implements OnClickListener {
 //	@Override
 	public void onClick(View v) {
 		//
-		Methods.ButtonTags tag_name = (Methods.ButtonTags) v.getTag();
+		Tags.ButtonTags tag_name = (Tags.ButtonTags) v.getTag();
 
 		//
 		switch (tag_name) {

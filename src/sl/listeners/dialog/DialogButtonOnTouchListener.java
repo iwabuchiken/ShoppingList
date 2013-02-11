@@ -1,6 +1,7 @@
 package sl.listeners.dialog;
 
 import sl.utils.Methods;
+import sl.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -31,7 +32,7 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 //	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO 自動生成されたメソッド・スタブ
-		Methods.DialogTags tag_name = (Methods.DialogTags) v.getTag();
+		Tags.DialogTags tag_name = (Tags.DialogTags) v.getTag();
 		
 		switch (event.getActionMasked()) {
 		case MotionEvent.ACTION_DOWN:

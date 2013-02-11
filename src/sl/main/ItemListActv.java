@@ -12,6 +12,7 @@ import sl.main.R;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Tags;
 
 import android.app.ListActivity;
 import android.database.Cursor;
@@ -82,7 +83,7 @@ public class ItemListActv extends ListActivity {
 			----------------------------*/
 		Button bt_choose = (Button) findViewById(R.id.itemlist_bt_choose);
 		
-		bt_choose.setTag(Methods.ButtonTags.itemlist_bt_choose);
+		bt_choose.setTag(Tags.ButtonTags.itemlist_bt_choose);
 		
 		bt_choose.setOnTouchListener(new ButtonOnTouchListener(this));
 		bt_choose.setOnClickListener(new ButtonOnClickListener(this));
@@ -92,7 +93,7 @@ public class ItemListActv extends ListActivity {
 			----------------------------*/
 		Button bt_see_chosen = (Button) findViewById(R.id.itemlist_bt_see_chosen);
 		
-		bt_see_chosen.setTag(Methods.ButtonTags.itemlist_bt_see_chosen);
+		bt_see_chosen.setTag(Tags.ButtonTags.itemlist_bt_see_chosen);
 		
 		bt_see_chosen.setOnTouchListener(new ButtonOnTouchListener(this));
 		bt_see_chosen.setOnClickListener(new ButtonOnClickListener(this));

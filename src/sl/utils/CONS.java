@@ -74,4 +74,13 @@ public class CONS {
 	// Factory
 	public static final CursorFactory factory = null;
 
+	/*********************************
+	 * Constant values
+	 *********************************/
+	public static final int DB_DOESNT_EXIST = -1;
+	public static final int DB_CANT_CREATE_FOLDER = -2;
+	public static final int DB_BACKUP_SUCCESSFUL = 1;
+	public static final int DB_FILE_COPY_EXCEPTION = -3;
+	
+	
 }//public class CONS

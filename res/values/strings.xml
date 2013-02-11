@@ -6,6 +6,7 @@
 	    <string name="generic_ok">OK</string>
 	    <string name="generic_cancel">キャンセル</string>
 	    <string name="generic_message_register">登録してよろしいですか？</string>
+	    
 	    <string name="dlg_reconfirm_genre_name">ジャンル名</string>
 	    <string name="generic_title_reconfirm">確認</string>
 	    <string name="generic_label_create">作成</string>
@@ -87,5 +88,13 @@
     <!-- itemlist.xml -->
     	<string name="itemlist_bt_choose">確定</string>
     	<string name="itemlist_bt_see_chosen">見る</string>
+    
+    <!-- dlg_db_admin.xml -->
+	    <string name="dlg_db_admin_title">DB Admin</string>
+	    <string name="dlg_db_admin_item_backup_db">Backup DB</string>
+	    <string name="dlg_db_admin_item_refresh_db">DBリフレッシュ</string>
+	    <string name="dlg_db_admin_item_set_new_column">Set new column</string>
+	    <string name="dlg_db_admin_item_restore_db">Restore db</string>
+    	
     	
 </resources>
