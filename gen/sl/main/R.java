@@ -124,11 +124,7 @@ public final class R {
         public static final int v1_et_name=0x7f080050;
         public static final int v1_et_price=0x7f080054;
         public static final int v1_et_yomi=0x7f080052;
-        public static final int v1_menu_add_genre=0x7f080060;
-        public static final int v1_menu_add_item=0x7f08005d;
         public static final int v1_menu_db_manager=0x7f08005c;
-        public static final int v1_menu_item_list=0x7f08005e;
-        public static final int v1_menu_register_store=0x7f08005f;
         public static final int v1_sp_genre=0x7f080056;
         public static final int v1_sp_store=0x7f08004e;
         public static final int v1_tl=0x7f08004c;
@@ -158,7 +154,7 @@ public final class R {
     }
     public static final class menu {
         public static final int itemlist=0x7f070000;
-        public static final int listmenu=0x7f070001;
+        public static final int menu_main=0x7f070001;
     }
     public static final class string {
         public static final int adapteritem_tv_item_name=0x7f050013;

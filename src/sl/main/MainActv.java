@@ -70,6 +70,8 @@ public class MainActv extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shoppinglist);
         
+        setTitle(this.getClass().getName());
+        
         vib = (Vibrator) this.getSystemService(this.VIBRATOR_SERVICE);
         
         /*----------------------------
@@ -406,7 +408,7 @@ public class MainActv extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// 
 		MenuInflater mi = getMenuInflater();
-		mi.inflate(R.menu.listmenu, menu);
+		mi.inflate(R.menu.menu_main, menu);
 
 		
 		
@@ -417,49 +419,22 @@ public class MainActv extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO 自動生成されたメソッド・スタブ
 		switch (item.getItemId()) {
-			case R.id.v1_menu_add_item:
-				//
-				Intent i = new Intent();
-				
-				//
-				i.setClass(this, RegisterItemActv.class);
-				
-				//
-				startActivity(i);
-				
-				break;
-			
-			case R.id.v1_menu_item_list:
-				//
-				i = new Intent();
-				i.setClass(this, ItemListActv.class);
-				startActivity(i);
-				
-				break;
-				
-			case R.id.v1_menu_register_store:
-				//
-				Methods.register_store(this);
-				
-				break;
-				
-			case R.id.v1_menu_add_genre:
-				//
-				Methods.registerGenre(this);
-				
-				break;
 				
 			case R.id.v1_menu_db_manager:
 				//
+				Intent i = new Intent();
+				
 				i = new Intent();
 				i.setClass(this, DBAdminActv.class);
+				
 				startActivity(i);
 				
 				break;
+				
 		}//switch (item.getItemId())
 		
 		return super.onOptionsItemSelected(item);
-	}
+	}//public boolean onOptionsItemSelected(MenuItem item)
 
 	@Override
 	protected void onPause() {
