@@ -425,7 +425,10 @@ public class MainActv extends Activity {
 				Intent i = new Intent();
 				
 				i = new Intent();
+				
 				i.setClass(this, DBAdminActv.class);
+				
+				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 				
 				startActivity(i);
 				

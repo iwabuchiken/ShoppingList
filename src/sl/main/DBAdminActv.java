@@ -201,6 +201,12 @@ public class DBAdminActv extends Activity {
 	protected void onPause() {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onPause();
+		// Log
+		Log.d("DBAdminActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Pausing...");
 	}
 
 	@Override
@@ -225,6 +231,17 @@ public class DBAdminActv extends Activity {
 	protected void onDestroy() {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onDestroy();
-	}
+		
+		// Log
+		Log.d("DBAdminActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Destroying");
+		
+//		this.finish();
+//		
+//		this.overridePendingTransition(0, 0);
+	}//protected void onDestroy()
 	
-}
+}//public class DBAdminActv extends Activity
