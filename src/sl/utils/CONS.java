@@ -34,7 +34,10 @@ public class CONS {
 	 *********************************/
 	public static String tableName = "shopping_item";
 
-	public static String[] columns = {"store", "name", "price", "genre"};
+//	public static String[] columns = {"store", "name", "price", "genre"};
+	public static String[] columns =
+					{"store", "name", "price", "genre", "yomi"};
+	
 	public static String[] columns_with_index = 
 					{"store", "name", "price", "genre", android.provider.BaseColumns._ID};
 

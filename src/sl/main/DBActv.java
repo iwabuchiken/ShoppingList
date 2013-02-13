@@ -208,7 +208,10 @@ public class DBActv extends Activity {
 				+ ":"
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "Pausing...");
-	}
+		
+		this.overridePendingTransition(0, 0);
+		
+	}//protected void onPause()
 
 	@Override
 	protected void onResume() {

@@ -426,7 +426,7 @@ public class MainActv extends Activity {
 				
 				Methods_dlg.dlg_db_activity(this);
 				
-				//
+				
 //				Intent i = new Intent();
 //				
 //				i = new Intent();

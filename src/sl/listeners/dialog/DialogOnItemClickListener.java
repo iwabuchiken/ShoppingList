@@ -4,13 +4,17 @@ import sl.main.MainActv;
 import sl.main.R;
 import sl.main.RegisterItemActv;
 import sl.utils.CONS;
+import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_sl;
 import sl.utils.Tags;
 import sl.utils.Tags.DialogTags;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
@@ -174,10 +178,144 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			
 			return;
 			
-		} else {
+		} else if (choice.equals(actv.getString(
+				R.string.dlg_db_admin_item_refatcor_db))) {
 
-		}
+			dlg_db_admin_lv_refactorDb();
+			
+			return;
+			
+		} else {
+			
+		}//if
+		
 	}//private void dlg_db_admin_lv(String choice)
+
+	private void dlg_db_admin_lv_refactorDb() {
+		// TODO Auto-generated method stub
+		/*********************************
+		 * Setup DB
+		 *********************************/
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		/*********************************
+		 * Query
+		 *********************************/
+		String tableName = "shopping_item";
+		
+		String sql = "SELECT * FROM " + tableName;
+
+		Cursor c = null;
+
+		try {
+			
+			c = wdb.rawQuery(sql, null);
+			
+			/*********************************
+			 * Cursor => null?
+			 *********************************/
+			if (null == c) {
+				
+				// Log
+				Log.d("DialogOnItemClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "Cursor => null");
+				
+				wdb.close();
+				
+				return;
+				
+			}//if (null == c)
+			
+			/*********************************
+			 * Num of entries in the cursor => Less than 1?
+			 *********************************/
+			if (c.getCount() < 1) {
+				
+				// Log
+				Log.d("DialogOnItemClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "Cursor => No entry");
+				
+				wdb.close();
+				
+				return;
+				
+			}//if (null == c)
+			
+			/*********************************
+			 * Start refactoring data
+			 *********************************/
+			// Log
+			Log.d("DialogOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Refactoring starts...");
+			
+			boolean res = Methods_sl.refactorData(
+										actv, wdb, dbu, tableName, c);
+			
+			if (res == true) {
+			
+				// Log
+				Log.d("DialogOnItemClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "Data refactored");
+				
+			} else {//if (res == true)
+
+				// Log
+				Log.d("DialogOnItemClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Data refactoring => Failed");
+				
+			}//if (res == true)
+			
+			/*********************************
+			 * Closing operations
+			 *********************************/
+			wdb.close();
+			
+			dlg.dismiss();
+			
+			return;
+			
+		} catch (Exception e) {
+
+			// Log
+			Log.d("DialogOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Exception => " + e.toString());
+		}//try
+
+		
+		wdb.close();
+		
+		return;
+
+	}//private void dlg_db_admin_lv_refactorDb()
 
 	private void dlg_db_admin_lv_backupDb() {
 		// TODO Auto-generated method stub

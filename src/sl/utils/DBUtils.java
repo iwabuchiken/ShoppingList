@@ -356,5 +356,49 @@ public class DBUtils extends SQLiteOpenHelper {
 
 	}//public boolean dropTable(String tableName) 
 
-}
+	public boolean updateData(Activity actv, SQLiteDatabase wdb, 
+			String tableName, long dbId, String colName, String value) {
+		/*----------------------------
+		* Steps
+		* 1. 
+		----------------------------*/
+		String sql = "UPDATE " + tableName + " SET " + 
+					colName + "='" + value + "'"
+//					+ " WHERE file_id = '" + dbId + "'";
+					+ " WHERE " + android.provider.BaseColumns._ID
+					+ " = '" + dbId + "'";
+		
+		try {
+			
+			wdb.execSQL(sql);
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql => Done: " + sql);
+			
+			//Methods.toastAndLog(actv, "Data updated", 2000);
+			
+			return true;
+			
+			
+		} catch (SQLException e) {
+
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Exception => " + e.toString() + " / " + "sql: " + sql);
+			
+			return false;
+			
+		}//try
+		
+	}//public void updateData_memos
+
+}//public class DBUtils extends SQLiteOpenHelper
 

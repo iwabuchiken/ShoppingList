@@ -14,6 +14,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -2037,5 +2039,37 @@ public class Methods {
 		return sdf1.format(new Date(millSec));
 		
 	}//public static String get_TimeLabel(long millSec)
-	
+
+	public static int getArrayIndex(String[] targetArray, String targetString) {
+		int index = -1;
+		
+		for (int i = 0; i < targetArray.length; i++) {
+			
+			if (targetArray[i].equals(targetString)) {
+				
+				index = i;
+				
+				break;
+				
+			}//if (targetArray[i] == )
+			
+		}//for (int i = 0; i < targetArray.length; i++)
+		
+		return index;
+	}//public static int getArrayIndex(String[] targetArray, String targetString)
+
+	public static boolean is_numeric(String str) {
+		
+		// REF=> http://www.coderanch.com/t/401142/java/java/check-if-String-value-numeric # Hurkpan Potgieter Greenhorn
+		String regex = "((-|\\+)?[0-9]+(\\.[0-9]+)?)+";
+		
+//		Pattern p = Pattern.compile( "([0-9]*)\\.[0]" );
+		Pattern p = Pattern.compile(regex);
+
+		Matcher m = p.matcher(str);
+		
+		return m.matches(); //TRUE
+		
+	}//public static boolean is_numeric(String str)
+
 }//public class Methods
