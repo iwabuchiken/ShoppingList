@@ -4,12 +4,19 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 
+import net.sf.json.xml.XMLSerializer;
+
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -699,37 +706,39 @@ public class Methods_sl {
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 					"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
 					"&grade=1" +
-					"&sentence=" + sen;
+					"&sentence=" + sen
+					+ "output=json";
+
 
 		HttpPost httpPost = new HttpPost(url);
 		
 		httpPost.setHeader("Content-type", "application/json");
 		
-		JSONObject jso = new JSONObject();
-		
-		StringEntity stringEntity = null;
-		
-		try {
-			
-			stringEntity = new StringEntity(jso.toString());
-			
-		} catch (UnsupportedEncodingException e) {
-
-			// Log
-			Log.d("Methods_sl.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "Exception: " + e.toString());
-		
-			return CONS.GETYOMI_FAILED;
-			
-		}
-
-		/*********************************
-		 * Set entity to HttpPost object
-		 *********************************/
-		httpPost.setEntity(stringEntity);
+//		JSONObject jso = new JSONObject();
+//		
+//		StringEntity stringEntity = null;
+//		
+//		try {
+//			
+//			stringEntity = new StringEntity(jso.toString());
+//			
+//		} catch (UnsupportedEncodingException e) {
+//
+//			// Log
+//			Log.d("Methods_sl.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "Exception: " + e.toString());
+//		
+//			return CONS.GETYOMI_FAILED;
+//			
+//		}
+//
+//		/*********************************
+//		 * Set entity to HttpPost object
+//		 *********************************/
+//		httpPost.setEntity(stringEntity);
 
 		/*********************************
 		 * memo
@@ -776,9 +785,6 @@ public class Methods_sl {
 		 *********************************/
 		if (hr == null) {
 			
-			// debug
-			Toast.makeText(actv, "hr == null", 2000).show();
-			
 			// Log
 			Log.d("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
@@ -787,10 +793,10 @@ public class Methods_sl {
 			return CONS.GETYOMI_FAILED;
 			
 		}//if (hr == null)
-		
-		/*----------------------------
-		 * 7. Status
-			----------------------------*/
+
+		/*********************************
+		 * Get status
+		 *********************************/
 		int statusCode = hr.getStatusLine().getStatusCode();
 		
 		// Log
@@ -799,6 +805,86 @@ public class Methods_sl {
 				+ ":"
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "statusCode: " + statusCode);
+		
+		/*********************************
+		 * Get contents of the response
+		 *********************************/
+		HttpEntity entity = hr.getEntity();
+		
+		JSONObject js_HttpResponse = null;
+		
+		try {
+			
+//			json = new JSONObject(EntityUtils.toString(entity));
+//			js_HttpResponse =
+//						XML.toJSONObject(EntityUtils.toString(entity));
+//			js_HttpResponse = new XMLSerializer().read( EntityUtils.toString(entity) );
+			js_HttpResponse = (JSONObject) new XMLSerializer().read(EntityUtils.toString(entity));
+			
+		} catch (ParseException e) {
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return CONS.GETYOMI_FAILED;
+			
+		} catch (IOException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return CONS.GETYOMI_FAILED;
+			
+		}
+		
+		// Log
+		Log.d("Methods_sl.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"js_HttpResponse="
+				+ js_HttpResponse.getClass().getName());
+		
+//		/*********************************
+//		 * Parse json object
+//		 *********************************/
+////		JSONArray jsonArray = null;
+//		JSONObject js_resultSet = null;
+//		
+//        try {
+//        	
+//        	js_resultSet =
+////			        json.getJSONObject("ResultSet").getJSONArray("items");
+//					json.getJSONObject("ResultSet");
+//			
+//		} catch (JSONException e) {
+//			
+//			// Log
+//			Log.d("Methods_sl.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", e.toString());
+//			
+//			return CONS.GETYOMI_FAILED;
+//			
+//		}
+//
+//        // Log
+//		Log.d("Methods_sl.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "js_resultSet=" + js_resultSet.getClass().getName());
 		
 		return CONS.GETYOMI_SUCCESSFUL;
 		
