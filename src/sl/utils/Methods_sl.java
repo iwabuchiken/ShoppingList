@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 
-import net.sf.json.xml.XMLSerializer;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
@@ -815,11 +813,13 @@ public class Methods_sl {
 		
 		try {
 			
-//			json = new JSONObject(EntityUtils.toString(entity));
+//			json = new JSONObject(EntityUtils.toString(entity));// sl.libs.douglascrockford
+			js_HttpResponse = new JSONObject(EntityUtils.toString(entity));// sl.libs.douglascrockford
 //			js_HttpResponse =
 //						XML.toJSONObject(EntityUtils.toString(entity));
 //			js_HttpResponse = new XMLSerializer().read( EntityUtils.toString(entity) );
-			js_HttpResponse = (JSONObject) new XMLSerializer().read(EntityUtils.toString(entity));
+//			js_HttpResponse = (JSONObject) new XMLSerializer().read(EntityUtils.toString(entity));
+			
 			
 		} catch (ParseException e) {
 			
@@ -843,6 +843,9 @@ public class Methods_sl {
 			
 			return CONS.GETYOMI_FAILED;
 			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		// Log
