@@ -192,128 +192,138 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 	}//private void dlg_db_admin_lv(String choice)
 
 	private void dlg_db_admin_lv_refactorDb() {
-		// TODO Auto-generated method stub
+		
+//		Methods_sl.refactorDb_colPrice(actv);
+		Methods_sl.refactorDb_colGenre(actv);
+
 		/*********************************
-		 * Setup DB
+		 * Close dialog
 		 *********************************/
-		DBUtils dbu = new DBUtils(actv, CONS.dbName);
-		
-		SQLiteDatabase wdb = dbu.getWritableDatabase();
-		
-		/*********************************
-		 * Query
-		 *********************************/
-		String tableName = "shopping_item";
-		
-		String sql = "SELECT * FROM " + tableName;
-
-		Cursor c = null;
-
-		try {
-			
-			c = wdb.rawQuery(sql, null);
-			
-			/*********************************
-			 * Cursor => null?
-			 *********************************/
-			if (null == c) {
-				
-				// Log
-				Log.d("DialogOnItemClickListener.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-						+ ":"
-						+ Thread.currentThread().getStackTrace()[2]
-								.getMethodName() + "]", "Cursor => null");
-				
-				wdb.close();
-				
-				return;
-				
-			}//if (null == c)
-			
-			/*********************************
-			 * Num of entries in the cursor => Less than 1?
-			 *********************************/
-			if (c.getCount() < 1) {
-				
-				// Log
-				Log.d("DialogOnItemClickListener.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-						+ ":"
-						+ Thread.currentThread().getStackTrace()[2]
-								.getMethodName() + "]", "Cursor => No entry");
-				
-				wdb.close();
-				
-				return;
-				
-			}//if (null == c)
-			
-			/*********************************
-			 * Start refactoring data
-			 *********************************/
-			// Log
-			Log.d("DialogOnItemClickListener.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "Refactoring starts...");
-			
-			boolean res = Methods_sl.refactorData(
-										actv, wdb, dbu, tableName, c);
-			
-			if (res == true) {
-			
-				// Log
-				Log.d("DialogOnItemClickListener.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-						+ ":"
-						+ Thread.currentThread().getStackTrace()[2]
-								.getMethodName() + "]", "Data refactored");
-				
-			} else {//if (res == true)
-
-				// Log
-				Log.d("DialogOnItemClickListener.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-						+ ":"
-						+ Thread.currentThread().getStackTrace()[2]
-								.getMethodName() + "]",
-						"Data refactoring => Failed");
-				
-			}//if (res == true)
-			
-			/*********************************
-			 * Closing operations
-			 *********************************/
-			wdb.close();
-			
-			dlg.dismiss();
-			
-			return;
-			
-		} catch (Exception e) {
-
-			// Log
-			Log.d("DialogOnItemClickListener.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "Exception => " + e.toString());
-		}//try
-
-		
-		wdb.close();
+		dlg.dismiss();
 		
 		return;
+
+		
+//		/*********************************
+//		 * Setup DB
+//		 *********************************/
+//		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+//		
+//		SQLiteDatabase wdb = dbu.getWritableDatabase();
+//		
+//		/*********************************
+//		 * Query
+//		 *********************************/
+//		String tableName = "shopping_item";
+//		
+//		String sql = "SELECT * FROM " + tableName;
+//
+//		Cursor c = null;
+//
+//		try {
+//			
+//			c = wdb.rawQuery(sql, null);
+//			
+//			/*********************************
+//			 * Cursor => null?
+//			 *********************************/
+//			if (null == c) {
+//				
+//				// Log
+//				Log.d("DialogOnItemClickListener.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]", "Cursor => null");
+//				
+//				wdb.close();
+//				
+//				return;
+//				
+//			}//if (null == c)
+//			
+//			/*********************************
+//			 * Num of entries in the cursor => Less than 1?
+//			 *********************************/
+//			if (c.getCount() < 1) {
+//				
+//				// Log
+//				Log.d("DialogOnItemClickListener.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]", "Cursor => No entry");
+//				
+//				wdb.close();
+//				
+//				return;
+//				
+//			}//if (null == c)
+//			
+//			/*********************************
+//			 * Start refactoring data
+//			 *********************************/
+//			// Log
+//			Log.d("DialogOnItemClickListener.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "Refactoring starts...");
+//			
+//			boolean res = Methods_sl.refactorData(
+//										actv, wdb, dbu, tableName, c);
+//			
+//			if (res == true) {
+//			
+//				// Log
+//				Log.d("DialogOnItemClickListener.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]", "Data refactored");
+//				
+//			} else {//if (res == true)
+//
+//				// Log
+//				Log.d("DialogOnItemClickListener.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]",
+//						"Data refactoring => Failed");
+//				
+//			}//if (res == true)
+//			
+//			/*********************************
+//			 * Closing operations
+//			 *********************************/
+//			wdb.close();
+//			
+//			dlg.dismiss();
+//			
+//			return;
+//			
+//		} catch (Exception e) {
+//
+//			// Log
+//			Log.d("DialogOnItemClickListener.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "Exception => " + e.toString());
+//		}//try
+//
+//		
+//		wdb.close();
+		
 
 	}//private void dlg_db_admin_lv_refactorDb()
 

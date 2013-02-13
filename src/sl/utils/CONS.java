@@ -80,10 +80,19 @@ public class CONS {
 	/*********************************
 	 * Constant values
 	 *********************************/
+	// Generic
+	public static final int UNKNOWN_ERROR = -9;
+	public static final int EXCEPTION = -10;
+	
 	public static final int DB_DOESNT_EXIST = -1;
 	public static final int DB_CANT_CREATE_FOLDER = -2;
 	public static final int DB_BACKUP_SUCCESSFUL = 1;
 	public static final int DB_FILE_COPY_EXCEPTION = -3;
 	
+	// Methods_sl.refactorDb_colPrice()
+	public static final int CURSOR_NULL = -1;
+	public static final int CURSOR_NO_ENTRY = -2;
+	public static final int DATA_REFACTORING_FAILED = -3;
+	public static final int DATA_REFACTORED = 1;
 	
 }//public class CONS
