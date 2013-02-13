@@ -1,5 +1,9 @@
 package sl.listeners.dialog;
 
+import java.io.File;
+
+import org.apache.commons.lang.StringUtils;
+
 import sl.main.MainActv;
 import sl.main.R;
 import sl.main.RegisterItemActv;
@@ -185,21 +189,57 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			
 			return;
 			
-		} else {
+		} else if (choice.equals(actv.getString(
+				R.string.dlg_db_admin_item_restore_db))) {
+			
+			dlg_db_admin_lv_RestoreDb();
 			
 		}//if
 		
 	}//private void dlg_db_admin_lv(String choice)
 
+	private void dlg_db_admin_lv_RestoreDb() {
+		
+		String src = StringUtils.join(
+						new String[]{
+								CONS.dirPath_db_backup,
+								"shoppinglist_backup_20130213_121226.bk"},
+						File.separator);
+		
+		String dst = StringUtils.join(
+						new String[]{
+								CONS.dirPath_db,
+								CONS.dbName},
+						File.separator);
+
+		// Log
+		Log.d("DialogOnItemClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"src=" + src
+				+ "|"
+				+ "dst=" + dst);
+
+		boolean res = Methods.restore_db(actv, CONS.dbName, src, dst);
+
+	}//private void dlg_db_admin_lv_RestoreDb()
+
 	private void dlg_db_admin_lv_refactorDb() {
 		
 //		Methods_sl.refactorDb_colPrice(actv);
-		Methods_sl.refactorDb_colGenre(actv);
+//		Methods_sl.refactorDb_colGenre(actv);
+		int res = Methods_sl.refactorDb_colPrice_CanDo(actv);
 
 		/*********************************
 		 * Close dialog
 		 *********************************/
-		dlg.dismiss();
+		if (res == CONS.DATA_REFACTORED) {
+		
+			dlg.dismiss();
+			
+		}//if (res == true)
 		
 		return;
 
