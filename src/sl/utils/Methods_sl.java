@@ -1,11 +1,23 @@
 package sl.utils;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONObject;
+
 import android.app.Activity;
+import android.app.Dialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.Toast;
 
 public class Methods_sl {
 
@@ -678,5 +690,118 @@ public class Methods_sl {
 		return res;
 		
 	}//private static boolean refactorData_colPrice_CanDo(
+
+	
+	public static int getYomi(Activity actv, Dialog dlg) {
+		// TODO Auto-generated method stub
+		String sen = "ä`ÉsÅ[";
+		
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+					"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+					"&grade=1" +
+					"&sentence=" + sen;
+
+		HttpPost httpPost = new HttpPost(url);
+		
+		httpPost.setHeader("Content-type", "application/json");
+		
+		JSONObject jso = new JSONObject();
+		
+		StringEntity stringEntity = null;
+		
+		try {
+			
+			stringEntity = new StringEntity(jso.toString());
+			
+		} catch (UnsupportedEncodingException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Exception: " + e.toString());
+		
+			return CONS.GETYOMI_FAILED;
+			
+		}
+
+		/*********************************
+		 * Set entity to HttpPost object
+		 *********************************/
+		httpPost.setEntity(stringEntity);
+
+		/*********************************
+		 * memo
+		 *********************************/
+		HttpUriRequest postRequest = httpPost;
+		
+		DefaultHttpClient dhc = new DefaultHttpClient();
+		
+		HttpResponse hr = null;
+		
+		/*********************************
+		 * Execute request
+		 *********************************/
+		try {
+			
+			hr = dhc.execute(postRequest);
+			
+		} catch (ClientProtocolException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return CONS.GETYOMI_FAILED;
+			
+		} catch (IOException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return CONS.GETYOMI_FAILED;
+			
+		}//try
+		
+		/*********************************
+		 * Process response
+		 *********************************/
+		if (hr == null) {
+			
+			// debug
+			Toast.makeText(actv, "hr == null", 2000).show();
+			
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "hr == null");
+			
+			return CONS.GETYOMI_FAILED;
+			
+		}//if (hr == null)
+		
+		/*----------------------------
+		 * 7. Status
+			----------------------------*/
+		int statusCode = hr.getStatusLine().getStatusCode();
+		
+		// Log
+		Log.d("Methods_sl.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "statusCode: " + statusCode);
+		
+		return CONS.GETYOMI_SUCCESSFUL;
+		
+	}//public static int getYomi(Activity actv, Dialog dlg)
 
 }//public class Methods_sl

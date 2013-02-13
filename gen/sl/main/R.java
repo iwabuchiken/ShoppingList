@@ -173,6 +173,7 @@ public final class R {
          */
         public static final int dlg_create_table_title=0x7f05002b;
         public static final int dlg_db_admin_item_backup_db=0x7f05003f;
+        public static final int dlg_db_admin_item_get_yomi=0x7f050043;
         public static final int dlg_db_admin_item_refatcor_db=0x7f050041;
         public static final int dlg_db_admin_item_refresh_db=0x7f050040;
         public static final int dlg_db_admin_item_restore_db=0x7f050042;

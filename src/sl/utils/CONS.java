@@ -94,5 +94,9 @@ public class CONS {
 	public static final int CURSOR_NO_ENTRY = -2;
 	public static final int DATA_REFACTORING_FAILED = -3;
 	public static final int DATA_REFACTORED = 1;
+
+	// Get yomi
+	public static final int GETYOMI_SUCCESSFUL = 1;
+	public static final int GETYOMI_FAILED = -1;
 	
 }//public class CONS

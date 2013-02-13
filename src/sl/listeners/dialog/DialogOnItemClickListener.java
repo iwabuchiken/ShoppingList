@@ -7,6 +7,7 @@ import org.apache.commons.lang.StringUtils;
 import sl.main.MainActv;
 import sl.main.R;
 import sl.main.RegisterItemActv;
+import sl.tasks.Task_GetYomi;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
@@ -193,10 +194,26 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 				R.string.dlg_db_admin_item_restore_db))) {
 			
 			dlg_db_admin_lv_RestoreDb();
-			
+		
+		} else if (choice.equals(actv.getString(
+					R.string.dlg_db_admin_item_get_yomi))) {
+				
+				dlg_db_admin_lv_GetYomi();
+				
 		}//if
 		
 	}//private void dlg_db_admin_lv(String choice)
+
+	private void dlg_db_admin_lv_GetYomi() {
+		// TODO Auto-generated method stub
+//		int res = Methods_sl.getYomi(actv, dlg);
+		
+		Task_GetYomi task = new Task_GetYomi(actv, dlg);
+		
+		task.execute("Start");
+		
+		
+	}//private void dlg_db_admin_lv_GetYomi()
 
 	private void dlg_db_admin_lv_RestoreDb() {
 		

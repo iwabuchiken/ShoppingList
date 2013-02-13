@@ -55,59 +55,7 @@ public class Methods {
 	/*----------------------------
 	 * Variables
 		----------------------------*/
-	//
-//	public static enum DialogTags {
-//		// dlg_generic
-//		dlg_generic_cancel,
-//		
-//		// dlg_register_store.xml
-//		dlg_register_store_ok, dlg_register_store_cancel,
-//
-//		// dlg_input_empty.xml
-//		dlg_input_empty_btn_reenter, dlg_input_empty_btn_cancel,
-//		
-//		// dlg_reconfirm_store_name.xml
-//		dlg_reconfirm_store_name_btn_yes, dlg_reconfirm_store_name_btn_cancel,
-//		
-//		// dlg_register_genre.xml
-//		dlg_register_genre_register, dlg_register_genre_cancel,
-//		
-//		// dlg_reconfirm_genre_name.xml
-//		dlg_reconfirm_genre_name_btn_register, dlg_reconfirm_genre_name_btn_cancel,
-//		
-//		// dlg_create_table.xml
-//		dlg_create_table_create, dlg_create_table_cancel,
-//
-//		// dlg_drop_table.xml
-//		dlg_drop_table_btn_cancel, dlg_drop_table,
-//		
-//		// dlg_confirm_drop_table.xml
-//		dlg_confirm_drop_table_btn_ok, dlg_confirm_drop_table_btn_cancel, dlg_confirm_drop_table,
-//
-//		// dlg_filter_list.xml
-//		dlg_filter_list_ok, dlg_filter_list_cancel,
-//		
-//		// dlg_register_main.xml
-//		dlg_register_main,
-//		
-//	}//public static enum DialogTags
-//	
-//	public static enum ButtonTags {
-//		// DBAdminActivity.java
-//		db_manager_activity_create_table, db_manager_activity_drop_table,
-//
-//		// ShoppingList.java
-//		sl_main_bt_item_list, sl_main_bt_register, sl_main_bt_db,
-//		
-//		// itemlist.xml
-//		itemlist_bt_choose, itemlist_bt_see_chosen,
-//		
-//	}//public static enum ButtonTags
-//
-//	public static enum ViewNames {
-//		TV, BT,
-//	}
-//	
+
 	public static void register_store(Activity actv) {
 		/*----------------------------
 		 * Steps
@@ -2072,4 +2020,45 @@ public class Methods {
 		
 	}//public static boolean is_numeric(String str)
 
+	/*********************************
+	 * 20130213_134916
+	 * convert_Kana2Gana(String s)
+	 * 1. The name "Kana2Gana" is borrowed from: http://java.akjava.com/library/kanagana
+	 * 2. The code from: http://www7a.biglobe.ne.jp/~java-master/samples/string/ZenkakuKatakanaToZenkakuHiragana.html
+	 * 
+	 *********************************/
+	public static String convert_Kana2Gana(String s) {
+		StringBuffer sb = new StringBuffer(s);
+		
+		for (int i = 0; i < sb.length(); i++) {
+		
+			char c = sb.charAt(i);
+			
+			if (c >= 'ƒ@' && c <= 'ƒ“') {
+				
+				sb.setCharAt(i, (char)(c - 'ƒ@' + '‚Ÿ'));
+				
+			} else if (c == 'ƒ•') {
+				
+				sb.setCharAt(i, '‚©');
+				
+			} else if (c == 'ƒ–') {
+				
+				sb.setCharAt(i, '‚¯');
+
+			} else if (c == 'ƒ”') {
+
+				sb.setCharAt(i, '‚¤');
+
+				sb.insert(i + 1, 'J');
+
+				i++;
+			}
+			
+		}//for (int i = 0; i < sb.length(); i++)
+		
+		return sb.toString(); 
+		
+	}//public static String convert_Kana2Gana(String s)
+	
 }//public class Methods
