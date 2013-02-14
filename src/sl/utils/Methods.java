@@ -1879,12 +1879,12 @@ public class Methods {
 		 *********************************/
 		try {
 			
-			// Log
-			Log.d("Methods.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "Executing postRequest...");
+//			// Log
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "Executing postRequest...");
 			
 			hr = dhc.execute(postRequest);
 			
@@ -1959,12 +1959,12 @@ public class Methods {
 			
 			xmlString = EntityUtils.toString(entity);
 			
-			// Log
-			Log.d("Methods.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", xmlString);
+//			// Log
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", xmlString);
 			
 		} catch (ParseException e) {
 
@@ -2153,7 +2153,7 @@ public class Methods {
 		if (entity == null) {
 			
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.d("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -2194,7 +2194,7 @@ public class Methods {
 		if (furigana == null && surface == null) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.d("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -2206,14 +2206,14 @@ public class Methods {
 			
 		} else {//if (furigana == null)
 			
-			// Log
-			Log.d("Methods_sl.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]",
-					"surface=" + surface + "/"
-					+ "furigana = " + furigana);
+//			// Log
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]",
+//					"surface=" + surface + "/"
+//					+ "furigana = " + furigana);
 			
 			return new String[]{kw, surface, furigana};
 			
