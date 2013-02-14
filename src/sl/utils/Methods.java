@@ -50,7 +50,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.util.Xml;
 import android.view.ViewGroup.LayoutParams;
-//import android.view.WindowManager.LayoutParams;
+
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -88,8 +88,7 @@ public class Methods {
 		dlg.setTitle(R.string.dlg_register_store_title);
 		
 		//
-		
-		
+
 		/*----------------------------
 		 * 2. Add listeners => OnTouch
 			----------------------------*/
@@ -111,16 +110,11 @@ public class Methods {
 		//
 		btn_ok.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
 		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
-		
-		
+
 		//
 		dlg.show();
-		
-		
-		
-		
-	}//public static void register_store(Activity actv)
 
+	}//public static void register_store(Activity actv)
 
 	public static void dlg_input_empty(Activity actv, Dialog dlg) {
 		/*----------------------------
@@ -163,10 +157,8 @@ public class Methods {
 		
 		//
 		dlg_new.show();
-		
-		
-	}//public static void dlg_input_empty(Activity actv, Dialog dlg)
 
+	}//public static void dlg_input_empty(Activity actv, Dialog dlg)
 
 	public static void insertStoreName(
 					Activity actv, Dialog dlg, String tableName, String storeName) {
@@ -221,8 +213,7 @@ public class Methods {
 		 * 2. Reconfirm store name
 			----------------------------*/
 		dlg_reconfirm_store_name(actv, dlg, tableName, storeName);
-		
-		
+
 	}//public static void insertStoreName(Activity actv, String tableName, String storeName)
 
 	/****************************************
@@ -294,7 +285,6 @@ public class Methods {
 		
 	}//private static void dlg_reconfirm_store_name
 
-
 	public static void insertStoreName_final(
 							Activity actv, Dialog dlg, Dialog dlg2, String tableName) {
 		/*----------------------------
@@ -317,8 +307,7 @@ public class Methods {
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "Store name => " + storeName);
-		
-		
+
 		// 
 		DBUtils dbm = new DBUtils(actv);
 		
@@ -344,7 +333,6 @@ public class Methods {
 			----------------------------*/
 		db.close();
 
-		
 		/*----------------------------
 		 * 4. Close dialogues
 			----------------------------*/
@@ -365,38 +353,8 @@ public class Methods {
 			dlg2.dismiss();
 			
 		}//if (result == true)
-		
-		
-		
-//		//debug
-//		String q = "DROP TABLE stores;";
-//		
-//		db.execSQL(q);
-//		
-//		// Log
-//		Log.d("Methods.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "db.execSQL(q) => Done");
-		
-		
-//		Cursor c = db.rawQuery(q, null);
 
-//		// Log
-//		Log.d("Methods.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "c => " + c.toString());
-		
-		
-//		//
-//		db.close();
-		
-//		// Log
-//		Log.d("Methods.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "Store name => " + tv_store_name.getText().toString());
-		
-		
-		
+
 	}//public static void insertStoreName_final()
 
 	public static void registerGenre(Activity actv) {
@@ -437,14 +395,10 @@ public class Methods {
 		//
 		btn_ok.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
 		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
-		
-		
+
 		//
 		dlg.show();
-		
-		
-		
-		
+
 	}//public static void registerGenre(Activity actv)
 
 	public static void dlg_reconfirm_genre_name(
@@ -511,8 +465,6 @@ public class Methods {
 		
 	}//public static void registerGenre_final(Activity actv, Dialog dlg1, Dialog dlg2)
 
-
-	
 	public static void registerGenreName_final(Activity actv, Dialog dlg,
 			Dialog dlg2, String tableName) {
 		/*----------------------------
@@ -529,9 +481,7 @@ public class Methods {
 					(TextView) dlg2.findViewById(
 //							R.id.dlg_reconfirm_store_name_tv_message_store_name);
 							R.id.dlg_reconfirm_genre_name_tv_genre_name);
-		
-//		// debug
-//		Toast.makeText(actv, tv_genre_name.getText(), 2000).show();
+
 		
 		String genreName = tv_genre_name.getText().toString();
 		
@@ -539,8 +489,7 @@ public class Methods {
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "Genre name => " + genreName);
-		
-		
+
 		// 
 		DBUtils dbm = new DBUtils(actv);
 		
@@ -595,7 +544,6 @@ public class Methods {
 		/*----------------------------
 		 * At this point, the table exists
 			----------------------------*/
-		
 
 		/*----------------------------
 		 * 2. Insert data
@@ -607,33 +555,6 @@ public class Methods {
 										CONS.columns_for_table_genres, 
 										new String[]{genreName, ""});
 
-//		/*----------------------------
-//		 * If "storeData" failed, dismiss the reconfirm dialog
-//		 * 		=> Close db
-//		 * 		=> Back to "Enter genre name" dialog
-//			----------------------------*/		
-//		if (result == false) {
-//			// Log
-//			Log.d("Methods.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "dbm.storeData => Failed");
-//			
-//			// debug
-//			Toast.makeText(actv, "Store data => Failed", 3000).show();
-//			
-//			db.close();
-//			
-//			dlg2.dismiss();
-//			
-//			return;
-//			
-//		}//if (result == false)
-//		
-//		// Log
-//		Log.d("Methods.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ "]", "Data stored");
-			
 		/*----------------------------
 		 * 3. Close db
 			----------------------------*/
@@ -647,9 +568,7 @@ public class Methods {
 		/*----------------------------
 		 * 4. Close dialogues
 			----------------------------*/
-		//debug
-//		boolean result = true;
-		
+
 		//
 		if (result == true) {
 			// debug
@@ -673,40 +592,10 @@ public class Methods {
 			dlg2.dismiss();
 			
 		}//if (result == true)
-		
-		
-//		
-////		//debug
-////		String q = "DROP TABLE stores;";
-////		
-////		db.execSQL(q);
-////		
-////		// Log
-////		Log.d("Methods.java" + "["
-////				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-////				+ "]", "db.execSQL(q) => Done");
-//		
-//		
-////		Cursor c = db.rawQuery(q, null);
-//
-////		// Log
-////		Log.d("Methods.java" + "["
-////				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-////				+ "]", "c => " + c.toString());
-//		
-//		
-////		//
-////		db.close();
-//		
-////		// Log
-////		Log.d("Methods.java" + "["
-////				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-////				+ "]", "Store name => " + tv_store_name.getText().toString());
-//		
-//		
-		
-	}//public static void registerGenreName_final
 
+//
+
+	}//public static void registerGenreName_final
 
 	public static void dlg_createTable(Activity actv) {
 		Dialog dlg = new Dialog(actv);
@@ -718,8 +607,7 @@ public class Methods {
 		dlg.setTitle(R.string.dlg_create_table_title);
 		
 		//
-		
-		
+
 		/*----------------------------
 		 * 2. Add listeners => OnTouch
 			----------------------------*/
@@ -741,13 +629,11 @@ public class Methods {
 		//
 		btn_ok.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
 		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
-		
-		
+
 		//
 		dlg.show();
 		
 	}//public static void dlg_createTable(Activity actv)
-
 
 	public static void createTable_FromDialog(Activity actv, Dialog dlg, String tableName, String[] columns, String[] types) {
 		/*----------------------------
@@ -791,11 +677,8 @@ public class Methods {
 			// debug
 			Toast.makeText(actv, "Create table => failed: " + tableName, Toast.LENGTH_LONG).show();
 		}//if (result == true)
-		
-		
-		
-	}//public static void createTable_FromDialog(Activity actv, Dialog dlg)
 
+	}//public static void createTable_FromDialog(Activity actv, Dialog dlg)
 
 	public static void dlg_createTable_isInputEmpty(Activity actv, Dialog dlg) {
 		/*----------------------------
@@ -847,10 +730,8 @@ public class Methods {
 		 * 4. Send data to other method
 			----------------------------*/
 		createTable_FromDialog(actv, dlg, et_table_name.getText().toString(), columns, types);
-		
-		
-	}//public static void dlg_createTable_isInputEmpty(Activity actv, Dialog dlg)
 
+	}//public static void dlg_createTable_isInputEmpty(Activity actv, Dialog dlg)
 
 	public static void dlg_dropTable(Activity actv) {
 		/*----------------------------
@@ -878,16 +759,9 @@ public class Methods {
 		
 		// Title
 		dlg.setTitle(R.string.dlg_drop_table_title);
-		
-		
-		
-		// Width
-//		android.view.WindowManager.LayoutParams params 
-//												= dlg.getWindow().getAttributes();
-//		
-//		params.width = 350;
+
 //
-//		dlg.getWindow().setAttributes(params);
+
 		/*----------------------------
 		 * 1.2. Add listeners => OnTouch
 			----------------------------*/
@@ -905,8 +779,7 @@ public class Methods {
 			----------------------------*/
 		//
 		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
-		
-		
+
 		/*----------------------------
 		 * 2. Adapter
 			----------------------------*/
@@ -955,8 +828,7 @@ public class Methods {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "c => null");
 		}//if (c != null)
-		
-		
+
 		db.close();
 		
 		// Adapter
@@ -973,29 +845,19 @@ public class Methods {
 		
 		// Set adapter
 		lv.setAdapter(adapter);
-		
-		
-//		LayoutParams params = lv.getLayoutParams();
-//		
-//		params.width = 100;
-//		
-//		lv.setLayoutParams(params);
-		
+
 		/*----------------------------
 		 * 4. Set listener to list view
 			----------------------------*/
 //		lv.setOnItemClickListener(new DialogOnItemClickListener(actv, dlg));
 		lv.setOnItemClickListener(new DialogOnItemClickListener(actv, dlg, Tags.DialogTags.dlg_drop_table));
-		
-		
-		
+
 		/*----------------------------
 		 * 5. Show dialog
 			----------------------------*/
 		dlg.show();
 		
 	}//public static void dlg_dropTable(Activity actv)
-
 
 	public static void dlg_confirmTableDrop(Activity actv, Dialog dlg, String tableName) {
 		/*----------------------------
@@ -1058,7 +920,6 @@ public class Methods {
 		
 	}//public static void dlg_confirmTableDrop
 
-
 	public static void dropTable(Activity actv, Dialog dlg) {
 		/*----------------------------
 		 * Steps
@@ -1112,10 +973,8 @@ public class Methods {
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "db => Closed");
-		
-		
-	}//public static void dropTable(Activity actv, Dialog dlg)
 
+	}//public static void dropTable(Activity actv, Dialog dlg)
 
 	public static void dlg_filterList(Activity actv) {
 		/*----------------------------
@@ -1256,7 +1115,6 @@ public class Methods {
 		
 	}//public static void dlg_filterList(Activity actv)
 
-
 	public static void filterList(Activity actv, Dialog dlg) {
 		/*----------------------------
 		 * Steps
@@ -1368,11 +1226,7 @@ public class Methods {
 			c.moveToNext();
 
 		}//for (int i = 0; i < c.getCount(); i++)
-		
-		// Sort list
-//		Collections.sort(ItemList.list);
-		
-		
+
 		/*----------------------------
 		 * 6. Close db
 			----------------------------*/
@@ -1442,8 +1296,7 @@ public class Methods {
 			Log.d("Methods.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Listener set => " + tv.toString());
-			
-			
+
 //		} else if (viewName.equals("bt")) {//if (viewName.equals("textview"))
 		} else if (viewName == Tags.ViewNames.BT) {//if (viewName.equals("textview"))
 			// Get the view
@@ -1463,9 +1316,7 @@ public class Methods {
 		}//if (viewName.equals("textview"))
 		
 	}//public void setOnTouchListener_button()
-	
-	
-	
+
 	public static void dlg_register_main(Activity actv) {
 		/*----------------------------
 		 * Steps
@@ -1634,7 +1485,6 @@ public class Methods {
 					+ "]", "Exception: " + e.toString());
 		}//try
 
-		
 	}//public static void db_backup(Activity actv, Dialog dlg, String item)
 
 	public static long getMillSeconds_now() {
@@ -1682,74 +1532,11 @@ public class Methods {
 		/*********************************
 		 * \/data/data
 		 *********************************/
-//		String dir = "/data";
-//		
-//		File f = new File("/data/data");
-//		File f2 = new File(dir);
-//		
-//		
-//		String[] dirList = f.list();
-//		String[] dirList2 = f2.list();
-//		
-//		// Log
-//		Log.d("Methods.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "f2.exists()=" + f2.exists());
-//		
-//		// Log
-//		Log.d("Methods.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "dirList2=" + dirList2);
-		/////////////////////////////////////////////////////
-		
-		
-//		if (dirList.length < 1) {
-//			
-//			// Log
-//			Log.d("Methods.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "dirList.length < 1");
-//			
-//		} else {//if (dirList.length < 1)
+
 //
-//			for (String name : dirList) {
-//				
-//				// Log
-//				Log.d("Methods.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]",
-//						"name=" + name);
-//				
-//			}//for (String name : dirList)
-//			
-//		}//if (dirList.length < 1)
-		
-		
-		
-//		return false;
-		///////////////////////////////////// Log
-		
 		/*********************************
 		 * 2. Setup: File paths
 		 *********************************/
-	//	String src = 
-	//			"/mnt/sdcard-ext/ShoppingList_backup/shoppinglist_backup_20120906_201402.bk";
-	//			"/mnt/sdcard-ext/CR4_backup/cr4_backup_20120907_184555.bk";
-	
-		
-	//	String dst =
-	////			"/data/data/test.main/databases/shoppinglist.db";
-	//			"/data/data/cr4.main/databases/cr4.db";
 	
 		/*********************************
 		 * 3. Setup: File objects
@@ -1804,7 +1591,6 @@ public class Methods {
 		}//try
 		
 	}//private boolean restore_db()
-
 
 	public static String getFileNameFromDir_latest(Activity actv,
 							String dirPath_dbBackup) {
@@ -1895,8 +1681,7 @@ public class Methods {
 			return CONS.DB_DOESNT_EXIST;
 			
 		}//if (f.exists())
-		
-		
+
 		/*----------------------------
 		 * 2-2. Folder exists?
 			----------------------------*/
@@ -1960,11 +1745,6 @@ public class Methods {
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", "File copied");
-			
-//			// debug
-//			Toast.makeText(actv,
-//					"DB backup => Done",
-//					Toast.LENGTH_LONG).show();
 			
 			return CONS.DB_BACKUP_SUCCESSFUL;
 
@@ -2081,13 +1861,6 @@ public class Methods {
 	 *********************************/
 	public static HttpEntity 
 	getYomi_getHttpEntity(String url) {
-
-//		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
-//		"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
-//		"&grade=1" +
-//		"&sentence=" + keyword;
-////		+ "output=json";
-		
 		HttpPost httpPost = new HttpPost(url);
 		
 		httpPost.setHeader("Content-type", "application/json");
@@ -2165,7 +1938,6 @@ public class Methods {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "statusCode: " + statusCode);		
 
-//		HttpEntity entity = hr.getEntity();
 		return hr.getEntity();
 		
 	}//private static HttpEntity getYomi_B18_v_1_3__1_getHttpEntity(String sen)

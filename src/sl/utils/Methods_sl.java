@@ -606,41 +606,6 @@ public class Methods_sl {
 					+ "]",
 					"store=" + storeName + "/"
 					+ "price=" + priceData);
-//			
-//			
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "priceData.getClass().getName()=" + priceData.getClass().getName());
-			
-//			if (storeName.equals("キャン・ドウ")) {
-//				
-//				// Log
-//				Log.d("Methods_sl.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]",
-//						"storeName => キャン・ドウ: " + storeName);
-//				
-//			} else {//if (storeName.equals("キャン・ドウ"))
-//				
-//				// Log
-//				Log.d("Methods_sl.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]",
-//						"storeName => Not キャン・ドウ: " + storeName);
-//				
-//			}//if (storeName.equals("キャン・ドウ"))
-			
 			
 //			if (storeName.equals("キャン・ドウ") &&
 			if (storeName.equals("キャン・ドゥ") &&
@@ -1258,97 +1223,6 @@ public class Methods_sl {
 		
 	}//private static HttpEntity getYomi_B18_v_1_3__1_getHttpEntity(String sen)
 
-//	private static HttpEntity 
-//	getYomi_getHttpEntity(String url) {
-//
-////		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
-////		"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
-////		"&grade=1" +
-////		"&sentence=" + keyword;
-//////		+ "output=json";
-//		
-//		HttpPost httpPost = new HttpPost(url);
-//		
-//		httpPost.setHeader("Content-type", "application/json");
-//		
-//		/*********************************
-//		 * memo
-//		 *********************************/
-//		HttpUriRequest postRequest = httpPost;
-//		
-//		DefaultHttpClient dhc = new DefaultHttpClient();
-//		
-//		HttpResponse hr = null;
-//		
-//		/*********************************
-//		 * Execute request
-//		 *********************************/
-//		try {
-//			
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "Executing postRequest...");
-//			
-//			hr = dhc.execute(postRequest);
-//			
-//		} catch (ClientProtocolException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return null;
-//			
-//		} catch (IOException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return null;
-//			
-//		}//try
-//		
-//		/*********************************
-//		 * Process response
-//		 *********************************/
-//		if (hr == null) {
-//			
-//			// Log
-//			Log.d("Methods.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "hr == null");
-//			
-//			return null;
-//			
-//		}//if (hr == null)
-//
-//		/*********************************
-//		 * Get status
-//		 *********************************/
-//		int statusCode = hr.getStatusLine().getStatusCode();
-//		
-//		// Log
-//		Log.d("Methods_sl.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "statusCode: " + statusCode);		
-//
-////		HttpEntity entity = hr.getEntity();
-//		return hr.getEntity();
-//		
-//	}//private static HttpEntity getYomi_B18_v_1_3__1_getHttpEntity(String sen)
-
 	private static int getYomi_xml(Activity actv, Dialog dlg) {
 		// TODO Auto-generated method stub
 		String sen = "柿ピー";
@@ -1569,38 +1443,6 @@ public class Methods_sl {
 			return CONS.GETYOMI_FAILED;
 			
 		}
-		
-		
-		
-		
-//		// Log
-//		try {
-//			
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", EntityUtils.toString(entity));
-//			
-//		} catch (ParseException e) {
-//			
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//		} catch (IOException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//		}
 		
 		return CONS.GETYOMI_SUCCESSFUL;
 		
