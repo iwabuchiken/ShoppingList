@@ -2089,15 +2089,15 @@ public class Methods {
 					
 				} else {//if
 					
-					// Log
-					Log.d("Methods.java"
-							+ "["
-							+ Thread.currentThread().getStackTrace()[2]
-									.getLineNumber()
-							+ ":"
-							+ Thread.currentThread().getStackTrace()[2]
-									.getMethodName() + "]",
-							"tag=" + xmlPullParser.getName());
+//					// Log
+//					Log.d("Methods.java"
+//							+ "["
+//							+ Thread.currentThread().getStackTrace()[2]
+//									.getLineNumber()
+//							+ ":"
+//							+ Thread.currentThread().getStackTrace()[2]
+//									.getMethodName() + "]",
+//							"tag=" + xmlPullParser.getName());
 					
 				}//if
 				
@@ -2130,5 +2130,95 @@ public class Methods {
 		return targetString;
 		
 	}//getYomi_getFurigana(XmlPullParser xmlPullParser, String targetTag)
-	
+
+	/*********************************
+	 * 20130214_114218
+	 * getYomi_full(String kw, String enc)
+	 *********************************/
+	public static String[]
+	getYomi_full(String kw, String enc) {
+		/*********************************
+		 * Build a url string
+		 *********************************/
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+				"&grade=1" +
+				"&sentence=" + kw;
+		
+		/*********************************
+		 * Get: Http entity
+		 *********************************/
+		HttpEntity entity = Methods.getYomi_getHttpEntity(url);
+
+		if (entity == null) {
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "entity == null");
+			
+			return null;
+			
+		}//if (entity == null)
+
+		/*********************************
+		 * Get: XMLPullParser
+		 *********************************/
+		String xmlString =
+					Methods.convert_HttpEntity2XmlString(entity);
+		
+		XmlPullParser xmlPullParser =
+				Methods.getYomi_getXmlParser(xmlString, enc);
+		
+		/*********************************
+		 * Extract: Furigana
+		 *********************************/
+		String furigana =
+				Methods.getYomi_getFurigana(xmlPullParser, "Furigana");
+		
+		/*********************************
+		 * Extract: Surface
+		 *********************************/
+		xmlPullParser =
+				Methods.getYomi_getXmlParser(xmlString, "utf-8");
+		
+		String surface =
+				Methods.getYomi_getFurigana(xmlPullParser, "Surface");
+
+		/*********************************
+		 * Return
+		 *********************************/
+//		if (furigana == null) {
+		if (furigana == null && surface == null) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"surface=" + surface + "/"
+					+ "furigana == null");
+
+			return null;
+			
+		} else {//if (furigana == null)
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"surface=" + surface + "/"
+					+ "furigana = " + furigana);
+			
+			return new String[]{kw, surface, furigana};
+			
+		}//if (furigana == null)
+
+	}//private static String[] getYomi_full(String kw, String enc)
+
 }//public class Methods
