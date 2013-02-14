@@ -709,200 +709,9 @@ public class Methods_sl {
 		
 		int res = Methods_sl.getYomi_B18_v_1_3(actv, dlg);
 		
-		return CONS.GETYOMI_FAILED;
-		// TODO Auto-generated method stub
-//		String sen = "Š`ƒs[";
-//		
-//		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
-//					"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
-//					"&grade=1" +
-//					"&sentence=" + sen
-//					+ "output=json";
-//
-//
-//		HttpPost httpPost = new HttpPost(url);
-//		
-//		httpPost.setHeader("Content-type", "application/json");
-//		
-////		JSONObject jso = new JSONObject();
-////		
-////		StringEntity stringEntity = null;
-////		
-////		try {
-////			
-////			stringEntity = new StringEntity(jso.toString());
-////			
-////		} catch (UnsupportedEncodingException e) {
-////
-////			// Log
-////			Log.d("Methods_sl.java" + "["
-////					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-////					+ ":"
-////					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-////					+ "]", "Exception: " + e.toString());
-////		
-////			return CONS.GETYOMI_FAILED;
-////			
-////		}
-////
-////		/*********************************
-////		 * Set entity to HttpPost object
-////		 *********************************/
-////		httpPost.setEntity(stringEntity);
-//
-//		/*********************************
-//		 * memo
-//		 *********************************/
-//		HttpUriRequest postRequest = httpPost;
-//		
-//		DefaultHttpClient dhc = new DefaultHttpClient();
-//		
-//		HttpResponse hr = null;
-//		
-//		/*********************************
-//		 * Execute request
-//		 *********************************/
-//		try {
-//			
-//			hr = dhc.execute(postRequest);
-//			
-//		} catch (ClientProtocolException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		} catch (IOException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		}//try
-//		
-//		/*********************************
-//		 * Process response
-//		 *********************************/
-//		if (hr == null) {
-//			
-//			// Log
-//			Log.d("Methods.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "hr == null");
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		}//if (hr == null)
-//
-//		/*********************************
-//		 * Get status
-//		 *********************************/
-//		int statusCode = hr.getStatusLine().getStatusCode();
-//		
-//		// Log
-//		Log.d("Methods_sl.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "statusCode: " + statusCode);
-//		
-//		/*********************************
-//		 * Get contents of the response
-//		 *********************************/
-//		HttpEntity entity = hr.getEntity();
-//		
-//		JSONObject js_HttpResponse = null;
-//		
-//		try {
-//			
-////			json = new JSONObject(EntityUtils.toString(entity));// sl.libs.douglascrockford
-//			js_HttpResponse = new JSONObject(EntityUtils.toString(entity));// sl.libs.douglascrockford
-////			js_HttpResponse =
-////						XML.toJSONObject(EntityUtils.toString(entity));
-////			js_HttpResponse = new XMLSerializer().read( EntityUtils.toString(entity) );
-////			js_HttpResponse = (JSONObject) new XMLSerializer().read(EntityUtils.toString(entity));
-//			
-//			
-//		} catch (ParseException e) {
-//			
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		} catch (IOException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		// Log
-//		Log.d("Methods_sl.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]",
-//				"js_HttpResponse="
-//				+ js_HttpResponse.getClass().getName());
-//		
-////		/*********************************
-////		 * Parse json object
-////		 *********************************/
-//////		JSONArray jsonArray = null;
-////		JSONObject js_resultSet = null;
-////		
-////        try {
-////        	
-////        	js_resultSet =
-//////			        json.getJSONObject("ResultSet").getJSONArray("items");
-////					json.getJSONObject("ResultSet");
-////			
-////		} catch (JSONException e) {
-////			
-////			// Log
-////			Log.d("Methods_sl.java" + "["
-////					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-////					+ ":"
-////					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-////					+ "]", e.toString());
-////			
-////			return CONS.GETYOMI_FAILED;
-////			
-////		}
-////
-////        // Log
-////		Log.d("Methods_sl.java" + "["
-////				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-////				+ ":"
-////				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-////				+ "]", "js_resultSet=" + js_resultSet.getClass().getName());
-//		
-//		return CONS.GETYOMI_SUCCESSFUL;
+		return res;
 		
+
 	}//public static int getYomi(Activity actv, Dialog dlg)
 
 	private static int getYomi_B18_v_1_3(Activity actv, Dialog dlg) {
@@ -930,15 +739,42 @@ public class Methods_sl {
 		/*********************************
 		 * Prepare: XMLPullParser
 		 *********************************/
+		String xmlString =
+					Methods_sl.convert_HttpEntity2XmlString(entity);
+		
 		XmlPullParser xmlPullParser =
-				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(entity);
+//				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(entity);
+				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(xmlString);
 		
 		/*********************************
 		 * Parse xml: Extract the target string
 		 *********************************/
+//		String furigana =
+//				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
+//								xmlPullParser);
+
 		String furigana =
 				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
-								xmlPullParser);
+								xmlPullParser, "Furigana");
+		
+		/*********************************
+		 * Extract: Surface
+		 *********************************/
+		xmlPullParser =
+				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(xmlString);
+		
+		String targetString =
+				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
+							xmlPullParser, "Surface");
+		
+		// Log
+		Log.d("Methods_sl.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"target=" + sen + "/"
+				+ "Surface=" + targetString);
 		
 		/*********************************
 		 * Return
@@ -950,9 +786,11 @@ public class Methods_sl {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "furigana != null");
+					+ "]",
+					"target=" + sen + "/"
+					+ "furigana == null");
 
-			return CONS.GETYOMI_SUCCESSFUL;
+			return CONS.GETYOMI_FAILED;
 			
 		} else {//if (furigana == null)
 			
@@ -961,181 +799,13 @@ public class Methods_sl {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "furigana == null");
+					+ "]",
+					"target=" + sen + "/"
+					+ "furigana = " + furigana);
 			
-			return CONS.GETYOMI_FAILED;
+			return CONS.GETYOMI_SUCCESSFUL;
 			
 		}//if (furigana == null)
-		
-		
-		
-//		for(int e = xmlPullParser.getEventType();
-//				e != XmlPullParser.END_DOCUMENT;
-//				e = xmlPullParser.next()) {
-//			
-//			if(e == XmlPullParser.START_TAG &&
-//					xmlPullParser.getName().equals("Furigana")) {
-//				
-//				// Log
-//				Log.d("Methods_sl.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]",
-//						"Furigana=" + xmlPullParser.nextText());
-//				
-//			} else {//if
-//				
-//				// Log
-//				Log.d("Methods_sl.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]",
-//						"tag=" + xmlPullParser.getName());
-//				
-//			}//if
-//			
-//		}//for
-
-		
-//		/*********************************
-//		 * Prepare: InputStream object
-//		 * Ref => http://symfoware.blog68.fc2.com/blog-entry-711.html
-//		 *********************************/
-//		String xmlString = null;
-//		
-//		try {
-//			
-//			xmlString = EntityUtils.toString(entity);
-//			
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", xmlString);
-//			
-//		} catch (ParseException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		} catch (IOException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//
-//		}
-//		
-//		InputStream is = null;
-//		
-//		try {
-//			
-//			is = new ByteArrayInputStream(
-//									xmlString.getBytes("utf-8"));
-//			
-//		} catch (UnsupportedEncodingException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		}
-//		
-//		/*********************************
-//		 * Prepare: XML parser
-//		 * REF=> http://android.roof-balcony.com/shori/xml/xmlparse/
-//		 *********************************/
-//		XmlPullParser xmlPullParser = Xml.newPullParser();
-//		
-//		try {
-//			
-//			xmlPullParser.setInput(is, "UTF-8");
-//			
-//			/*********************************
-//			 * XML => Parsing
-//			 *********************************/
-//			for(int e = xmlPullParser.getEventType();
-//					e != XmlPullParser.END_DOCUMENT;
-//					e = xmlPullParser.next()) {
-//				
-//				if(e == XmlPullParser.START_TAG &&
-//						xmlPullParser.getName().equals("Furigana")) {
-//					
-//					// Log
-//					Log.d("Methods_sl.java"
-//							+ "["
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getLineNumber()
-//							+ ":"
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getMethodName() + "]",
-//							"Furigana=" + xmlPullParser.nextText());
-//					
-//				} else {//if
-//					
-//					// Log
-//					Log.d("Methods_sl.java"
-//							+ "["
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getLineNumber()
-//							+ ":"
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getMethodName() + "]",
-//							"tag=" + xmlPullParser.getName());
-//					
-//				}//if
-//				
-//			}//for
-//
-//			
-//		} catch (XmlPullParserException e) {
-//			
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		} catch (IOException e) {
-//
-//			// Log
-//			Log.d("Methods_sl.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", e.toString());
-//			
-//			return CONS.GETYOMI_FAILED;
-//			
-//		}
-//
-//		return CONS.GETYOMI_SUCCESSFUL;
 		
 	}//private static int getYomi_B18_v_1_3(Activity actv, Dialog dlg)
 
@@ -1375,6 +1045,108 @@ public class Methods_sl {
 		}
 		
 		return xmlPullParser;
+		
+	}//private static XmlPullParser getYomi_B18_v_1_3__2_getXmlParser()
+
+	private static XmlPullParser
+	getYomi_B18_v_1_3__2_getXmlParser(String xmlString) {
+
+		/*********************************
+		 * Prepare: InputStream object
+		 * Ref => http://symfoware.blog68.fc2.com/blog-entry-711.html
+		 *********************************/
+		InputStream is = null;
+		
+		try {
+			
+			is = new ByteArrayInputStream(
+									xmlString.getBytes("utf-8"));
+			
+		} catch (UnsupportedEncodingException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		}
+		
+		/*********************************
+		 * Prepare: XML parser
+		 * REF=> http://android.roof-balcony.com/shori/xml/xmlparse/
+		 *********************************/
+		XmlPullParser xmlPullParser = Xml.newPullParser();
+		
+		try {
+			
+			xmlPullParser.setInput(is, "UTF-8");
+			
+		} catch (XmlPullParserException e) {
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		}
+		
+		return xmlPullParser;
+		
+	}//private static XmlPullParser getYomi_B18_v_1_3__2_getXmlParser()
+
+	public static String
+	convert_HttpEntity2XmlString(HttpEntity entity) {
+
+		/*********************************
+		 * Prepare: InputStream object
+		 * Ref => http://symfoware.blog68.fc2.com/blog-entry-711.html
+		 *********************************/
+		String xmlString = null;
+		
+		try {
+			
+			xmlString = EntityUtils.toString(entity);
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", xmlString);
+			
+		} catch (ParseException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		} catch (IOException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+
+		}
+		
+		return xmlString;
 		
 	}//private static XmlPullParser getYomi_B18_v_1_3__2_getXmlParser()
 
