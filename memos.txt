@@ -1,5 +1,5 @@
 a
-cd C:\WORKS\WS\WS_Android~\ShoppingList
+pushd C:\WORKS\WS\WS_Android~\ShoppingList
 gitk
 
 C:\WORKS\WS\a
