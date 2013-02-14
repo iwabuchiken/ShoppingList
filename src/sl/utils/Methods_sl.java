@@ -716,12 +716,23 @@ public class Methods_sl {
 
 	private static int getYomi_B18_v_1_3(Activity actv, Dialog dlg) {
 		// TODO Auto-generated method stub
-		
+		/*********************************
+		 * Build a url string
+		 *********************************/
 //		String sen = "柿ピー";
 		String sen = "スポンジ";
 		
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+		"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+		"&grade=1" +
+		"&sentence=" + sen;
+		
+		/*********************************
+		 * Get: Http entity
+		 *********************************/
 		HttpEntity entity =
-				Methods_sl.getYomi_B18_v_1_3__1_getHttpEntity(sen);
+//				Methods_sl.getYomi_B18_v_1_3__1_getHttpEntity(sen);
+				Methods.getYomi_getHttpEntity(url);
 		
 		if (entity == null) {
 			
@@ -737,14 +748,16 @@ public class Methods_sl {
 		}//if (entity == null)
 		
 		/*********************************
-		 * Prepare: XMLPullParser
+		 * Get: XMLPullParser
 		 *********************************/
 		String xmlString =
-					Methods_sl.convert_HttpEntity2XmlString(entity);
+//					Methods_sl.convert_HttpEntity2XmlString(entity);
+					Methods.convert_HttpEntity2XmlString(entity);
 		
 		XmlPullParser xmlPullParser =
 //				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(entity);
-				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(xmlString);
+//				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(xmlString);
+				Methods.getYomi_getXmlParser(xmlString, "utf-8");
 		
 		/*********************************
 		 * Parse xml: Extract the target string
@@ -754,18 +767,21 @@ public class Methods_sl {
 //								xmlPullParser);
 
 		String furigana =
-				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
-								xmlPullParser, "Furigana");
+//				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
+//								xmlPullParser, "Furigana");
+				Methods.getYomi_getFurigana(xmlPullParser, "Furigana");
 		
 		/*********************************
 		 * Extract: Surface
 		 *********************************/
 		xmlPullParser =
-				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(xmlString);
+//				Methods_sl.getYomi_B18_v_1_3__2_getXmlParser(xmlString);
+				Methods.getYomi_getXmlParser(xmlString, "utf-8");
 		
 		String targetString =
-				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
-							xmlPullParser, "Surface");
+//				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
+//							xmlPullParser, "Surface");
+				Methods.getYomi_getFurigana(xmlPullParser, "Surface");
 		
 		// Log
 		Log.d("Methods_sl.java" + "["
@@ -779,7 +795,8 @@ public class Methods_sl {
 		/*********************************
 		 * Return
 		 *********************************/
-		if (furigana == null) {
+//		if (furigana == null) {
+		if (furigana == null && targetString == null) {
 
 			// Log
 			Log.d("Methods_sl.java" + "["
@@ -1240,6 +1257,97 @@ public class Methods_sl {
 		return hr.getEntity();
 		
 	}//private static HttpEntity getYomi_B18_v_1_3__1_getHttpEntity(String sen)
+
+//	private static HttpEntity 
+//	getYomi_getHttpEntity(String url) {
+//
+////		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+////		"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+////		"&grade=1" +
+////		"&sentence=" + keyword;
+//////		+ "output=json";
+//		
+//		HttpPost httpPost = new HttpPost(url);
+//		
+//		httpPost.setHeader("Content-type", "application/json");
+//		
+//		/*********************************
+//		 * memo
+//		 *********************************/
+//		HttpUriRequest postRequest = httpPost;
+//		
+//		DefaultHttpClient dhc = new DefaultHttpClient();
+//		
+//		HttpResponse hr = null;
+//		
+//		/*********************************
+//		 * Execute request
+//		 *********************************/
+//		try {
+//			
+//			// Log
+//			Log.d("Methods_sl.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "Executing postRequest...");
+//			
+//			hr = dhc.execute(postRequest);
+//			
+//		} catch (ClientProtocolException e) {
+//
+//			// Log
+//			Log.d("Methods_sl.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", e.toString());
+//			
+//			return null;
+//			
+//		} catch (IOException e) {
+//
+//			// Log
+//			Log.d("Methods_sl.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", e.toString());
+//			
+//			return null;
+//			
+//		}//try
+//		
+//		/*********************************
+//		 * Process response
+//		 *********************************/
+//		if (hr == null) {
+//			
+//			// Log
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "hr == null");
+//			
+//			return null;
+//			
+//		}//if (hr == null)
+//
+//		/*********************************
+//		 * Get status
+//		 *********************************/
+//		int statusCode = hr.getStatusLine().getStatusCode();
+//		
+//		// Log
+//		Log.d("Methods_sl.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "statusCode: " + statusCode);		
+//
+////		HttpEntity entity = hr.getEntity();
+//		return hr.getEntity();
+//		
+//	}//private static HttpEntity getYomi_B18_v_1_3__1_getHttpEntity(String sen)
 
 	private static int getYomi_xml(Activity actv, Dialog dlg) {
 		// TODO Auto-generated method stub
