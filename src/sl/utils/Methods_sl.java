@@ -707,7 +707,7 @@ public class Methods_sl {
 		
 	}//public static int getYomi(Activity actv, Dialog dlg)
 
-	private static String[] getYomi_full(String kw, String enc) {
+	public static String[] getYomi_full(String kw, String enc) {
 		/*********************************
 		 * Build a url string
 		 *********************************/
@@ -747,7 +747,11 @@ public class Methods_sl {
 		 * Extract: Furigana
 		 *********************************/
 		String furigana =
-				Methods.getYomi_getFurigana(xmlPullParser, "Furigana");
+//				Methods.getYomi_getFurigana(xmlPullParser, "Furigana");
+//				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
+//				xmlPullParser, "Furigana");
+				Methods_sl.getYomi_B18_v_2_0__3_getFurigana(
+						xmlPullParser, "Furigana");
 		
 		/*********************************
 		 * Extract: Surface
@@ -757,6 +761,8 @@ public class Methods_sl {
 		
 		String surface =
 				Methods.getYomi_getFurigana(xmlPullParser, "Surface");
+//				Methods_sl.getYomi_B18_v_1_3__3_getFurigana(
+//										xmlPullParser, "Surface");
 
 		/*********************************
 		 * Return
@@ -791,6 +797,94 @@ public class Methods_sl {
 		}//if (furigana == null)
 
 	}//private static String[] getYomi_full(String kw, String enc)
+
+	private static String
+	getYomi_B18_v_2_0__3_getFurigana
+	(XmlPullParser xmlPullParser, String targetTag) {
+
+		/*********************************
+		 * Steps
+		 * 
+		 * Find a tag "Word"
+		 * Found a END_TAG?
+		 * 	If no
+		 * 		Found a Surface tag?
+		 * 			If yes
+		 * 				Store the text to SURFACE:StringBuilder
+		 * 			If no
+		 * 	If yes
+		 *********************************/
+		
+		String targetString = null;
+		
+		try {
+			
+			for(int e = xmlPullParser.getEventType();
+					e != XmlPullParser.END_DOCUMENT;
+					e = xmlPullParser.next()) {
+				
+				if(e == XmlPullParser.START_TAG &&
+//						xmlPullParser.getName().equals("Furigana")) {
+						xmlPullParser.getName().equals(targetTag)) {
+					
+					targetString = xmlPullParser.nextText();
+					
+					// Log
+					Log.d("Methods_sl.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+//							"Furigana=" + xmlPullParser.nextText());
+							targetTag + "=" + targetString);
+					
+					return targetString;
+					
+				} else {//if
+					
+//					// Log
+//					Log.d("Methods_sl.java"
+//							+ "["
+//							+ Thread.currentThread().getStackTrace()[2]
+//									.getLineNumber()
+//							+ ":"
+//							+ Thread.currentThread().getStackTrace()[2]
+//									.getMethodName() + "]",
+//							"tag=" + xmlPullParser.getName());
+					
+				}//if
+				
+			}//for
+			
+		} catch (XmlPullParserException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		} catch (IOException e) {
+
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+
+		}//try
+
+		return targetString;
+		
+	}//private static String getYomi_B18_v_2_0__3_getFurigana(XmlPullParser xmlPullParser)
 
 	private static int getYomi_B18_v_1_3(Activity actv, Dialog dlg) {
 		// TODO Auto-generated method stub
@@ -1010,15 +1104,15 @@ public class Methods_sl {
 					
 				} else {//if
 					
-					// Log
-					Log.d("Methods_sl.java"
-							+ "["
-							+ Thread.currentThread().getStackTrace()[2]
-									.getLineNumber()
-							+ ":"
-							+ Thread.currentThread().getStackTrace()[2]
-									.getMethodName() + "]",
-							"tag=" + xmlPullParser.getName());
+//					// Log
+//					Log.d("Methods_sl.java"
+//							+ "["
+//							+ Thread.currentThread().getStackTrace()[2]
+//									.getLineNumber()
+//							+ ":"
+//							+ Thread.currentThread().getStackTrace()[2]
+//									.getMethodName() + "]",
+//							"tag=" + xmlPullParser.getName());
 					
 				}//if
 				

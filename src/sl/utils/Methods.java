@@ -2062,6 +2062,8 @@ public class Methods {
 
 		String targetString = null;
 		
+//		StringBuilder sb = new StringBuilder();
+		
 		try {
 			
 			for(int e = xmlPullParser.getEventType();
@@ -2084,6 +2086,8 @@ public class Methods {
 									.getMethodName() + "]",
 //							"Furigana=" + xmlPullParser.nextText());
 							targetTag + "=" + targetString);
+					
+//					sb.append(targetString);
 					
 					return targetString;
 					
@@ -2128,6 +2132,14 @@ public class Methods {
 		}//try
 
 		return targetString;
+//		// Log
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "sb.toString()=" + sb.toString());
+//		
+//		return sb.toString();
 		
 	}//getYomi_getFurigana(XmlPullParser xmlPullParser, String targetTag)
 

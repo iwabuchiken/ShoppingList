@@ -36,13 +36,14 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		// TODO Auto-generated method stub
 		
 //		int res = Task_GetYomi.doInBackground__1();
-		Task_GetYomi.doInBackground__1();
+//		Task_GetYomi.doInBackground__1();
+		Task_GetYomi.doInBackground__2();
 		
-		int res = Methods_sl.getYomi(actv, dlg);
+//		int res = Methods_sl.getYomi(actv, dlg);
 		
 		
-
-		return res;
+		return CONS.GETYOMI_FAILED;
+//		return res;
 		
 //		return null;
 	}
@@ -178,7 +179,41 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		return CONS.GETYOMI_FAILED;
 		
 	}//private static int doInBackground__1()
-	
+
+	private static int doInBackground__2() {
+		
+		String name = "êÙëÛñ‘ÅiíÜÅj";
+
+		String yomi = Methods_sl.getYomi_full(name, "utf-8")[2];
+		
+		if (yomi != null) {
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "yomi=" + yomi);
+			
+			return CONS.GETYOMI_SUCCESSFUL;
+			
+		} else {//if (yomi != null)
+		
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "yomi == null (" + name + ")");
+			
+			return CONS.GETYOMI_FAILED;
+			
+		}//if (yomi != null)
+		
+		
+		
+	}//private static int doInBackground__1()
+
 
 	@Override
 	protected void onCancelled() {
