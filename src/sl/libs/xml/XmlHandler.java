@@ -25,6 +25,7 @@ public class XmlHandler {
 //	private final String filename;
 	private String filename;
 
+	private Document doc;
 	/**
 	* コンストラクタ
 	* @param filename 読込ファイルパス
@@ -190,5 +191,54 @@ public class XmlHandler {
 		return sb.toString();
 
 	}//public static String indent(int level)
+
+	public Document getDoc() {
+		return doc;
+	}
+
+	public Document getDoc(String uri) {
+		
+		try {
+			
+			return DocumentBuilderFactory.newInstance()
+				.newDocumentBuilder().parse(uri);
+			
+		} catch (SAXException e) {
+			
+			// Log
+			Log.d("XmlHandler.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		} catch (IOException e) {
+			
+			// Log
+			Log.d("XmlHandler.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		} catch (ParserConfigurationException e) {
+			
+			// Log
+			Log.d("XmlHandler.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		}//try
+		
+//		return doc;
+	}//public Document getDoc(String uri)
 	
 }//public class XmlHandler

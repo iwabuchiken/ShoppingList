@@ -5,6 +5,10 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.http.HttpEntity;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import sl.libs.xml.XmlHandler;
@@ -52,7 +56,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		/*********************************
 		 * XmlHandler
 		 *********************************/
-		Task_GetYomi.doInBackground__2__1__XmlHandler();
+//		Task_GetYomi.doInBackground__2__1__XmlHandler();
+		
+		Task_GetYomi.doInBackground_B18_v_2_0_d();
 		
 		
 		return CONS.GETYOMI_FAILED;
@@ -60,6 +66,135 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		
 //		return null;
 	}
+
+	private static void doInBackground_B18_v_2_0_d() {
+		// TODO Auto-generated method stub
+		String kw = "ô‘ó–Ôi’†j";
+		
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+				"&grade=1" +
+				"&sentence=" + kw;
+
+		XmlHandler xh = new XmlHandler();
+		
+		Document doc = xh.getDoc(url);
+		
+		String tagName = "Word";
+		
+		NodeList listWord = doc.getElementsByTagName(tagName);
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "listWord.getLength()=" + listWord.getLength());
+		
+		Node nNode = listWord.item(0);
+		
+		if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "nNode => Element node");
+		} else {
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "nNode => Not an element node");
+		}
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "nNode.getNodeName()=" + nNode.getNodeName());
+		
+		NodeList nListWordChilds = nNode.getChildNodes();
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "nListWordChilds=" + nListWordChilds.getLength());
+		
+		for (int i = 0; i < nListWordChilds.getLength(); i++) {
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Child " + (i + 1) + "=" + nListWordChilds.item(i).getNodeName());
+			
+		}//for (int i = 0; i < nListWordChilds.getLength(); i++)
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"item(1)=" + nListWordChilds.item(1).getTextContent());
+		
+		
+//		for (int i = 0; i < listWord.getLength(); i++) {
+//
+//			Node nNode = listWord.item(i);
+//			
+//			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+//				
+//				Element elm = (Element) nNode;
+//				
+//				String strSurface = elm.getElementsByTagName("Surface").item(0).getTextContent();
+//				
+//				// Log
+//				Log.d("Task_GetYomi.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]",
+//						"Surface no." + 1 + "=" + strSurface);
+//				
+////				Node nChild = elm.getElementsByTagName("Surface").item(0);
+//				
+////				if (nChild.getNodeType() == Node.ELEMENT_NODE) {
+////					
+//////					Element elmSurface = (Element) nChild;
+//////					
+//////					String strSurface = elmSurface.getTextContent();
+////					
+////					String strSurface = nChild.getTextContent();
+////					
+////					// Log
+////					Log.d("Task_GetYomi.java"
+////							+ "["
+////							+ Thread.currentThread().getStackTrace()[2]
+////									.getLineNumber()
+////							+ ":"
+////							+ Thread.currentThread().getStackTrace()[2]
+////									.getMethodName() + "]",
+////							"Surface no." + 1 + "=" + strSurface);
+////					
+////				}//if (elmChild.getNodeType() == Node.ELEMENT_NODE)
+//				
+//			}//if (variable == condition)
+//			
+//		}//for (int i = 0; i < listWord.getLength(); i++)
+		
+	}//private static void doInBackground_B18_v_2_0_d()
 
 	private static int doInBackground__1() {
 		
