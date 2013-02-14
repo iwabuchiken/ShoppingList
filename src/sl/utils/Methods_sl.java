@@ -237,7 +237,7 @@ public class Methods_sl {
 			} else {//if (res == true)
 
 				// Log
-				Log.d("DialogOnItemClickListener.java"
+				Log.e("DialogOnItemClickListener.java"
 						+ "["
 						+ Thread.currentThread().getStackTrace()[2]
 								.getLineNumber()
@@ -255,7 +255,7 @@ public class Methods_sl {
 		} catch (Exception e) {
 
 			// Log
-			Log.d("DialogOnItemClickListener.java" + "["
+			Log.e("DialogOnItemClickListener.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -420,7 +420,7 @@ public class Methods_sl {
 		} catch (Exception e) {
 
 			// Log
-			Log.d("DialogOnItemClickListener.java" + "["
+			Log.e("DialogOnItemClickListener.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -546,7 +546,7 @@ public class Methods_sl {
 		} catch (Exception e) {
 
 			// Log
-			Log.d("DialogOnItemClickListener.java" + "["
+			Log.e("DialogOnItemClickListener.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -861,7 +861,7 @@ public class Methods_sl {
 		} catch (XmlPullParserException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -872,7 +872,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1046,7 +1046,7 @@ public class Methods_sl {
 		} catch (XmlPullParserException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1057,7 +1057,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1121,7 +1121,7 @@ public class Methods_sl {
 		} catch (XmlPullParserException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1132,7 +1132,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1169,7 +1169,7 @@ public class Methods_sl {
 		} catch (ParseException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1180,7 +1180,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1200,7 +1200,7 @@ public class Methods_sl {
 		} catch (UnsupportedEncodingException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1223,7 +1223,7 @@ public class Methods_sl {
 		} catch (XmlPullParserException e) {
 			
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1254,7 +1254,7 @@ public class Methods_sl {
 		} catch (UnsupportedEncodingException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1277,7 +1277,7 @@ public class Methods_sl {
 		} catch (XmlPullParserException e) {
 			
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1314,7 +1314,7 @@ public class Methods_sl {
 		} catch (ParseException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1325,7 +1325,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1378,7 +1378,7 @@ public class Methods_sl {
 		} catch (ClientProtocolException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1389,7 +1389,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1470,7 +1470,7 @@ public class Methods_sl {
 		} catch (ClientProtocolException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1481,7 +1481,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1539,7 +1539,7 @@ public class Methods_sl {
 		} catch (ParseException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1550,7 +1550,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1570,7 +1570,7 @@ public class Methods_sl {
 		} catch (UnsupportedEncodingException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1630,7 +1630,7 @@ public class Methods_sl {
 		} catch (XmlPullParserException e) {
 			
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -1641,7 +1641,7 @@ public class Methods_sl {
 		} catch (IOException e) {
 
 			// Log
-			Log.d("Methods_sl.java" + "["
+			Log.e("Methods_sl.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()

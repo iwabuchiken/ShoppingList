@@ -1,5 +1,13 @@
 package sl.tasks;
 
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.http.HttpEntity;
+import org.xml.sax.SAXException;
+
+import sl.libs.xml.XmlHandler;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
@@ -37,9 +45,14 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		
 //		int res = Task_GetYomi.doInBackground__1();
 //		Task_GetYomi.doInBackground__1();
-		Task_GetYomi.doInBackground__2();
+//		Task_GetYomi.doInBackground__2();
 		
 //		int res = Methods_sl.getYomi(actv, dlg);
+		
+		/*********************************
+		 * XmlHandler
+		 *********************************/
+		Task_GetYomi.doInBackground__2__1__XmlHandler();
 		
 		
 		return CONS.GETYOMI_FAILED;
@@ -181,10 +194,14 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 	}//private static int doInBackground__1()
 
 	private static int doInBackground__2() {
-		
+		/*********************************
+		 * API-related processes
+		 *********************************/
 		String name = "洗濯網（中）";
 
 		String yomi = Methods_sl.getYomi_full(name, "utf-8")[2];
+		
+		
 		
 		if (yomi != null) {
 			
@@ -210,10 +227,93 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			
 		}//if (yomi != null)
 		
-		
-		
 	}//private static int doInBackground__1()
 
+
+	private static void doInBackground__2__1__XmlHandler() {
+		// TODO Auto-generated method stub
+		String kw = "洗濯網（中）";
+		
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+				"&grade=1" +
+				"&sentence=" + kw;
+
+		HttpEntity entity = Methods.getYomi_getHttpEntity(url);
+		
+		if (entity == null) {
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "entity == null");
+			
+			return;
+			
+		}//if (entity == null)
+
+		/*********************************
+		 * Get: XMLPullParser
+		 *********************************/
+		String xmlString =
+					Methods.convert_HttpEntity2XmlString(entity);
+		
+		if (xmlString == null) {
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "xmlString == null");
+			
+			return;
+			
+		}//if (entity == null)
+
+		/*********************************
+		 * XmlHandler
+		 *********************************/
+		XmlHandler xh = new XmlHandler();
+		
+		try {
+			
+//			xh.showXml(xmlString);
+			xh.showXml(url);
+			
+		} catch (SAXException e) {
+
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+		} catch (IOException e) {
+
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+		} catch (ParserConfigurationException e) {
+
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+		}//try
+
+	}//private static void doInBackground__2__1__XmlHandler()
+	
 
 	@Override
 	protected void onCancelled() {
@@ -255,4 +355,4 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		super.onPreExecute();
 	}
 
-}
+}//public class Task_GetYomi extends AsyncTask<String, Integer, Integer>
