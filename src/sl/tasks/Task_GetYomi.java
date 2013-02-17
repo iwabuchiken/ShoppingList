@@ -64,7 +64,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_2();
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_3();
-		Task_GetYomi.doInBackground_B18_v_2_0_d_t_4();
+//		Task_GetYomi.doInBackground_B18_v_2_0_d_t_4();
+//		Task_GetYomi.doInBackground_B18_v_2_0_d_t_5();
+		Task_GetYomi.doInBackground_B18_v_2_0_d_t_6();
 		
 		
 		return CONS.GETYOMI_FAILED;
@@ -595,6 +597,92 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 				+ "]", "Starting... => walk");
 		
 		ds.walkThrough();
+		
+	}//private static void doInBackground_B18_v_2_0_d_t_3()
+
+	private static void doInBackground_B18_v_2_0_d_t_5() {
+		// TODO Auto-generated method stub
+		String kw = "洗濯網（中）";
+		
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+				"&grade=1" +
+				"&sentence=";
+
+//		DomSample ds = new DomSample(url, kw);
+		DomSample ds = DomSample.getDomSampleFromUri(url, kw);
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Starting... => walk");
+		
+		ds.walkThrough();
+		
+	}//private static void doInBackground_B18_v_2_0_d_t_3()
+
+	private static void doInBackground_B18_v_2_0_d_t_6() {
+		// TODO Auto-generated method stub
+		String kw = "洗濯網（中）";
+		
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+				"&grade=1" +
+				"&sentence=" + kw;
+
+		XmlHandler xh = new XmlHandler();
+		
+		Document doc = xh.getDoc(url);
+		
+		Element root = doc.getDocumentElement();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "root.getNodeType()=" + root.getNodeType());
+		
+		/*********************************
+		 * Surfaces
+		 *********************************/
+		NodeList surfaces = root.getElementsByTagName("Surface");
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "surfaces.getLength()=" + surfaces.getLength());
+		
+//			[643:doInBackground_B18_v_2_0_d_t_6](17459): root.getNodeType()=1
+//			[652:doInBackground_B18_v_2_0_d_t_6](17459): surfaces.getLength()=6
+
+		Element el_Surface = (Element) surfaces.item(0);
+		
+		String s = el_Surface.getChildNodes().item(0).getNodeValue();
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "s=" + s);
+
+		String s2 = el_Surface.getFirstChild().getNodeValue();
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "s2=" + s2);
+		
+//			[669:doInBackground_B18_v_2_0_d_t_6](17706): s=?
+//			[678:doInBackground_B18_v_2_0_d_t_6](17706): s2=?
+
 		
 	}//private static void doInBackground_B18_v_2_0_d_t_3()
 
