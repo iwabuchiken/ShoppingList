@@ -12,10 +12,12 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import sl.libs.xml.XmlHandler;
+import sl.libs.xml.domsample.DomSample;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
 import sl.utils.Methods_sl;
+import android.R;
 import android.app.Activity;
 import android.app.Dialog;
 import android.database.Cursor;
@@ -61,7 +63,8 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //		Task_GetYomi.doInBackground_B18_v_2_0_d();
 		
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_2();
-		Task_GetYomi.doInBackground_B18_v_2_0_d_t_3();
+//		Task_GetYomi.doInBackground_B18_v_2_0_d_t_3();
+		Task_GetYomi.doInBackground_B18_v_2_0_d_t_4();
 		
 		
 		return CONS.GETYOMI_FAILED;
@@ -568,6 +571,30 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //			[556:doInBackground_B18_v_2_0_d_t_3](3414): : Name=#text/Type=3/Value=
 //			[556:doInBackground_B18_v_2_0_d_t_3](3414):         
 
+		
+		
+	}//private static void doInBackground_B18_v_2_0_d_t_3()
+
+	private static void doInBackground_B18_v_2_0_d_t_4() {
+		// TODO Auto-generated method stub
+		String kw = "ô‘ó–Ôi’†j";
+		
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+				"&grade=1" +
+				"&sentence=";
+
+//		DomSample ds = new DomSample(url, kw);
+		DomSample ds = DomSample.getDomSampleFromUri(url, kw);
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Starting... => walk");
+		
+		ds.walkThrough();
 		
 	}//private static void doInBackground_B18_v_2_0_d_t_3()
 
