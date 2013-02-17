@@ -66,7 +66,8 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_3();
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_4();
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_5();
-		Task_GetYomi.doInBackground_B18_v_2_0_d_t_6();
+//		Task_GetYomi.doInBackground_B18_v_2_0_d_t_6();
+		Task_GetYomi.doInBackground_B18_v_2_0_d_t_7();
 		
 		
 		return CONS.GETYOMI_FAILED;
@@ -664,24 +665,328 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		
 		String s = el_Surface.getChildNodes().item(0).getNodeValue();
 		
-		// Log
-		Log.d("Task_GetYomi.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "s=" + s);
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "s=" + s);
 
 		String s2 = el_Surface.getFirstChild().getNodeValue();
 		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "s2=" + s2);
+		
+//			[669:doInBackground_B18_v_2_0_d_t_6](17706): s=?
+//			[678:doInBackground_B18_v_2_0_d_t_6](17706): s2=?
+
+		/*********************************
+		 * TRY: http://www.anddev.org/parse_xml_with_dom_-_getnodevalue_always_null-t3082.html
+		 * 	=> by ExxKA â Sun Nov 08, 2009 5:05 pm
+		 *********************************/
+		Node childOfSurface = el_Surface.getFirstChild();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "childOfSurface.getNodeType()=" + childOfSurface.getNodeType());
+		
+//			=> [694:doInBackground_B18_v_2_0_d_t_6](17995): childOfSurface.getNodeType()=3
+		
+		String val = childOfSurface.getNodeValue();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "childOfSurface.getNodeValue()=" + val);
+		
+//			=> [705:doInBackground_B18_v_2_0_d_t_6](18118): childOfSurface.getNodeValue()=?
+
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "val.equals(\"\")=" + (val.equals(""))
+//				+ "/"
+//				+ "(val == null)=" + (val == null));
+		
+//			=> [714:doInBackground_B18_v_2_0_d_t_6](18244): val.equals("")=false/(val == null)=false
+
 		// Log
 		Log.d("Task_GetYomi.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ ":"
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "s2=" + s2);
+				+ "]", "val.getClass().getName()=" + val.getClass().getName());
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "val.length()=" + val.length());
+
+	}//private static void doInBackground_B18_v_2_0_d_t_3()
+
+	private static void doInBackground_B18_v_2_0_d_t_7() {
+		// TODO Auto-generated method stub
+		String kw = "ô‘ó–Ôi’†j";
+		
+		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
+				"&grade=1" +
+				"&sentence=" + kw;
+
+		XmlHandler xh = new XmlHandler();
+		
+		Document doc = xh.getDoc(url);
+		
+		Element root = doc.getDocumentElement();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "root.getNodeType()=" + root.getNodeType());
+		
+		/*********************************
+		 * Surfaces
+		 *********************************/
+		NodeList surfaces = root.getElementsByTagName("Surface");
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "surfaces.getLength()=" + surfaces.getLength());
+		
+//			[643:doInBackground_B18_v_2_0_d_t_6](17459): root.getNodeType()=1
+//			[652:doInBackground_B18_v_2_0_d_t_6](17459): surfaces.getLength()=6
+
+		Element el_Surface = (Element) surfaces.item(0);
+		
+		String s = el_Surface.getChildNodes().item(0).getNodeValue();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "s=" + s);
+
+		String s2 = el_Surface.getFirstChild().getNodeValue();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "s2=" + s2);
 		
 //			[669:doInBackground_B18_v_2_0_d_t_6](17706): s=?
 //			[678:doInBackground_B18_v_2_0_d_t_6](17706): s2=?
+
+		/*********************************
+		 * TRY: http://www.anddev.org/parse_xml_with_dom_-_getnodevalue_always_null-t3082.html
+		 * 	=> by ExxKA â Sun Nov 08, 2009 5:05 pm
+		 *********************************/
+		Node childOfSurface = el_Surface.getFirstChild();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "childOfSurface.getNodeType()=" + childOfSurface.getNodeType());
+		
+//			=> [694:doInBackground_B18_v_2_0_d_t_6](17995): childOfSurface.getNodeType()=3
+		
+		String val = childOfSurface.getNodeValue();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "childOfSurface.getNodeValue()=" + val);
+		
+//			=> [705:doInBackground_B18_v_2_0_d_t_6](18118): childOfSurface.getNodeValue()=?
+
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "val.equals(\"\")=" + (val.equals(""))
+//				+ "/"
+//				+ "(val == null)=" + (val == null));
+		
+//			=> [714:doInBackground_B18_v_2_0_d_t_6](18244): val.equals("")=false/(val == null)=false
+
+		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "val.getClass().getName()=" + val.getClass().getName());
+//		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "val.length()=" + val.length());
+//
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"childOfSurface.getClass().getName()=" + childOfSurface.getClass().getName());
+		
+//			[846:doInBackground_B18_v_2_0_d_t_7](18504): val.length()=1
+//			[853:doInBackground_B18_v_2_0_d_t_7](18504):
+//					childOfSurface.getClass().getName()=org.apache.harmony.xml.dom.TextImpl
+
+		/*********************************
+		 * CharacterDataImpl
+		 *********************************/
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"childOfSurface.getClass().getSuperclass().getName()="
+//						+ childOfSurface.getClass().getSuperclass().getName());
+
+//				[868:doInBackground_B18_v_2_0_d_t_7](18770):
+//					childOfSurface.getClass().getSuperclass().getName()=
+//					org.apache.harmony.xml.dom.CharacterDataImpl
+
+		/*********************************
+		 * el_Surface
+		 *********************************/
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"el_Surface.getClass().getName()=" + el_Surface.getClass().getName());
+		
+//			=> [884:doInBackground_B18_v_2_0_d_t_7](19039):
+//					el_Surface.getClass().getName()=org.apache.harmony.xml.dom.ElementImpl
+
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"el_Surface.getClass().getSuperclass().getName()="
+//						+ el_Surface.getClass().getSuperclass().getName());
+		
+//			=> [895:doInBackground_B18_v_2_0_d_t_7](19166):
+//					el_Surface.getClass().getSuperclass().getName()=
+//						org.apache.harmony.xml.dom.InnerNodeImpl
+
+		
+		/*********************************
+		 * Root
+		 *********************************/
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "root.getClass().getName()=" + root.getClass().getName());
+		
+//			=> [912:doInBackground_B18_v_2_0_d_t_7](19500):
+//						root.getClass().getName()=
+//								org.apache.harmony.xml.dom.ElementImpl
+
+		/*********************************
+		 * InnerNodeImpl
+		 *********************************/
+//		Class c1 = root.getClass().getSuperclass();
+//		
+//		Class c2 = c1.getClass().getSuperclass();
+//		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "c2.getClass().getName()=" + c2.getClass().getName());
+		
+		s = root.getClass().getSuperclass().getSuperclass().getName();
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "root.getClass().getSuperclass().getSuperclass().getName()=" + s);
+		
+//			=> [939:doInBackground_B18_v_2_0_d_t_7](19782):
+//					root.getClass().getSuperclass().getSuperclass().getName()=
+//						org.apache.harmony.xml.dom.LeafNodeImpl
+		
+		s = root.getClass()
+				.getSuperclass()
+				.getSuperclass()
+				.getSuperclass()
+				.getName();
+
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"root.getClass().getSuperclass().getSuperclass().getSuperclass().getName()" + s);
+
+//			=> [952:doInBackground_B18_v_2_0_d_t_7](19953):
+//					root.getClass().getSuperclass().getSuperclass().getSuperclass().getName()
+//						org.apache.harmony.xml.dom.NodeImpl
+
+//		s = root.getClass()
+//				.getSuperclass()
+//				.getSuperclass()
+//				.getSuperclass()
+//				.getSuperclass()
+//				.getSuperclass()
+//				.getName();
+//
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"root.getClass()" +
+//						".getSuperclass()" +
+//						".getSuperclass()" +
+//						".getSuperclass()" +
+//						".getSuperclass()" +
+//						".getSuperclass()" +
+//						".getName()=" + s);
+
+//			Caused by: java.lang.NullPointerException
+//			at sl.tasks.Task_GetYomi.doInBackground_B18_v_2_0_d_t_7(Task_GetYomi.java:972)
 
 		
 	}//private static void doInBackground_B18_v_2_0_d_t_3()
