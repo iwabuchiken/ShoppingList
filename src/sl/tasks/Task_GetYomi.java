@@ -24,6 +24,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import sl.libs.json.YahooFurigana;
 import sl.libs.xml.XmlHandler;
 import sl.libs.xml.domsample.DomSample;
 import sl.utils.CONS;
@@ -81,13 +82,35 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_5();
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_6();
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_7();
-		Task_GetYomi.doInBackground_B18_v_3_0();
+//		Task_GetYomi.doInBackground_B18_v_3_0();
+		Task_GetYomi.doInBackground_B18_v_4_0();
 		
 		return CONS.GETYOMI_FAILED;
 //		return res;
 		
 //		return null;
 	}
+
+	private static void doInBackground_B18_v_4_0() {
+		// TODO Auto-generated method stub
+		String keyWord = "洗濯網（中）";
+		
+//		YahooFurigana yf = YahooFurigana.getInstanceWithKeyWord(keyWord);
+//		
+//		String furi = yf.getFurigana(true);
+		
+		YahooFurigana yf = YahooFurigana.getInstanceWithKeyWord(keyWord);
+		
+		String furi = yf.getFurigana(keyWord, true);
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "furi=" + furi);
+		
+	}//private static void doInBackground_B18_v_4_0()
 
 	private static void doInBackground_B18_v_3_0() {
 		// TODO Auto-generated method stub
