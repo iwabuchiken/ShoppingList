@@ -339,7 +339,7 @@ public class Methods {
 		//
 		if (result == true) {
 			// debug
-			Toast.makeText(actv, "“X•Ü–¼‚ª“o˜^‚³‚ê‚Ü‚µ‚½@=>@" + storeName, Toast.LENGTH_LONG).show();
+			Toast.makeText(actv, "ï¿½Xï¿½Ü–ï¿½ï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½@=>ï¿½@" + storeName, Toast.LENGTH_LONG).show();
 			
 			//
 			dlg2.dismiss();
@@ -347,7 +347,7 @@ public class Methods {
 			
 		} else {//if (result == true)
 			// debug
-			Toast.makeText(actv, "“X•Ü–¼“o˜^@=>@‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", Toast.LENGTH_LONG).show();
+			Toast.makeText(actv, "ï¿½Xï¿½Ü–ï¿½ï¿½oï¿½^ï¿½@=>ï¿½@ï¿½Å‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½", Toast.LENGTH_LONG).show();
 			
 			//
 			dlg2.dismiss();
@@ -572,7 +572,7 @@ public class Methods {
 		//
 		if (result == true) {
 			// debug
-			Toast.makeText(actv, "ƒWƒƒƒ“ƒ‹–¼‚ª“o˜^‚³‚ê‚Ü‚µ‚½@=>@" + genreName, Toast.LENGTH_LONG).show();
+			Toast.makeText(actv, "ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½^ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½ï¿½@=>ï¿½@" + genreName, Toast.LENGTH_LONG).show();
 			
 			//
 			dlg2.dismiss();
@@ -586,7 +586,7 @@ public class Methods {
 				----------------------------*/		
 
 			// debug
-			Toast.makeText(actv, "ƒWƒƒƒ“ƒ‹–¼“o˜^@=>@‚Å‚«‚Ü‚¹‚ñ‚Å‚µ‚½", Toast.LENGTH_LONG).show();
+			Toast.makeText(actv, "ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½oï¿½^ï¿½@=>ï¿½@ï¿½Å‚ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½Å‚ï¿½ï¿½ï¿½", Toast.LENGTH_LONG).show();
 			
 			//
 			dlg2.dismiss();
@@ -1828,23 +1828,21 @@ public class Methods {
 		
 			char c = sb.charAt(i);
 			
-			if (c >= 'ƒ@' && c <= 'ƒ“') {
+			if (c >= 'ã‚¡' && c <= 'ãƒ³') {
 				
-				sb.setCharAt(i, (char)(c - 'ƒ@' + '‚Ÿ'));
+				sb.setCharAt(i, (char)(c - 'ã‚¡' + 'ã'));
 				
-			} else if (c == 'ƒ•') {
+			} else if (c == 'ãƒµ') {
 				
-				sb.setCharAt(i, '‚©');
+				sb.setCharAt(i, 'ã‹');
 				
-			} else if (c == 'ƒ–') {
+			} else if (c == 'ãƒ¶') {
 				
-				sb.setCharAt(i, '‚¯');
+				sb.setCharAt(i, 'ã‘');
 
-			} else if (c == 'ƒ”') {
+			} else if (c == 'ãƒ´') {
 
-				sb.setCharAt(i, '‚¤');
-
-				sb.insert(i + 1, 'J');
+				sb.setCharAt(i, 'ã†');
 
 				i++;
 			}

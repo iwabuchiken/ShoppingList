@@ -1,10 +1,23 @@
 package sl.tasks;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -47,8 +60,8 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 
 	@Override
 	protected Integer doInBackground(String... arg0) {
-		// TODO Auto-generated method stub
 		
+		// TODO Auto-generated method stub
 //		int res = Task_GetYomi.doInBackground__1();
 //		Task_GetYomi.doInBackground__1();
 //		Task_GetYomi.doInBackground__2();
@@ -66,8 +79,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_3();
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_4();
 //		Task_GetYomi.doInBackground_B18_v_2_0_d_t_5();
-		Task_GetYomi.doInBackground_B18_v_2_0_d_t_6();
+//		Task_GetYomi.doInBackground_B18_v_2_0_d_t_6();
 		
+		Task_GetYomi.doInBackground_B18_v_3_0();
 		
 		return CONS.GETYOMI_FAILED;
 //		return res;
@@ -75,9 +89,358 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //		return null;
 	}
 
+	private static void doInBackground_B18_v_3_0() {
+		// TODO Auto-generated method stub
+		String kw = "Ê¥óÊøØÁ∂≤Ôºà‰∏≠Ôºâ";
+		
+//		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
+//				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-&grade=1" +
+//				"&sentence="
+//				+ kw;
+
+//		String url = "http://localhost/Learn_php/01/01_get_furigana.php?kw=%E5%88%B6%E5%BE%A1%E6%BC%94%E7%AE%97%E5%AD%90%E3%81%8C%E3%81%82%E3%81%A3%E3%81%A6%E3%82%82" +
+//				"&kw="
+//				+ kw;
+////		http://localhost/Learn_php/01/01_get_furigana.php?kw=%E5%88%B6%E5%BE%A1%E6%BC%94%E7%AE%97%E5%AD%90%E3%81%8C%E3%81%82%E3%81%A3%E3%81%A6%E3%82%82
+		
+		String url = "http://benfranklin.chips.jp/Learn_php/01/01_get_furigana.php?kw="
+				+ kw;
+//		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "url=" + url);
+		
+		HttpPost httpPost = new HttpPost(url);
+		
+		httpPost.setHeader("Content-type", "application/json");
+		
+//		List<NameValuePair> paramList = new ArrayList<NameValuePair>();
+//		
+//		paramList.add(new BasicNameValuePair("file_name", "1234.wav"));
+		
+		HttpUriRequest postRequest = httpPost;
+		
+		DefaultHttpClient dhc = new DefaultHttpClient();
+		
+		HttpResponse hr = null;
+		
+		try {
+			
+			hr = dhc.execute(postRequest);
+			
+		} catch (ClientProtocolException e) {
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", e.toString());
+		} catch (IOException e) {
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", e.toString());
+		}
+		
+
+		/*----------------------------
+		 * 6. Response null?
+			----------------------------*/
+		if (hr == null) {
+			
+//			// debug
+//			Toast.makeText(actv, "hr == null", 2000).show();
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "hr == null");
+			
+			return;
+			
+		} else {//if (hr == null)
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "hr => Not null");
+			
+		}//if (hr == null)
+
+		/*********************************
+		 * Status code
+		 *********************************/
+		int status = hr.getStatusLine().getStatusCode();
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "status=" + status);
+		
+		/*********************************
+		 * Entity
+		 *********************************/
+		HttpEntity entity = hr.getEntity();
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "entity.toString()=" + entity.toString());
+		
+		/*********************************
+		 * JSONObject
+		 *********************************/
+		JSONObject json = null;
+		
+		try {
+			
+			json = new JSONObject(EntityUtils.toString(entity));
+			
+		} catch (ParseException e) {
+			
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+			
+		} catch (JSONException e) {
+
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+
+		} catch (IOException e) {
+
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+			
+		}//try
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "JSONObject => Created");
+		
+		/*********************************
+		 * Parse JSONObject
+		 *********************************/
+		JSONObject jsonResult = null;
+		
+		String tagName = "Result";
+//		String tagName = "abc";
+//		String tagName = "Word";
+		
+		try {
+			
+			jsonResult = json.getJSONObject(tagName);
+
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "JSONObject => Created (Tag=" + tagName + ")");
+
+		} catch (JSONException e) {
+			
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+			
+		}//try
+		
+		/*********************************
+		 * Parse: WordList
+		 *********************************/
+//		JSONArray jsArray = null;
+		
+		JSONObject joWordList = null;
+
+		tagName = "WordList";
+//		String tagName = "abc";
+//		String tagName = "Word";
+		
+		try {
+			
+//			jsArray = jsonResult.getJSONArray(tagName);
+			joWordList = jsonResult.getJSONObject(tagName);
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "JSONObject => Created (Tag=" + tagName + ")");
+
+		} catch (JSONException e) {
+			
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+			
+		}//try
+
+		/*********************************
+		 * Parse: Word
+		 *********************************/
+		JSONArray jaWord = null;
+		
+		tagName = "Word";
+		
+		try {
+			
+			jaWord = joWordList.getJSONArray(tagName);
+
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "JSONArray => Created (Tag=" + tagName + ")");
+
+		} catch (JSONException e) {
+			
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+			
+		}//try
+		
+		/*********************************
+		 * Parse: Surface
+		 *********************************/
+		JSONObject joSurface = null;
+
+//		tagName = "WordList";
+		int index = 0;		// Surface
+		
+		try {
+			
+//			jsArray = jsonResult.getJSONArray(tagName);
+			joSurface = jaWord.getJSONObject(0);
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "JSONObject => Created (Tag=" + tagName + ")");
+
+		} catch (JSONException e) {
+			
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+			
+		}//try
+
+		/*********************************
+		 * Get: Value of Surface
+		 *********************************/
+		String valSurface = null;
+		
+		try {
+			
+			valSurface = joSurface.getString("Surface");
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "valSurface=" + valSurface);
+			
+		} catch (JSONException e) {
+
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+
+		}
+		
+		/*********************************
+		 * Get value
+		 *********************************/
+		String s = null;
+		
+		try {
+			
+			s = joWordList.getString("Surface");
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "s=" + s);
+			
+		} catch (JSONException e) {
+
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return;
+
+		}
+		
+	}//private static void doInBackground_B18_v_3_0()
+
 	private static void doInBackground_B18_v_2_0_d_t_2() {
 		// TODO Auto-generated method stub
-		String kw = "êÙëÛñ‘ÅiíÜÅj";
+		String kw = "ÔøΩÔøΩÔøΩÔøΩ‘ÅiÔøΩÔøΩÔøΩj";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
@@ -257,7 +620,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 
 	private static void doInBackground_B18_v_2_0_d_t_3() {
 		// TODO Auto-generated method stub
-		String kw = "êÙëÛñ‘ÅiíÜÅj";
+		String kw = "ÔøΩÔøΩÔøΩÔøΩ‘ÅiÔøΩÔøΩÔøΩj";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
@@ -533,7 +896,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //			//=> [515:doInBackground_B18_v_2_0_d_t_3](2417): 1: Name=#text/Type=3/Value=?
 
 		/*********************************
-		 * Node.getFirstChild()Å@ÇégÇ§ï˚ñ@
+		 * Node.getFirstChild()ÔøΩ@ÔøΩÔøΩÔøΩgÔøΩÔøΩÔøΩÔøΩ@
 		 *********************************/
 		Node n1 = nWord1.getFirstChild();
 		
@@ -579,7 +942,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 
 	private static void doInBackground_B18_v_2_0_d_t_4() {
 		// TODO Auto-generated method stub
-		String kw = "êÙëÛñ‘ÅiíÜÅj";
+		String kw = "ÔøΩÔøΩÔøΩÔøΩ‘ÅiÔøΩÔøΩÔøΩj";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
@@ -602,7 +965,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 
 	private static void doInBackground_B18_v_2_0_d_t_5() {
 		// TODO Auto-generated method stub
-		String kw = "êÙëÛñ‘ÅiíÜÅj";
+		String kw = "ÔøΩÔøΩÔøΩÔøΩ‘ÅiÔøΩÔøΩÔøΩj";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
@@ -625,7 +988,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 
 	private static void doInBackground_B18_v_2_0_d_t_6() {
 		// TODO Auto-generated method stub
-		String kw = "êÙëÛñ‘ÅiíÜÅj";
+		String kw = "ÔøΩÔøΩÔøΩÔøΩ‘ÅiÔøΩÔøΩÔøΩj";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
@@ -688,7 +1051,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 
 	private static void doInBackground_B18_v_2_0_d() {
 		// TODO Auto-generated method stub
-		String kw = "êÙëÛñ‘ÅiíÜÅj";
+		String kw = "ÔøΩÔøΩÔøΩÔøΩ‘ÅiÔøΩÔøΩÔøΩj";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
@@ -837,7 +1200,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			if (null == c) {
 				
 				// Log
-				Log.d("DialogOnItemClickListener.java"
+				Log.d("Methods.java"
 						+ "["
 						+ Thread.currentThread().getStackTrace()[2]
 								.getLineNumber()
@@ -857,7 +1220,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			if (c.getCount() < 1) {
 				
 				// Log
-				Log.d("DialogOnItemClickListener.java"
+				Log.d("Methods.java"
 						+ "["
 						+ Thread.currentThread().getStackTrace()[2]
 								.getLineNumber()
@@ -927,7 +1290,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		} catch (Exception e) {
 			
 			// Log
-			Log.d("DialogOnItemClickListener.java"
+			Log.d("Methods.java"
 					+ "["
 					+ Thread.currentThread().getStackTrace()[2]
 							.getLineNumber()
@@ -951,7 +1314,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		/*********************************
 		 * API-related processes
 		 *********************************/
-		String name = "êÙëÛñ‘ÅiíÜÅj";
+		String name = "ÔøΩÔøΩÔøΩÔøΩ‘ÅiÔøΩÔøΩÔøΩj";
 
 		String yomi = Methods_sl.getYomi_full(name, "utf-8")[2];
 		
@@ -986,7 +1349,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 
 	private static void doInBackground__2__1__XmlHandler() {
 		// TODO Auto-generated method stub
-		String kw = "êÙëÛñ‘ÅiíÜÅj";
+		String kw = "ÔøΩÔøΩÔøΩÔøΩ‘ÅiÔøΩÔøΩÔøΩj";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 				"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
