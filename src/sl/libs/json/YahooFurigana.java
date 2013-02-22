@@ -1210,8 +1210,8 @@ public class YahooFurigana {
 		
 //		this.getFurigana(true);
 		
-//		return this.getFurigana(flag);
-		return this.getFurigana_B18_v_5_0_e_1_t_1(flag);
+		return this.getFurigana(flag);
+//		return this.getFurigana_B18_v_5_0_e_1_t_1(flag);
 		
 	}//public String getFurigana(String keyWord)
 
