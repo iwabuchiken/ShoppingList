@@ -91,7 +91,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //		return Task_GetYomi.doInBackground_B18_v_5_0();
 //		return Task_GetYomi.doInBackground_B18_v_5_0_e_1_t_1();
 //		return Task_GetYomi.doInBackground_B18_v_5_1();
-		return Task_GetYomi.doInBackground_B18_v_5_1a();
+//		return Task_GetYomi.doInBackground_B18_v_5_1a();
+//		return Task_GetYomi.doInBackground_B18_v_5_2();
+		return Task_GetYomi.doInBackground_B18_v_5_3();
 		
 //		v-5.0-e1-t1
 //		return CONS.GETYOMI_FAILED;
@@ -99,6 +101,660 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		
 //		return null;
 	}
+
+	private static Integer doInBackground_B18_v_5_3() {
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Time=" + Methods.get_TimeLabel(Methods.getMillSeconds_now()));
+		
+		List<Furi> furiganaList = doInBackground_B18_v_5_3__1_getFuriganaList();
+
+		/*********************************
+		 * Get furigana
+		 *********************************/
+//		List<String> furiganaList = new ArrayList<String>();
+//		List<Furi> furiganaList = new ArrayList<Furi>();
+		
+		YahooFurigana yf = YahooFurigana.getInstance();
+		
+//		for (int i = 0; i < itemNames.size(); i++) {
+		for (int i = 0; i < furiganaList.size(); i++) {
+			
+			String keyWord = furiganaList.get(i).getName();
+			
+//			YahooFurigana yf = YahooFurigana.getInstance();
+			
+			String furi = yf.getFurigana(keyWord, true);
+
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "furi=" + furi);
+
+//			furiganaList.add(furi);
+			furiganaList.get(i).setFuri(furi);
+			
+		}//for (int i = 0; i < itemNames.size(); i++)
+		
+		//
+
+		/***************************************
+		 * Get: Gana
+		 * 1. If "furi" value of the Furi instance is null
+		 * 		=> Set "gana" value to null, also 
+		 ***************************************/
+		for (int i = 0; i < furiganaList.size(); i++) {
+
+			Furi f = furiganaList.get(i);
+			
+			if (f.getFuri() != null) {
+				
+				String gana = Methods.convert_Kana2Gana(f.getFuri());
+				
+				if (gana != null) {
+					
+					furiganaList.get(i).setGana(gana);
+					
+				} else {//if (gana != null)
+					
+					furiganaList.get(i).setGana(null);
+					
+					// Log
+					Log.d("Task_GetYomi.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+							"gana == null"
+							+ "(id=" + furiganaList.get(i).getId() + ")");
+					
+					continue;
+					
+				}//if (gana != null)
+				
+				
+			} else {//if (f.getFuri() != null)
+				
+				// Log
+				Log.d("Task_GetYomi.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "f.getFuri() == null");
+				
+				furiganaList.get(i).setGana(null);
+				
+			}//if (f.getFuri() != null)
+			
+		}//for (int i = 0; i < furiganaList.size(); i++)
+		
+		/***************************************
+		 * Update table
+		 ***************************************/
+		doInBackground_B18_v_5_3__2_updateTable(furiganaList);
+		
+		/***************************************
+		 * Debug
+		 ***************************************/
+		int numOfYes = 0;
+		int numOfNo = 0;
+		
+		for (int i = 0; i < furiganaList.size(); i++) {
+		
+			Furi f = furiganaList.get(i);
+			
+			if (f.getGana() != null) {
+				
+				numOfYes += 1;
+				
+			} else {//if (f.getGana() != null)
+				
+				numOfNo += 1;
+				
+				// Log
+				Log.d("Task_GetYomi.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Gana => null(id=" + f.getId() + "/" + f.getName() + ")");
+				
+			}//if (f.getGana() != null)
+			
+
+		}//for (int i = 0; i < furiganaList.size(); i++)
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"furiganaList.size()=" + furiganaList.size()
+				+ "/"
+				+ "numOfYes=" + numOfYes
+				+ "/"
+				+ "numOfNo=" + numOfNo);
+	
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Time=" + Methods.get_TimeLabel(Methods.getMillSeconds_now()));
+
+		/***************************************
+		 * Return
+		 ***************************************/
+		return CONS.GETYOMI_SUCCESSFUL;
+		
+	}//private static void doInBackground_B18_v_5_3()
+
+	private static void doInBackground_B18_v_5_3__2_updateTable(
+			List<Furi> furiganaList) {
+		/***************************************
+		 * Setup
+		 ***************************************/
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		String sql = null;
+		
+		// Variables for debugging
+		int numOfTargets = furiganaList.size();
+		int numOfSuccess = 0;
+		int numOfFail = 0;
+		
+//		// Log
+//		Log.d("Task_GetYomi.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"colName=" + CONS.columns[Methods.getArrayIndex(CONS.columns, "yomi")]);
+
+		/***************************************
+		 * Update
+		 ***************************************/
+		for (int i = 0; i < furiganaList.size(); i++) {
+			
+			Furi furi = furiganaList.get(i);
+			
+//			long dbId = furiganaList.get(i).getId();
+			long dbId = furi.getId();
+			
+			String colName = CONS.columns[Methods.getArrayIndex(CONS.columns, "yomi")];
+			
+//			String value = furi.getName();
+			String value = furi.getGana();
+			
+			int res = dbu.updateData_shoppingItem(actv, wdb, CONS.tableName, dbId, colName, value);
+
+			if (res == CONS.DB_UPDATE_SUCCESSFUL) {
+				
+				numOfSuccess += 1;
+				
+				// Log
+				Log.d("Task_GetYomi.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Data updated: name=" + furi.getName()
+						+ "/"
+						+ "gana=" + value);
+				
+			} else {//if (res == CONS.DB_UPDATE_SUCCESSFUL)
+				
+				// Log
+				Log.d("Task_GetYomi.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Update failed => id=" + dbId
+						+ "/"
+						+ "name=" + value);
+				
+			}//if (res == CONS.DB_UPDATE_SUCCESSFUL)
+			
+			
+			
+		}//for (int i = 0; i < furiganaList.size(); i++)
+		
+		
+		/***************************************
+		 * Close db
+		 ***************************************/
+		wdb.close();
+		
+		/***************************************
+		 * Result
+		 ***************************************/
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"numOfTargets=" + numOfTargets
+				+ "/"
+				+ "numOfSuccess=" + numOfSuccess
+				+ "/"
+				+ "numOfFail=" + numOfFail);
+		
+	}//private static void doInBackground_B18_v_5_3__2_updateTable
+
+	private static List<Furi> doInBackground_B18_v_5_3__1_getFuriganaList() {
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		SQLiteDatabase rdb = dbu.getReadableDatabase();
+		
+		/*----------------------------
+		 * 0. Table exists?
+			----------------------------*/
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "tableName=" + CONS.tableName);
+		
+		boolean res = dbu.tableExists(rdb, CONS.tableName);
+		
+		if (res == false) {
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "getAllData() => Table doesn't exist: " + CONS.tableName);
+			
+			rdb.close();
+			
+			return null;
+			
+		}//if (res == false)
+		
+		/*----------------------------
+		 * 2. Get data
+		 * 		2.1. Get cursor
+		 * 		2.2. Add to list
+			----------------------------*/
+		//
+		String sql = "SELECT * FROM " + CONS.tableName;
+		
+		Cursor c = null;
+		
+		try {
+			
+			c = rdb.rawQuery(sql, null);
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "c.getCount()=" + c.getCount());
+			
+		} catch (Exception e) {
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			rdb.close();
+			
+			return null;
+		}
+	
+		/*********************************
+		 * Get names
+		 *********************************/
+//		List<String> itemNames = new ArrayList<String>();
+//		
+//		List<Long> itemIds = new ArrayList<Long>();
+		
+		List<Furi> furiganaList = new ArrayList<Furi>();
+		
+		c.moveToFirst();
+		
+		int numOfSamples = 20;
+//		int numOfSamples = c.getCount();
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "numOfSamples=" + numOfSamples);
+		
+//		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < numOfSamples; i++) {
+			
+			String name = c.getString(CONS.colAddUp + Methods.getArrayIndex(CONS.columns, "name"));
+			
+//			long itemId = c.getLong(Methods.getArrayIndex(
+//											CONS.columns,
+////											String.valueOf(android.provider.BaseColumns._ID)));
+//											android.provider.BaseColumns._ID));
+
+			long itemId = c.getLong(0);
+//			long itemId = c.getLong(Methods.getArrayIndex(
+//					CONS.columns,
+//					);
+			
+//			// Log
+//			Log.d("Task_GetYomi.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "android.provider.BaseColumns._ID=" + android.provider.BaseColumns._ID);
+			
+			if (name != null) {
+				
+				furiganaList.add(new Furi(itemId, name));
+				
+//				itemNames.add(name);
+//				
+//				itemIds.add(itemId);
+				
+			}//if (name != null)
+			
+			/*********************************
+			 * Next entry
+			 *********************************/
+			c.moveToNext();
+			
+		}//for (int i = 0; i < 10; i++)
+		
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "furiganaList.size()=" + furiganaList.size());
+		
+		rdb.close();
+		
+		/***************************************
+		 * Return
+		 ***************************************/
+		return furiganaList;
+		
+	}//private static List<Furi> doInBackground_B18_v_5_3__1_getFuriganaList()
+
+	private static Integer doInBackground_B18_v_5_2() {
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Time=" + Methods.get_TimeLabel(Methods.getMillSeconds_now()));
+		
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		SQLiteDatabase rdb = dbu.getReadableDatabase();
+		
+		/*----------------------------
+		 * 0. Table exists?
+			----------------------------*/
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "tableName=" + CONS.tableName);
+		
+		boolean res = dbu.tableExists(rdb, CONS.tableName);
+		
+		if (res == false) {
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "getAllData() => Table doesn't exist: " + CONS.tableName);
+			
+			rdb.close();
+			
+			return CONS.GETYOMI_FAILED;
+			
+		}//if (res == false)
+		
+		/*----------------------------
+		 * 2. Get data
+		 * 		2.1. Get cursor
+		 * 		2.2. Add to list
+			----------------------------*/
+		//
+		String sql = "SELECT * FROM " + CONS.tableName;
+		
+		Cursor c = null;
+		
+		try {
+			
+			c = rdb.rawQuery(sql, null);
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "c.getCount()=" + c.getCount());
+			
+		} catch (Exception e) {
+			// Log
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			rdb.close();
+			
+			return CONS.GETYOMI_FAILED;
+		}
+	
+		/*********************************
+		 * Get names
+		 *********************************/
+//		List<String> itemNames = new ArrayList<String>();
+//		
+//		List<Long> itemIds = new ArrayList<Long>();
+		
+		List<Furi> furiganaList = new ArrayList<Furi>();
+		
+		c.moveToFirst();
+		
+//		int numOfSamples = 20;
+		int numOfSamples = c.getCount();
+		
+//		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < numOfSamples; i++) {
+			
+			String name = c.getString(CONS.colAddUp + Methods.getArrayIndex(CONS.columns, "name"));
+			
+//			long itemId = c.getLong(Methods.getArrayIndex(
+//											CONS.columns,
+////											String.valueOf(android.provider.BaseColumns._ID)));
+//											android.provider.BaseColumns._ID));
+
+			long itemId = c.getLong(0);
+//			long itemId = c.getLong(Methods.getArrayIndex(
+//					CONS.columns,
+//					);
+			
+//			// Log
+//			Log.d("Task_GetYomi.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "android.provider.BaseColumns._ID=" + android.provider.BaseColumns._ID);
+			
+			if (name != null) {
+				
+				furiganaList.add(new Furi(itemId, name));
+				
+//				itemNames.add(name);
+//				
+//				itemIds.add(itemId);
+				
+			}//if (name != null)
+			
+			/*********************************
+			 * Next entry
+			 *********************************/
+			c.moveToNext();
+			
+		}//for (int i = 0; i < 10; i++)
+		
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "furiganaList.size()=" + furiganaList.size());
+		
+		rdb.close();
+		
+		/*********************************
+		 * Get furigana
+		 *********************************/
+//		List<String> furiganaList = new ArrayList<String>();
+//		List<Furi> furiganaList = new ArrayList<Furi>();
+		
+		YahooFurigana yf = YahooFurigana.getInstance();
+		
+//		for (int i = 0; i < itemNames.size(); i++) {
+		for (int i = 0; i < furiganaList.size(); i++) {
+			
+			String keyWord = furiganaList.get(i).getName();
+			
+//			YahooFurigana yf = YahooFurigana.getInstance();
+			
+			String furi = yf.getFurigana(keyWord, true);
+
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "furi=" + furi);
+
+//			furiganaList.add(furi);
+			furiganaList.get(i).setFuri(furi);
+			
+		}//for (int i = 0; i < itemNames.size(); i++)
+		
+		//
+
+		/***************************************
+		 * Get: Gana
+		 ***************************************/
+		for (int i = 0; i < furiganaList.size(); i++) {
+
+			Furi f = furiganaList.get(i);
+			
+			if (f.getFuri() != null) {
+				
+				String gana = Methods.convert_Kana2Gana(f.getFuri());
+				
+				if (gana != null) {
+					
+					furiganaList.get(i).setGana(gana);
+					
+				} else {//if (gana != null)
+					
+					furiganaList.get(i).setGana(null);
+					
+					// Log
+					Log.d("Task_GetYomi.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+							"gana == null"
+							+ "(id=" + furiganaList.get(i).getId() + ")");
+					
+					continue;
+					
+				}//if (gana != null)
+				
+				
+			} else {//if (f.getFuri() != null)
+				
+				// Log
+				Log.d("Task_GetYomi.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "f.getFuri() == null");
+				
+			}//if (f.getFuri() != null)
+			
+		}//for (int i = 0; i < furiganaList.size(); i++)
+		
+		/***************************************
+		 * Debug
+		 ***************************************/
+		int numOfYes = 0;
+		int numOfNo = 0;
+		
+		for (int i = 0; i < furiganaList.size(); i++) {
+		
+			Furi f = furiganaList.get(i);
+			
+			if (f.getGana() != null) {
+				
+				numOfYes += 1;
+				
+			} else {//if (f.getGana() != null)
+				
+				numOfNo += 1;
+				
+			}//if (f.getGana() != null)
+			
+
+		}//for (int i = 0; i < furiganaList.size(); i++)
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"furiganaList.size()=" + furiganaList.size()
+				+ "/"
+				+ "numOfYes=" + numOfYes
+				+ "/"
+				+ "numOfNo=" + numOfNo);
+	
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Time=" + Methods.get_TimeLabel(Methods.getMillSeconds_now()));
+
+		/***************************************
+		 * Return
+		 ***************************************/
+		return CONS.GETYOMI_SUCCESSFUL;
+		
+	}//private static void doInBackground_B18_v_5_2()
 
 	private static Integer doInBackground_B18_v_5_0_e_1_t_1() {
 		String keyWord = "洗濯網（中）目玉クリップ";
