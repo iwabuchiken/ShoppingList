@@ -22,7 +22,7 @@ public class CONS {
 	public static String dirPath_db_backup = 
 					dirName_ExternalStorage + "/ShoppingList_backup";
 	
-//	public static String[] registerItems = {"•i•¨", "“X•Ü", "ƒWƒƒƒ“ƒ‹"};
+//	public static String[] registerItems = {"ï¿½iï¿½ï¿½", "ï¿½Xï¿½ï¿½", "ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"};
 	
 //	public static enum registerChoice = {
 	public static enum registerChoice {
@@ -64,6 +64,18 @@ public class CONS {
 	 * DB
 	 *********************************/
 	public static String dbName = "sl";
+	
+	/*********************************
+	 * Created at: 20130222_095606<br>
+	 * 1. Number of columns automatically added 
+	 * 		when the table gets created<br/>
+	 * 2. For example, if you coded in such a way that
+	 * 		the table id is automatically inserted, then
+	 * 		you set this value at 1<br>
+	 * 3. The name was formulated from "Number of <b>col</b>umns to<br>
+	 * 		<b>add</b> <b>up</b> when extracting values from the cursor"
+	 *********************************/
+	public static int colAddUp = 1;
 	
 	/*********************************
 	 * From: DBUtils.java (formerly, DBManager.java)
