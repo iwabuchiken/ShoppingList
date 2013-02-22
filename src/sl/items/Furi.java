@@ -11,6 +11,13 @@ public class Furi {
 		
 	}
 	
+	public Furi(long itemId, String name) {
+
+		this.id = itemId;
+		this.name = name;
+		
+	}
+
 	public static Furi getInstance() {
 		
 		return new Furi();

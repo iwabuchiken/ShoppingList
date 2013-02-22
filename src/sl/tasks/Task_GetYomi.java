@@ -25,6 +25,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import sl.items.Furi;
 import sl.libs.json.YahooFurigana;
 import sl.libs.xml.XmlHandler;
 import sl.libs.xml.domsample.DomSample;
@@ -89,7 +90,8 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //		return Task_GetYomi.doInBackground_B18_v_4_1();
 //		return Task_GetYomi.doInBackground_B18_v_5_0();
 //		return Task_GetYomi.doInBackground_B18_v_5_0_e_1_t_1();
-		return Task_GetYomi.doInBackground_B18_v_5_1();
+//		return Task_GetYomi.doInBackground_B18_v_5_1();
+		return Task_GetYomi.doInBackground_B18_v_5_1a();
 		
 //		v-5.0-e1-t1
 //		return CONS.GETYOMI_FAILED;
@@ -138,7 +140,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 
 	}//private static Integer doInBackground_B18_v_5_0_e_1_t_1()
 
-	private static Integer doInBackground_B18_v_5_1() {
+	private static Integer doInBackground_B18_v_5_1a() {
 		// TODO Auto-generated method stub
 //		String keyWord = "洗濯網（中）";
 //		String keyWord = "目玉クリップ";
@@ -151,7 +153,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		 * 0. Table exists?
 			----------------------------*/
 		// Log
-		Log.d("Methods.java" + "["
+		Log.d("Task_GetYomi.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "tableName=" + CONS.tableName);
 		
@@ -160,7 +162,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		if (res == false) {
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("Task_GetYomi.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "getAllData() => Table doesn't exist: " + CONS.tableName);
 			
@@ -185,13 +187,280 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			c = rdb.rawQuery(sql, null);
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("Task_GetYomi.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "c.getCount()=" + c.getCount());
 			
 		} catch (Exception e) {
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			rdb.close();
+			
+			return CONS.GETYOMI_FAILED;
+		}
+	
+		/*********************************
+		 * Get names
+		 *********************************/
+//		List<String> itemNames = new ArrayList<String>();
+//		
+//		List<Long> itemIds = new ArrayList<Long>();
+		
+		List<Furi> furiganaList = new ArrayList<Furi>();
+		
+		c.moveToFirst();
+		
+		int numOfSamples = 20;
+		
+//		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < numOfSamples; i++) {
+			
+			String name = c.getString(CONS.colAddUp + Methods.getArrayIndex(CONS.columns, "name"));
+			
+//			long itemId = c.getLong(Methods.getArrayIndex(
+//											CONS.columns,
+////											String.valueOf(android.provider.BaseColumns._ID)));
+//											android.provider.BaseColumns._ID));
+
+			long itemId = c.getLong(0);
+//			long itemId = c.getLong(Methods.getArrayIndex(
+//					CONS.columns,
+//					);
+			
+//			// Log
+//			Log.d("Task_GetYomi.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "android.provider.BaseColumns._ID=" + android.provider.BaseColumns._ID);
+			
+			if (name != null) {
+				
+				furiganaList.add(new Furi(itemId, name));
+				
+//				itemNames.add(name);
+//				
+//				itemIds.add(itemId);
+				
+			}//if (name != null)
+			
+			/*********************************
+			 * Next entry
+			 *********************************/
+			c.moveToNext();
+			
+		}//for (int i = 0; i < 10; i++)
+		
+		
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "furiganaList.size()=" + furiganaList.size());
+		
+		rdb.close();
+		
+		/*********************************
+		 * Get furigana
+		 *********************************/
+//		List<String> furiganaList = new ArrayList<String>();
+//		List<Furi> furiganaList = new ArrayList<Furi>();
+		
+		YahooFurigana yf = YahooFurigana.getInstance();
+		
+//		for (int i = 0; i < itemNames.size(); i++) {
+		for (int i = 0; i < furiganaList.size(); i++) {
+			
+			String keyWord = furiganaList.get(i).getName();
+			
+//			YahooFurigana yf = YahooFurigana.getInstance();
+			
+			String furi = yf.getFurigana(keyWord, true);
+
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "furi=" + furi);
+
+//			furiganaList.add(furi);
+			furiganaList.get(i).setFuri(furi);
+			
+//			if (furi != null) {
+//				
+//				Log.d("Task_GetYomi.java" + "["
+//						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//						+ "]", "furi(Hiragana)=" + Methods.convert_Kana2Gana(furi));
+//
+////				return CONS.GETYOMI_SUCCESSFUL;
+//				
+//				furiganaList.add(furi);
+//				
+//			} else {//if (furi != null)
+//				
+//				
+//				
+//				furiganaList.add(null);
+//				
+//			}//if (furi != null)
+
+			//			// Log
+//			Log.d("Task_GetYomi.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]",
+//					"id=" + itemIds.get(i)
+//					+ "/"
+//					+ "name=" + itemNames.get(i));
+			
+		}//for (int i = 0; i < itemNames.size(); i++)
+		
+		//
+
+		/***************************************
+		 * Get: Gana
+		 ***************************************/
+		for (int i = 0; i < furiganaList.size(); i++) {
+
+			Furi f = furiganaList.get(i);
+			
+			if (f.getFuri() != null) {
+				
+				String gana = Methods.convert_Kana2Gana(f.getFuri());
+				
+				if (gana != null) {
+					
+					furiganaList.get(i).setGana(gana);
+					
+				} else {//if (gana != null)
+					
+					furiganaList.get(i).setGana(null);
+					
+					// Log
+					Log.d("Task_GetYomi.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]", "gana == null");
+					
+					continue;
+					
+				}//if (gana != null)
+				
+				
+			} else {//if (f.getFuri() != null)
+				
+				// Log
+				Log.d("Task_GetYomi.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "f.getFuri() == null");
+				
+			}//if (f.getFuri() != null)
+			
+		}//for (int i = 0; i < furiganaList.size(); i++)
+		
+		/***************************************
+		 * Debug
+		 ***************************************/
+		for (int i = 0; i < furiganaList.size(); i++) {
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"id=" + furiganaList.get(i).getId()
+					+ "/"
+					+ "name=" + furiganaList.get(i).getName()
+					+ "/"
+					+ "furi=" + furiganaList.get(i).getFuri()
+					+ "/"
+					+ "gana=" + furiganaList.get(i).getGana());
+			
+//					"id=" + itemIds.get(i)
+//					+ "/"
+//					+ "name=" + itemNames.get(i)
+//					+ "/"
+//					+ "furi=" + furiganaList.get(i));
+			
+		}//for (int i = 0; i < furiganaList.size(); i++)
+		
+		/***************************************
+		 * Return
+		 ***************************************/
+		return CONS.GETYOMI_SUCCESSFUL;
+		
+	}//private static void doInBackground_B18_v_5_1a()
+
+	private static Integer doInBackground_B18_v_5_1() {
+		// TODO Auto-generated method stub
+//		String keyWord = "洗濯網（中）";
+//		String keyWord = "目玉クリップ";
+		
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		SQLiteDatabase rdb = dbu.getReadableDatabase();
+		
+		/*----------------------------
+		 * 0. Table exists?
+			----------------------------*/
+		// Log
+		Log.d("Task_GetYomi.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "tableName=" + CONS.tableName);
+		
+		boolean res = dbu.tableExists(rdb, CONS.tableName);
+		
+		if (res == false) {
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "getAllData() => Table doesn't exist: " + CONS.tableName);
+			
+			rdb.close();
+			
+			return CONS.GETYOMI_FAILED;
+			
+		}//if (res == false)
+		
+		/*----------------------------
+		 * 2. Get data
+		 * 		2.1. Get cursor
+		 * 		2.2. Add to list
+			----------------------------*/
+		//
+		String sql = "SELECT * FROM " + CONS.tableName;
+		
+		Cursor c = null;
+		
+		try {
+			
+			c = rdb.rawQuery(sql, null);
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "c.getCount()=" + c.getCount());
+			
+		} catch (Exception e) {
+			// Log
+			Log.e("Task_GetYomi.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Exception => " + e.toString());
 			
@@ -351,7 +620,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		 * 0. Table exists?
 			----------------------------*/
 		// Log
-		Log.d("Methods.java" + "["
+		Log.d("Task_GetYomi.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "tableName=" + CONS.tableName);
 		
@@ -360,7 +629,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		if (res == false) {
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("Task_GetYomi.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "getAllData() => Table doesn't exist: " + CONS.tableName);
 			
@@ -385,13 +654,13 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			c = rdb.rawQuery(sql, null);
 			
 			// Log
-			Log.d("Methods.java" + "["
+			Log.d("Task_GetYomi.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "c.getCount()=" + c.getCount());
 			
 		} catch (Exception e) {
 			// Log
-			Log.e("Methods.java" + "["
+			Log.e("Task_GetYomi.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Exception => " + e.toString());
 			
@@ -2055,7 +2324,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			if (null == c) {
 				
 				// Log
-				Log.d("Methods.java"
+				Log.d("Task_GetYomi.java"
 						+ "["
 						+ Thread.currentThread().getStackTrace()[2]
 								.getLineNumber()
@@ -2075,7 +2344,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			if (c.getCount() < 1) {
 				
 				// Log
-				Log.d("Methods.java"
+				Log.d("Task_GetYomi.java"
 						+ "["
 						+ Thread.currentThread().getStackTrace()[2]
 								.getLineNumber()
@@ -2145,7 +2414,7 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		} catch (Exception e) {
 			
 			// Log
-			Log.d("Methods.java"
+			Log.d("Task_GetYomi.java"
 					+ "["
 					+ Thread.currentThread().getStackTrace()[2]
 							.getLineNumber()
