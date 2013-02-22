@@ -87,8 +87,8 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 //		Integer res = Task_GetYomi.doInBackground_B18_v_4_0();
 //		return Task_GetYomi.doInBackground_B18_v_4_0();
 //		return Task_GetYomi.doInBackground_B18_v_4_1();
-		return Task_GetYomi.doInBackground_B18_v_5_0();
-//		return Task_GetYomi.doInBackground_B18_v_5_0_e_1_t_1();
+//		return Task_GetYomi.doInBackground_B18_v_5_0();
+		return Task_GetYomi.doInBackground_B18_v_5_0_e_1_t_1();
 		
 //		v-5.0-e1-t1
 //		return CONS.GETYOMI_FAILED;
@@ -98,8 +98,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 	}
 
 	private static Integer doInBackground_B18_v_5_0_e_1_t_1() {
-//		String keyWord = "洗濯網（中）目玉クリップ";
-		String keyWord = "かりんとう";
+		String keyWord = "洗濯網（中）目玉クリップ";
+//		String keyWord = "かりんとう";
+//		String keyWord = "のど飴";
 		
 //		YahooFurigana yf = YahooFurigana.getInstanceWithKeyWord(keyWord);
 //		
@@ -107,14 +108,16 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 		
 		YahooFurigana yf = YahooFurigana.getInstanceWithKeyWord(keyWord);
 		
-		String furi = yf.getFurigana(keyWord, true);
+//		String furi = yf.getFurigana(keyWord, true);
+		String furi = yf.getFurigana_B18_v_5_0_e_1_t_1(keyWord, true);
 		
 		// Log
 		Log.d("Task_GetYomi.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ ":"
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "furi=" + furi);
+				+ "]",
+				"keyWord=" + keyWord + "/" + "furi=" + furi);
 
 		if (furi != null) {
 			
