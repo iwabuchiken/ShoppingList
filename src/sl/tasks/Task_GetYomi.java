@@ -98,9 +98,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 	}
 
 	private static Integer doInBackground_B18_v_5_0_e_1_t_1() {
-		String keyWord = "洗濯網（中）目玉クリップ";
+//		String keyWord = "洗濯網（中）目玉クリップ";
 //		String keyWord = "かりんとう";
-//		String keyWord = "のど飴";
+		String keyWord = "のど飴";
 		
 //		YahooFurigana yf = YahooFurigana.getInstanceWithKeyWord(keyWord);
 //		

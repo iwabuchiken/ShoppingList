@@ -877,17 +877,23 @@ public class YahooFurigana {
 		
 		try {
 			
-			Object obj = joWordList.getJSONArray(tagName);
+//			Object obj = joWordList.getJSONArray(tagName);
+			jaWords = joWordList.getJSONArray(tagName);
 
+//			// Log
+//			Log.d("YahooFurigana.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]",
+//					"obj=" + obj.getClass().getName());
 			// Log
 			Log.d("YahooFurigana.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]",
-					"obj=" + obj.getClass().getName());
+					+ "]", "jaWords => Obtained");
 			
-
 		} catch (JSONException e) {
 			
 			// Log
@@ -899,9 +905,10 @@ public class YahooFurigana {
 			
 			try {
 				
-				joWord = joWordList.getJSONObject(tagName);
+				JSONObject joWord_single = joWordList.getJSONObject(tagName);
 
-				String furi = YahooFurigana.getFuriganaFromJSONObjectWord(joWord);
+//				String furi = YahooFurigana.getFuriganaFromJSONObjectWord(joWord);
+				String furi = YahooFurigana.getFuriganaFromJSONObjectWord(joWord_single);
 				
 				// Log
 				Log.d("YahooFurigana.java"
@@ -914,116 +921,7 @@ public class YahooFurigana {
 				
 				return furi;
 				
-//				// Log
-//				Log.d("YahooFurigana.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]", "joWord => Created");
-//						
-//				String tagSurface = "Surface";
-//				
-//				/*********************************
-//				 * Get keys
-//				 *********************************/
-//				Iterator keys = joWord.keys();
-//				
-//				List<String> keyList = new ArrayList<String>();
-//				
-//				while (keys.hasNext()) {
-//					String key = (String) keys.next();
-//					
-//					
-//					keyList.add(key);
-//					
-//				}//while (keys.hasNext())
-//				
-//				// Log
-//				Log.d("YahooFurigana.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]",
-//						"keyList.size()=" + keyList.size());
-//				
-//				/*********************************
-//				 * Has "Furigana" key?
-//				 * 	=> If yes: Add the value to furiList
-//				 * 	=> If no: Add the value of 'Surface' key to furiList
-//				 *********************************/
-//				String targetKey = "Furigana";
-//				
-//				String surfaceKey = "Surface";
-//				
-//				List<String> furiList = new ArrayList<String>();
-//				
-//				if (keyList.contains(targetKey)) {
-//					
-//					// Log
-//					Log.d("YahooFurigana.java"
-//							+ "["
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getLineNumber()
-//							+ ":"
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getMethodName() + "]",
-//							"Furigana=" + joWord.getString(targetKey));
-//					
-//					furiList.add(joWord.getString(targetKey));
-//					
-//				} else {//if (keyList.contains(""))
-//					
-//					// Log
-//					Log.d("YahooFurigana.java"
-//							+ "["
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getLineNumber()
-//							+ ":"
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getMethodName() + "]",
-//							"No 'Furigana' key; 'Surface'=" + joWord.getString(surfaceKey));
-//					
-//					furiList.add(joWord.getString(surfaceKey));
-//					
-//				}//if (keyList.contains(""))
-//				
-//				/*********************************
-//				 * furiList => Convert to a string
-//				 *********************************/
-//				StringBuilder sb = new StringBuilder();
-//				
-//				for (int j = 0; j < furiList.size(); j++) {
-//					
-//					sb.append(furiList.get(j));
-//					
-//					// Log
-//					Log.d("YahooFurigana.java"
-//							+ "["
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getLineNumber()
-//							+ ":"
-//							+ Thread.currentThread().getStackTrace()[2]
-//									.getMethodName() + "]",
-//							"item=" + furiList.get(j));
-//					
-//				}//for (int j = 0; j < furiList.size(); j++)
-//				
-//				// Log
-//				Log.d("YahooFurigana.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]",
-//						"Furigana is=" + sb.toString());
-//				
-//				return sb.toString();
-				
+
 			} catch (JSONException e1) {
 				
 				// Log
@@ -1038,8 +936,181 @@ public class YahooFurigana {
 			}//try
 			
 		}//try
+
+		/*********************************
+		 * List<String> furiList
+		 *********************************/
+		List<String> furiList = new ArrayList<String>();
 		
-		return null;
+		/*********************************
+		 * StringBuilder
+		 *********************************/
+		StringBuilder sb = new StringBuilder();
+		
+		/*********************************
+		 * Iterate
+		 *********************************/
+		for (int i = 0; i < jaWords.length(); i++) {
+			
+			try {
+				
+//				JSONObject joWord = jaWords.getJSONObject(i);
+				joWord = jaWords.getJSONObject(i);
+				
+				// Log
+				Log.d("YahooFurigana.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "joWord => Created");
+
+//						=> [528:getFurigana](6448): joWord => Created
+						
+				String tagSurface = "Surface";
+				
+//				JSONArray jaSurfaces = joWord.getJSONArray(tagSurface);
+				
+				/*********************************
+				 * Get keys
+				 *********************************/
+				Iterator keys = joWord.keys();
+				
+				List<String> keyList = new ArrayList<String>();
+				
+				while (keys.hasNext()) {
+					String key = (String) keys.next();
+					
+					
+//					keyList.add((String) keys.next());
+					keyList.add(key);
+					
+//					// Log
+//					Log.d("YahooFurigana.java"
+//							+ "["
+//							+ Thread.currentThread().getStackTrace()[2]
+//									.getLineNumber()
+//							+ ":"
+//							+ Thread.currentThread().getStackTrace()[2]
+//									.getMethodName() + "]", "key=" + key);
+					
+				}//while (keys.hasNext())
+				
+				// Log
+				Log.d("YahooFurigana.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"keyList.size()=" + keyList.size());
+				
+				/*********************************
+				 * Has "Furigana" key?
+				 * 	=> If yes: Add the value to furiList
+				 * 	=> If no: Add the value of 'Surface' key to furiList
+				 *********************************/
+				String targetKey = "Furigana";
+				
+				String surfaceKey = "Surface";
+				
+				if (keyList.contains(targetKey)) {
+					
+					// Log
+					Log.d("YahooFurigana.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+							"Furigana=" + joWord.getString(targetKey));
+					
+					furiList.add(joWord.getString(targetKey));
+					
+				} else {//if (keyList.contains(""))
+					
+					// Log
+					Log.d("YahooFurigana.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+							"No 'Furigana' key; 'Surface'=" + joWord.getString(surfaceKey));
+					
+					furiList.add(joWord.getString(surfaceKey));
+					
+				}//if (keyList.contains(""))
+				
+				/*********************************
+				 * furiList => Convert to a string
+				 *********************************/
+				sb = new StringBuilder();
+				
+				for (int j = 0; j < furiList.size(); j++) {
+					
+					sb.append(furiList.get(j));
+					
+					// Log
+					Log.d("YahooFurigana.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+							"item=" + furiList.get(j));
+					
+				}//for (int j = 0; j < furiList.size(); j++)
+				
+				// Log
+				Log.d("YahooFurigana.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Furigana is=" + sb.toString());
+				
+				
+				
+//				String jaSurfaces = joWord.getJSONArray(tagSurface);
+//				
+//				// Log
+//				Log.d("YahooFurigana.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]",
+//						"Number of surfaces=" + jaSurfaces.length());
+				
+			} catch (JSONException e) {
+
+				// Log
+				Log.e("YahooFurigana.java" + "["
+						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2].getMethodName()
+						+ "]", e.toString());
+
+			}
+			
+		}//for (int i = 0; i < jaWords.length(); i++)
+		
+		/*********************************
+		 * Return
+		 *********************************/
+		return sb.toString();
+		
+		
+//		return null;
 		
 	}//public String getFurigana_B18_v_5_0_e_1_t_1(boolean flag)
 
