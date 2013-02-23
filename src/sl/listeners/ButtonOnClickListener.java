@@ -16,6 +16,7 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -109,6 +110,31 @@ public class ButtonOnClickListener implements OnClickListener {
 //			
 		case itemlist_bt_choose://-----------------------------------
 			
+			if (ItemListActv.toBuys == null) {
+				
+				// Log
+				Log.d("ButtonOnClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "ItemListActv.toBuys => null");
+				
+			} else {//if (ItemListActv.toBuys == null)
+
+				// Log
+				Log.d("ButtonOnClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "ItemListActv.toBuys => Not null");
+
+			}//if (ItemListActv.toBuys == null)
+			
+			
 			ItemListActv.toBuys.addAll(ItemListActv.checkedPositions);
 			
 			List<ShoppingItem> chosen_items_list = new ArrayList<ShoppingItem>();
@@ -131,6 +157,25 @@ public class ButtonOnClickListener implements OnClickListener {
 			/***************************************
 			 * Sort list
 			 ***************************************/
+			// Log
+			Log.d("ButtonOnClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "chosen_items_list.size()=" + chosen_items_list.size());
+			
+			// Log
+			ShoppingItem si = chosen_items_list.get(0);
+			
+			Log.d("ButtonOnClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"si.getName()=" + si.getName()
+					+ "/"
+					+ "si.getYomi()=" + si.getYomi());
+			
 			Methods_sl.sortItemList(chosen_items_list);
 			
 			/***************************************

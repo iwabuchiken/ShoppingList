@@ -1672,6 +1672,19 @@ public class Methods_sl {
 //				return (int) (i1.getDate_added() - i2.getDate_added());
 				
 //				return (int) (i1.getName().compareToIgnoreCase(i2.getName()));
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"i1.getYomi()=" + i1.getYomi()
+						+ "/"
+						+ "i2.getYomi()=" + i2.getYomi());
+				
 				return (int) (i1.getYomi().compareToIgnoreCase(i2.getYomi()));
 			}
 			
