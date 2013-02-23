@@ -266,6 +266,8 @@ public class YahooFurigana {
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", e.toString());
 			
+			
+			
 			return null;
 			
 		}

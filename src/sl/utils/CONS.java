@@ -114,6 +114,7 @@ public class CONS {
 
 	// Get yomi
 	public static final int GETYOMI_SUCCESSFUL = 1;
+	public static final int GETYOMI_NO_ENTRY = 2;
 	public static final int GETYOMI_FAILED = -1;
 	
 }//public class CONS
