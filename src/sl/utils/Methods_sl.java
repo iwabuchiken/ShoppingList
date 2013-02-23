@@ -4,7 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -29,6 +32,8 @@ import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+
+import sl.items.ShoppingItem;
 
 public class Methods_sl {
 
@@ -580,7 +585,7 @@ public class Methods_sl {
 		
 		/*********************************
 		 * Among records which data in the "store" column is 
-		 * 	"ƒLƒƒƒ“EƒhƒE", if the value of the column "price" is
+		 * 	"ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½hï¿½E", if the value of the column "price" is
 		 * 	blank(i.e. ""), then insert the value 100
 		 *********************************/
 		boolean res = true;
@@ -607,8 +612,8 @@ public class Methods_sl {
 					"store=" + storeName + "/"
 					+ "price=" + priceData);
 			
-//			if (storeName.equals("ƒLƒƒƒ“EƒhƒE") &&
-			if (storeName.equals("ƒLƒƒƒ“EƒhƒD") &&
+//			if (storeName.equals("ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½hï¿½E") &&
+			if (storeName.equals("ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½hï¿½D") &&
 					(priceData.equals("") || priceData == null)) {
 			
 				long dbId = c.getLong(0);
@@ -640,7 +645,7 @@ public class Methods_sl {
 					
 				}//if (res == false)
 				
-			} else {//if (storeName.equals("ƒLƒƒƒ“EƒhƒE"))
+			} else {//if (storeName.equals("ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½hï¿½E"))
 				
 				// Log
 				Log.d("Methods_sl.java"
@@ -654,7 +659,7 @@ public class Methods_sl {
 				
 //				continue;
 				
-			}//if (storeName.equals("ƒLƒƒƒ“EƒhƒE"))
+			}//if (storeName.equals("ï¿½Lï¿½ï¿½ï¿½ï¿½ï¿½Eï¿½hï¿½E"))
 			
 			/*********************************
 			 * Next data
@@ -674,7 +679,7 @@ public class Methods_sl {
 		
 //		int res = Methods_sl.getYomi_B18_v_1_3(actv, dlg);
 		
-		String kw = "ƒXƒ|ƒ“ƒW";
+		String kw = "ï¿½Xï¿½|ï¿½ï¿½ï¿½W";
 		String enc = "utf-8";
 		
 //		int res = Methods_sl.getYomi_full(kw, enc);
@@ -891,8 +896,8 @@ public class Methods_sl {
 		/*********************************
 		 * Build a url string
 		 *********************************/
-//		String sen = "Š`ƒs[";
-		String sen = "ƒXƒ|ƒ“ƒW";
+//		String sen = "ï¿½`ï¿½sï¿½[";
+		String sen = "ï¿½Xï¿½|ï¿½ï¿½ï¿½W";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 		"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
@@ -1432,7 +1437,7 @@ public class Methods_sl {
 
 	private static int getYomi_xml(Activity actv, Dialog dlg) {
 		// TODO Auto-generated method stub
-		String sen = "Š`ƒs[";
+		String sen = "ï¿½`ï¿½sï¿½[";
 		
 		String url = "http://jlp.yahooapis.jp/FuriganaService/V1/furigana" +
 		"?appid=dj0zaiZpPTZjQWNRNExhd0thayZkPVlXazlhR2gwTTJGUE56SW1jR285TUEtLSZzPWNvbnN1bWVyc2VjcmV0Jng9Mjc-" +
@@ -1654,5 +1659,23 @@ public class Methods_sl {
 		return CONS.GETYOMI_SUCCESSFUL;
 		
 	}//private static int getYomi_xml(Activity actv, Dialog dlg)
+
+	public static void
+	sortItemList(List<ShoppingItem> tiList) {
+		
+		Collections.sort(tiList, new Comparator<ShoppingItem>(){
+
+//			@Override
+			public int compare(ShoppingItem i1, ShoppingItem i2) {
+				// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
+				
+//				return (int) (i1.getDate_added() - i2.getDate_added());
+				
+				return (int) (i1.getName().compareToIgnoreCase(i2.getName()));
+			}
+			
+		});//Collections.sort()
+
+	}//public static void sort_tiList(List<ThumbnailItem> tiList)
 
 }//public class Methods_sl

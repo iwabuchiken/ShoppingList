@@ -12,6 +12,7 @@ import sl.main.R;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_sl;
 import sl.utils.Tags;
 
 import android.app.ListActivity;
@@ -153,10 +154,15 @@ public class ItemListActv extends ListActivity {
 		
 		//
 		db.close();
+
+		/***************************************
+		 * Sort list
+		 ***************************************/
+		Methods_sl.sortItemList(list);
 		
-		/*----------------------------
+		/***************************************
 		 * 4. Set up adapter
-			----------------------------*/
+		 ***************************************/
 		//
 		adapter = new ItemListAdapter(
 							this,
