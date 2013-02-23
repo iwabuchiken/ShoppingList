@@ -1202,13 +1202,22 @@ public class Methods {
 		//
 		for (int i = 0; i < c.getCount(); i++) {
 			//
+//			ShoppingItem item = new ShoppingItem(
+//									c.getString(1),		// store
+//									c.getString(2),		// name
+//									c.getInt(3),			// price
+//									c.getString(4),		// genre
+//									c.getInt(0)				// id
+//									);
+
 			ShoppingItem item = new ShoppingItem(
-									c.getString(1),		// store
-									c.getString(2),		// name
-									c.getInt(3),			// price
-									c.getString(4),		// genre
-									c.getInt(0)				// id
-									);
+					c.getInt(0),		// id
+					c.getString(1),		// store
+					c.getString(2),		// name
+					c.getInt(3),		// price
+					c.getString(4),		//	genre
+					c.getString(5)			// yomi
+					);
 			
 			// Log
 			Log.d("Methods.java" + "["

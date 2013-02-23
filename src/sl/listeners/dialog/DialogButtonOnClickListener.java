@@ -11,7 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class DialogButtonOnClickListener implements OnClickListener {
+public class
+DialogButtonOnClickListener implements OnClickListener {
 	/*----------------------------
 	 * Fields
 		----------------------------*/
@@ -250,4 +251,4 @@ public class DialogButtonOnClickListener implements OnClickListener {
 		}//switch (tag_name)
 	}
 
-}
+}//DialogButtonOnClickListener implements OnClickListener

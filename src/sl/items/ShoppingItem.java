@@ -41,6 +41,22 @@ public class ShoppingItem {
 		
 	}//public ShoppingItem(String store, String name, int price, String genre)
 
+	
+
+	public
+	ShoppingItem
+	(int id, String store, String name, int price, String genre, String yomi) {
+
+		this.id = id;
+		this.name = name;
+		this.yomi = yomi;
+
+		this.genre = genre;
+		this.store = store;
+		this.price = price;
+
+	}
+
 	public String getStore() {
 		return store;
 	}
