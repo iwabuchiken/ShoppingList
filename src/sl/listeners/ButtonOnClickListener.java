@@ -1,5 +1,10 @@
 package sl.listeners;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import sl.adapters.ItemListAdapter;
+import sl.items.ShoppingItem;
 import sl.main.DBActv;
 import sl.main.ItemListActv;
 import sl.main.R;
@@ -7,6 +12,7 @@ import sl.utils.Methods;
 import sl.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Vibrator;
 import android.view.View;
@@ -104,9 +110,41 @@ public class ButtonOnClickListener implements OnClickListener {
 			
 			ItemListActv.toBuys.addAll(ItemListActv.checkedPositions);
 			
-			ItemListActv.adapter.notifyDataSetChanged();
+			List<ShoppingItem> chosen_items_list = new ArrayList<ShoppingItem>();
+			
+			for (Integer num : ItemListActv.toBuys) {
+				
+				chosen_items_list.add(ItemListActv.list.get(num));
+				
+			}
+
+			if (chosen_items_list.size() <= 0) {
+				
+				// debug
+				Toast.makeText(actv, "No item chosen", Toast.LENGTH_SHORT).show();
+				
+				return;
+				
+			}//if (chosen_items_list.size() == 0)
+
+			ItemListActv.adapter.clear();
+			
+			ItemListActv.adapter = new ItemListAdapter(
+					actv,
+					R.layout.adapteritem,
+//					ItemList.list
+					chosen_items_list
+					);
+
+			((ListActivity)actv).setListAdapter(ItemListActv.adapter);
 			
 			break;
+			
+//			ItemListActv.toBuys.addAll(ItemListActv.checkedPositions);
+//			
+//			ItemListActv.adapter.notifyDataSetChanged();
+//			
+//			break;
 			
 		default:
 			break;
