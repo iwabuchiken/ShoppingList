@@ -12,6 +12,7 @@ import sl.main.R;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_sl;
 import sl.utils.Tags;
 
 import android.app.ListActivity;
@@ -116,32 +117,44 @@ public class ItemListActv extends ListActivity {
 		Cursor c = db.query(
 				CONS.tableName, 
 //										DBManager.columns,
-				CONS.columns_with_index,
+//				CONS.columns_with_index,
+				CONS.columns_with_index2,
 										null, null, null, null, null);
 		
 		//
 		c.moveToFirst();
 		
 		for (int i = 0; i < c.getCount(); i++) {
-			// Log
-			Log.d("ItemList.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "c.getString(0) => " + c.getString(0));
-			Log.d("ItemList.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "c.getString(1) => " + c.getString(1));
-			Log.d("ItemList.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "c.getString(4) => " + c.getString(4));
+//			// Log
+//			Log.d("ItemList.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(0) => " + c.getString(0));
+//			Log.d("ItemList.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(1) => " + c.getString(1));
+//			Log.d("ItemList.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(4) => " + c.getString(4));
 			
 			//
+//			ShoppingItem item = new ShoppingItem(
+//									c.getString(0),		// store
+//									c.getString(1),		// name
+//									c.getInt(2),			// price
+//									c.getString(3),		// genre
+//									c.getInt(4)				// id
+//									);
+
+//			0									1		2		3		4			5
+//			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
 			ShoppingItem item = new ShoppingItem(
-									c.getString(0),		// store
-									c.getString(1),		// name
-									c.getInt(2),			// price
-									c.getString(3),		// genre
-									c.getInt(4)				// id
-									);
+					c.getInt(0),		// id store
+					c.getString(1),		// name
+					c.getString(2),		// yomi
+					c.getString(3),		// genre
+					c.getString(4),		//	store
+					c.getInt(5)			// price
+					);
 			
 			//
 			list.add(item);
@@ -153,10 +166,15 @@ public class ItemListActv extends ListActivity {
 		
 		//
 		db.close();
+
+		/***************************************
+		 * Sort list
+		 ***************************************/
+		Methods_sl.sortItemList(list);
 		
-		/*----------------------------
+		/***************************************
 		 * 4. Set up adapter
-			----------------------------*/
+		 ***************************************/
 		//
 		adapter = new ItemListAdapter(
 							this,

@@ -24,7 +24,7 @@ public class ItemListAdapter extends ArrayAdapter<ShoppingItem> {
 	public ItemListAdapter(Context context, int textViewResourceId,
 												List<ShoppingItem> list) {
 		super(context, textViewResourceId, list);
-		// TODO ©“®¶¬‚³‚ê‚½ƒRƒ“ƒXƒgƒ‰ƒNƒ^[EƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½Rï¿½ï¿½ï¿½Xï¿½gï¿½ï¿½ï¿½Nï¿½^ï¿½[ï¿½Eï¿½Xï¿½^ï¿½u
 		
 		this.resourceId = textViewResourceId;
 		
@@ -43,7 +43,7 @@ public class ItemListAdapter extends ArrayAdapter<ShoppingItem> {
 		 * 5. Set background
 			----------------------------*/
 		
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -63,12 +63,12 @@ public class ItemListAdapter extends ArrayAdapter<ShoppingItem> {
         //
         ShoppingItem si = (ShoppingItem) getItem(position);
         
-        // Log
-		Log.d("ItemListAdapter.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", 
-				"si.getName() => " + si.getName()+
-					"/" + "id=" + si.getId());
+//        // Log
+//		Log.d("ItemListAdapter.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", 
+//				"si.getName() => " + si.getName()+
+//					"/" + "id=" + si.getId());
 		
 		/*----------------------------
 		 * 4. Set values
