@@ -230,7 +230,21 @@ public class YahooFurigana {
 		
 		try {
 			
+			// Log
+			Log.d("YahooFurigana.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Executing HttpClient...");
+			
 			hr = dhc.execute(postRequest);
+			
+			// Log
+			Log.d("YahooFurigana.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Response obtained!");
 			
 		} catch (ClientProtocolException e) {
 			
@@ -1195,12 +1209,14 @@ public class YahooFurigana {
 
 	/*********************************
 	 * 作成日：20130220_161907
-	 * The method internally uses getFurigana(boolean flag)
+	 * The method internally uses getFurigana(boolean flag)<br>
+	 * 
 	 * @param	keyWord	The word for which the furigana string will be sought
 	 * @param	flag	Strictness of the conversion. If true, when the furigana
 	 * 					tag is missing in the returned JSON data, the surface tag value
 	 * 					will be used in constructing the furigana string.
-	 * @return	The constructed furigana string. If any error, returns <i>null</i>.
+	 * @return	The constructed furigana string(katakana-including).<br>
+	 * 				If any error, returns <i>null</i>.
 	 * @see		YahooFurigana: public String getFurigana(boolean flag)
 	 *********************************/
 	public String getFurigana(String keyWord, boolean flag) {

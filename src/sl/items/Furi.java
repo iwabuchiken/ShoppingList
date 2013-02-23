@@ -4,7 +4,17 @@ public class Furi {
 
 	long id;
 	String name;
+	
+	/***************************************
+	 * The value returned from Yahoo Furigana<br>
+	 * The katakana remains to be a katakana
+	 ***************************************/
 	String furi;
+	
+	/***************************************
+	 * The all-hiragana string converted from katakana-including<br>
+	 * 		string, through a method in Methods.java
+	 ***************************************/
 	String gana;
 	
 	private Furi() {
@@ -15,6 +25,14 @@ public class Furi {
 
 		this.id = itemId;
 		this.name = name;
+		
+	}
+
+	public Furi(long itemId, String name, String yomi) {
+		
+		this.id = itemId;
+		this.name = name;
+		this.gana = yomi;
 		
 	}
 
