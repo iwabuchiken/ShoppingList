@@ -32,28 +32,9 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             
-            android:textSize="25dp"
+            android:textSize="25sp"
             
             android:text="@string/itemlist_bt_choose" 
-            
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            
-            android:layout_weight="1"
-            
-            />
-
-        <Button
-            android:id="@+id/itemlist_bt_see_chosen"
-            
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            
-            android:textSize="25dp"
-            
-            android:text="@string/itemlist_bt_see_chosen" 
             
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"

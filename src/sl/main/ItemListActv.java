@@ -91,15 +91,15 @@ public class ItemListActv extends ListActivity {
 		bt_choose.setOnTouchListener(new ButtonOnTouchListener(this));
 		bt_choose.setOnClickListener(new ButtonOnClickListener(this));
 		
-		/*----------------------------
-		 * 2. Button => see_chosen
-			----------------------------*/
-		Button bt_see_chosen = (Button) findViewById(R.id.itemlist_bt_see_chosen);
-		
-		bt_see_chosen.setTag(Tags.ButtonTags.itemlist_bt_see_chosen);
-		
-		bt_see_chosen.setOnTouchListener(new ButtonOnTouchListener(this));
-		bt_see_chosen.setOnClickListener(new ButtonOnClickListener(this));
+//		/*----------------------------
+//		 * 2. Button => see_chosen
+//			----------------------------*/
+//		Button bt_see_chosen = (Button) findViewById(R.id.itemlist_bt_see_chosen);
+//		
+//		bt_see_chosen.setTag(Tags.ButtonTags.itemlist_bt_see_chosen);
+//		
+//		bt_see_chosen.setOnTouchListener(new ButtonOnTouchListener(this));
+//		bt_see_chosen.setOnClickListener(new ButtonOnClickListener(this));
 		
 		
 	}//private void set_listener()
