@@ -79,7 +79,7 @@ public class DBUtils extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		// TODO Ž©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		// Log
 		Log.d("DBManager.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
@@ -89,7 +89,7 @@ public class DBUtils extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase arg0, int arg1, int arg2) {
-		// TODO Ž©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 
 	}
 
@@ -339,7 +339,7 @@ public class DBUtils extends SQLiteOpenHelper {
 			return true;
 			
 		} catch (SQLException e) {
-			// TODO Ž©“®¶¬‚³‚ê‚½ catch ƒuƒƒbƒN
+			// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ catch ï¿½uï¿½ï¿½ï¿½bï¿½N
 			// Log
 			Log.e("DBManager.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
@@ -443,6 +443,52 @@ public class DBUtils extends SQLiteOpenHelper {
 		}//try
 		
 	}//public boolean updateData()
+
+	
+	public int updateData_shoppingItem(Activity actv, SQLiteDatabase wdb,
+			String tableName, long dbId, String colName, String value) {
+		
+		/*----------------------------
+		* Steps
+		* 1. 
+		----------------------------*/
+		String sql = "UPDATE " + tableName + " SET " + 
+					colName + "='" + value + "'"
+//					+ " WHERE file_id = '" + dbId + "'";
+					+ " WHERE " + android.provider.BaseColumns._ID
+					+ " = '" + dbId + "'";
+		
+		try {
+			
+			wdb.execSQL(sql);
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql => Done: " + sql);
+			
+			//Methods.toastAndLog(actv, "Data updated", 2000);
+			
+			return CONS.DB_UPDATE_SUCCESSFUL;
+			
+			
+		} catch (SQLException e) {
+
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Exception => " + e.toString() + " / " + "sql: " + sql);
+			
+			return CONS.EXCEPTION_SQL;
+			
+		}//try
+		
+	}//public int updateData_shoppingItem
 
 }//public class DBUtils extends SQLiteOpenHelper
 
