@@ -138,6 +138,13 @@ public class ButtonOnClickListener implements OnClickListener {
 
 			((ListActivity)actv).setListAdapter(ItemListActv.adapter);
 			
+			/***************************************
+			 * Clear the positions
+			 ***************************************/
+			ItemListActv.checkedPositions.clear();
+			
+			ItemListActv.toBuys.clear();
+			
 			break;
 			
 //			ItemListActv.toBuys.addAll(ItemListActv.checkedPositions);
