@@ -9,6 +9,7 @@ import sl.main.DBActv;
 import sl.main.ItemListActv;
 import sl.main.R;
 import sl.utils.Methods;
+import sl.utils.Methods_sl;
 import sl.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
@@ -127,6 +128,14 @@ public class ButtonOnClickListener implements OnClickListener {
 				
 			}//if (chosen_items_list.size() == 0)
 
+			/***************************************
+			 * Sort list
+			 ***************************************/
+			Methods_sl.sortItemList(chosen_items_list);
+			
+			/***************************************
+			 * Adapter
+			 ***************************************/
 			ItemListActv.adapter.clear();
 			
 			ItemListActv.adapter = new ItemListAdapter(
