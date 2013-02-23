@@ -1671,7 +1671,8 @@ public class Methods_sl {
 				
 //				return (int) (i1.getDate_added() - i2.getDate_added());
 				
-				return (int) (i1.getName().compareToIgnoreCase(i2.getName()));
+//				return (int) (i1.getName().compareToIgnoreCase(i2.getName()));
+				return (int) (i1.getYomi().compareToIgnoreCase(i2.getYomi()));
 			}
 			
 		});//Collections.sort()
