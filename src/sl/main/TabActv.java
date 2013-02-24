@@ -1,12 +1,16 @@
 package sl.main;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.TabActivity;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
@@ -49,12 +53,36 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //        thirdTab.setContent(this);
 //        tabHost.addTab(thirdTab);
         
+        setupListView_B22_v_1_1_b();
+        
         //最初にカーソルを当てたいタブを指定
         tabHost.setCurrentTabByTag("First");
         
-    }
+    }//public void onCreate(Bundle savedInstanceState)
 
-//		@Override
+    private void setupListView_B22_v_1_1_b() {
+		// TODO Auto-generated method stub
+		ListView lv = (ListView) findViewById(R.id.itemlist_tab2_lv);
+		
+		List<String> list = new ArrayList<String>();
+		
+		for (int i = 1; i < 11; i++) {
+			
+			list.add("Number: " + i);
+			
+		}//for (int i = 1; i < 11; i++)
+		
+		ArrayAdapter<String> adp = new ArrayAdapter<String>(
+				this,
+				android.R.layout.simple_list_item_1,
+				list
+				);
+		
+		lv.setAdapter(adp);
+		
+	}//private void setupListView_B22_v_1_1_b()
+
+		//		@Override
 		public View createTabContent(String tag) {
 			Time time = new Time("Asia/Tokyo");
 			time.setToNow();
@@ -63,4 +91,5 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			textView.setText(date);			
 			return textView;
 		}
-	}
+
+}//public class TabActv extends TabActivity implements TabHost.TabContentFactory

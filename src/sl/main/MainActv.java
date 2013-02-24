@@ -420,12 +420,12 @@ public class MainActv extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		
-		// Log
-		Log.d("MainActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "Options");
+//		// Log
+//		Log.d("MainActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "Options");
 		
 		switch (item.getItemId()) {
 				
@@ -458,14 +458,14 @@ public class MainActv extends Activity {
 				
 			case R.id.menu_main_tab_actv:
 				
-				// Log
-				Log.d("MainActv.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-						+ ":"
-						+ Thread.currentThread().getStackTrace()[2]
-								.getMethodName() + "]", "tab_actv");
+//				// Log
+//				Log.d("MainActv.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]", "tab_actv");
 				
 //				Methods_dlg.dlg_db_activity(this);
 //
