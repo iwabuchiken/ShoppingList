@@ -30,46 +30,6 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         
         setupListView();
         
-//        /***************************************
-//		 * Tab host
-//		 ***************************************/
-//        //TabHostクラスのインスタンス生成
-////        TabHost tabHost = getTabHost();
-//        tabHost = getTabHost();
-//        
-//        /***************************************
-//		 * First tab
-//		 ***************************************/
-//        // TabHostからTabSpecの生成
-////        TabSpec firstTab = tabHost.newTabSpec("First");
-//        firstTab = tabHost.newTabSpec("First");
-//        // タブ部分に表示するテキストおよびアイコンのセット
-//        firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
-//        // タブ選択時に表示したいViewのセット
-//        firstTab.setContent(R.id.first_content);
-//        // タブをTabHostに追加
-//        tabHost.addTab(firstTab);
-//        
-//        /***************************************
-//		 * Second tab
-//		 ***************************************/
-////        TabSpec secondTab = tabHost.newTabSpec("Second");
-//        secondTab = tabHost.newTabSpec("Second");
-//        secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
-//        secondTab.setContent(R.id.second_content);
-//        tabHost.addTab(secondTab);
-//        
-////        //３つ目のタブを生成
-////        TabSpec thirdTab = tabHost.newTabSpec("Third");
-////        thirdTab.setIndicator("thirdTab", getResources().getDrawable(android.R.drawable.ic_menu_add));
-////        thirdTab.setContent(this);
-////        tabHost.addTab(thirdTab);
-//        
-//        setupListView_B22_v_1_1_b();
-//        
-//        //最初にカーソルを当てたいタブを指定
-//        tabHost.setCurrentTabByTag("First");
-//        
     }//public void onCreate(Bundle savedInstanceState)
 
     private void setupTabs() {
@@ -108,34 +68,58 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //        thirdTab.setIndicator("thirdTab", getResources().getDrawable(android.R.drawable.ic_menu_add));
 //        thirdTab.setContent(this);
 //        tabHost.addTab(thirdTab);
-        
-//        setupListView_B22_v_1_1_b();
-        
+
         //最初にカーソルを当てたいタブを指定
         tabHost.setCurrentTabByTag("First");
         
 	}//private void setupTabs()
 
 	private void setupListView() {
-		// TODO Auto-generated method stub
-		ListView lv = (ListView) findViewById(R.id.itemlist_tab2_lv);
 		
-		List<String> list = new ArrayList<String>();
+		int numOfEntries = 30;
 		
-		for (int i = 1; i < 11; i++) {
+		/***************************************
+		 * List in the tab 1
+		 ***************************************/
+		ListView lvTab1 = (ListView) findViewById(R.id.itemlist_tab1_lv);
+		
+		List<String> listTab1 = new ArrayList<String>();
+		
+		for (int i = 1; i < numOfEntries; i++) {
 			
-			list.add("Number: " + i);
+			listTab1.add("Number: " + i);
 			
 		}//for (int i = 1; i < 11; i++)
 		
-		ArrayAdapter<String> adp = new ArrayAdapter<String>(
+		ArrayAdapter<String> adpTab1 = new ArrayAdapter<String>(
 				this,
 				android.R.layout.simple_list_item_1,
-				list
+				listTab1
 				);
 		
-		lv.setAdapter(adp);
+		lvTab1.setAdapter(adpTab1);
+
+		/***************************************
+		 * List in the tab 2
+		 ***************************************/
+		ListView lvTab2 = (ListView) findViewById(R.id.itemlist_tab2_lv);
 		
+		List<String> listTab2 = new ArrayList<String>();
+		
+		for (int i = 1; i < numOfEntries; i++) {
+			
+			listTab2.add("番号: " + i);
+			
+		}//for (int i = 1; i < 11; i++)
+		
+		ArrayAdapter<String> adpTab2 = new ArrayAdapter<String>(
+				this,
+				android.R.layout.simple_list_item_1,
+				listTab2
+				);
+		
+		lvTab2.setAdapter(adpTab2);
+
 	}//private void setupListView()
 
 	private void setupListView_B22_v_1_1_b() {
