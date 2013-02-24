@@ -24,6 +24,7 @@
         <activity android:name="sl.main.RegisterItemActv" android:screenOrientation="portrait"></activity>
         <activity android:name="sl.main.ItemListActv" android:screenOrientation="portrait"></activity>
         <activity android:name="sl.main.DBActv" android:screenOrientation="portrait"></activity>
+        <activity android:name=".TabActv"></activity>
     </application>
 
 </manifest>

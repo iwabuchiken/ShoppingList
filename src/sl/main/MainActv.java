@@ -49,7 +49,7 @@ public class MainActv extends Activity {
 //
 //	String dirPath_db_backup = dirName_ExternalStorage + "/ShoppingList_backup";
 //	
-////	public static String[] registerItems = {"•i•¨", "“X•Ü", "ƒWƒƒƒ“ƒ‹"};
+////	public static String[] registerItems = {"ï¿½iï¿½ï¿½", "ï¿½Xï¿½ï¿½", "ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"};
 //	
 ////	public static enum registerChoice = {
 //	public static enum registerChoice {
@@ -419,10 +419,26 @@ public class MainActv extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		
+		// Log
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Options");
+		
 		switch (item.getItemId()) {
 				
 			case R.id.v1_menu_db_manager:
+				
+				// Log
+				Log.d("MainActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "db_manager");
 				
 				Methods_dlg.dlg_db_activity(this);
 				
@@ -436,9 +452,39 @@ public class MainActv extends Activity {
 //				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 //				
 //				startActivity(i);
+
 				
 				break;
 				
+			case R.id.menu_main_tab_actv:
+				
+				// Log
+				Log.d("MainActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "tab_actv");
+				
+//				Methods_dlg.dlg_db_activity(this);
+//
+//				
+				Intent i = new Intent();
+				
+				i = new Intent();
+				
+				i.setClass(this, TabActv.class);
+				
+				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				
+				startActivity(i);
+
+				break;
+				
+			default:
+				break;
+					
 		}//switch (item.getItemId())
 		
 		return super.onOptionsItemSelected(item);
@@ -446,31 +492,38 @@ public class MainActv extends Activity {
 
 	@Override
 	protected void onPause() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onResume();
+		
+		// Log
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Resume");
 	}
 
 	@Override
 	protected void onStart() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onStart();
 	}
 
 	@Override
 	protected void onStop() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onStop();
 	}
 
 	@Override
 	protected void onDestroy() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onDestroy();
 	}
     

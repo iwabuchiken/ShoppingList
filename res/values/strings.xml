@@ -55,7 +55,10 @@
     
     <string name="db_manager_btn_create_table">テーブル作成</string>
     <string name="db_manager_btn_drop_table">テーブル削除</string>
-    <string name="v1_menu_db_manager">データベース</string>
+    
+    <!-- menu_main.xml -->
+    	<string name="v1_menu_db_manager">データベース</string>
+    	<string name="menu_main_tab_actv">TabActv</string>
     
     <!-- db_manager.xml -->
     <string name="dlg_create_table_title">テーブル作成</string>
