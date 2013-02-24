@@ -48,7 +48,11 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //        TabSpec firstTab = tabHost.newTabSpec("First");
         firstTab = tabHost.newTabSpec("First");
         // タブ部分に表示するテキストおよびアイコンのセット
-        firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
+//        firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
+        firstTab.setIndicator(
+        		"",
+        		getResources().getDrawable(R.drawable.sl_tab_itemlist));
+        
         // タブ選択時に表示したいViewのセット
         firstTab.setContent(R.id.first_content);
         // タブをTabHostに追加
@@ -59,8 +63,14 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 ***************************************/
 //        TabSpec secondTab = tabHost.newTabSpec("Second");
         secondTab = tabHost.newTabSpec("Second");
-        secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
+//        secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
+        
+        secondTab.setIndicator(
+        		"",
+        		getResources().getDrawable(R.drawable.sl_basket));
+
         secondTab.setContent(R.id.second_content);
+        
         tabHost.addTab(secondTab);
         
 //        //３つ目のタブを生成
