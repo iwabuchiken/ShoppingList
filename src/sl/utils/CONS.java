@@ -1,6 +1,7 @@
 package sl.utils;
 
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.widget.TabHost;
 
 public class CONS {
 
@@ -120,5 +121,15 @@ public class CONS {
 	public static final int GETYOMI_SUCCESSFUL = 1;
 	public static final int GETYOMI_NO_ENTRY = 2;
 	public static final int GETYOMI_FAILED = -1;
+
+	// TabActv.java
+	public static final int PREP_LIST_SUCCESSFUL = 1;
+	public static final int PREP_LIST_FAILED = -1;
 	
+	
+//	public static class VarTabActv {
+//		
+//		public static TabHost tabHost;
+//		
+//	}
 }//public class CONS

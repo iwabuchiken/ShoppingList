@@ -4,10 +4,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import sl.items.ShoppingItem;
+import sl.utils.CONS;
+import sl.utils.DBUtils;
+
 import android.app.Activity;
 import android.app.TabActivity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.format.Time;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -20,6 +27,8 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 	TabHost tabHost;
 	TabSpec firstTab;
 	TabSpec secondTab;
+
+	List<ShoppingItem> itemList;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,25 +98,75 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		int numOfEntries = 30;
 		
 		/***************************************
+		 * Prepare list
+		 ***************************************/
+		int res = prepareItemList();
+
+		
+		/***************************************
 		 * List in the tab 1
 		 ***************************************/
-		ListView lvTab1 = (ListView) findViewById(R.id.itemlist_tab1_lv);
-		
-		List<String> listTab1 = new ArrayList<String>();
-		
-		for (int i = 1; i < numOfEntries; i++) {
+		if (res == CONS.PREP_LIST_SUCCESSFUL) {
+
+			ListView lvTab1 = (ListView) findViewById(R.id.itemlist_tab1_lv);
 			
-			listTab1.add("Number: " + i);
+			List<String> listTab1 = new ArrayList<String>();
+
 			
-		}//for (int i = 1; i < 11; i++)
-		
-		ArrayAdapter<String> adpTab1 = new ArrayAdapter<String>(
-				this,
-				android.R.layout.simple_list_item_1,
-				listTab1
-				);
-		
-		lvTab1.setAdapter(adpTab1);
+			
+			for (int i = 1; i < numOfEntries; i++) {
+				
+				listTab1.add("Number: " + i);
+				
+			}//for (int i = 1; i < 11; i++)
+			
+			/***************************************
+			 * Adapter
+			 ***************************************/
+			ArrayAdapter<String> adpTab1 = new ArrayAdapter<String>(
+					this,
+					android.R.layout.simple_list_item_1,
+					listTab1
+					);
+			
+			lvTab1.setAdapter(adpTab1);
+
+			// Log
+			Log.d("TabActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "itemList.size()=" + itemList.size());
+			
+		} else {//if (res == CONS.PREP_LIST_SUCCESSFUL)
+			
+			// Log
+			Log.d("TabActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Prep list => Failed");
+			
+		}//if (res == CONS.PREP_LIST_SUCCESSFUL)
+//		ListView lvTab1 = (ListView) findViewById(R.id.itemlist_tab1_lv);
+//		
+//		List<String> listTab1 = new ArrayList<String>();
+//
+//		
+//		
+//		for (int i = 1; i < numOfEntries; i++) {
+//			
+//			listTab1.add("Number: " + i);
+//			
+//		}//for (int i = 1; i < 11; i++)
+//		
+//		ArrayAdapter<String> adpTab1 = new ArrayAdapter<String>(
+//				this,
+//				android.R.layout.simple_list_item_1,
+//				listTab1
+//				);
+//		
+//		lvTab1.setAdapter(adpTab1);
 
 		/***************************************
 		 * List in the tab 2
@@ -131,6 +190,73 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		lvTab2.setAdapter(adpTab2);
 
 	}//private void setupListView()
+
+	private int prepareItemList() {
+		// TODO Auto-generated method stub
+		itemList = new ArrayList<ShoppingItem>();
+		
+		//
+		DBUtils dbm = new DBUtils(this);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+		
+		try {
+			c = rdb.query(
+					CONS.tableName, 
+//										DBManager.columns,
+//				CONS.columns_with_index,
+					CONS.columns_with_index2,
+											null, null, null, null, null);
+		} catch (Exception e) {
+			
+			// Log
+			Log.e("TabActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			rdb.close();
+			
+			return CONS.PREP_LIST_FAILED;
+			
+		}//try
+		
+		//
+		c.moveToFirst();
+		
+		for (int i = 0; i < c.getCount(); i++) {
+
+//			0									1		2		3		4			5
+//			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
+			ShoppingItem item = new ShoppingItem(
+					c.getInt(0),		// id store
+					c.getString(1),		// name
+					c.getString(2),		// yomi
+					c.getString(3),		// genre
+					c.getString(4),		//	store
+					c.getInt(5)			// price
+					);
+			
+			//
+			itemList.add(item);
+			
+			//
+			c.moveToNext();
+			
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		//
+		rdb.close();
+
+		/***************************************
+		 * Return
+		 ***************************************/
+		return CONS.PREP_LIST_SUCCESSFUL;
+		
+	}//private void prepareItemList()
 
 	private void setupListView_B22_v_1_1_b() {
 		// TODO Auto-generated method stub
