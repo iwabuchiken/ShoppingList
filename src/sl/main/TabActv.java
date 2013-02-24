@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import sl.adapters.ItemListAdapter;
+import sl.adapters.ItemListAdapter2;
 import sl.items.ShoppingItem;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
@@ -28,6 +30,11 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 	TabSpec firstTab;
 	TabSpec secondTab;
 
+	ArrayAdapter<String> adpTab1;
+	ArrayAdapter<String> adpTab2;
+
+	ItemListAdapter2 adpItems;
+	
 	List<ShoppingItem> itemList;
 	
     @Override
@@ -123,13 +130,21 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			/***************************************
 			 * Adapter
 			 ***************************************/
-			ArrayAdapter<String> adpTab1 = new ArrayAdapter<String>(
+//			ArrayAdapter<String> adpTab1 = new ArrayAdapter<String>(
+//			adpTab1 = new ArrayAdapter<String>(
+//					this,
+//					android.R.layout.simple_list_item_1,
+//					listTab1
+//					);
+			
+			adpItems = new ItemListAdapter2(
 					this,
-					android.R.layout.simple_list_item_1,
-					listTab1
+					R.layout.adapteritem,
+					itemList
 					);
 			
-			lvTab1.setAdapter(adpTab1);
+//			lvTab1.setAdapter(adpTab1);
+			lvTab1.setAdapter(adpItems);
 
 			// Log
 			Log.d("TabActv.java" + "["
