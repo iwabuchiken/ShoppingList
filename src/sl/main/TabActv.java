@@ -17,9 +17,15 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.itemlist_tabs);
         
+        /***************************************
+		 * Tab host
+		 ***************************************/
         //TabHostクラスのインスタンス生成
         TabHost tabHost = getTabHost();
         
+        /***************************************
+		 * First tab
+		 ***************************************/
         // TabHostからTabSpecの生成
         TabSpec firstTab = tabHost.newTabSpec("First");
         // タブ部分に表示するテキストおよびアイコンのセット
@@ -29,16 +35,19 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         // タブをTabHostに追加
         tabHost.addTab(firstTab);
         
+        /***************************************
+		 * Second tab
+		 ***************************************/
         TabSpec secondTab = tabHost.newTabSpec("Second");
         secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
         secondTab.setContent(R.id.second_content);
         tabHost.addTab(secondTab);
         
-        //３つ目のタブを生成
-        TabSpec thirdTab = tabHost.newTabSpec("Third");
-        thirdTab.setIndicator("thirdTab", getResources().getDrawable(android.R.drawable.ic_menu_add));
-        thirdTab.setContent(this);
-        tabHost.addTab(thirdTab);
+//        //３つ目のタブを生成
+//        TabSpec thirdTab = tabHost.newTabSpec("Third");
+//        thirdTab.setIndicator("thirdTab", getResources().getDrawable(android.R.drawable.ic_menu_add));
+//        thirdTab.setContent(this);
+//        tabHost.addTab(thirdTab);
         
         //最初にカーソルを当てたいタブを指定
         tabHost.setCurrentTabByTag("First");
