@@ -59,6 +59,7 @@
     <!-- menu_main.xml -->
     	<string name="v1_menu_db_manager">データベース</string>
     	<string name="menu_main_tab_actv">TabActv</string>
+    	<string name="menu_main_pref_actv">Preference</string>
     
     <!-- db_manager.xml -->
     <string name="dlg_create_table_title">テーブル作成</string>
@@ -99,6 +100,12 @@
 	    <string name="dlg_db_admin_item_refatcor_db">Refactor DB</string>
 	    <string name="dlg_db_admin_item_restore_db">Restore db</string>
 	    <string name="dlg_db_admin_item_get_yomi">Get Yomi data</string>
-    	
+    
+	<!-- preferences.xml -->
+		<string name="prefs_title_bgm">BGM on</string>
+		<string name="prefs_key_bgm">pref_bgm</string>
+	
+	<!-- SharedPreferencesName -->
+		<string name="shared_preferences_name">preferences</string>
     	
 </resources>

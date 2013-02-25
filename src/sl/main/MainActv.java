@@ -1,5 +1,6 @@
 package sl.main;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -20,7 +21,9 @@ import sl.utils.Tags;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -481,6 +484,32 @@ public class MainActv extends Activity {
 				startActivity(i);
 
 				break;
+
+			case R.id.menu_main_pref_actv:
+				
+//				// Log
+//				Log.d("MainActv.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]", "tab_actv");
+				
+//				Methods_dlg.dlg_db_activity(this);
+//
+//				
+				i = new Intent();
+				
+				i = new Intent();
+				
+				i.setClass(this, PrefActv.class);
+				
+				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				
+				startActivity(i);
+
+				break;// case R.id.menu_main_pref_actv
 				
 			default:
 				break;
@@ -507,7 +536,25 @@ public class MainActv extends Activity {
 				+ ":"
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "Resume");
-	}
+		
+		/***************************************
+		 * Preference values: BGM
+		 ***************************************/
+		SharedPreferences prefs = this
+				.getSharedPreferences(
+					this.getString(R.string.shared_preferences_name),
+					Context.MODE_PRIVATE);
+
+		boolean bgm = prefs.getBoolean(this.getString(R.string.prefs_key_bgm), false);
+		
+		// Log
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "bgm=" + bgm);
+		 
+	}//protected void onResume()
 
 	@Override
 	protected void onStart() {

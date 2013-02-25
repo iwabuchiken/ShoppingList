@@ -25,6 +25,7 @@
         <activity android:name="sl.main.ItemListActv" android:screenOrientation="portrait"></activity>
         <activity android:name="sl.main.DBActv" android:screenOrientation="portrait"></activity>
         <activity android:name=".TabActv"></activity>
+        <activity android:name=".PrefActv"></activity>
     </application>
 
 </manifest>
