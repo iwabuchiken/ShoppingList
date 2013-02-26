@@ -1716,7 +1716,9 @@ public class Methods_sl {
 	    int bufferSize = 512;
 	    byte [] buffer = new byte[bufferSize];
 //	    InputStream inputStream = actv.getResources().openRawResource(R.raw.bgm_1);
+	    
 	    InputStream inputStream = actv.getResources().openRawResource(R.raw.bgm_2_koto_t150_1second);
+	    
 	    try {
 	        while((i = inputStream.read(buffer)) != -1)
 	            audioTrack.write(buffer, 0, i);
@@ -1730,6 +1732,72 @@ public class Methods_sl {
 	        // TODO Auto-generated catch block
 	        e.printStackTrace();
 	    }
-	}
+	    
+	}//public static void playSound(Activity actv)
+
+	public static void playSound(Activity actv, int bgmResourceId) {
+		// TODO Auto-generated method stub
+		int minBufferSize = AudioTrack.getMinBufferSize(
+				44100,
+				AudioFormat.CHANNEL_CONFIGURATION_MONO, 
+				AudioFormat.ENCODING_PCM_16BIT);
+
+		AudioTrack audioTrack = new AudioTrack(
+			AudioManager.STREAM_MUSIC, 44100,
+			AudioFormat.CHANNEL_CONFIGURATION_MONO, 
+			AudioFormat.ENCODING_PCM_16BIT,
+			minBufferSize,
+			AudioTrack.MODE_STREAM); 
+		
+		audioTrack.play();
+		
+		int i = 0;
+		int bufferSize = 512;
+		byte [] buffer = new byte[bufferSize];
+		//InputStream inputStream = actv.getResources().openRawResource(R.raw.bgm_1);
+		
+//		InputStream inputStream = actv.getResources().openRawResource(R.raw.bgm_2_koto_t150_1second);
+		InputStream inputStream = 
+						actv.getResources().openRawResource(bgmResourceId);
+		
+		try {
+			
+			while((i = inputStream.read(buffer)) != -1)
+			audioTrack.write(buffer, 0, i);
+			
+		} catch (IOException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			
+			inputStream.close();
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Stream closed");
+			
+		} catch (IOException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+
+		audioTrack.stop();
+		
+		// Log
+		Log.d("Methods_sl.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Audio stopped");
+		
+	}//public static void playSound(Activity actv, int bgmResourceId)
 
 }//public class Methods_sl

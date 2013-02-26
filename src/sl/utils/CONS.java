@@ -1,5 +1,9 @@
 package sl.utils;
 
+import java.util.List;
+
+import sl.adapters.ItemListAdapter2;
+
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.widget.TabHost;
 
@@ -125,7 +129,13 @@ public class CONS {
 	// TabActv.java
 	public static final int PREP_LIST_SUCCESSFUL = 1;
 	public static final int PREP_LIST_FAILED = -1;
+
+	/***************************************
+	 * Item list
+	 ***************************************/
+	public static List<Integer> tab_checkedPositions;
 	
+	public static ItemListAdapter2 adpItems;
 	
 //	public static class VarTabActv {
 //		

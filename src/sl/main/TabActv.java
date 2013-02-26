@@ -7,8 +7,10 @@ import java.util.List;
 import sl.adapters.ItemListAdapter;
 import sl.adapters.ItemListAdapter2;
 import sl.items.ShoppingItem;
+import sl.listeners.list.ListOnItemClickListener;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
+import sl.utils.Tags;
 
 import android.app.Activity;
 import android.app.TabActivity;
@@ -33,7 +35,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 	ArrayAdapter<String> adpTab1;
 	ArrayAdapter<String> adpTab2;
 
-	ItemListAdapter2 adpItems;
+//	ItemListAdapter2 adpItems;
 	
 	List<ShoppingItem> itemList;
 	
@@ -42,13 +44,20 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.itemlist_tabs);
         
+        initVars();
+        
         setupTabs();
         
         setupListView();
         
     }//public void onCreate(Bundle savedInstanceState)
 
-    private void setupTabs() {
+    private void initVars() {
+		// TODO Auto-generated method stub
+		CONS.tab_checkedPositions = new ArrayList<Integer>();
+	}
+
+	private void setupTabs() {
 		// TODO Auto-generated method stub
         /***************************************
 		 * Tab host
@@ -108,7 +117,6 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 * Prepare list
 		 ***************************************/
 		int res = prepareItemList();
-
 		
 		/***************************************
 		 * List in the tab 1
@@ -130,21 +138,15 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			/***************************************
 			 * Adapter
 			 ***************************************/
-//			ArrayAdapter<String> adpTab1 = new ArrayAdapter<String>(
-//			adpTab1 = new ArrayAdapter<String>(
-//					this,
-//					android.R.layout.simple_list_item_1,
-//					listTab1
-//					);
-			
-			adpItems = new ItemListAdapter2(
+
+			CONS.adpItems = new ItemListAdapter2(
 					this,
 					R.layout.adapteritem,
 					itemList
 					);
 			
 //			lvTab1.setAdapter(adpTab1);
-			lvTab1.setAdapter(adpItems);
+			lvTab1.setAdapter(CONS.adpItems);
 
 			// Log
 			Log.d("TabActv.java" + "["
@@ -152,6 +154,14 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", "itemList.size()=" + itemList.size());
+			
+			/***************************************
+			 * Set listener
+			 ***************************************/
+			lvTab1.setTag(Tags.ListTags.tab_itemList);
+			
+			lvTab1.setOnItemClickListener(new ListOnItemClickListener(this));
+			
 			
 		} else {//if (res == CONS.PREP_LIST_SUCCESSFUL)
 			
@@ -163,25 +173,6 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 					+ "]", "Prep list => Failed");
 			
 		}//if (res == CONS.PREP_LIST_SUCCESSFUL)
-//		ListView lvTab1 = (ListView) findViewById(R.id.itemlist_tab1_lv);
-//		
-//		List<String> listTab1 = new ArrayList<String>();
-//
-//		
-//		
-//		for (int i = 1; i < numOfEntries; i++) {
-//			
-//			listTab1.add("Number: " + i);
-//			
-//		}//for (int i = 1; i < 11; i++)
-//		
-//		ArrayAdapter<String> adpTab1 = new ArrayAdapter<String>(
-//				this,
-//				android.R.layout.simple_list_item_1,
-//				listTab1
-//				);
-//		
-//		lvTab1.setAdapter(adpTab1);
 
 		/***************************************
 		 * List in the tab 2

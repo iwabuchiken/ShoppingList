@@ -57,4 +57,9 @@ public class Tags {
 		TV, BT,
 	}
 	
+	public static enum ListTags {
+		// TabActv.java
+		tab_itemList,
+	}
+	
 }//public class Tags

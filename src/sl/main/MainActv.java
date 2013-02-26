@@ -539,34 +539,34 @@ public class MainActv extends Activity {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "Resume");
 		
-		/***************************************
-		 * Preference values: BGM
-		 ***************************************/
-		SharedPreferences prefs = this
-				.getSharedPreferences(
-					this.getString(R.string.shared_preferences_name),
-					Context.MODE_PRIVATE);
-
-		boolean bgm = prefs.getBoolean(this.getString(R.string.prefs_key_bgm), false);
-		
-		// Log
-		Log.d("MainActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "bgm=" + bgm);
-		 
-		/***************************************
-		 * Play sound
-		 ***************************************/
-		if (bgm == true) {
-			
-//			Methods_sl.playSound(this);
-			TaskAudioTrack task = new TaskAudioTrack(this);
-			
-			task.execute("Start");
-			
-		}//if (bgm == true)
+//		/***************************************
+//		 * Preference values: BGM
+//		 ***************************************/
+//		SharedPreferences prefs = this
+//				.getSharedPreferences(
+//					this.getString(R.string.shared_preferences_name),
+//					Context.MODE_PRIVATE);
+//
+//		boolean bgm = prefs.getBoolean(this.getString(R.string.prefs_key_bgm), false);
+//		
+//		// Log
+//		Log.d("MainActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "bgm=" + bgm);
+//		 
+//		/***************************************
+//		 * Play sound
+//		 ***************************************/
+//		if (bgm == true) {
+//			
+////			Methods_sl.playSound(this);
+//			TaskAudioTrack task = new TaskAudioTrack(this);
+//			
+//			task.execute("Start");
+//			
+//		}//if (bgm == true)
 		
 	}//protected void onResume()
 
