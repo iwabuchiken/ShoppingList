@@ -13,10 +13,12 @@ import org.apache.commons.lang.StringUtils;
 import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
 import sl.main.R;
+import sl.tasks.TaskAudioTrack;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
 import sl.utils.Methods_dlg;
+import sl.utils.Methods_sl;
 import sl.utils.Tags;
 
 import android.app.Activity;
@@ -554,6 +556,18 @@ public class MainActv extends Activity {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "bgm=" + bgm);
 		 
+		/***************************************
+		 * Play sound
+		 ***************************************/
+		if (bgm == true) {
+			
+//			Methods_sl.playSound(this);
+			TaskAudioTrack task = new TaskAudioTrack(this);
+			
+			task.execute("Start");
+			
+		}//if (bgm == true)
+		
 	}//protected void onResume()
 
 	@Override

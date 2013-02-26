@@ -170,8 +170,11 @@ public final class R {
         public static final int menu_main=0x7f090001;
     }
     public static final class raw {
-        public static final int furigana=0x7f050000;
-        public static final int node=0x7f050001;
+        public static final int bgm_1=0x7f050000;
+        public static final int bgm_2=0x7f050001;
+        public static final int bgm_2_koto_t150_1second=0x7f050002;
+        public static final int furigana=0x7f050003;
+        public static final int node=0x7f050004;
     }
     public static final class string {
         public static final int adapteritem_tv_item_name=0x7f070013;
