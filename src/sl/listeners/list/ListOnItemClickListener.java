@@ -74,7 +74,7 @@ public class ListOnItemClickListener implements OnItemClickListener {
 	//	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-		vib.vibrate(40);
+//		vib.vibrate(40);
 		
 		/*********************************
 		 * Called from: Methods_dlg.dlg_db_activity()
