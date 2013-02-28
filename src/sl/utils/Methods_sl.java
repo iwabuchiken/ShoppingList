@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -1678,17 +1679,17 @@ public class Methods_sl {
 				
 //				return (int) (i1.getName().compareToIgnoreCase(i2.getName()));
 				
-				// Log
-				Log.d("Methods_sl.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-						+ ":"
-						+ Thread.currentThread().getStackTrace()[2]
-								.getMethodName() + "]",
-						"i1.getYomi()=" + i1.getYomi()
-						+ "/"
-						+ "i2.getYomi()=" + i2.getYomi());
+//				// Log
+//				Log.d("Methods_sl.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]",
+//						"i1.getYomi()=" + i1.getYomi()
+//						+ "/"
+//						+ "i2.getYomi()=" + i2.getYomi());
 				
 				return (int) (i1.getYomi().compareToIgnoreCase(i2.getYomi()));
 			}
@@ -1799,5 +1800,138 @@ public class Methods_sl {
 				+ "]", "Audio stopped");
 		
 	}//public static void playSound(Activity actv, int bgmResourceId)
+
+	
+	public static void updateListView_ToBuyList(Activity actv) {
+		/***************************************
+		 * Clear the list "toBuyList : ListView<ShoppingItem>
+		 ***************************************/
+		CONS.toBuyList.clear();
+		
+		/***************************************
+		 * Setup db
+		 ***************************************/
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+		
+		for (Integer itemId : CONS.tab_toBuyItemIds) {
+			
+			try {
+				
+				c = rdb.query(
+						CONS.tableName, 
+	//										DBManager.columns,
+	//				CONS.columns_with_index,
+						CONS.columns_with_index2,
+//						String.valueOf(CONS.columns_with_index2[0]),
+						String.valueOf(CONS.columns_with_index2[0]) + "=?",
+						new String[]{String.valueOf(itemId.intValue())},
+						null, null, null);
+				
+			} catch (Exception e) {
+				
+				// Log
+				Log.e("Methods_sl.java" + "["
+						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2].getMethodName()
+						+ "]", e.toString());
+				
+				rdb.close();
+				
+//				return CONS.PREP_LIST_FAILED;
+				return;
+				
+			}//try
+
+			/***************************************
+			 * If the cursor is null, then move on to
+			 * 	the next id
+			 ***************************************/
+			if (c == null) {
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"c==null => id=" + itemId.intValue());
+				
+				continue;
+				
+			}//if (c == null)
+			
+			/***************************************
+			 * If no result, then also, move on to
+			 * 	the next
+			 ***************************************/
+			if (c.getCount() < 1) {
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"c.getCount() < 1 => id=" + itemId.intValue());
+				
+				continue;
+				
+			}//if (c.getCount() < 1)
+			
+			/***************************************
+			 * If has result, the add the new item
+			 * 	to the list
+			 ***************************************/
+			//
+			c.moveToFirst();
+			
+			for (int i = 0; i < c.getCount(); i++) {
+	
+	//			0									1		2		3		4			5
+	//			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
+				ShoppingItem item = new ShoppingItem(
+						c.getInt(0),		// id store
+						c.getString(1),		// name
+						c.getString(2),		// yomi
+						c.getString(3),		// genre
+						c.getString(4),		//	store
+						c.getInt(5)			// price
+						);
+				
+				//
+				CONS.toBuyList.add(item);
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Item added to toBuyList => " + item.getName());
+				
+				//
+				c.moveToNext();
+				
+			}//for (int i = 0; i < c.getCount(); i++)
+
+		}//for (Integer itemId : CONS.tab_toBuyItemIds)
+
+		//
+		rdb.close();
+
+		
+		
+	}//public static void updateToBuyList(Activity actv)
 
 }//public class Methods_sl

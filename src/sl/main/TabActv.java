@@ -62,6 +62,8 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         
         setupItemListView();
         
+        setupToBuyListView();
+        
         setupListeners();
         
     }//public void onCreate(Bundle savedInstanceState)
@@ -229,6 +231,13 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 ***************************************/
 		int res = prepareToBuyList();
 		
+		// Log
+		Log.d("TabActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "res=" + res);
+		
 		if (res == CONS.PREP_LIST_SUCCESSFUL) {
 			lvTab2 = (ListView) findViewById(R.id.itemlist_tab2_lv);
 			
@@ -261,7 +270,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		}//if (res == CONS.PREP_LIST_SUCCESSFUL)
 
 //		lvTab2.setAdapter(adpTab2);
-//		lvTab2.setAdapter(CONS.adpToBuys);
+		lvTab2.setAdapter(CONS.adpToBuys);
 
 	}//private void setupToBuyListView()
 

@@ -241,6 +241,14 @@ public class ButtonOnClickListener implements OnClickListener {
 		/***************************************
 		 * Add to toBuyItemIds
 		 ***************************************/
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"CONS.tab_checkedItemIds.size()=" + CONS.tab_checkedItemIds.size());
+		
 		for (Integer id : CONS.tab_checkedItemIds) {
 			
 			if (!CONS.tab_toBuyItemIds.contains(id)) {
@@ -286,6 +294,32 @@ public class ButtonOnClickListener implements OnClickListener {
 		 * Notify adapter: adpItems
 		 ***************************************/
 		CONS.adpItems.notifyDataSetChanged();
+		
+		/***************************************
+		 * Update: toBuyList
+		 ***************************************/
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"CONS.toBuyList.size()=" + CONS.toBuyList.size());
+		
+		Methods_sl.updateListView_ToBuyList(actv);
+		
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"CONS.toBuyList.size()=" + CONS.toBuyList.size());
+		
+		/***************************************
+		 * Notify adapter: CONS.tab_toBuyItemIds
+		 ***************************************/
+		CONS.adpToBuys.notifyDataSetChanged();
 		
 	}//private void itemlist_tabs_bt_choose()
 
