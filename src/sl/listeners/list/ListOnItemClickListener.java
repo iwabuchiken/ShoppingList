@@ -39,7 +39,7 @@ public class ListOnItemClickListener implements OnItemClickListener {
 	//
 	Vibrator vib;
 	
-	boolean bgm;
+//	boolean bgm;
 	
 	//
 	Tags.DialogTags dlgTag = null;
@@ -50,23 +50,23 @@ public class ListOnItemClickListener implements OnItemClickListener {
 		//
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
 
-		/***************************************
-		 * Get preference value: bgm
-		 ***************************************/
-		SharedPreferences prefs = actv
-				.getSharedPreferences(
-					actv.getString(R.string.shared_preferences_name),
-					Context.MODE_PRIVATE);
-
-//		boolean bgm = prefs.getBoolean(actv.getString(R.string.prefs_key_bgm), false);
-		bgm = prefs.getBoolean(actv.getString(R.string.prefs_key_bgm), false);
-		
-		// Log
-		Log.d("MainActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "bgm=" + bgm);
+//		/***************************************
+//		 * Get preference value: bgm
+//		 ***************************************/
+//		SharedPreferences prefs = actv
+//				.getSharedPreferences(
+//					actv.getString(R.string.shared_preferences_name),
+//					Context.MODE_PRIVATE);
+//
+////		boolean bgm = prefs.getBoolean(actv.getString(R.string.prefs_key_bgm), false);
+//		CONS.bgm = prefs.getBoolean(actv.getString(R.string.prefs_key_bgm), false);
+//		
+//		// Log
+//		Log.d("MainActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "bgm=" + CONS.bgm);
 
 	}//public ListOnItemClickListener(Activity actv)
 
@@ -124,23 +124,58 @@ public class ListOnItemClickListener implements OnItemClickListener {
 		 ***************************************/
 		int itemId = si.getId();
 		
-		if (CONS.tab_checkedPositions.contains(itemId)) {
+		if (CONS.tab_checkedItemIds.contains(itemId)) {
 			
 //			CONS.tab_checkedPositions.remove(itemId);
-			CONS.tab_checkedPositions.remove(new Integer(itemId));
+			CONS.tab_checkedItemIds.remove(new Integer(itemId));
+
+			/***************************************
+			 * BGM
+			 ***************************************/
+			if (CONS.bgm == true) {
+				
+				int bgmResourceId = R.raw.bgm_3_uncheck_item;
+				
+				TaskAudioTrack task = new TaskAudioTrack(actv);
+				
+//				task.execute("Start");
+				task.execute(bgmResourceId);
+				
+			}//if (bgm == true)
+
+		} else if (!CONS.tab_checkedItemIds.contains(itemId)) {//if (CONS.tab_checkedPositions.contains(itemId))
 			
-		} else if (!CONS.tab_checkedPositions.contains(itemId)) {//if (CONS.tab_checkedPositions.contains(itemId))
+			CONS.tab_checkedItemIds.add(itemId);
 			
-			CONS.tab_checkedPositions.add(itemId);
-			
+			// Log
+			Log.d("ListOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Added: Item id=" + itemId);
+
+			/***************************************
+			 * BGM
+			 ***************************************/
+			if (CONS.bgm == true) {
+				
+				int bgmResourceId = R.raw.bgm_2_koto_t150_1second;
+				
+				TaskAudioTrack task = new TaskAudioTrack(actv);
+				
+//				task.execute("Start");
+				task.execute(bgmResourceId);
+				
+			}//if (bgm == true)
+
 		}//if (CONS.tab_checkedPositions.contains(itemId))
 		
 		//debug
 		StringBuilder sb = new StringBuilder();
 		
-		for (int i = 0; i < CONS.tab_checkedPositions.size(); i++) {
+		for (int i = 0; i < CONS.tab_checkedItemIds.size(); i++) {
 		
-			sb.append(CONS.tab_checkedPositions.get(i));
+			sb.append(CONS.tab_checkedItemIds.get(i));
 			sb.append(",");
 //			// Log
 //			Log.d("ListOnItemClickListener.java" + "["
@@ -158,27 +193,27 @@ public class ListOnItemClickListener implements OnItemClickListener {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "Positions=" + sb.toString());
 		
-		/***************************************
-		 * BGM
-		 ***************************************/
-
-		/***************************************
-		 * Play sound
-		 ***************************************/
-		if (bgm == true) {
-			
-			int bgmResourceId = R.raw.bgm_2_koto_t150_1second;
-			
-//			bgm(actv, bgmResourceId);
-			
-//			Methods_sl.playSound(this);
-//			TaskAudioTrack task = new TaskAudioTrack(actv, bgmResourceId);
-			TaskAudioTrack task = new TaskAudioTrack(actv);
-			
-//			task.execute("Start");
-			task.execute(bgmResourceId);
-			
-		}//if (bgm == true)
+//		/***************************************
+//		 * BGM
+//		 ***************************************/
+//
+//		/***************************************
+//		 * Play sound
+//		 ***************************************/
+//		if (bgm == true) {
+//			
+//			int bgmResourceId = R.raw.bgm_2_koto_t150_1second;
+//			
+////			bgm(actv, bgmResourceId);
+//			
+////			Methods_sl.playSound(this);
+////			TaskAudioTrack task = new TaskAudioTrack(actv, bgmResourceId);
+//			TaskAudioTrack task = new TaskAudioTrack(actv);
+//			
+////			task.execute("Start");
+//			task.execute(bgmResourceId);
+//			
+//		}//if (bgm == true)
 		
 		/***************************************
 		 * Notify adapter

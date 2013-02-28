@@ -3,6 +3,7 @@ package sl.utils;
 import java.util.List;
 
 import sl.adapters.ItemListAdapter2;
+import sl.items.ShoppingItem;
 
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.widget.TabHost;
@@ -131,11 +132,18 @@ public class CONS {
 	public static final int PREP_LIST_FAILED = -1;
 
 	/***************************************
-	 * Item list
+	 * TabActv.java
 	 ***************************************/
-	public static List<Integer> tab_checkedPositions;
+//	public static List<Integer> tab_checkedPositions;
+	public static List<Integer> tab_checkedItemIds;
+	public static List<Integer> tab_toBuyItemIds;
 	
 	public static ItemListAdapter2 adpItems;
+	public static ItemListAdapter2 adpToBuys;
+	
+	public static List<ShoppingItem> toBuyList;
+	
+	public static boolean bgm;
 	
 //	public static class VarTabActv {
 //		

@@ -7,13 +7,17 @@ import java.util.List;
 import sl.adapters.ItemListAdapter;
 import sl.adapters.ItemListAdapter2;
 import sl.items.ShoppingItem;
+import sl.listeners.ButtonOnClickListener;
 import sl.listeners.list.ListOnItemClickListener;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
+import sl.utils.Methods_sl;
 import sl.utils.Tags;
 
 import android.app.Activity;
 import android.app.TabActivity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,6 +25,7 @@ import android.text.format.Time;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
@@ -32,30 +37,79 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 	TabSpec firstTab;
 	TabSpec secondTab;
 
-	ArrayAdapter<String> adpTab1;
-	ArrayAdapter<String> adpTab2;
+	ListView lvTab1;
+	ListView lvTab2;
+	
+//	ArrayAdapter<String> adpTab1;
+//	ArrayAdapter<String> adpTab2;
 
 //	ItemListAdapter2 adpItems;
 	
 	List<ShoppingItem> itemList;
+	
+	
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.itemlist_tabs);
         
+        setTitle(this.getClass().getName());
+        
         initVars();
         
         setupTabs();
         
-        setupListView();
+        setupItemListView();
+        
+        setupListeners();
         
     }//public void onCreate(Bundle savedInstanceState)
 
-    private void initVars() {
+    private void setupListeners() {
 		// TODO Auto-generated method stub
-		CONS.tab_checkedPositions = new ArrayList<Integer>();
-	}
+		/***************************************
+		 * Set listener: lvTab1
+		 ***************************************/
+		lvTab1.setTag(Tags.ListTags.tab_itemList);
+		
+		lvTab1.setOnItemClickListener(new ListOnItemClickListener(this));
+
+		/***************************************
+		 * Set listener: ImageButton
+		 ***************************************/
+		ImageButton ib_tab1Choose = (ImageButton) findViewById(R.id.itemlist_tab1_ib);
+		
+		ib_tab1Choose.setTag(Tags.ButtonTags.itemlist_tabs_bt_choose);
+		
+		ib_tab1Choose.setOnClickListener(new ButtonOnClickListener(this));
+		
+	}//private void setupListeners()
+
+	private void initVars() {
+		// TODO Auto-generated method stub
+		CONS.tab_checkedItemIds = new ArrayList<Integer>();
+		CONS.tab_toBuyItemIds = new ArrayList<Integer>();
+		
+		/***************************************
+		 * Get preference value: bgm
+		 ***************************************/
+		SharedPreferences prefs = this
+				.getSharedPreferences(
+					this.getString(R.string.shared_preferences_name),
+					Context.MODE_PRIVATE);
+
+//		boolean bgm = prefs.getBoolean(actv.getString(R.string.prefs_key_bgm), false);
+		CONS.bgm = prefs.getBoolean(this.getString(R.string.prefs_key_bgm), false);
+		
+		// Log
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "bgm=" + CONS.bgm);
+
+	}//private void initVars()
 
 	private void setupTabs() {
 		// TODO Auto-generated method stub
@@ -109,7 +163,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         
 	}//private void setupTabs()
 
-	private void setupListView() {
+	private void setupItemListView() {
 		
 		int numOfEntries = 30;
 		
@@ -123,7 +177,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 ***************************************/
 		if (res == CONS.PREP_LIST_SUCCESSFUL) {
 
-			ListView lvTab1 = (ListView) findViewById(R.id.itemlist_tab1_lv);
+			lvTab1 = (ListView) findViewById(R.id.itemlist_tab1_lv);
 			
 			List<String> listTab1 = new ArrayList<String>();
 
@@ -154,14 +208,46 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 					+ "]", "itemList.size()=" + itemList.size());
+	
+		} else {//if (res == CONS.PREP_LIST_SUCCESSFUL)
 			
-			/***************************************
-			 * Set listener
-			 ***************************************/
-			lvTab1.setTag(Tags.ListTags.tab_itemList);
+			// Log
+			Log.d("TabActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Prep item list => Failed");
 			
-			lvTab1.setOnItemClickListener(new ListOnItemClickListener(this));
+		}//if (res == CONS.PREP_LIST_SUCCESSFUL)
+
+	}//private void setupListView()
+
+	private void setupToBuyListView() {
+		
+		/***************************************
+		 * List in the tab 2
+		 ***************************************/
+		int res = prepareToBuyList();
+		
+		if (res == CONS.PREP_LIST_SUCCESSFUL) {
+			lvTab2 = (ListView) findViewById(R.id.itemlist_tab2_lv);
 			
+//			List<String> listTab2 = new ArrayList<String>();
+			
+//			for (int i = 1; i < numOfEntries; i++) {
+//				
+//				listTab2.add("番号: " + i);
+//				
+//			}//for (int i = 1; i < 11; i++)
+			
+	//		ArrayAdapter<String> adpTab2 = new ArrayAdapter<String>(
+			
+			CONS.adpToBuys = new ItemListAdapter2(
+					this,
+	//				android.R.layout.simple_list_item_1,
+					R.layout.adapteritem,
+					CONS.toBuyList
+					);
 			
 		} else {//if (res == CONS.PREP_LIST_SUCCESSFUL)
 			
@@ -170,35 +256,19 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "Prep list => Failed");
+					+ "]", "Prep toBuy list => Failed");
 			
 		}//if (res == CONS.PREP_LIST_SUCCESSFUL)
 
-		/***************************************
-		 * List in the tab 2
-		 ***************************************/
-		ListView lvTab2 = (ListView) findViewById(R.id.itemlist_tab2_lv);
-		
-		List<String> listTab2 = new ArrayList<String>();
-		
-		for (int i = 1; i < numOfEntries; i++) {
-			
-			listTab2.add("番号: " + i);
-			
-		}//for (int i = 1; i < 11; i++)
-		
-		ArrayAdapter<String> adpTab2 = new ArrayAdapter<String>(
-				this,
-				android.R.layout.simple_list_item_1,
-				listTab2
-				);
-		
-		lvTab2.setAdapter(adpTab2);
+//		lvTab2.setAdapter(adpTab2);
+//		lvTab2.setAdapter(CONS.adpToBuys);
 
-	}//private void setupListView()
+	}//private void setupToBuyListView()
 
 	private int prepareItemList() {
-		// TODO Auto-generated method stub
+		/***************************************
+		 * itemList
+		 ***************************************/
 		itemList = new ArrayList<ShoppingItem>();
 		
 		//
@@ -258,11 +328,161 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		rdb.close();
 
 		/***************************************
+		 * Sort list
+		 ***************************************/
+		Methods_sl.sortItemList(itemList);
+		
+		/***************************************
 		 * Return
 		 ***************************************/
 		return CONS.PREP_LIST_SUCCESSFUL;
 		
 	}//private void prepareItemList()
+
+	private int prepareToBuyList() {
+		/***************************************
+		 * itemList
+		 ***************************************/
+		CONS.toBuyList = new ArrayList<ShoppingItem>();
+		
+		/***************************************
+		 * Setup db
+		 ***************************************/
+		DBUtils dbm = new DBUtils(this);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+		
+		for (Integer itemId : CONS.tab_toBuyItemIds) {
+			
+			try {
+				
+				c = rdb.query(
+						CONS.tableName, 
+	//										DBManager.columns,
+	//				CONS.columns_with_index,
+						CONS.columns_with_index2,
+						String.valueOf(CONS.columns_with_index2[0]),
+						new String[]{String.valueOf(itemId.intValue())},
+						null, null, null);
+				
+			} catch (Exception e) {
+				
+				// Log
+				Log.e("TabActv.java" + "["
+						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2].getMethodName()
+						+ "]", e.toString());
+				
+				rdb.close();
+				
+				return CONS.PREP_LIST_FAILED;
+				
+			}//try
+
+			/***************************************
+			 * If the cursor is null, then move on to
+			 * 	the next id
+			 ***************************************/
+			if (c == null) {
+				
+				// Log
+				Log.d("TabActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"c==null => id=" + itemId.intValue());
+				
+				continue;
+				
+			}//if (c == null)
+			
+			/***************************************
+			 * If no result, then also, move on to
+			 * 	the next
+			 ***************************************/
+			if (c.getCount() < 1) {
+				
+				// Log
+				Log.d("TabActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"c.getCount() < 1 => id=" + itemId.intValue());
+				
+				continue;
+				
+			}//if (c.getCount() < 1)
+			
+			
+			//
+			c.moveToFirst();
+			
+			for (int i = 0; i < c.getCount(); i++) {
+	
+	//			0									1		2		3		4			5
+	//			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
+				ShoppingItem item = new ShoppingItem(
+						c.getInt(0),		// id store
+						c.getString(1),		// name
+						c.getString(2),		// yomi
+						c.getString(3),		// genre
+						c.getString(4),		//	store
+						c.getInt(5)			// price
+						);
+				
+				//
+				CONS.toBuyList.add(item);
+				
+				//
+				c.moveToNext();
+				
+			}//for (int i = 0; i < c.getCount(); i++)
+
+		}//for (Integer itemId : CONS.tab_toBuyItemIds)
+
+		//
+		rdb.close();
+
+		/***************************************
+		 * Sort list
+		 ***************************************/
+//		Methods_sl.sortItemList(itemList);
+		Methods_sl.sortItemList(CONS.toBuyList);
+		
+		//debug
+		//debug
+		StringBuilder sb = new StringBuilder();
+		
+		for (ShoppingItem item : CONS.toBuyList) {
+			
+			sb.append(item.getId());
+			
+			sb.append(",");
+			
+		}
+		
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "CONS.toBuyList=" + sb.toString());
+		
+		/***************************************
+		 * Return
+		 ***************************************/
+		return CONS.PREP_LIST_SUCCESSFUL;
+		
+	}//private int prepareToBuyList()
 
 	private void setupListView_B22_v_1_1_b() {
 		// TODO Auto-generated method stub

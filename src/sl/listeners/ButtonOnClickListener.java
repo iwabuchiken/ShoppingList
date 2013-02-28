@@ -8,6 +8,8 @@ import sl.items.ShoppingItem;
 import sl.main.DBActv;
 import sl.main.ItemListActv;
 import sl.main.R;
+import sl.tasks.TaskAudioTrack;
+import sl.utils.CONS;
 import sl.utils.Methods;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
@@ -206,10 +208,85 @@ public class ButtonOnClickListener implements OnClickListener {
 //			ItemListActv.adapter.notifyDataSetChanged();
 //			
 //			break;
+
+		case itemlist_tabs_bt_choose://-----------------------------------
+			
+			itemlist_tabs_bt_choose();
+			
+			break;// case itemlist_tabs_bt_choose
 			
 		default:
 			break;
 		}//switch (tag_name)
 	}
 
-}
+	private void itemlist_tabs_bt_choose() {
+		// TODO Auto-generated method stub
+		
+		/***************************************
+		 * BGM
+		 ***************************************/
+		if (CONS.bgm == true) {
+			
+			int bgmResourceId = R.raw.bgm_4_add_to_tobuy_list;
+			
+			TaskAudioTrack task = new TaskAudioTrack(actv);
+			
+//			task.execute("Start");
+			task.execute(bgmResourceId);
+			
+		}//if (bgm == true)
+
+
+		/***************************************
+		 * Add to toBuyItemIds
+		 ***************************************/
+		for (Integer id : CONS.tab_checkedItemIds) {
+			
+			if (!CONS.tab_toBuyItemIds.contains(id)) {
+				
+				CONS.tab_toBuyItemIds.add(id);
+				
+			} else {//if (CONS.tab_toBuyItemIds.contains(id))
+				
+				// Log
+				Log.d("ButtonOnClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Item is already in toBuy list: " + id.intValue());
+				
+			}//if (CONS.tab_toBuyItemIds.contains(id))
+			
+			
+		}//for (Integer id : CONS.tab_checkedItemIds)
+		
+		//debug
+		StringBuilder sb = new StringBuilder();
+		
+		for (Integer id : CONS.tab_toBuyItemIds) {
+			
+			sb.append(id.intValue());
+			
+			sb.append(",");
+			
+		}
+		
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "CONS.tab_toBuyItemIds=" + sb.toString());
+		
+		/***************************************
+		 * Notify adapter: adpItems
+		 ***************************************/
+		CONS.adpItems.notifyDataSetChanged();
+		
+	}//private void itemlist_tabs_bt_choose()
+
+}//public class ButtonOnClickListener implements OnClickListener
