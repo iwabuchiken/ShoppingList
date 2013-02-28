@@ -43,12 +43,15 @@ import sl.main.MainActv;
 import sl.main.RegisterItemActv;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Vibrator;
 import android.util.Log;
 import android.util.Xml;
+import android.view.Display;
+import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
 
 import android.widget.ArrayAdapter;
@@ -2240,4 +2243,16 @@ public class Methods {
 
 	}//private static String[] getYomi_full(String kw, String enc)
 
+	public static int[]
+	getDisplaySize(Activity actv) {
+
+		Display disp=((WindowManager)actv.getSystemService(
+				Context.WINDOW_SERVICE)).getDefaultDisplay();
+		int w=disp.getWidth();
+		int h=disp.getHeight();
+		
+		return new int[]{w, h};
+
+	}//getDisplaySize(Activity actv)
+	
 }//public class Methods

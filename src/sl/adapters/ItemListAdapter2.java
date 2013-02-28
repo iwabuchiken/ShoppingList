@@ -153,6 +153,14 @@ public class ItemListAdapter2 extends ArrayAdapter<ShoppingItem> {
 		
 		tv_genre.setText("(" + si.getGenre() + ")");
 
+//		/***************************************
+//		 * LinearLayout for item name
+//		 ***************************************/
+//		LinearLayout llName =
+//				(LinearLayout) convertView.findViewById(R.id.adapteritem_LL_item_name);
+//		
+//		llName.setBackgroundColor(Color.WHITE);
+		
 	}//private void getView__1_setupTextView(View convertView)
 
 }//public class ItemListAdapter extends ArrayAdapter<ShoppingItem>

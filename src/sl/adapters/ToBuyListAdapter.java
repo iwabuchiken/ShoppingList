@@ -7,7 +7,10 @@ import sl.main.ItemListActv;
 import sl.main.R;
 import sl.main.R.id;
 import sl.utils.CONS;
+import sl.utils.Methods;
+import sl.utils.Methods_sl;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -15,12 +18,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ToBuyListAdapter extends ArrayAdapter<ShoppingItem> {
 
 	//
 	private int resourceId; 
+
+	TextView tvItemName;
+
+	Context con;
 	
 	public ToBuyListAdapter(Context context, int textViewResourceId,
 												List<ShoppingItem> list) {
@@ -29,6 +37,7 @@ public class ToBuyListAdapter extends ArrayAdapter<ShoppingItem> {
 		
 		this.resourceId = textViewResourceId;
 		
+		this.con = context;
 		
 	}//public ItemListAdapter()
 
@@ -85,37 +94,30 @@ public class ToBuyListAdapter extends ArrayAdapter<ShoppingItem> {
 	private void
 	getView__2_setupBackground(View convertView, ShoppingItem si, int position) {
 
-		if (CONS.tab_checkedItemIds.contains(new Integer(si.getId()))) {
-			
-			convertView.setBackgroundColor(Color.BLUE);
-			
-		} else {//if (CONS.)
-			
-			convertView.setBackgroundColor(Color.BLACK);
-			
-		}//if (CONS.)
-		
-		
-//		if (ItemListActv.toBuys.contains((Integer) position)) {
-//		
-//			convertView.setBackgroundColor(Color.GREEN);
-//			
-//		} else if (ItemListActv.checkedPositions.contains((Integer) position)) {
-//			
 //			convertView.setBackgroundColor(Color.BLUE);
-//			
-//		} else {//if (ItemList.checkedPositions.contains((Integer) position))
-//			
-//			convertView.setBackgroundColor(Color.BLACK);
-//			
-//		}//if (ItemList.checkedPositions.contains((Integer) position))
+		tvItemName.setBackgroundColor(Color.WHITE);
+//		tvItemName.setTextColor(Color.BLACK);
+		tvItemName.setTextColor(((Activity)con).getResources().getColor(R.color.gray1));
+
+		//debug
+		tvItemName.setWidth(Methods.getDisplaySize((Activity)con)[0]);
+		
+		/***************************************
+		 * LinearLayout for item name
+		 ***************************************/
+		LinearLayout llName =
+				(LinearLayout) convertView.findViewById(R.id.adapteritem_LL_item_name);
+		
+		llName.setBackgroundColor(Color.WHITE);
+		
+		
 
 	}//private void getView__2_setupBackground(View convertView, int position)
 
 	private void getView__1_setupTextView(View convertView, ShoppingItem si) {
 		// TODO Auto-generated method stub
-        //
-        TextView tv_item_name = 
+
+        tvItemName = 
         				(TextView) convertView.findViewById(R.id.adapteritem_tv_item_name);
         TextView tv_store = 
 				(TextView) convertView.findViewById(R.id.adapteritem_tv_store);
@@ -128,7 +130,7 @@ public class ToBuyListAdapter extends ArrayAdapter<ShoppingItem> {
 		 * 4. Set values
 			----------------------------*/
 		//
-		tv_item_name.setText(si.getName());
+		tvItemName.setText(si.getName());
 		tv_store.setText(si.getStore());
 //		tv_price.setText(si.getPrice());
 		tv_price.setText(String.valueOf(si.getPrice()));

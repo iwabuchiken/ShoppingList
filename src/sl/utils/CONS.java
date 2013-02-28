@@ -3,6 +3,7 @@ package sl.utils;
 import java.util.List;
 
 import sl.adapters.ItemListAdapter2;
+import sl.adapters.ToBuyListAdapter;
 import sl.items.ShoppingItem;
 
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
@@ -139,7 +140,7 @@ public class CONS {
 	public static List<Integer> tab_toBuyItemIds;
 	
 	public static ItemListAdapter2 adpItems;
-	public static ItemListAdapter2 adpToBuys;
+	public static ToBuyListAdapter adpToBuys;
 	
 	public static List<ShoppingItem> toBuyList;
 	

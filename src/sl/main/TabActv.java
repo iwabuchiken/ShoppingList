@@ -6,11 +6,13 @@ import java.util.List;
 
 import sl.adapters.ItemListAdapter;
 import sl.adapters.ItemListAdapter2;
+import sl.adapters.ToBuyListAdapter;
 import sl.items.ShoppingItem;
 import sl.listeners.ButtonOnClickListener;
 import sl.listeners.list.ListOnItemClickListener;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
+import sl.utils.Methods;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
 
@@ -66,6 +68,19 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         
         setupListeners();
         
+        //debug
+        int[] size = Methods.getDisplaySize(this);
+        
+        // Log
+		Log.d("TabActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"window size: width=" + size[0]
+				+ "/"
+				+ "window size: height=" + size[1]);
+         
     }//public void onCreate(Bundle savedInstanceState)
 
     private void setupListeners() {
@@ -251,7 +266,8 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			
 	//		ArrayAdapter<String> adpTab2 = new ArrayAdapter<String>(
 			
-			CONS.adpToBuys = new ItemListAdapter2(
+//			CONS.adpToBuys = new ItemListAdapter2(
+			CONS.adpToBuys = new ToBuyListAdapter(
 					this,
 	//				android.R.layout.simple_list_item_1,
 					R.layout.adapteritem,
