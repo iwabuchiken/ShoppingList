@@ -9,6 +9,7 @@ import sl.adapters.ItemListAdapter2;
 import sl.adapters.ToBuyListAdapter;
 import sl.items.ShoppingItem;
 import sl.listeners.ButtonOnClickListener;
+import sl.listeners.ButtonOnTouchListener;
 import sl.listeners.list.ListOnItemClickListener;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
@@ -100,6 +101,8 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		ib_tab1Choose.setTag(Tags.ButtonTags.itemlist_tabs_bt_choose);
 		
 		ib_tab1Choose.setOnClickListener(new ButtonOnClickListener(this));
+		
+		ib_tab1Choose.setOnTouchListener(new ButtonOnTouchListener(this));
 		
 	}//private void setupListeners()
 

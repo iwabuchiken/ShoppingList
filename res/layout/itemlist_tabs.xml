@@ -45,7 +45,7 @@
 					    android:layout_height="35dp"
 					    android:layout_gravity="center_vertical"
 					    android:background="@color/darkgreen"
-					    android:src="@drawable/sl_add_item" />
+					    android:src="@drawable/sl_add_item_bar_150x150" />
 				
 				</LinearLayout>
 

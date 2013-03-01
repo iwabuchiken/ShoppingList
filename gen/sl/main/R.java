@@ -34,14 +34,19 @@ public final class R {
         public static final int menu_listitem_filter_30x30=0x7f020002;
         public static final int menu_listitem_filter_30x30_v3=0x7f020003;
         public static final int sl_add_item=0x7f020004;
-        public static final int sl_basket=0x7f020005;
-        public static final int sl_tab_itemlist=0x7f020006;
-        public static final int v1_menu_add_genre_30x30=0x7f020007;
-        public static final int v1_menu_db_manager_30x30=0x7f020008;
-        public static final int v1_menu_item_list=0x7f020009;
-        public static final int v1_menu_item_list_30x30=0x7f02000a;
-        public static final int v1_menu_item_list_50x50=0x7f02000b;
-        public static final int v1_menu_item_register_store_2_30x30=0x7f02000c;
+        public static final int sl_add_item_150x150=0x7f020005;
+        public static final int sl_add_item_bar_150x150=0x7f020006;
+        public static final int sl_add_item_bar_touched_150x150=0x7f020007;
+        public static final int sl_add_item_touched=0x7f020008;
+        public static final int sl_add_item_touched_150x150=0x7f020009;
+        public static final int sl_basket=0x7f02000a;
+        public static final int sl_tab_itemlist=0x7f02000b;
+        public static final int v1_menu_add_genre_30x30=0x7f02000c;
+        public static final int v1_menu_db_manager_30x30=0x7f02000d;
+        public static final int v1_menu_item_list=0x7f02000e;
+        public static final int v1_menu_item_list_30x30=0x7f02000f;
+        public static final int v1_menu_item_list_50x50=0x7f020010;
+        public static final int v1_menu_item_register_store_2_30x30=0x7f020011;
     }
     public static final class id {
         public static final int adapteritem_LL_item_name=0x7f0a0005;
