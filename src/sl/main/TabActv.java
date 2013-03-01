@@ -107,6 +107,13 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		
 		ib_tab1Choose.setOnTouchListener(new ButtonOnTouchListener(this));
 		
+		/***************************************
+		 * Set listener: lvTab1
+		 ***************************************/
+		lvTab2.setTag(Tags.ListTags.tab_toBuyList);
+		
+		lvTab2.setOnItemClickListener(new ListOnItemClickListener(this));
+		
 	}//private void setupListeners()
 
 	private void initVars() {
@@ -148,7 +155,9 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 ***************************************/
         // TabHostからTabSpecの生成
 //        TabSpec firstTab = tabHost.newTabSpec("First");
-        firstTab = tabHost.newTabSpec("First");
+//        firstTab = tabHost.newTabSpec("First");
+        firstTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_first));
+        
         // タブ部分に表示するテキストおよびアイコンのセット
 //        firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
         firstTab.setIndicator(
@@ -164,8 +173,10 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 * Second tab
 		 ***************************************/
 //        TabSpec secondTab = tabHost.newTabSpec("Second");
-        secondTab = tabHost.newTabSpec("Second");
+//        secondTab = tabHost.newTabSpec("Second");
 //        secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
+        
+        secondTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_second));
         
         secondTab.setIndicator(
         		"",
@@ -183,6 +194,8 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 
         //最初にカーソルを当てたいタブを指定
         tabHost.setCurrentTabByTag("First");
+        
+        
         
 	}//private void setupTabs()
 
@@ -549,6 +562,20 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		String tabTag = tabHost.getCurrentTabTag();
+
+//		/***************************************
+//		 * Switch the menu file using tab tag
+//		 ***************************************/
+//		if (tabTag.equals(this.getString(R.string.tabactv_tabtags_first))) {
+//			
+//			MenuInflater mi = getMenuInflater();
+//			mi.inflate(R.menu.itemlist, menu);
+//			
+//		} else {//if (tabTag.equals(this.getString(R.string.tabactv_tabtags_first)))
+//			
+//		}//if (tabTag.equals(this.getString(R.string.tabactv_tabtags_first)))
 
 		MenuInflater mi = getMenuInflater();
 		mi.inflate(R.menu.itemlist, menu);
@@ -562,7 +589,25 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		switch (item.getItemId()) {
 		case R.id.menu_listitem_filter:
 
-			Methods.dlg_filterList2(this);
+			String tabTag = tabHost.getCurrentTabTag();
+			
+			if (tabTag.equals(this.getString(R.string.tabactv_tabtags_first))) {
+				
+				Methods.dlg_filterList2(this);
+				
+			} else {//if (tabTag.equals(this.getString(R.string.tabactv_tabtags_first)))
+				
+			}//if (tabTag.equals(this.getString(R.string.tabactv_tabtags_first)))
+			
+			
+//			// Log
+//			Log.d("TabActv.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "tabHost.getCurrentTabTag()=" + tabHost.getCurrentTabTag());
+			
+//			Methods.dlg_filterList2(this);
 			
 			break;
 		

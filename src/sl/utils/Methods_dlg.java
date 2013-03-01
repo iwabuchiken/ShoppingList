@@ -3,6 +3,7 @@ package sl.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import sl.items.ShoppingItem;
 import sl.listeners.dialog.DialogButtonOnClickListener;
 import sl.listeners.dialog.DialogButtonOnTouchListener;
 import sl.listeners.dialog.DialogOnItemClickListener;
@@ -128,5 +129,109 @@ public class Methods_dlg {
 		return dlg;
 	
 	}//public static Dialog dlg_template_okCancel()
+
+
+	public static Dialog dlg_template_cancel(Activity actv, int layoutId, String title,
+			int cancelButtonId, DialogTags cancelTag) {
+		/*----------------------------
+		* Steps
+		* 1. Set up
+		* 2. Add listeners => OnTouch
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		
+		// 
+		Dialog dlg = new Dialog(actv);
+		
+		//
+		dlg.setContentView(layoutId);
+		
+		// Title
+//		dlg.setTitle(titleStringId);
+		dlg.setTitle(title);
+		
+		/*----------------------------
+		* 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_cancel = (Button) dlg.findViewById(cancelButtonId);
+		
+		//
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_cancel.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
+		
+		/*----------------------------
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
+		
+		//
+		//dlg.show();
+		
+		return dlg;
+	
+	}//public static Dialog dlg_template_okCancel()
+
+	public static void dlg_tabActv_tab2Lv(Activity actv, ShoppingItem si) {
+		/***************************************
+		 * 1. Dialog
+		 ***************************************/
+		Dialog dlg = Methods_dlg.dlg_template_cancel(
+				actv,
+				R.layout.dlg_db_admin, 
+				si.getName(), 
+				R.id.dlg_db_admin_bt_cancel, 
+				Tags.DialogTags.dlg_generic_dismiss);
+
+//		dlg.setTitle(si.getName());
+		
+		/***************************************
+		 * 2. Prep => List
+		 ***************************************/
+		String[] choices = {
+				actv.getString(R.string.tabactv_tab2_lv_delete_from_list),
+		};
+
+		List<String> list = new ArrayList<String>();
+		
+		for (String item : choices) {
+			
+			list.add(item);
+			
+		}
+		
+		/***************************************
+		 * 3. Adapter
+		 ***************************************/
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+				actv,
+//				R.layout.dlg_db_admin,
+				android.R.layout.simple_list_item_1,
+				list
+				);
+
+		/***************************************
+		 * 4. Set adapter
+		 ***************************************/
+		ListView lv = (ListView) dlg.findViewById(R.id.dlg_db_admin_lv);
+		
+		lv.setAdapter(adapter);
+		
+		/***************************************
+		 * 5. Set listener to list
+		 ***************************************/
+		lv.setTag(Tags.DialogTags.dlg_tabactv_tab2_lv);
+		
+		lv.setOnItemClickListener(new DialogOnItemClickListener(actv, dlg, si));
+		
+		/***************************************
+		 * 6. Show dialog
+		 ***************************************/
+		dlg.show();
+		
+	}//public static void dlg_tabActv_tab2Lv(Activity actv, ShoppingItem si)
 
 }//public class Methods_dlg

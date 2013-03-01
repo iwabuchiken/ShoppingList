@@ -40,6 +40,9 @@ public class Tags {
 		// dlg_db_admin.xml
 		dlg_db_admin_lv,
 		
+		// tabactv_tab2_lv
+		dlg_tabactv_tab2_lv,
+		
 	}//public static enum DialogTags
 	
 	public static enum ButtonTags {
@@ -63,7 +66,7 @@ public class Tags {
 	
 	public static enum ListTags {
 		// TabActv.java
-		tab_itemList,
+		tab_itemList, tab_toBuyList,
 	}
 	
 }//public class Tags

@@ -107,5 +107,12 @@
 	
 	<!-- SharedPreferencesName -->
 		<string name="shared_preferences_name">preferences</string>
-    	
+    
+	<!-- List: lvTab2 -->
+		<string name="tabactv_tab2_lv_title">Admin list view</string>
+		<string name="tabactv_tab2_lv_delete_from_list">Delete from list</string>
+		
+	<!-- TabActv.java -->
+		<string name="tabactv_tabtags_first">First</string>
+		<string name="tabactv_tabtags_second">Second</string>
 </resources>

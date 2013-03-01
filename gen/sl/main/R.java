@@ -266,6 +266,14 @@ public final class R {
          */
         public static final int sl_tv_item_list=0x7f070038;
         public static final int sl_tv_item_register=0x7f070039;
+        public static final int tabactv_tab2_lv_delete_from_list=0x7f07004a;
+        /**  List: lvTab2 
+         */
+        public static final int tabactv_tab2_lv_title=0x7f070049;
+        /**  TabActv.java 
+         */
+        public static final int tabactv_tabtags_first=0x7f07004b;
+        public static final int tabactv_tabtags_second=0x7f07004c;
         public static final int v1_btn_register=0x7f070011;
         public static final int v1_menu_1=0x7f07000a;
         public static final int v1_menu_add_genre=0x7f070025;

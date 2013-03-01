@@ -13,6 +13,7 @@ import sl.tasks.Task_GetYomi;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_dlg;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
 import sl.utils.Tags.DialogTags;
@@ -97,12 +98,40 @@ public class ListOnItemClickListener implements OnItemClickListener {
 			
 			break;
 
+		case tab_toBuyList:
+
+			tab_toBuyList(parent, position);
+			
+			break;// case tab_toBuyList
+
 		default:
 			break;
 		
 		}//switch (item)
 
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+
+	private void tab_toBuyList(AdapterView<?> parent, int position) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Get item
+		 ***************************************/
+		ShoppingItem si = (ShoppingItem) parent.getItemAtPosition(position);
+		
+		// Log
+		Log.d("ListOnItemClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "si.getName()=" + si.getName());
+		
+		/***************************************
+		 * Show dialog
+		 ***************************************/
+		Methods_dlg.dlg_tabActv_tab2Lv(actv, si);
+		
+	}//private void tab_toBuyList(AdapterView<?> parent, int position)
 
 
 	private void tab_itemList(AdapterView<?> parent, int position) {
