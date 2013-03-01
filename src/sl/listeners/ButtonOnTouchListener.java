@@ -31,18 +31,18 @@ public class ButtonOnTouchListener implements OnTouchListener {
 		// TODO �����������ꂽ���\�b�h�E�X�^�u
 		Tags.ButtonTags tag = (Tags.ButtonTags) v.getTag();
 		
-		// Log
-		Log.d("ButtonOnTouchListener.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "tag_name => " + tag.name());
+//		// Log
+//		Log.d("ButtonOnTouchListener.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", "tag_name => " + tag.name());
 		
 		
 		switch (event.getActionMasked()) {
 		case MotionEvent.ACTION_DOWN:
-			// Log
-			Log.d("ButtonOnTouchListener.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "ACTION_DOWN");
+//			// Log
+//			Log.d("ButtonOnTouchListener.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "ACTION_DOWN");
 
 			switch (tag) {
 				//
@@ -79,10 +79,10 @@ public class ButtonOnTouchListener implements OnTouchListener {
 			
 		case MotionEvent.ACTION_UP:
 			
-			// Log
-			Log.d("ButtonOnTouchListener.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "ACTION_UP");
+//			// Log
+//			Log.d("ButtonOnTouchListener.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "ACTION_UP");
 			
 			
 			switch (tag) {

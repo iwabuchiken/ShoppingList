@@ -60,10 +60,10 @@ public class DBUtils extends SQLiteOpenHelper {
 		// 
 		this.context = context;
 		
-		// Log
-		Log.d("DBManager.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ "]", "DBManager => Instance");
+//		// Log
+//		Log.d("DBUtils.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ "]", "DBManager => Instance");
 		
 	}//public DBManager(Context context)
 
@@ -81,7 +81,7 @@ public class DBUtils extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		// TODO �����������ꂽ���\�b�h�E�X�^�u
 		// Log
-		Log.d("DBManager.java" + "["
+		Log.d("DBUtils.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "onCreate()");
 		
@@ -114,7 +114,7 @@ public class DBUtils extends SQLiteOpenHelper {
 //		if (!tableExists(db, tableName)) {
 		if (tableExists(db, tableName)) {
 			// Log
-			Log.d("DBManager.java" + "["
+			Log.d("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Table exists => " + tableName);
 			
@@ -132,7 +132,7 @@ public class DBUtils extends SQLiteOpenHelper {
 			db.execSQL(sql);
 			
 			// Log
-			Log.d("DBManager.java" + "["
+			Log.d("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Table created => " + tableName);
 			
@@ -174,7 +174,7 @@ public class DBUtils extends SQLiteOpenHelper {
 //		if (!tableExists(db, tableName)) {
 		if (tableExists(db, tableName)) {
 			// Log
-			Log.d("DBManager.java" + "["
+			Log.d("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Table exists => " + tableName);
 			
@@ -201,7 +201,7 @@ public class DBUtils extends SQLiteOpenHelper {
 		sb.append(");");
 		
 		// Log
-		Log.d("DBManager.java" + "["
+		Log.d("DBUtils.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "sql => " + sb.toString());
 		
@@ -221,7 +221,7 @@ public class DBUtils extends SQLiteOpenHelper {
 			db.execSQL(sb.toString());
 			
 			// Log
-			Log.d("DBManager.java" + "["
+			Log.d("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Table created => " + tableName);
 			
@@ -269,7 +269,7 @@ public class DBUtils extends SQLiteOpenHelper {
 				
 			}//for (int i = 0; i < cols.length; i++)
 			
-			Log.d("DBManager.java" + "["
+			Log.d("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Stored => " + sb.toString());
 			
@@ -331,7 +331,7 @@ public class DBUtils extends SQLiteOpenHelper {
 			db.execSQL("VACUUM");
 			
 			// Log
-			Log.d("DBManager.java" + "["
+			Log.d("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "The table dropped => " + tableName);
 			
@@ -341,7 +341,7 @@ public class DBUtils extends SQLiteOpenHelper {
 		} catch (SQLException e) {
 			// TODO �����������ꂽ catch �u���b�N
 			// Log
-			Log.e("DBManager.java" + "["
+			Log.e("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "DROP TABLE => failed (table=" + tableName + "): " + e.toString());
 			

@@ -1474,16 +1474,37 @@ public class Methods {
 					"genre is '" + genreName + "'";
 			
 		}//if (storeName.equals(actv.getString(R.string.generic_label_all)))
+
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "sql=" + query);
 		
-		/*----------------------------
+		/***************************************
 		 * 4. Exec query
-			----------------------------*/
+		 ***************************************/
 		Cursor c = db.rawQuery(query, null);
 		
 		// Log
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "c.getCount() => " + c.getCount());
+		
+		/***************************************
+		 * Validations
+		 ***************************************/
+		if (c.getCount() < 1) {
+			
+			db.close();
+			
+			// debug
+			Toast.makeText(actv, "No entry", Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}//if (c.getCount() == condition)
 		
 		/***************************************
 		 * 5. Update list
@@ -1509,18 +1530,18 @@ public class Methods {
 					c.getString(5)			// yomi
 					);
 			
-			// Log
-			Log.d("Methods.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "c.getString(0) => " + c.getString(0));
-			
-			Log.d("Methods.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "c.getString(1) => " + c.getString(1));
-			
-			//
-//			ItemListActv.list.add(item);
-			CONS.itemList.add(item);
+//			// Log
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(0) => " + c.getString(0));
+//			
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(1) => " + c.getString(1));
+//			
+//			//
+////			ItemListActv.list.add(item);
+//			CONS.itemList.add(item);
 			
 			//
 			c.moveToNext();

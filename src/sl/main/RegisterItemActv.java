@@ -177,20 +177,22 @@ public class RegisterItemActv extends Activity {
 				
 				SQLiteDatabase db = dbm.getWritableDatabase();
 				
+//				columns => {"store", "name", "price", "genre", "yomi"};
 				boolean result = dbm.storeData(
 								db, 
 								CONS.tableName, 
-								CONS.columns, 
+								CONS.columns,
 								new String[]{
 //										et_store.getText().toString(),
 										sp_store_name.getSelectedItem().toString(),
 										
 										et_name.getText().toString(),
-										et_yomi.getText().toString(),
+//										et_yomi.getText().toString(),
 										et_price.getText().toString(),
 										
 //										et_genre.getText().toString()
-										sp_genre_name.getSelectedItem().toString()
+										sp_genre_name.getSelectedItem().toString(),
+										et_yomi.getText().toString()
 								});
 				
 				if (result == true) {
@@ -268,9 +270,9 @@ public class RegisterItemActv extends Activity {
 		
 		// Log
 		for (int i = 0; i < c.getCount(); i++) {
-			Log.d("RegisterItem.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "c.getString(1) => " + c.getString(1));
+//			Log.d("RegisterItem.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(1) => " + c.getString(1));
 
 			/*----------------------------
 			 * 3. Set store data to adapter
@@ -335,9 +337,9 @@ public class RegisterItemActv extends Activity {
 		
 		// Log
 		for (int i = 0; i < c.getCount(); i++) {
-			Log.d("RegisterItem.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ "]", "c.getString(1) => " + c.getString(1));
+//			Log.d("RegisterItem.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(1) => " + c.getString(1));
 
 			/*----------------------------
 			 * 3. Set genre data to adapter
