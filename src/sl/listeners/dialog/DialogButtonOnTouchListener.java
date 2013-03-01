@@ -31,7 +31,7 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 
 //	@Override
 	public boolean onTouch(View v, MotionEvent event) {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		Tags.DialogTags tag_name = (Tags.DialogTags) v.getTag();
 		
 		switch (event.getActionMasked()) {
@@ -55,6 +55,7 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 				case dlg_confirm_drop_table_btn_ok:
 				case dlg_confirm_drop_table_btn_cancel:
 				case dlg_filter_list_ok:
+				case dlg_filter_list_ok2:
 				case dlg_filter_list_cancel:
 				case dlg_generic_cancel:
 					//
@@ -89,7 +90,9 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 				case dlg_confirm_drop_table_btn_cancel:
 				
 				case dlg_filter_list_ok:
+				case dlg_filter_list_ok2:
 				case dlg_filter_list_cancel:
+				
 				
 				case dlg_generic_cancel:
 					//

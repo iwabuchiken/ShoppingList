@@ -32,6 +32,7 @@ public class Tags {
 
 		// dlg_filter_list.xml
 		dlg_filter_list_ok, dlg_filter_list_cancel,
+		dlg_filter_list_ok2, dlg_filter_list_cancel2,
 		
 		// dlg_register_main.xml
 		dlg_register_main,

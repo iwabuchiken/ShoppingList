@@ -1118,6 +1118,145 @@ public class Methods {
 		
 	}//public static void dlg_filterList(Activity actv)
 
+	public static void dlg_filterList2(Activity actv) {
+		/*----------------------------
+		 * Steps
+		 * 1. Set up
+		 * 2. Prepare data for spinners
+		 * 		2.1. Stores
+		 * 		2.2. Genres
+		 * 		2.3. Close db
+		 * 3. Set data to adapter
+		 * 4. Adapter to spinner
+		 * 5. Set listeners
+		 * 		5.1. Touch
+		 * 		5.2. Click
+		 * 9. Show dialog
+			----------------------------*/
+		
+		// 
+		Dialog dlg = new Dialog(actv);
+		
+		//
+		dlg.setContentView(R.layout.dlg_filter_list);
+		
+		// Title
+		dlg.setTitle(R.string.dlg_filter_list_tv_title);
+		
+		/*----------------------------
+		 * 2. Prepare data for spinners
+			----------------------------*/
+		/***************************************
+		 * 2.1. Stores
+		 ***************************************/
+		List<String> storeList = new ArrayList<String>();
+		
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase db = dbm.getReadableDatabase();
+		
+		Cursor c = dbm.getAllData(db, "stores", CONS.columns_for_table_stores_with_index);
+		
+		// All
+		storeList.add(actv.getString(R.string.generic_label_all));
+		
+		//
+		c.moveToFirst();
+		
+		for (int i = 0; i < c.getCount(); i++) {
+			//
+			storeList.add(c.getString(1));
+			
+			//
+			c.moveToNext();
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		/***************************************
+		 * 2.2. Genres
+		 ***************************************/
+		List<String> genreList = new ArrayList<String>();
+		
+		c = dbm.getAllData(db, "genres", CONS.columns_for_table_genres_with_index);
+		
+		// All
+		genreList.add(actv.getString(R.string.generic_label_all));
+		
+		//
+		c.moveToFirst();
+		
+		for (int i = 0; i < c.getCount(); i++) {
+			//
+			genreList.add(c.getString(1));
+			
+			//
+			c.moveToNext();
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		/*----------------------------
+		 * 2.3. Close db
+			----------------------------*/
+		db.close();
+		
+		/***************************************
+		 * 3. Set data to adapter
+		 ***************************************/
+		// Stores
+		ArrayAdapter<String> adapterStore = new ArrayAdapter<String>(
+	              actv, android.R.layout.simple_spinner_item, storeList);
+		
+		// Stores
+		ArrayAdapter<String> adapterGenre = new ArrayAdapter<String>(
+	              actv, android.R.layout.simple_spinner_item, genreList);
+		
+		// Drop down view
+		adapterStore.setDropDownViewResource(
+				android.R.layout.simple_spinner_dropdown_item);
+		
+		adapterGenre.setDropDownViewResource(
+				android.R.layout.simple_spinner_dropdown_item);
+
+		/***************************************
+		 * 4. Adapter to spinner
+		 ***************************************/
+		//
+		Spinner spStore = (Spinner) dlg.findViewById(R.id.dlg_filter_list_sp_store);
+		Spinner spGenre = (Spinner) dlg.findViewById(R.id.dlg_filter_list_sp_genre);
+		
+		spStore.setAdapter(adapterStore);
+		spGenre.setAdapter(adapterGenre);
+		
+		/*----------------------------
+		 * 5. Set listeners
+			----------------------------*/
+		/***************************************
+		 * 5.1. Touch
+		 ***************************************/
+		// View
+		Button btn_ok = (Button) dlg.findViewById(R.id.dlg_filter_list_bt_ok);
+		Button btn_cancel = (Button) dlg.findViewById(R.id.dlg_filter_list_bt_cancel);
+		
+		// Tags
+		btn_ok.setTag(Tags.DialogTags.dlg_filter_list_ok2);
+		btn_cancel.setTag(Tags.DialogTags.dlg_filter_list_cancel);
+		
+		// Set
+		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv));
+		btn_cancel.setOnTouchListener(new DialogButtonOnTouchListener(actv));
+		
+		/***************************************
+		 * 5.2. Click
+		 ***************************************/
+		// 
+		btn_ok.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
+		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
+		
+		/*----------------------------
+		 * 9. Show dialog
+			----------------------------*/
+		dlg.show();
+		
+	}//public static void dlg_filterList2(Activity actv)
+
 	public static void filterList(Activity actv, Dialog dlg) {
 		/*----------------------------
 		 * Steps
@@ -1269,7 +1408,162 @@ public class Methods {
 		ItemListActv.adapter.sort(cmp);
 		
 	}//public static void filterList(Activity actv, Dialog dlg)
-	
+
+	public static void filterList2(Activity actv, Dialog dlg) {
+		/*----------------------------
+		 * Steps
+		 * 1. Get db
+		 * 2. Get store name and genre name
+		 * 2-2. Dismiss dlg
+		 * 3. Build query
+		 * 4. Exec query
+		 * 5. Update list
+		 * 6. Close db
+		 * 7. Notify adapter
+		 * 8. Sort adapter
+			----------------------------*/
+		// 
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase db = dbm.getReadableDatabase();
+
+		/***************************************
+		 * 2. Get store name and genre name
+		 ***************************************/
+		Spinner spStore = (Spinner)dlg.findViewById(R.id.dlg_filter_list_sp_store);
+		Spinner spGenre = (Spinner)dlg.findViewById(R.id.dlg_filter_list_sp_genre);
+		
+		String storeName = (String) spStore.getSelectedItem();
+		String genreName = (String) spGenre.getSelectedItem();
+
+		/***************************************
+		 * 2-2. Dismiss dlg
+		 ***************************************/
+		dlg.dismiss();
+
+		/***************************************
+		 * 3. Build query
+		 ***************************************/
+		//
+		String query;
+		
+		// Both are "All"
+		if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
+				genreName.equals(actv.getString(R.string.generic_label_all))) {
+			query = "SELECT * FROM " + CONS.tableName;
+
+		// Store => All, Genre => Specific
+		} else if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
+						!genreName.equals(actv.getString(R.string.generic_label_all))) {
+			
+			query = "SELECT * FROM " + CONS.tableName + 
+							" WHERE genre is '" + genreName + "'";
+					
+		// Store => Specific, Genre => All
+		} else if (!storeName.equals(actv.getString(R.string.generic_label_all)) &&
+						genreName.equals(actv.getString(R.string.generic_label_all))) {
+			
+			query = "SELECT * FROM " + CONS.tableName + 
+					" WHERE store is '" + storeName + "'";
+
+		// Store => Specific, Genre => Specific
+		} else {
+			
+			query = "SELECT * FROM " + CONS.tableName + 
+					" WHERE store is '" + storeName + "'" + " AND " +
+					"genre is '" + genreName + "'";
+			
+		}//if (storeName.equals(actv.getString(R.string.generic_label_all)))
+		
+		/*----------------------------
+		 * 4. Exec query
+			----------------------------*/
+		Cursor c = db.rawQuery(query, null);
+		
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "c.getCount() => " + c.getCount());
+		
+		/***************************************
+		 * 5. Update list
+		 ***************************************/
+		//
+		c.moveToFirst();
+		
+//		ItemListActv.list.clear();
+		CONS.itemList.clear();
+		
+		//
+		for (int i = 0; i < c.getCount(); i++) {
+			
+//			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
+			//
+
+			ShoppingItem item = new ShoppingItem(
+					c.getInt(0),		// id
+					c.getString(1),		// store
+					c.getString(2),		// name
+					c.getInt(3),		// price
+					c.getString(4),		//	genre
+					c.getString(5)			// yomi
+					);
+			
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "c.getString(0) => " + c.getString(0));
+			
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "c.getString(1) => " + c.getString(1));
+			
+			//
+//			ItemListActv.list.add(item);
+			CONS.itemList.add(item);
+			
+			//
+			c.moveToNext();
+
+		}//for (int i = 0; i < c.getCount(); i++)
+
+		/***************************************
+		 * 6. Close db
+		 ***************************************/
+		db.close();
+
+		/***************************************
+		 * Sort list
+		 ***************************************/
+		Methods_sl.sortItemList(CONS.itemList);
+		
+		/*----------------------------
+		 * 7. Notify adapter
+			----------------------------*/
+//		ItemListActv.adapter.notifyDataSetChanged();
+		CONS.adpItems.notifyDataSetChanged();
+		
+//		/*----------------------------
+//		 * 8. Sort adapter
+//			----------------------------*/
+//		Comparator<Object> cmp = new Comparator<Object>(){
+//
+////			@Override
+//			public int compare(Object obj1, Object obj2) {
+//				// 
+//				String itemName1 = ((ShoppingItem) obj1).getName();
+//				String itemName2 = ((ShoppingItem) obj2).getName();
+//				
+//				return itemName1.compareToIgnoreCase(itemName2);
+//			}//public int compare(Object obj1, Object obj2)
+//			
+//		};//Comparator<Object> cmp = new Comparator<Object>()
+		
+		// Sort
+//		ItemListActv.adapter.sort(cmp);
+		
+	}//public static void filterList2(Activity actv, Dialog dlg)
+
 	/****************************************
 	 *
 	 * 

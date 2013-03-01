@@ -143,6 +143,7 @@ public class CONS {
 	public static ToBuyListAdapter adpToBuys;
 	
 	public static List<ShoppingItem> toBuyList;
+	public static List<ShoppingItem> itemList;
 	
 	public static boolean bgm;
 	

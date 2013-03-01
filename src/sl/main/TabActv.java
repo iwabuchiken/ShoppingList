@@ -26,6 +26,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.format.Time;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -48,7 +51,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 
 //	ItemListAdapter2 adpItems;
 	
-	List<ShoppingItem> itemList;
+//	List<ShoppingItem> itemList;
 	
 	
 	
@@ -216,7 +219,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			CONS.adpItems = new ItemListAdapter2(
 					this,
 					R.layout.adapteritem,
-					itemList
+					CONS.itemList
 					);
 			
 //			lvTab1.setAdapter(adpTab1);
@@ -227,7 +230,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "itemList.size()=" + itemList.size());
+					+ "]", "itemList.size()=" + CONS.itemList.size());
 	
 		} else {//if (res == CONS.PREP_LIST_SUCCESSFUL)
 			
@@ -297,7 +300,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		/***************************************
 		 * itemList
 		 ***************************************/
-		itemList = new ArrayList<ShoppingItem>();
+		CONS.itemList = new ArrayList<ShoppingItem>();
 		
 		//
 		DBUtils dbm = new DBUtils(this);
@@ -345,7 +348,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 					);
 			
 			//
-			itemList.add(item);
+			CONS.itemList.add(item);
 			
 			//
 			c.moveToNext();
@@ -358,7 +361,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		/***************************************
 		 * Sort list
 		 ***************************************/
-		Methods_sl.sortItemList(itemList);
+		Methods_sl.sortItemList(CONS.itemList);
 		
 		/***************************************
 		 * Return
@@ -543,5 +546,29 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			textView.setText(date);			
 			return textView;
 		}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		MenuInflater mi = getMenuInflater();
+		mi.inflate(R.menu.itemlist, menu);
+
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch (item.getItemId()) {
+		case R.id.menu_listitem_filter:
+
+			Methods.dlg_filterList2(this);
+			
+			break;
+		
+		}//switch (item.getItemId())
+
+		return super.onOptionsItemSelected(item);
+	}
 
 }//public class TabActv extends TabActivity implements TabHost.TabContentFactory

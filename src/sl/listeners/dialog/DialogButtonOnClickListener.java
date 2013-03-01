@@ -234,6 +234,12 @@ DialogButtonOnClickListener implements OnClickListener {
 			
 			break;
 			
+		case dlg_filter_list_ok2://------------------------------------------
+			
+			Methods.filterList2(actv, dlg);
+			
+			break;
+
 		case dlg_generic_cancel://------------------------------------------
 			
 			dlg.dismiss();
