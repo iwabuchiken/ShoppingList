@@ -1445,42 +1445,8 @@ public class Methods {
 		 * 3. Build query
 		 ***************************************/
 		//
-		String query;
-		
-		// Both are "All"
-		if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
-				genreName.equals(actv.getString(R.string.generic_label_all))) {
-			query = "SELECT * FROM " + CONS.tableName;
-
-		// Store => All, Genre => Specific
-		} else if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
-						!genreName.equals(actv.getString(R.string.generic_label_all))) {
-			
-			query = "SELECT * FROM " + CONS.tableName + 
-							" WHERE genre is '" + genreName + "'";
-					
-		// Store => Specific, Genre => All
-		} else if (!storeName.equals(actv.getString(R.string.generic_label_all)) &&
-						genreName.equals(actv.getString(R.string.generic_label_all))) {
-			
-			query = "SELECT * FROM " + CONS.tableName + 
-					" WHERE store is '" + storeName + "'";
-
-		// Store => Specific, Genre => Specific
-		} else {
-			
-			query = "SELECT * FROM " + CONS.tableName + 
-					" WHERE store is '" + storeName + "'" + " AND " +
-					"genre is '" + genreName + "'";
-			
-		}//if (storeName.equals(actv.getString(R.string.generic_label_all)))
-
-		// Log
-		Log.d("Methods.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "sql=" + query);
+//		String query;
+		String query = filterList2__buildQuery(actv, storeName, genreName);
 		
 		/***************************************
 		 * 4. Exec query
@@ -1541,7 +1507,7 @@ public class Methods {
 //			
 //			//
 ////			ItemListActv.list.add(item);
-//			CONS.itemList.add(item);
+			CONS.itemList.add(item);
 			
 			//
 			c.moveToNext();
@@ -1564,6 +1530,8 @@ public class Methods {
 //		ItemListActv.adapter.notifyDataSetChanged();
 		CONS.adpItems.notifyDataSetChanged();
 		
+		
+		
 //		/*----------------------------
 //		 * 8. Sort adapter
 //			----------------------------*/
@@ -1584,6 +1552,88 @@ public class Methods {
 //		ItemListActv.adapter.sort(cmp);
 		
 	}//public static void filterList2(Activity actv, Dialog dlg)
+
+	private static
+	String filterList2__buildQuery
+	(Activity actv, String storeName, String genreName) {
+		
+		String query = null;
+		
+		
+		// Both are "All"
+		if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
+				genreName.equals(actv.getString(R.string.generic_label_all))) {
+			query = "SELECT * FROM " + CONS.tableName;
+
+		// Store => All, Genre => Specific
+		} else if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
+						!genreName.equals(actv.getString(R.string.generic_label_all))) {
+			
+			query = "SELECT * FROM " + CONS.tableName + 
+							" WHERE genre = '" + genreName + "'";
+					
+		// Store => Specific, Genre => All
+		} else if (!storeName.equals(actv.getString(R.string.generic_label_all)) &&
+						genreName.equals(actv.getString(R.string.generic_label_all))) {
+			
+			query = "SELECT * FROM " + CONS.tableName + 
+					" WHERE store = '" + storeName + "'";
+
+		// Store => Specific, Genre => Specific
+		} else {
+			
+			query = "SELECT * FROM " + CONS.tableName + 
+					" WHERE store = '" + storeName + "'" + " AND " +
+					"genre = '" + genreName + "'";
+			
+		}//if (storeName.equals(actv.getString(R.string.generic_label_all)))
+
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "sql=" + query);
+
+//		
+//		// Both are "All"
+//		if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
+//				genreName.equals(actv.getString(R.string.generic_label_all))) {
+//			query = "SELECT * FROM " + CONS.tableName;
+//
+//		// Store => All, Genre => Specific
+//		} else if (storeName.equals(actv.getString(R.string.generic_label_all)) &&
+//						!genreName.equals(actv.getString(R.string.generic_label_all))) {
+//			
+//			query = "SELECT * FROM " + CONS.tableName + 
+//							" WHERE genre is '" + genreName + "'";
+//					
+//		// Store => Specific, Genre => All
+//		} else if (!storeName.equals(actv.getString(R.string.generic_label_all)) &&
+//						genreName.equals(actv.getString(R.string.generic_label_all))) {
+//			
+//			query = "SELECT * FROM " + CONS.tableName + 
+//					" WHERE store is '" + storeName + "'";
+//
+//		// Store => Specific, Genre => Specific
+//		} else {
+//			
+//			query = "SELECT * FROM " + CONS.tableName + 
+//					" WHERE store is '" + storeName + "'" + " AND " +
+//					"genre is '" + genreName + "'";
+//			
+//		}//if (storeName.equals(actv.getString(R.string.generic_label_all)))
+//
+//		// Log
+//		Log.d("Methods.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "sql=" + query);
+
+		return query;
+		
+	}//String filterList2__buildQuery()
 
 	/****************************************
 	 *
