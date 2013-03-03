@@ -129,6 +129,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		// TODO Auto-generated method stub
 		CONS.tab_checkedItemIds = new ArrayList<Integer>();
 		CONS.tab_toBuyItemIds = new ArrayList<Integer>();
+		CONS.tab_boughtItemIds = new ArrayList<Integer>();
 		
 		/***************************************
 		 * Get preference value: bgm

@@ -127,9 +127,83 @@ public class ListOnItemClickListener implements OnItemClickListener {
 				+ "]", "si.getName()=" + si.getName());
 		
 		/***************************************
-		 * Show dialog
+		 * checkedItemPositions
 		 ***************************************/
-		Methods_dlg.dlg_tabActv_tab2Lv(actv, si);
+		int itemId = si.getId();
+		
+		if (CONS.tab_boughtItemIds.contains(itemId)) {
+			
+//			CONS.tab_checkedPositions.remove(itemId);
+			CONS.tab_boughtItemIds.remove(new Integer(itemId));
+
+			/***************************************
+			 * BGM
+			 ***************************************/
+			if (CONS.bgm == true) {
+				
+				int bgmResourceId = R.raw.bgm_3_uncheck_item;
+				
+				TaskAudioTrack task = new TaskAudioTrack(actv);
+				
+//				task.execute("Start");
+				task.execute(bgmResourceId);
+				
+			}//if (bgm == true)
+
+		} else if (!CONS.tab_boughtItemIds.contains(itemId)) {//if (CONS.tab_checkedPositions.contains(itemId))
+			
+			CONS.tab_boughtItemIds.add(itemId);
+			
+			// Log
+			Log.d("ListOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Added: Item id=" + itemId);
+
+			/***************************************
+			 * BGM
+			 ***************************************/
+			if (CONS.bgm == true) {
+				
+				int bgmResourceId = R.raw.bgm_2_koto_t150_1second;
+				
+				TaskAudioTrack task = new TaskAudioTrack(actv);
+				
+//				task.execute("Start");
+				task.execute(bgmResourceId);
+				
+			}//if (bgm == true)
+
+		}//if (CONS.tab_checkedPositions.contains(itemId))
+		
+//		//debug
+//		StringBuilder sb = new StringBuilder();
+//		
+//		for (int i = 0; i < CONS.tab_toBuyItemIds.size(); i++) {
+//		
+//			sb.append(CONS.tab_toBuyItemIds.get(i));
+//			sb.append(",");
+//			
+//		}//for (int i = 0; i < CONS.tab_checkedPositions.size(); i++)
+//		
+//		// Log
+//		Log.d("ListOnItemClickListener.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "Positions=" + sb.toString());
+		
+		/***************************************
+		 * Notify adapter
+		 ***************************************/
+//		CONS.adpItems.notifyDataSetChanged();
+		CONS.adpToBuys.notifyDataSetChanged();
+		
+//		/***************************************
+//		 * Show dialog
+//		 ***************************************/
+//		Methods_dlg.dlg_tabActv_tab2Lv(actv, si);
 		
 	}//private void tab_toBuyList(AdapterView<?> parent, int position)
 

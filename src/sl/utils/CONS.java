@@ -135,13 +135,23 @@ public class CONS {
 	/***************************************
 	 * TabActv.java
 	 ***************************************/
+	/***************************************
+	 * List: Ids
+	 ***************************************/
 //	public static List<Integer> tab_checkedPositions;
 	public static List<Integer> tab_checkedItemIds;
 	public static List<Integer> tab_toBuyItemIds;
+	public static List<Integer> tab_boughtItemIds;
 	
+	/***************************************
+	 * Adapters
+	 ***************************************/
 	public static ItemListAdapter2 adpItems;
 	public static ToBuyListAdapter adpToBuys;
 	
+	/***************************************
+	 * List: ShoppingItem
+	 ***************************************/
 	public static List<ShoppingItem> toBuyList;
 	public static List<ShoppingItem> itemList;
 	

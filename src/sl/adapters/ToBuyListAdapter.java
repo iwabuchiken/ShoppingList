@@ -94,21 +94,81 @@ public class ToBuyListAdapter extends ArrayAdapter<ShoppingItem> {
 	private void
 	getView__2_setupBackground(View convertView, ShoppingItem si, int position) {
 
-//			convertView.setBackgroundColor(Color.BLUE);
-		tvItemName.setBackgroundColor(Color.WHITE);
-//		tvItemName.setTextColor(Color.BLACK);
-		tvItemName.setTextColor(((Activity)con).getResources().getColor(R.color.gray1));
+		// Log
+		Log.d("ToBuyListAdapter.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "postion=" + position);
+		
+//		if (CONS.tab_toBuyItemIds.contains(new Integer(position))) {
+		if (CONS.tab_boughtItemIds.contains(Integer.valueOf(si.getId()))) {
 
-		//debug
-		tvItemName.setWidth(Methods.getDisplaySize((Activity)con)[0]);
+			// Log
+			Log.d("ToBuyListAdapter.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Contain");
+
+	//			convertView.setBackgroundColor(Color.BLUE);
+			tvItemName.setBackgroundColor(Color.BLUE);
+	//		tvItemName.setTextColor(Color.BLACK);
+			tvItemName.setTextColor(Color.WHITE);
+	
+			//debug
+			tvItemName.setWidth(Methods.getDisplaySize((Activity)con)[0]);
+			
+			/***************************************
+			 * LinearLayout for item name
+			 ***************************************/
+			LinearLayout llName =
+					(LinearLayout) convertView.findViewById(R.id.adapteritem_LL_item_name);
+			
+			llName.setBackgroundColor(Color.BLUE);
+			
+		} else {//if (CONS.tab_boughtItemIds.contains(new Integer(position)))
+			
+			// Log
+			Log.d("ToBuyListAdapter.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Doen't contain");
+			
+		//		convertView.setBackgroundColor(Color.BLUE);
+			tvItemName.setBackgroundColor(Color.WHITE);
+		//	tvItemName.setTextColor(Color.BLACK);
+			tvItemName.setTextColor(((Activity)con).getResources().getColor(R.color.gray1));
 		
-		/***************************************
-		 * LinearLayout for item name
-		 ***************************************/
-		LinearLayout llName =
-				(LinearLayout) convertView.findViewById(R.id.adapteritem_LL_item_name);
+			//debug
+			tvItemName.setWidth(Methods.getDisplaySize((Activity)con)[0]);
+			
+			/***************************************
+			 * LinearLayout for item name
+			 ***************************************/
+			LinearLayout llName =
+					(LinearLayout) convertView.findViewById(R.id.adapteritem_LL_item_name);
+			
+			llName.setBackgroundColor(Color.WHITE);
+			
+		}//if (CONS.tab_boughtItemIds.contains(new Integer(position)))
 		
-		llName.setBackgroundColor(Color.WHITE);
+////			convertView.setBackgroundColor(Color.BLUE);
+//		tvItemName.setBackgroundColor(Color.WHITE);
+////		tvItemName.setTextColor(Color.BLACK);
+//		tvItemName.setTextColor(((Activity)con).getResources().getColor(R.color.gray1));
+//
+//		//debug
+//		tvItemName.setWidth(Methods.getDisplaySize((Activity)con)[0]);
+//		
+//		/***************************************
+//		 * LinearLayout for item name
+//		 ***************************************/
+//		LinearLayout llName =
+//				(LinearLayout) convertView.findViewById(R.id.adapteritem_LL_item_name);
+//		
+//		llName.setBackgroundColor(Color.WHITE);
 		
 		
 
