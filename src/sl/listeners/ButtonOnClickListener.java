@@ -8,6 +8,8 @@ import sl.items.ShoppingItem;
 import sl.main.DBActv;
 import sl.main.ItemListActv;
 import sl.main.R;
+import sl.tasks.TaskAudioTrack;
+import sl.utils.CONS;
 import sl.utils.Methods;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
@@ -16,6 +18,7 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -109,6 +112,31 @@ public class ButtonOnClickListener implements OnClickListener {
 //			
 		case itemlist_bt_choose://-----------------------------------
 			
+			if (ItemListActv.toBuys == null) {
+				
+				// Log
+				Log.d("ButtonOnClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "ItemListActv.toBuys => null");
+				
+			} else {//if (ItemListActv.toBuys == null)
+
+				// Log
+				Log.d("ButtonOnClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "ItemListActv.toBuys => Not null");
+
+			}//if (ItemListActv.toBuys == null)
+			
+			
 			ItemListActv.toBuys.addAll(ItemListActv.checkedPositions);
 			
 			List<ShoppingItem> chosen_items_list = new ArrayList<ShoppingItem>();
@@ -131,6 +159,25 @@ public class ButtonOnClickListener implements OnClickListener {
 			/***************************************
 			 * Sort list
 			 ***************************************/
+			// Log
+			Log.d("ButtonOnClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "chosen_items_list.size()=" + chosen_items_list.size());
+			
+			// Log
+			ShoppingItem si = chosen_items_list.get(0);
+			
+			Log.d("ButtonOnClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"si.getName()=" + si.getName()
+					+ "/"
+					+ "si.getYomi()=" + si.getYomi());
+			
 			Methods_sl.sortItemList(chosen_items_list);
 			
 			/***************************************
@@ -161,10 +208,119 @@ public class ButtonOnClickListener implements OnClickListener {
 //			ItemListActv.adapter.notifyDataSetChanged();
 //			
 //			break;
+
+		case itemlist_tabs_bt_choose://-----------------------------------
+			
+			itemlist_tabs_bt_choose();
+			
+			break;// case itemlist_tabs_bt_choose
 			
 		default:
 			break;
 		}//switch (tag_name)
 	}
 
-}
+	private void itemlist_tabs_bt_choose() {
+		// TODO Auto-generated method stub
+		
+		/***************************************
+		 * BGM
+		 ***************************************/
+		if (CONS.bgm == true) {
+			
+			int bgmResourceId = R.raw.bgm_4_add_to_tobuy_list;
+			
+			TaskAudioTrack task = new TaskAudioTrack(actv);
+			
+//			task.execute("Start");
+			task.execute(bgmResourceId);
+			
+		}//if (bgm == true)
+
+
+		/***************************************
+		 * Add to toBuyItemIds
+		 ***************************************/
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"CONS.tab_checkedItemIds.size()=" + CONS.tab_checkedItemIds.size());
+		
+		for (Integer id : CONS.tab_checkedItemIds) {
+			
+			if (!CONS.tab_toBuyItemIds.contains(id)) {
+				
+				CONS.tab_toBuyItemIds.add(id);
+				
+			} else {//if (CONS.tab_toBuyItemIds.contains(id))
+				
+				// Log
+				Log.d("ButtonOnClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Item is already in toBuy list: " + id.intValue());
+				
+			}//if (CONS.tab_toBuyItemIds.contains(id))
+			
+			
+		}//for (Integer id : CONS.tab_checkedItemIds)
+		
+		//debug
+		StringBuilder sb = new StringBuilder();
+		
+		for (Integer id : CONS.tab_toBuyItemIds) {
+			
+			sb.append(id.intValue());
+			
+			sb.append(",");
+			
+		}
+		
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "CONS.tab_toBuyItemIds=" + sb.toString());
+		
+		/***************************************
+		 * Notify adapter: adpItems
+		 ***************************************/
+		CONS.adpItems.notifyDataSetChanged();
+		
+		/***************************************
+		 * Update: toBuyList
+		 ***************************************/
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"CONS.toBuyList.size()=" + CONS.toBuyList.size());
+		
+		Methods_sl.updateListView_ToBuyList(actv);
+		
+		// Log
+		Log.d("ButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"CONS.toBuyList.size()=" + CONS.toBuyList.size());
+		
+		/***************************************
+		 * Notify adapter: CONS.tab_toBuyItemIds
+		 ***************************************/
+		CONS.adpToBuys.notifyDataSetChanged();
+		
+	}//private void itemlist_tabs_bt_choose()
+
+}//public class ButtonOnClickListener implements OnClickListener

@@ -1,5 +1,6 @@
 package sl.main;
 
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -12,15 +13,19 @@ import org.apache.commons.lang.StringUtils;
 import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
 import sl.main.R;
+import sl.tasks.TaskAudioTrack;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
 import sl.utils.Methods_dlg;
+import sl.utils.Methods_sl;
 import sl.utils.Tags;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -49,7 +54,7 @@ public class MainActv extends Activity {
 //
 //	String dirPath_db_backup = dirName_ExternalStorage + "/ShoppingList_backup";
 //	
-////	public static String[] registerItems = {"•i•¨", "“X•Ü", "ƒWƒƒƒ“ƒ‹"};
+////	public static String[] registerItems = {"ï¿½iï¿½ï¿½", "ï¿½Xï¿½ï¿½", "ï¿½Wï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"};
 //	
 ////	public static enum registerChoice = {
 //	public static enum registerChoice {
@@ -419,10 +424,26 @@ public class MainActv extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		
+//		// Log
+//		Log.d("MainActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "Options");
+		
 		switch (item.getItemId()) {
 				
 			case R.id.v1_menu_db_manager:
+				
+				// Log
+				Log.d("MainActv.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "db_manager");
 				
 				Methods_dlg.dlg_db_activity(this);
 				
@@ -436,9 +457,65 @@ public class MainActv extends Activity {
 //				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 //				
 //				startActivity(i);
+
 				
 				break;
 				
+			case R.id.menu_main_tab_actv:
+				
+//				// Log
+//				Log.d("MainActv.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]", "tab_actv");
+				
+//				Methods_dlg.dlg_db_activity(this);
+//
+//				
+				Intent i = new Intent();
+				
+				i = new Intent();
+				
+				i.setClass(this, TabActv.class);
+				
+				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				
+				startActivity(i);
+
+				break;
+
+			case R.id.menu_main_pref_actv:
+				
+//				// Log
+//				Log.d("MainActv.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]", "tab_actv");
+				
+//				Methods_dlg.dlg_db_activity(this);
+//
+//				
+				i = new Intent();
+				
+				i = new Intent();
+				
+				i.setClass(this, PrefActv.class);
+				
+				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				
+				startActivity(i);
+
+				break;// case R.id.menu_main_pref_actv
+				
+			default:
+				break;
+					
 		}//switch (item.getItemId())
 		
 		return super.onOptionsItemSelected(item);
@@ -446,31 +523,68 @@ public class MainActv extends Activity {
 
 	@Override
 	protected void onPause() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onPause();
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onResume();
-	}
+		
+		// Log
+		Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Resume");
+		
+//		/***************************************
+//		 * Preference values: BGM
+//		 ***************************************/
+//		SharedPreferences prefs = this
+//				.getSharedPreferences(
+//					this.getString(R.string.shared_preferences_name),
+//					Context.MODE_PRIVATE);
+//
+//		boolean bgm = prefs.getBoolean(this.getString(R.string.prefs_key_bgm), false);
+//		
+//		// Log
+//		Log.d("MainActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "bgm=" + bgm);
+//		 
+//		/***************************************
+//		 * Play sound
+//		 ***************************************/
+//		if (bgm == true) {
+//			
+////			Methods_sl.playSound(this);
+//			TaskAudioTrack task = new TaskAudioTrack(this);
+//			
+//			task.execute("Start");
+//			
+//		}//if (bgm == true)
+		
+	}//protected void onResume()
 
 	@Override
 	protected void onStart() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onStart();
 	}
 
 	@Override
 	protected void onStop() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onStop();
 	}
 
 	@Override
 	protected void onDestroy() {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+		// TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ê‚½ï¿½ï¿½ï¿½\ï¿½bï¿½hï¿½Eï¿½Xï¿½^ï¿½u
 		super.onDestroy();
 	}
     

@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -26,6 +27,9 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.AudioFormat;
+import android.media.AudioManager;
+import android.media.AudioTrack;
 import android.util.Log;
 import android.util.Xml;
 import android.widget.Toast;
@@ -34,6 +38,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import sl.items.ShoppingItem;
+import sl.main.MainActv;
+import sl.main.R;
 
 public class Methods_sl {
 
@@ -1672,11 +1678,260 @@ public class Methods_sl {
 //				return (int) (i1.getDate_added() - i2.getDate_added());
 				
 //				return (int) (i1.getName().compareToIgnoreCase(i2.getName()));
+				
+//				// Log
+//				Log.d("Methods_sl.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]",
+//						"i1.getYomi()=" + i1.getYomi()
+//						+ "/"
+//						+ "i2.getYomi()=" + i2.getYomi());
+				
 				return (int) (i1.getYomi().compareToIgnoreCase(i2.getYomi()));
 			}
 			
 		});//Collections.sort()
 
 	}//public static void sort_tiList(List<ThumbnailItem> tiList)
+
+	public static void playSound(Activity actv) {
+		int minBufferSize = AudioTrack.getMinBufferSize(
+									44100,
+									AudioFormat.CHANNEL_CONFIGURATION_MONO, 
+									AudioFormat.ENCODING_PCM_16BIT);
+
+		AudioTrack audioTrack = new AudioTrack(
+						AudioManager.STREAM_MUSIC, 44100,
+						AudioFormat.CHANNEL_CONFIGURATION_MONO, 
+						AudioFormat.ENCODING_PCM_16BIT,
+						minBufferSize,
+						AudioTrack.MODE_STREAM); 
+		
+		audioTrack.play();
+		
+	    int i = 0;
+	    int bufferSize = 512;
+	    byte [] buffer = new byte[bufferSize];
+//	    InputStream inputStream = actv.getResources().openRawResource(R.raw.bgm_1);
+	    
+	    InputStream inputStream = actv.getResources().openRawResource(R.raw.bgm_2_koto_t150_1second);
+	    
+	    try {
+	        while((i = inputStream.read(buffer)) != -1)
+	            audioTrack.write(buffer, 0, i);
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    try {
+	        inputStream.close();
+	    } catch (IOException e) {
+	        // TODO Auto-generated catch block
+	        e.printStackTrace();
+	    }
+	    
+	}//public static void playSound(Activity actv)
+
+	public static void playSound(Activity actv, int bgmResourceId) {
+		// TODO Auto-generated method stub
+		int minBufferSize = AudioTrack.getMinBufferSize(
+				44100,
+				AudioFormat.CHANNEL_CONFIGURATION_MONO, 
+				AudioFormat.ENCODING_PCM_16BIT);
+
+		AudioTrack audioTrack = new AudioTrack(
+			AudioManager.STREAM_MUSIC, 44100,
+			AudioFormat.CHANNEL_CONFIGURATION_MONO, 
+			AudioFormat.ENCODING_PCM_16BIT,
+			minBufferSize,
+			AudioTrack.MODE_STREAM); 
+		
+		audioTrack.play();
+		
+		int i = 0;
+		int bufferSize = 512;
+		byte [] buffer = new byte[bufferSize];
+		//InputStream inputStream = actv.getResources().openRawResource(R.raw.bgm_1);
+		
+//		InputStream inputStream = actv.getResources().openRawResource(R.raw.bgm_2_koto_t150_1second);
+		InputStream inputStream = 
+						actv.getResources().openRawResource(bgmResourceId);
+		
+		try {
+			
+			while((i = inputStream.read(buffer)) != -1)
+			audioTrack.write(buffer, 0, i);
+			
+		} catch (IOException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		try {
+			
+			inputStream.close();
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Stream closed");
+			
+		} catch (IOException e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+
+		audioTrack.stop();
+		
+		// Log
+		Log.d("Methods_sl.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Audio stopped");
+		
+	}//public static void playSound(Activity actv, int bgmResourceId)
+
+	
+	public static void updateListView_ToBuyList(Activity actv) {
+		/***************************************
+		 * Clear the list "toBuyList : ListView<ShoppingItem>
+		 ***************************************/
+		CONS.toBuyList.clear();
+		
+		/***************************************
+		 * Setup db
+		 ***************************************/
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+		
+		for (Integer itemId : CONS.tab_toBuyItemIds) {
+			
+			try {
+				
+				c = rdb.query(
+						CONS.tableName, 
+	//										DBManager.columns,
+	//				CONS.columns_with_index,
+						CONS.columns_with_index2,
+//						String.valueOf(CONS.columns_with_index2[0]),
+						String.valueOf(CONS.columns_with_index2[0]) + "=?",
+						new String[]{String.valueOf(itemId.intValue())},
+						null, null, null);
+				
+			} catch (Exception e) {
+				
+				// Log
+				Log.e("Methods_sl.java" + "["
+						+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2].getMethodName()
+						+ "]", e.toString());
+				
+				rdb.close();
+				
+//				return CONS.PREP_LIST_FAILED;
+				return;
+				
+			}//try
+
+			/***************************************
+			 * If the cursor is null, then move on to
+			 * 	the next id
+			 ***************************************/
+			if (c == null) {
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"c==null => id=" + itemId.intValue());
+				
+				continue;
+				
+			}//if (c == null)
+			
+			/***************************************
+			 * If no result, then also, move on to
+			 * 	the next
+			 ***************************************/
+			if (c.getCount() < 1) {
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"c.getCount() < 1 => id=" + itemId.intValue());
+				
+				continue;
+				
+			}//if (c.getCount() < 1)
+			
+			/***************************************
+			 * If has result, the add the new item
+			 * 	to the list
+			 ***************************************/
+			//
+			c.moveToFirst();
+			
+			for (int i = 0; i < c.getCount(); i++) {
+	
+	//			0									1		2		3		4			5
+	//			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
+				ShoppingItem item = new ShoppingItem(
+						c.getInt(0),		// id store
+						c.getString(1),		// name
+						c.getString(2),		// yomi
+						c.getString(3),		// genre
+						c.getString(4),		//	store
+						c.getInt(5)			// price
+						);
+				
+				//
+				CONS.toBuyList.add(item);
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Item added to toBuyList => " + item.getName());
+				
+				//
+				c.moveToNext();
+				
+			}//for (int i = 0; i < c.getCount(); i++)
+
+		}//for (Integer itemId : CONS.tab_toBuyItemIds)
+
+		//
+		rdb.close();
+
+		
+		
+	}//public static void updateToBuyList(Activity actv)
 
 }//public class Methods_sl

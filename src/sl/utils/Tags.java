@@ -32,12 +32,16 @@ public class Tags {
 
 		// dlg_filter_list.xml
 		dlg_filter_list_ok, dlg_filter_list_cancel,
+		dlg_filter_list_ok2, dlg_filter_list_cancel2,
 		
 		// dlg_register_main.xml
 		dlg_register_main,
 		
 		// dlg_db_admin.xml
 		dlg_db_admin_lv,
+		
+		// tabactv_tab2_lv
+		dlg_tabactv_tab2_lv,
 		
 	}//public static enum DialogTags
 	
@@ -51,10 +55,18 @@ public class Tags {
 		// itemlist.xml
 		itemlist_bt_choose, itemlist_bt_see_chosen,
 		
+		// itemlist_tabs.xml
+		itemlist_tabs_bt_choose,
+		
 	}//public static enum ButtonTags
 
 	public static enum ViewNames {
 		TV, BT,
+	}
+	
+	public static enum ListTags {
+		// TabActv.java
+		tab_itemList, tab_toBuyList,
 	}
 	
 }//public class Tags

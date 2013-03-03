@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.apache.commons.lang.StringUtils;
 
+import sl.items.ShoppingItem;
 import sl.main.MainActv;
 import sl.main.R;
 import sl.main.RegisterItemActv;
@@ -32,7 +33,7 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 	//
 	Activity actv;
 	Dialog dlg;
-	
+	ShoppingItem si;
 	//
 	Vibrator vib;
 	
@@ -59,7 +60,18 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		
 	}//public DialogOnItemClickListener(Activity actv, Dialog dlg)
 
-//	@Override
+	public DialogOnItemClickListener(Activity actv,
+							Dialog dlg, ShoppingItem si) {
+		this.actv = actv;
+		this.dlg = dlg;
+		this.si = si;
+		
+		//
+		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
+
+	}
+
+	//	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		/*----------------------------
 		 * Steps
@@ -88,6 +100,24 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 				dlg_db_admin_lv(choice);
 				
 				break;
+
+			case dlg_tabactv_tab2_lv:
+				
+				choice = (String) parent.getItemAtPosition(position);
+
+				dlg_tabactv_tab2_lv(choice);
+				
+//				// Log
+//				Log.d("DialogOnItemClickListener.java"
+//						+ "["
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getLineNumber()
+//						+ ":"
+//						+ Thread.currentThread().getStackTrace()[2]
+//								.getMethodName() + "]", "choice=" + choice);
+//				
+				break;// case dlg_tabactv_tab2_lv
+
 				
 			}//switch (tag)
 			
@@ -173,6 +203,34 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		}//if (dlgName != null && dlgName == "confirm_table_drop")
 		
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+	private void dlg_tabactv_tab2_lv(String choice) {
+		// TODO Auto-generated method stub
+		if (choice.equals(actv.getString(R.string.tabactv_tab2_lv_delete_from_list))) {
+		
+			/***************************************
+			 * 1. Remove the si from toBuyList
+			 * 2. Notify the adapter: CONS.adpToBuys, CONS.adpItems
+			 ***************************************/
+			CONS.toBuyList.remove(si);
+			
+//			CONS.tab_toBuyItemIds.remove(si.getId());
+			CONS.tab_toBuyItemIds.remove(Integer.valueOf(si.getId()));
+			
+			CONS.adpToBuys.notifyDataSetChanged();
+			
+			CONS.adpItems.notifyDataSetChanged();
+			
+			/***************************************
+			 * Close dlg
+			 ***************************************/
+			dlg.dismiss();
+			
+		} else {//if (choice.equals(actv.getString(R.string.tabactv_tab2_lv_delete_from_list)))
+			
+		}//if (choice.equals(actv.getString(R.string.tabactv_tab2_lv_delete_from_list)))
+		
+	}
 
 	private void dlg_db_admin_lv(String choice) {
 		// TODO Auto-generated method stub

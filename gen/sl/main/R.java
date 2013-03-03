@@ -16,6 +16,7 @@ public final class R {
         public static final int darkgreen=0x7f060003;
         public static final int darkolivegreen4=0x7f060005;
         public static final int gold2=0x7f060007;
+        public static final int gray1=0x7f06000a;
         public static final int green4=0x7f060004;
         public static final int purple4=0x7f060006;
         /**  /main.xml 
@@ -32,12 +33,21 @@ public final class R {
         public static final int icon_shopping_list=0x7f020001;
         public static final int menu_listitem_filter_30x30=0x7f020002;
         public static final int menu_listitem_filter_30x30_v3=0x7f020003;
-        public static final int v1_menu_add_genre_30x30=0x7f020004;
-        public static final int v1_menu_db_manager_30x30=0x7f020005;
-        public static final int v1_menu_item_list=0x7f020006;
-        public static final int v1_menu_item_list_30x30=0x7f020007;
-        public static final int v1_menu_item_list_50x50=0x7f020008;
-        public static final int v1_menu_item_register_store_2_30x30=0x7f020009;
+        public static final int sl_add_item=0x7f020004;
+        public static final int sl_add_item_150x150=0x7f020005;
+        public static final int sl_add_item_bar_150x150=0x7f020006;
+        public static final int sl_add_item_bar_touched_150x150=0x7f020007;
+        public static final int sl_add_item_touched=0x7f020008;
+        public static final int sl_add_item_touched_150x150=0x7f020009;
+        public static final int sl_basket=0x7f02000a;
+        public static final int sl_basket_empty_35x35=0x7f02000b;
+        public static final int sl_tab_itemlist=0x7f02000c;
+        public static final int v1_menu_add_genre_30x30=0x7f02000d;
+        public static final int v1_menu_db_manager_30x30=0x7f02000e;
+        public static final int v1_menu_item_list=0x7f02000f;
+        public static final int v1_menu_item_list_30x30=0x7f020010;
+        public static final int v1_menu_item_list_50x50=0x7f020011;
+        public static final int v1_menu_item_register_store_2_30x30=0x7f020012;
     }
     public static final class id {
         public static final int adapteritem_LL_item_name=0x7f0a0005;
@@ -115,24 +125,32 @@ public final class R {
         public static final int dlg_register_store_btn_ok=0x7f0a004b;
         public static final int dlg_register_store_et=0x7f0a0049;
         public static final int dlg_register_store_tv=0x7f0a0047;
+        public static final int first_content=0x7f0a004f;
         public static final int itemlist_LL_list=0x7f0a004d;
         public static final int itemlist_bt_choose=0x7f0a004e;
-        public static final int menu_listitem_filter=0x7f0a005b;
+        public static final int itemlist_tab1_ib=0x7f0a0051;
+        public static final int itemlist_tab1_lv=0x7f0a0050;
+        public static final int itemlist_tab2_lv=0x7f0a0053;
+        public static final int menu_listitem_filter=0x7f0a0060;
+        public static final int menu_listitem_tabToBuy_clear_basket=0x7f0a0061;
+        public static final int menu_main_pref_actv=0x7f0a0064;
+        public static final int menu_main_tab_actv=0x7f0a0063;
+        public static final int second_content=0x7f0a0052;
         public static final int sl_tv_item_list=0x7f0a0002;
         public static final int sl_tv_register=0x7f0a0003;
-        public static final int v1_btn_register=0x7f0a005a;
-        public static final int v1_et_name=0x7f0a0053;
-        public static final int v1_et_price=0x7f0a0057;
-        public static final int v1_et_yomi=0x7f0a0055;
-        public static final int v1_menu_db_manager=0x7f0a005c;
-        public static final int v1_sp_genre=0x7f0a0059;
-        public static final int v1_sp_store=0x7f0a0051;
-        public static final int v1_tl=0x7f0a004f;
-        public static final int v1_tv_genre=0x7f0a0058;
-        public static final int v1_tv_name=0x7f0a0052;
-        public static final int v1_tv_price=0x7f0a0056;
-        public static final int v1_tv_store=0x7f0a0050;
-        public static final int v1_tv_yomi=0x7f0a0054;
+        public static final int v1_btn_register=0x7f0a005f;
+        public static final int v1_et_name=0x7f0a0058;
+        public static final int v1_et_price=0x7f0a005c;
+        public static final int v1_et_yomi=0x7f0a005a;
+        public static final int v1_menu_db_manager=0x7f0a0062;
+        public static final int v1_sp_genre=0x7f0a005e;
+        public static final int v1_sp_store=0x7f0a0056;
+        public static final int v1_tl=0x7f0a0054;
+        public static final int v1_tv_genre=0x7f0a005d;
+        public static final int v1_tv_name=0x7f0a0057;
+        public static final int v1_tv_price=0x7f0a005b;
+        public static final int v1_tv_store=0x7f0a0055;
+        public static final int v1_tv_yomi=0x7f0a0059;
     }
     public static final class layout {
         public static final int actv_db=0x7f030000;
@@ -151,15 +169,22 @@ public final class R {
         public static final int dlg_register_main=0x7f03000d;
         public static final int dlg_register_store=0x7f03000e;
         public static final int itemlist=0x7f03000f;
-        public static final int registeritem=0x7f030010;
+        public static final int itemlist_tabs=0x7f030010;
+        public static final int main_pref=0x7f030011;
+        public static final int registeritem=0x7f030012;
     }
     public static final class menu {
         public static final int itemlist=0x7f090000;
         public static final int menu_main=0x7f090001;
     }
     public static final class raw {
-        public static final int furigana=0x7f050000;
-        public static final int node=0x7f050001;
+        public static final int bgm_1=0x7f050000;
+        public static final int bgm_2=0x7f050001;
+        public static final int bgm_2_koto_t150_1second=0x7f050002;
+        public static final int bgm_3_uncheck_item=0x7f050003;
+        public static final int bgm_4_add_to_tobuy_list=0x7f050004;
+        public static final int furigana=0x7f050005;
+        public static final int node=0x7f050006;
     }
     public static final class string {
         public static final int adapteritem_tv_item_name=0x7f070013;
@@ -168,28 +193,28 @@ public final class R {
         public static final int app_name=0x7f070009;
         public static final int db_manager_btn_create_table=0x7f070028;
         public static final int db_manager_btn_drop_table=0x7f070029;
-        public static final int dlg_confirm_drop_table_tv_message_drop=0x7f070030;
-        public static final int dlg_create_table_label_column_name=0x7f07002c;
-        public static final int dlg_create_table_label_data_type=0x7f07002d;
-        public static final int dlg_create_table_label_table_name=0x7f07002e;
+        public static final int dlg_confirm_drop_table_tv_message_drop=0x7f070032;
+        public static final int dlg_create_table_label_column_name=0x7f07002e;
+        public static final int dlg_create_table_label_data_type=0x7f07002f;
+        public static final int dlg_create_table_label_table_name=0x7f070030;
         /**  db_manager.xml 
          */
-        public static final int dlg_create_table_title=0x7f07002b;
-        public static final int dlg_db_admin_item_backup_db=0x7f07003f;
-        public static final int dlg_db_admin_item_get_yomi=0x7f070043;
-        public static final int dlg_db_admin_item_refatcor_db=0x7f070041;
-        public static final int dlg_db_admin_item_refresh_db=0x7f070040;
-        public static final int dlg_db_admin_item_restore_db=0x7f070042;
+        public static final int dlg_create_table_title=0x7f07002d;
+        public static final int dlg_db_admin_item_backup_db=0x7f070042;
+        public static final int dlg_db_admin_item_get_yomi=0x7f070046;
+        public static final int dlg_db_admin_item_refatcor_db=0x7f070044;
+        public static final int dlg_db_admin_item_refresh_db=0x7f070043;
+        public static final int dlg_db_admin_item_restore_db=0x7f070045;
         /**  dlg_db_admin.xml 
          */
-        public static final int dlg_db_admin_title=0x7f07003e;
-        public static final int dlg_drop_table_title=0x7f07002f;
-        public static final int dlg_filter_list_tv_genre=0x7f070034;
-        public static final int dlg_filter_list_tv_history=0x7f070035;
-        public static final int dlg_filter_list_tv_store=0x7f070033;
+        public static final int dlg_db_admin_title=0x7f070041;
+        public static final int dlg_drop_table_title=0x7f070031;
+        public static final int dlg_filter_list_tv_genre=0x7f070037;
+        public static final int dlg_filter_list_tv_history=0x7f070038;
+        public static final int dlg_filter_list_tv_store=0x7f070036;
         /**  dlg_filter_list.xml 
          */
-        public static final int dlg_filter_list_tv_title=0x7f070032;
+        public static final int dlg_filter_list_tv_title=0x7f070035;
         public static final int dlg_input_empty_cancel=0x7f07001e;
         public static final int dlg_input_empty_message=0x7f07001c;
         public static final int dlg_input_empty_reenter=0x7f07001d;
@@ -203,11 +228,11 @@ public final class R {
         public static final int dlg_reconfirm_store_name_title=0x7f07001f;
         public static final int dlg_register_genre_message=0x7f070026;
         public static final int dlg_register_genre_title=0x7f070027;
-        public static final int dlg_register_main_genres=0x7f07003b;
+        public static final int dlg_register_main_genres=0x7f07003e;
         /**  dlg_register_main.xml 
          */
-        public static final int dlg_register_main_items=0x7f070039;
-        public static final int dlg_register_main_stores=0x7f07003a;
+        public static final int dlg_register_main_items=0x7f07003c;
+        public static final int dlg_register_main_stores=0x7f07003d;
         public static final int dlg_register_store_cancel=0x7f070018;
         public static final int dlg_register_store_message=0x7f070019;
         public static final int dlg_register_store_ok=0x7f070017;
@@ -224,19 +249,39 @@ public final class R {
         public static final int hello=0x7f070008;
         /**  itemlist.xml 
          */
-        public static final int itemlist_bt_choose=0x7f07003c;
-        public static final int itemlist_bt_see_chosen=0x7f07003d;
-        /**  ItemList.java 
+        public static final int itemlist_bt_choose=0x7f07003f;
+        public static final int itemlist_bt_see_chosen=0x7f070040;
+        /**  ItemList.java: Option menu 
          */
-        public static final int menu_listitem_filter=0x7f070031;
-        public static final int sl_tv_item_db=0x7f070038;
+        public static final int menu_listitem_filter=0x7f070033;
+        public static final int menu_listitem_tabToBuy_clear_basket=0x7f070034;
+        public static final int menu_main_pref_actv=0x7f07002c;
+        public static final int menu_main_tab_actv=0x7f07002b;
+        public static final int prefs_key_bgm=0x7f070048;
+        /**  preferences.xml 
+         */
+        public static final int prefs_title_bgm=0x7f070047;
+        /**  SharedPreferencesName 
+         */
+        public static final int shared_preferences_name=0x7f070049;
+        public static final int sl_tv_item_db=0x7f07003b;
         /**  shoppinglist.xml 
          */
-        public static final int sl_tv_item_list=0x7f070036;
-        public static final int sl_tv_item_register=0x7f070037;
+        public static final int sl_tv_item_list=0x7f070039;
+        public static final int sl_tv_item_register=0x7f07003a;
+        public static final int tabactv_tab2_lv_delete_from_list=0x7f07004b;
+        /**  List: lvTab2 
+         */
+        public static final int tabactv_tab2_lv_title=0x7f07004a;
+        /**  TabActv.java 
+         */
+        public static final int tabactv_tabtags_first=0x7f07004c;
+        public static final int tabactv_tabtags_second=0x7f07004d;
         public static final int v1_btn_register=0x7f070011;
         public static final int v1_menu_1=0x7f07000a;
         public static final int v1_menu_add_genre=0x7f070025;
+        /**  menu_main.xml 
+         */
         public static final int v1_menu_db_manager=0x7f07002a;
         public static final int v1_menu_item_list=0x7f070012;
         public static final int v1_menu_register_item=0x7f07000b;
@@ -256,5 +301,6 @@ public final class R {
     }
     public static final class xml {
         public static final int furigana=0x7f040000;
+        public static final int preferences=0x7f040001;
     }
 }

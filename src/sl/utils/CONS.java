@@ -1,6 +1,13 @@
 package sl.utils;
 
+import java.util.List;
+
+import sl.adapters.ItemListAdapter2;
+import sl.adapters.ToBuyListAdapter;
+import sl.items.ShoppingItem;
+
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.widget.TabHost;
 
 public class CONS {
 
@@ -120,5 +127,29 @@ public class CONS {
 	public static final int GETYOMI_SUCCESSFUL = 1;
 	public static final int GETYOMI_NO_ENTRY = 2;
 	public static final int GETYOMI_FAILED = -1;
+
+	// TabActv.java
+	public static final int PREP_LIST_SUCCESSFUL = 1;
+	public static final int PREP_LIST_FAILED = -1;
+
+	/***************************************
+	 * TabActv.java
+	 ***************************************/
+//	public static List<Integer> tab_checkedPositions;
+	public static List<Integer> tab_checkedItemIds;
+	public static List<Integer> tab_toBuyItemIds;
 	
+	public static ItemListAdapter2 adpItems;
+	public static ToBuyListAdapter adpToBuys;
+	
+	public static List<ShoppingItem> toBuyList;
+	public static List<ShoppingItem> itemList;
+	
+	public static boolean bgm;
+	
+//	public static class VarTabActv {
+//		
+//		public static TabHost tabHost;
+//		
+//	}
 }//public class CONS

@@ -11,7 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class DialogButtonOnClickListener implements OnClickListener {
+public class
+DialogButtonOnClickListener implements OnClickListener {
 	/*----------------------------
 	 * Fields
 		----------------------------*/
@@ -233,6 +234,12 @@ public class DialogButtonOnClickListener implements OnClickListener {
 			
 			break;
 			
+		case dlg_filter_list_ok2://------------------------------------------
+			
+			Methods.filterList2(actv, dlg);
+			
+			break;
+
 		case dlg_generic_cancel://------------------------------------------
 			
 			dlg.dismiss();
@@ -250,4 +257,4 @@ public class DialogButtonOnClickListener implements OnClickListener {
 		}//switch (tag_name)
 	}
 
-}
+}//DialogButtonOnClickListener implements OnClickListener

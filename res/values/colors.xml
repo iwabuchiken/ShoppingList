@@ -18,4 +18,6 @@
 <!-- /main.xml -->
 	<color name="red">#ff0000</color>
 	<color name="yello">#ffff00</color>
+	
+	<color name="gray1">#424242</color>
 </resources>

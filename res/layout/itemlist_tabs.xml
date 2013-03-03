@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@android:id/tabhost" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	
+	<LinearLayout android:orientation="vertical"
+		android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+		
+		
+		<TabWidget android:id="@android:id/tabs"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"></TabWidget>
+		
+		<FrameLayout android:id="@android:id/tabcontent"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			
+		    <!-- Tab: Items -->
+			<LinearLayout
+			    android:id="@+id/first_content"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				
+				android:orientation="vertical"
+				>
+
+				<ListView
+				    android:id="@+id/itemlist_tab1_lv"
+				    android:layout_width="match_parent"
+				    android:layout_height="440dp" >
+
+				</ListView>
+
+				<LinearLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content"
+				    android:background="@color/darkgreen"
+				    android:gravity="center_horizontal"
+				    android:paddingBottom="5dp"
+				    android:paddingTop="5dp" >
+								
+					<ImageButton
+					    android:id="@+id/itemlist_tab1_ib"
+					    android:layout_width="wrap_content"
+					    android:layout_height="35dp"
+					    android:layout_gravity="center_vertical"
+					    android:background="@color/darkgreen"
+					    android:src="@drawable/sl_add_item_bar_150x150" />
+				
+				</LinearLayout>
+
+			</LinearLayout>
+			
+			<!-- Tab: To buy -->
+			<LinearLayout android:id="@+id/second_content"
+				android:layout_width="fill_parent" android:layout_height="wrap_content">
+				
+			    <ListView
+				    android:id="@+id/itemlist_tab2_lv"
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content" >
+				</ListView>
+				
+			</LinearLayout>
+			
+		</FrameLayout>
+		
+	</LinearLayout>
+	
+</TabHost>
