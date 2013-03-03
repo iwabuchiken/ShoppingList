@@ -227,7 +227,9 @@ public class ListOnItemClickListener implements OnItemClickListener {
 		 ***************************************/
 		int itemId = si.getId();
 		
-		if (CONS.tab_checkedItemIds.contains(itemId)) {
+//		if (CONS.tab_checkedItemIds.contains(itemId)) {
+		if (CONS.tab_checkedItemIds.contains(itemId)
+				&& !CONS.tab_toBuyItemIds.contains(itemId)) {
 			
 //			CONS.tab_checkedPositions.remove(itemId);
 			CONS.tab_checkedItemIds.remove(new Integer(itemId));
@@ -246,7 +248,9 @@ public class ListOnItemClickListener implements OnItemClickListener {
 				
 			}//if (bgm == true)
 
-		} else if (!CONS.tab_checkedItemIds.contains(itemId)) {//if (CONS.tab_checkedPositions.contains(itemId))
+//		} else if (!CONS.tab_checkedItemIds.contains(itemId)) {//if (CONS.tab_checkedPositions.contains(itemId))
+		} else if (!CONS.tab_checkedItemIds.contains(itemId)
+					&& !CONS.tab_toBuyItemIds.contains(itemId)) {//if (CONS.tab_checkedPositions.contains(itemId))
 			
 			CONS.tab_checkedItemIds.add(itemId);
 			
