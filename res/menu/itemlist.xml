@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/menu_listitem_filter" android:icon="@drawable/menu_listitem_filter_30x30_v3" android:title="@string/menu_listitem_filter"></item>
+    <item
+        android:id="@+id/menu_listitem_filter"
+		android:icon="@drawable/menu_listitem_filter_30x30_v3"
+		android:title="@string/menu_listitem_filter">
+        
+    </item>
     
-
+    <item
+        android:id="@+id/menu_listitem_tabToBuy_clear_basket"
+		android:icon="@drawable/sl_basket_empty_35x35"
+		android:title="@string/menu_listitem_tabToBuy_clear_basket">
+        
+    </item>
+    
 </menu>

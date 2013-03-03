@@ -69,8 +69,9 @@
     <string name="dlg_drop_table_title">テーブル削除</string>
     <string name="dlg_confirm_drop_table_tv_message_drop">このテーブルを削除しますか？</string>
     
-    <!-- ItemList.java -->
-    <string name="menu_listitem_filter">フィルター</string>
+    <!-- ItemList.java: Option menu -->
+    	<string name="menu_listitem_filter">フィルター</string>
+    	<string name="menu_listitem_tabToBuy_clear_basket">Clear basket</string>
     
     <!-- dlg_filter_list.xml -->
     <string name="dlg_filter_list_tv_title">フィルター</string>
