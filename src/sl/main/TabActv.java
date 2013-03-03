@@ -11,6 +11,7 @@ import sl.items.ShoppingItem;
 import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
 import sl.listeners.list.ListOnItemClickListener;
+import sl.listeners.list.ListOnItemLongClickListener;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
@@ -108,11 +109,19 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		ib_tab1Choose.setOnTouchListener(new ButtonOnTouchListener(this));
 		
 		/***************************************
-		 * Set listener: lvTab1
+		 * Set listener: lvTab2
+		 ***************************************/
+		/***************************************
+		 * Listener: Item click
 		 ***************************************/
 		lvTab2.setTag(Tags.ListTags.tab_toBuyList);
 		
 		lvTab2.setOnItemClickListener(new ListOnItemClickListener(this));
+		
+		/***************************************
+		 * Listener: Item long click
+		 ***************************************/
+		lvTab2.setOnItemLongClickListener(new ListOnItemLongClickListener(this));
 		
 	}//private void setupListeners()
 
