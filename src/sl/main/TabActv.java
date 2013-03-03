@@ -619,7 +619,19 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //			Methods.dlg_filterList2(this);
 			
 			break;
-		
+
+		case R.id.menu_listitem_tabToBuy_clear_basket:
+			
+			CONS.toBuyList.clear();
+			CONS.tab_toBuyItemIds.clear();
+			
+			CONS.adpItems.notifyDataSetChanged();
+			CONS.adpToBuys.notifyDataSetChanged();
+			
+			break;
+			
+		default:
+			break;
 		}//switch (item.getItemId())
 
 		return super.onOptionsItemSelected(item);
