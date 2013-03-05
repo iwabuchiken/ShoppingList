@@ -15,6 +15,7 @@ import sl.listeners.list.ListOnItemLongClickListener;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_dlg;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
 
@@ -630,6 +631,12 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			CONS.adpToBuys.notifyDataSetChanged();
 			
 			break;
+			
+		case R.id.menu_listitem_tabToBuy_admin_db:
+			
+			Methods_dlg.dlg_tabActv_adminDb(this);
+			
+			break;// case R.id.menu_listitem_tabToBuy_admin_db
 			
 		default:
 			break;

@@ -5,6 +5,7 @@ public class Tags {
 	public static enum DialogTags {
 		// dlg_generic
 		dlg_generic_cancel, dlg_generic_dismiss,
+		dlg_generic_dismiss_second_dialog,
 		
 		// dlg_register_store.xml
 		dlg_register_store_ok, dlg_register_store_cancel,
@@ -40,8 +41,11 @@ public class Tags {
 		// dlg_db_admin.xml
 		dlg_db_admin_lv,
 		
-		// tabactv_tab2_lv
-		dlg_tabactv_tab2_lv,
+		// TabActv.java
+		dlg_tabactv_tab2_lv, dlg_tabActv_adminDb,
+
+		// dlg_save_tobuy_list.xml
+		dlg_save_tobuy_list_bt_ok,
 		
 	}//public static enum DialogTags
 	

@@ -57,7 +57,12 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 				case dlg_filter_list_ok:
 				case dlg_filter_list_ok2:
 				case dlg_filter_list_cancel:
+				
 				case dlg_generic_cancel:
+				case dlg_generic_dismiss_second_dialog:
+				
+				case dlg_save_tobuy_list_bt_ok:
+				case dlg_generic_dismiss:
 					//
 					v.setBackgroundColor(Color.GRAY);
 					
@@ -93,8 +98,12 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 				case dlg_filter_list_ok2:
 				case dlg_filter_list_cancel:
 				
+				case dlg_save_tobuy_list_bt_ok:
 				
+				case dlg_generic_dismiss:
+
 				case dlg_generic_cancel:
+				case dlg_generic_dismiss_second_dialog:
 					//
 					v.setBackgroundColor(Color.WHITE);
 					
