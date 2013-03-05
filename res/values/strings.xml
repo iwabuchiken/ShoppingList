@@ -117,4 +117,15 @@
 	<!-- TabActv.java -->
 		<string name="tabactv_tabtags_first">First</string>
 		<string name="tabactv_tabtags_second">Second</string>
+		
+	<!-- menu_listitem_tabToBuy_admin_db -->
+		<string name="menu_listitem_tabToBuy_admin_db_save_tobuy_list">Save to-buy list</string>
+		<string name="menu_listitem_tabToBuy_admin_db_load_tobuy_list">Load to-buy list</string>
+		
+	<!-- dlg_save_tobuy_list.xml -->
+		<string name="dlg_save_tobuy_list_scheduled_date">予定日</string>	
+		<string name="dlg_save_tobuy_list_store_name">店名</string>
+		<string name="dlg_save_tobuy_list_amount">金額</string>
+		<string name="dlg_save_tobuy_list_memo">メモ</string>
+		
 </resources>

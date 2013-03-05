@@ -2,6 +2,8 @@ a
 pushd C:\WORKS\WS\WS_Android~\ShoppingList
 gitk
 
+
+
 C:\WORKS\WS\a
 C:\WORKS\PROGRAMS\FreeMind\FreeMind.exe C:\WORKS\WS\WS_Android~\FM\ShoppingList\ShoppingList.mm
 
