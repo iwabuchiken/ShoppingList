@@ -162,4 +162,22 @@ public class CONS {
 //		public static TabHost tabHost;
 //		
 //	}
+	
+	public static class DBAdmin {
+//		created_at INTEGER, modified_at INTEGER,
+		public static final
+		String[] timeStamps = {"created_at", "modified_at"};
+		
+		public static final
+		String tname_purchaseSchedule = "purchase_schedule";
+
+		public static
+		String[] col_purchaseSchedule =
+				{"store_name", "due_date", "amount", "memo", "items"};
+
+		public static
+		String[] colTypes_purchaseSchedule =
+				{"TEXT",		"INTEGER", "INTEGER", "TEXT", "TEXT"};
+
+	}
 }//public class CONS

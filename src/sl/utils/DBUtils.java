@@ -1,5 +1,6 @@
 package sl.utils;
 
+import sl.items.PS;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -286,6 +287,240 @@ public class DBUtils extends SQLiteOpenHelper {
 		
 	}//public boolean storeData(SQLiteDatabase db, String tableName, String[] cols, String[] values)
 
+	public boolean storeData_PS(String dbName, String tableName, PS ps) {
+		try {
+			
+//			getWritableDatabase();
+			SQLiteDatabase wdb = this.getWritableDatabase();
+			
+			ContentValues cv = storeData_PS__getContentValues(ps);
+			
+			//
+//			ContentValues cv = new ContentValues();
+
+//			/***************************************
+//			 * Put values
+//			 ***************************************/
+//			cv.put(
+//					CONS.DBAdmin
+//						.col_purchaseSchedule[
+//					              Methods.getArrayIndex(
+//					            		  CONS.DBAdmin.col_purchaseSchedule,
+//					            		  "store_name")],
+//					ps.getStoreName());
+//
+//			cv.put(
+//					CONS.DBAdmin
+//						.col_purchaseSchedule[
+//					              Methods.getArrayIndex(
+//					            		  CONS.DBAdmin.col_purchaseSchedule,
+//					            		  "due_date")],
+//					ps.getDueDate());
+			
+//			// Put values
+//			for (int i = 0; i < cols.length; i++) {
+//				cv.put(cols[i], values[i]);
+//			}//for (int i = 0; i < columnNames.length; i++)
+
+			//
+			wdb.beginTransaction();
+			
+			// Insert data
+			long res = wdb.insert(tableName, null, cv);
+
+			if (res != -1) {
+
+				// Set as successful
+				wdb.setTransactionSuccessful();
+
+				// End transaction
+				wdb.endTransaction();
+
+				wdb.close();
+				
+				// Log
+				Log.d("DBUtils.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Data stored => " + ps.getStoreName());
+				
+				return true;
+						
+			} else {//if (res != -1)
+				
+				// Log
+				Log.d("DBUtils.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"Insertion => Failed: " + ps.getStoreName());
+
+				wdb.close();
+				
+				return false;
+				
+			}//if (res != -1)
+			
+//			// Set as successful
+//			wdb.setTransactionSuccessful();
+//
+//			// End transaction
+//			wdb.endTransaction();
+			
+//			// Log
+//			StringBuilder sb = new StringBuilder();
+//			
+//			for (int i = 0; i < cols.length; i++) {
+//				//
+//				sb.append(cols[i] + " => " + values[i] + "/");
+//				
+//			}//for (int i = 0; i < cols.length; i++)
+//			
+//			Log.d("DBUtils.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "Stored => " + sb.toString());
+			
+//			return true;
+			
+		} catch (Exception e) {
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			return false;
+		}//try
+		
+	}//public boolean storeData(SQLiteDatabase db, String tableName, String[] cols, String[] values)
+
+	private ContentValues storeData_PS__getContentValues(PS ps) {
+		// TODO Auto-generated method stub
+		ContentValues cv = new ContentValues();
+		
+		/***************************************
+		 * Put values
+		 ***************************************/
+//		"store_name", "due_date", "amount", "memo", "items"
+		
+		cv.put(
+				CONS.DBAdmin
+					.col_purchaseSchedule[
+				              Methods.getArrayIndex(
+				            		  CONS.DBAdmin.col_purchaseSchedule,
+				            		  "store_name")],
+				ps.getStoreName());
+
+		cv.put(
+				CONS.DBAdmin
+					.col_purchaseSchedule[
+				              Methods.getArrayIndex(
+				            		  CONS.DBAdmin.col_purchaseSchedule,
+				            		  "due_date")],
+				ps.getDueDate());
+
+		cv.put(
+				CONS.DBAdmin
+					.col_purchaseSchedule[
+				              Methods.getArrayIndex(
+				            		  CONS.DBAdmin.col_purchaseSchedule,
+				            		  "amount")],
+				ps.getAmount());
+		
+		cv.put(
+				CONS.DBAdmin
+					.col_purchaseSchedule[
+				              Methods.getArrayIndex(
+				            		  CONS.DBAdmin.col_purchaseSchedule,
+				            		  "memo")],
+				ps.getMemo());
+
+		cv.put(
+				CONS.DBAdmin
+					.col_purchaseSchedule[
+				              Methods.getArrayIndex(
+				            		  CONS.DBAdmin.col_purchaseSchedule,
+				            		  "items")],
+				ps.getItems());
+		
+		return cv;
+		
+	}//private ContentValues storeData_PS__getContentValues(PS ps)
+	
+
+	public boolean
+	storeData_withTimeStamp
+	(SQLiteDatabase db, String tableName,
+			String[] cols, String[] values) {
+		try {
+			//
+			db.beginTransaction();
+			
+			//
+			ContentValues cv = new ContentValues();
+			
+			/***************************************
+			 * Time stamps
+			 ***************************************/
+			// "created_at"
+			cv.put(
+					CONS.DBAdmin.timeStamps[0],
+					Methods.getMillSeconds_now());
+
+			// "modified_at"
+			cv.put(
+					CONS.DBAdmin.timeStamps[1],
+					Methods.getMillSeconds_now());
+
+			/***************************************
+			 * Other values
+			 ***************************************/
+			// Put values
+			for (int i = 0; i < cols.length; i++) {
+				cv.put(cols[i], values[i]);
+			}//for (int i = 0; i < columnNames.length; i++)
+
+			// Insert data
+			db.insert(tableName, null, cv);
+			
+			// Set as successful
+			db.setTransactionSuccessful();
+
+			// End transaction
+			db.endTransaction();
+			
+			// Log
+			StringBuilder sb = new StringBuilder();
+			
+			for (int i = 0; i < cols.length; i++) {
+				//
+				sb.append(cols[i] + " => " + values[i] + "/");
+				
+			}//for (int i = 0; i < cols.length; i++)
+			
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Stored => " + sb.toString());
+			
+			return true;
+			
+		} catch (Exception e) {
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			return false;
+		}//try
+		
+	}//storeData_withTimeStamp(SQLiteDatabase db, String tableName, String[] cols, String[] values)
+
 	public Cursor getAllData(
 					SQLiteDatabase db, String tableName, String[] cols) {
 		//
@@ -489,6 +724,80 @@ public class DBUtils extends SQLiteOpenHelper {
 		}//try
 		
 	}//public int updateData_shoppingItem
+
+	public boolean createTable(
+			SQLiteDatabase db, String tableName, String[] columns, String[] types) {
+		/*----------------------------
+		 * Steps
+		 * 1. Table exists?
+		 * 2. Build sql
+		 * 3. Exec sql
+			----------------------------*/
+		
+		//
+		//if (!tableExists(db, tableName)) {
+		if (tableExists(db, tableName)) {
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Table exists => " + tableName);
+			
+			return false;
+		}//if (!tableExists(SQLiteDatabase db, String tableName))
+		
+		/*----------------------------
+		 * 2. Build sql
+			----------------------------*/
+		//
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("CREATE TABLE " + tableName + " (");
+		sb.append(android.provider.BaseColumns._ID +
+							" INTEGER PRIMARY KEY AUTOINCREMENT, ");
+		
+		// created_at, modified_at
+		sb.append("created_at INTEGER, modified_at INTEGER, ");
+		
+		int i = 0;
+		for (i = 0; i < columns.length - 1; i++) {
+			sb.append(columns[i] + " " + types[i] + ", ");
+		}//for (int i = 0; i < columns.length - 1; i++)
+		
+		sb.append(columns[i] + " " + types[i]);
+		
+		sb.append(");");
+		
+		// Log
+		Log.d("DBUtils.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "sql => " + sb.toString());
+		
+		/*----------------------------
+		 * 3. Exec sql
+			----------------------------*/
+		//
+		try {
+		//	db.execSQL(sql);
+			db.execSQL(sb.toString());
+			
+			// Log
+			Log.d(this.getClass().getName() + 
+					"["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Table created => " + tableName);
+			
+			
+			return true;
+		} catch (SQLException e) {
+			// Log
+			Log.d(this.getClass().getName() + 
+					"[" + Thread.currentThread().getStackTrace()[2].getLineNumber() + "]", 
+					"Exception => " + e.toString());
+			
+			return false;
+		}//try
+		
+	}//public boolean createTable(SQLiteDatabase db, String tableName)
 
 }//public class DBUtils extends SQLiteOpenHelper
 

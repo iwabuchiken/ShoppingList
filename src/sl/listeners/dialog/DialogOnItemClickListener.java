@@ -189,6 +189,15 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		if (choice.equals(
 					actv.getString(R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list))) {
 			
+			if (CONS.toBuyList.size() < 1) {
+				
+				// debug
+				Toast.makeText(actv, "Seems basket is empty", Toast.LENGTH_LONG).show();
+				
+				return;
+				
+			}//if (CONS.toBuyList.size() == condition)
+			
 			Methods_dlg.dlg_saveToBuyList(actv, dlg);
 			
 		} else if (choice.equals(

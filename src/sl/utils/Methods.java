@@ -2619,5 +2619,63 @@ public class Methods {
 		return new int[]{w, h};
 
 	}//getDisplaySize(Activity actv)
-	
+
+	public static boolean createTable(Activity actv, String dbName,
+			String t_name, String[] colNames, String[] colTypes) {
+
+		// db setup
+		DBUtils dbu = new DBUtils(actv, dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		// Create a table
+		boolean res = dbu.createTable(wdb, t_name, 
+//					dbu.get_cols(), dbu.get_col_types());
+				colNames, colTypes);
+		
+		// Close db
+		wdb.close();
+		
+		// Return
+		return res;
+
+	}//public static boolean create_table
+
+	public static int getTableSize(Activity actv, String dbName,
+			String tname) {
+		// TODO Auto-generated method stub
+		
+		int count = -1;
+		
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+
+		String sql = "SELECT * FROM " + tname;
+		
+		
+		try {
+			
+			c = rdb.rawQuery(sql, null);
+
+			count = c.getCount();
+
+		} catch (Exception e) {
+			
+			// Log
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+		} finally {
+			
+			rdb.close();
+			
+			return count;
+		}
+
+	}//public static int getTableSize
+
 }//public class Methods

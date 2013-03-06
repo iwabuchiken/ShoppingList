@@ -91,10 +91,48 @@ public class MainActv extends Activity {
 //        debug_restore_db();
 //		debug_B13_v_1_0();
         
+		//admin
+//		admin_createTable_purchaseSchedule();
 		
     }//public void onCreate(Bundle savedInstanceState)
 
     
+	private void admin_createTable_purchaseSchedule() {
+		// TODO Auto-generated method stub
+		
+		boolean res =
+				Methods.createTable(
+							this,
+							CONS.dbName,
+							CONS.DBAdmin.tname_purchaseSchedule,
+							CONS.DBAdmin.col_purchaseSchedule,
+							CONS.DBAdmin.colTypes_purchaseSchedule);
+		
+		if (res == true) {
+			
+			// Log
+			Log.d("MainActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Table created => " + CONS.DBAdmin.tname_purchaseSchedule);
+			
+		} else {//if (res == true)
+			
+			// Log
+			Log.d("MainActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"Table creation failed => " + CONS.DBAdmin.tname_purchaseSchedule);
+			
+		}//if (res == true)
+		
+	}//private void admin_createTable_purchaseSchedule()
+
+
 	private void debug_B13_v_1_0() {
 		
 		File f = new File(CONS.dirPath_db);
@@ -590,4 +628,4 @@ public class MainActv extends Activity {
     
     
     
-}//public class ShoppingListActivity extends ListActivity
+}//public class MainActv extends Activity
