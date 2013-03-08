@@ -29,22 +29,17 @@
         android:id="@+id/dlg_db_admin_bt_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        
-		android:layout_gravity="center_horizontal"
-        
-        android:text="@string/generic_cancel"
-        android:textSize="25sp" 
-        android:textColor="@color/red"
-        
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="0dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        
+        android:layout_marginTop="15dp"
         android:paddingBottom="5dp"
-        android:paddingTop="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        />
+        android:paddingTop="5dp"
+        android:text="@string/generic_cancel"
+        android:textColor="@color/red"
+        android:textSize="25sp" />
 
 </LinearLayout>

@@ -201,7 +201,9 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			Methods_dlg.dlg_saveToBuyList(actv, dlg);
 			
 		} else if (choice.equals(
-					actv.getString(R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list))) {
+					actv.getString(R.string.menu_listitem_tabToBuy_admin_db_load_tobuy_list))) {
+			
+			Methods_dlg.dlg_LoadToBuyList(actv, dlg);
 			
 		}//if (choice.equals(actv.getString(R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list)))
 		

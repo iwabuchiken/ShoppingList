@@ -1,5 +1,8 @@
 package sl.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import sl.items.PS;
 import android.app.Activity;
 import android.content.ContentValues;
@@ -798,6 +801,95 @@ public class DBUtils extends SQLiteOpenHelper {
 		}//try
 		
 	}//public boolean createTable(SQLiteDatabase db, String tableName)
+
+	
+	public List<PS> getPSList(Activity actv) {
+		
+		SQLiteDatabase rdb = this.getReadableDatabase();
+
+		Cursor c = null;
+		
+		try {
+			
+			c = rdb.query(
+							CONS.DBAdmin.tname_purchaseSchedule,
+							CONS.DBAdmin.col_purchaseSchedule,
+							null, null, null, null, null);
+			
+		} catch (Exception e) {
+
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			rdb.close();
+			
+			return null;
+			
+		}//try
+		
+		/***************************************
+		 * Validate
+		 * 	Cursor => Null?
+		 * 	Entry => 0?
+		 ***************************************/
+		if (c == null) {
+			
+			// Log
+			Log.e("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Query failed");
+			
+			rdb.close();
+			
+			return null;
+			
+		} else if (c.getCount() < 1) {//if (c == null)
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "No entry in the table");
+			
+			rdb.close();
+			
+			return null;
+			
+		}//if (c == null)
+		
+		/***************************************
+		 * Build list
+		 ***************************************/
+		c.moveToFirst();
+		
+		List<PS> psList = new ArrayList<PS>();
+		
+		for (int i = 0; i < c.getCount(); i++) {
+			
+			PS ps = new PS();
+			
+			ps.setStoreName(c.getString(c.getColumnIndex("store_name")));
+			ps.setDueDate(c.getInt(c.getColumnIndex("due_date")));
+			ps.setAmount(c.getInt(c.getColumnIndex("amount")));
+			ps.setMemo(c.getString(c.getColumnIndex("memo")));
+			ps.setItems(c.getString(c.getColumnIndex("items")));
+			
+			psList.add(ps);
+			
+			c.moveToNext();
+			
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		return psList;
+		
+	}//public List<PS> getPSList(Activity actv)
 
 }//public class DBUtils extends SQLiteOpenHelper
 

@@ -2678,4 +2678,28 @@ public class Methods {
 
 	}//public static int getTableSize
 
+	
+	public static int
+	getSmallerNumber(int i, int j)
+			throws NumberFormatException{
+		
+		if (Methods.is_numeric(String.valueOf(i)) == false
+				|| Methods.is_numeric(String.valueOf(j)) == false) {
+			
+			throw new NumberFormatException("Not a number");
+			
+		}//if (Methods.is_numeric(String.valueOf(i)) == false \)
+		
+		if (i > j) {
+			
+			return j;
+			
+		} else {//if (i > j)
+			
+			return i;
+			
+		}//if (i > j)
+		
+	}//public static int getSmallerNumber(int i, int j)
+
 }//public class Methods

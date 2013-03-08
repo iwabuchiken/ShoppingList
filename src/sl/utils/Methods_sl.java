@@ -37,6 +37,7 @@ import android.widget.Toast;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import sl.items.PS;
 import sl.items.ShoppingItem;
 import sl.main.MainActv;
 import sl.main.R;
@@ -1933,5 +1934,15 @@ public class Methods_sl {
 		
 		
 	}//public static void updateToBuyList(Activity actv)
+
+	
+	public static List<PS> getPSList(Activity actv) {
+		
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		return dbu.getPSList(actv);
+		
+//		return null;
+	}//public static List<PS> getPSList(Activity actv)
 
 }//public class Methods_sl

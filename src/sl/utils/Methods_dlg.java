@@ -3,6 +3,8 @@ package sl.utils;
 import java.util.ArrayList;
 import java.util.List;
 
+import sl.adapters.PSListAdapter;
+import sl.items.PS;
 import sl.items.ShoppingItem;
 import sl.listeners.dialog.DialogButtonOnClickListener;
 import sl.listeners.dialog.DialogButtonOnTouchListener;
@@ -17,11 +19,14 @@ import android.app.Dialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Methods_dlg {
 
@@ -202,6 +207,52 @@ public class Methods_dlg {
 		return dlg;
 	
 	}//public static Dialog dlg_template_okCancel()
+
+	
+	public static
+	Dialog dlg_template_cancel_2Dialogues
+	(Activity actv, int layoutId, int titleStringId,
+			int cancelButtonId, DialogTags cancelTag, Dialog dlg1) {
+		/*----------------------------
+		* Steps
+		* 1. Set up
+		* 2. Add listeners => OnTouch
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		
+		// 
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(layoutId);
+		
+		// Title
+		dlg2.setTitle(titleStringId);
+		
+		/*----------------------------
+		* 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_cancel = (Button) dlg2.findViewById(cancelButtonId);
+		
+		//
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_cancel.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg2));
+		
+		/*----------------------------
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg1, dlg2));
+		
+		//
+		//dlg2.show();
+		
+		return dlg2;
+	
+	}//public static Dialog dlg_template_cancel_2Dialogues
 
 
 	public static Dialog dlg_template_cancel(Activity actv, int layoutId, String title,
@@ -534,5 +585,85 @@ public class Methods_dlg {
 		return dlg2;
 	
 	}//public static Dialog dlg_template_okCancel()
+
+	
+	public static void
+	dlg_LoadToBuyList(Activity actv, Dialog dlg1) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * 1. Get cursor
+		 * 2. Build a PS list
+		 * 3. Show the list in the dialog
+		 ***************************************/
+//		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		List<PS> psList = Methods_sl.getPSList(actv);
+	
+//		// Log
+//		Log.d("Methods_dlg.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "psList.size()=" + psList.size());
+		
+		if (psList == null) {
+			
+			// debug
+			Toast.makeText(
+						actv,
+						"Build list => Failed",
+						Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}//if (psList == null)
+		
+		/***************************************
+		 * 3. Show the list in the dialog
+		 ***************************************/
+//		(Activity actv, int layoutId, int titleStringId,
+//				int cancelButtonId, DialogTags cancelTag, Dialog dlg1)
+		Dialog dlg2 = Methods_dlg.dlg_template_cancel_2Dialogues(
+				actv,
+				R.layout.dlg_db_admin, 
+//				R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list,
+				R.string.menu_listitem_tabToBuy_admin_db_load_tobuy_list,
+				
+				R.id.dlg_db_admin_bt_cancel,
+//				dlg_generic_dismiss
+//				Tags.DialogTags.dlg_generic_dismiss,
+				Tags.DialogTags.dlg_generic_dismiss_second_dialog,
+				
+				dlg1);
+
+		/***************************************
+		 * Set list
+		 ***************************************/
+		PSListAdapter adp = new PSListAdapter(
+				actv,
+				R.layout.listrow_load_tobuy_list,
+				psList
+				);
+		
+		ListView lv = (ListView) dlg2.findViewById(R.id.dlg_db_admin_lv);
+		
+		int lvWidth = Methods.getSmallerNumber(350, 75 * psList.size());
+		
+		lv.setLayoutParams(new LinearLayout.LayoutParams(
+										LayoutParams.WRAP_CONTENT,
+//										300));
+										lvWidth));
+		
+		
+		
+		lv.setAdapter(adp);
+		
+		/***************************************
+		 * Show dialog
+		 ***************************************/
+		dlg2.show();
+		
+		
+	}//dlg_LoadToBuyList(Activity actv, Dialog dlg)
 
 }//public class Methods_dlg
