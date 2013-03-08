@@ -290,17 +290,17 @@ DialogButtonOnClickListener implements OnClickListener {
 		int month = dp.getMonth();
 //		int month = dp.getMonth() + 1;
 		int day = dp.getDayOfMonth();
-//		// Log
-//		Log.d("DialogButtonOnClickListener.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]",
-//				"year=" + year
-//				+ "/"
-//				+ "month=" + month
-//				+ "/"
-//				+ "day=" + day);
+		// Log
+		Log.d("DialogButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"year=" + year
+				+ "/"
+				+ "month=" + month
+				+ "/"
+				+ "day=" + day);
 
 		Calendar cal = Calendar.getInstance();
 		

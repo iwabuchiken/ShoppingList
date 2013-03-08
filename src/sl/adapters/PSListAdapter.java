@@ -7,6 +7,7 @@ import sl.items.ShoppingItem;
 import sl.main.ItemListActv;
 import sl.main.R;
 import sl.main.R.id;
+import sl.utils.Methods;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -65,8 +66,15 @@ public class PSListAdapter extends ArrayAdapter<PS> {
 
         tvStoreName.setText(ps.getStoreName());
         
-        tvDueDate.setText(String.valueOf(ps.getDueDate()));
+//        tvDueDate.setText(String.valueOf(ps.getDueDate()));
+        tvDueDate.setText(Methods.getTimeLabel_Japanese(ps.getDueDate()));
         
+        // Log
+		Log.d("PSListAdapter.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "duedate=" + ps.getDueDate());
         
 		return convertView;
 //		return super.getView(position, convertView, parent);

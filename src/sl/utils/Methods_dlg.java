@@ -598,7 +598,17 @@ public class Methods_dlg {
 //		DBUtils dbu = new DBUtils(actv, CONS.dbName);
 		
 		List<PS> psList = Methods_sl.getPSList(actv);
-	
+
+		for (PS item : psList) {
+			
+			// Log
+			Log.d("Methods_dlg.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "item.getDueDate()=" + item.getDueDate());
+			
+		}//for (PS item : psList)
 //		// Log
 //		Log.d("Methods_dlg.java" + "["
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()

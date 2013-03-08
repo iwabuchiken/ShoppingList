@@ -876,12 +876,27 @@ public class DBUtils extends SQLiteOpenHelper {
 			PS ps = new PS();
 			
 			ps.setStoreName(c.getString(c.getColumnIndex("store_name")));
-			ps.setDueDate(c.getInt(c.getColumnIndex("due_date")));
+//			ps.setDueDate(c.getInt(c.getColumnIndex("due_date")));
+			ps.setDueDate(c.getLong(c.getColumnIndex("due_date")));
 			ps.setAmount(c.getInt(c.getColumnIndex("amount")));
 			ps.setMemo(c.getString(c.getColumnIndex("memo")));
 			ps.setItems(c.getString(c.getColumnIndex("items")));
 			
 			psList.add(ps);
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"ColumnIndex(\"due_date\")="
+					+ c.getColumnIndex("due_date")
+					+ "/"
+//					+ "c.getInt(c.getColumnIndex(\"due_date\"))="
+					+ "c.getLong(c.getColumnIndex(\"due_date\"))="
+//					+ c.getInt(c.getColumnIndex("due_date")));
+					+ c.getLong(c.getColumnIndex("due_date")));
 			
 			c.moveToNext();
 			

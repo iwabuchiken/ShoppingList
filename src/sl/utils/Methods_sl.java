@@ -1940,7 +1940,12 @@ public class Methods_sl {
 		
 		DBUtils dbu = new DBUtils(actv, CONS.dbName);
 		
-		return dbu.getPSList(actv);
+		List<PS> psList = dbu.getPSList(actv);
+		
+		dbu.close();
+		
+//		return dbu.getPSList(actv);
+		return psList;
 		
 //		return null;
 	}//public static List<PS> getPSList(Activity actv)

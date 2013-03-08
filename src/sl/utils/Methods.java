@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -2159,6 +2160,17 @@ public class Methods {
 		
 	}//public static String get_TimeLabel(long millSec)
 
+	public static String getTimeLabel_Japanese(long millSec) {
+		
+		
+//		 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd_HHmmss");
+//		SimpleDateFormat sdf1 = new SimpleDateFormat("MM月dd日", Locale.JAPAN);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("M月d日", Locale.JAPAN);
+		
+		return sdf1.format(new Date(millSec));
+		
+	}//public static String get_TimeLabel(long millSec)
+
 	public static int getArrayIndex(String[] targetArray, String targetString) {
 		int index = -1;
 		
@@ -2685,7 +2697,7 @@ public class Methods {
 		
 		if (Methods.is_numeric(String.valueOf(i)) == false
 				|| Methods.is_numeric(String.valueOf(j)) == false) {
-			
+			// REF=> http://www.tohoho-web.com/java/exception.htm
 			throw new NumberFormatException("Not a number");
 			
 		}//if (Methods.is_numeric(String.valueOf(i)) == false \)
