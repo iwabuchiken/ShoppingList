@@ -599,34 +599,27 @@ public class Methods_dlg {
 		
 		List<PS> psList = Methods_sl.getPSList(actv);
 
-		for (PS item : psList) {
-			
-			// Log
-			Log.d("Methods_dlg.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "item.getDueDate()=" + item.getDueDate());
-			
-		}//for (PS item : psList)
+		/***************************************
+		 * Sort list
+		 ***************************************/
+		Methods_sl.sortPSList(psList, Tags.SortTags.pslist_due_date);
+		
+//		for (PS item : psList) {
+//			
+//			// Log
+//			Log.d("Methods_dlg.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "item.getDueDate()=" + item.getDueDate());
+//			
+//		}//for (PS item : psList)
 //		// Log
 //		Log.d("Methods_dlg.java" + "["
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //				+ ":"
 //				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 //				+ "]", "psList.size()=" + psList.size());
-		
-		if (psList == null) {
-			
-			// debug
-			Toast.makeText(
-						actv,
-						"Build list => Failed",
-						Toast.LENGTH_LONG).show();
-			
-			return;
-			
-		}//if (psList == null)
 		
 		/***************************************
 		 * 3. Show the list in the dialog
@@ -657,12 +650,12 @@ public class Methods_dlg {
 		
 		ListView lv = (ListView) dlg2.findViewById(R.id.dlg_db_admin_lv);
 		
-		int lvWidth = Methods.getSmallerNumber(350, 75 * psList.size());
+		int lvHeight = Methods.getSmallerNumber(350, 75 * psList.size());
 		
 		lv.setLayoutParams(new LinearLayout.LayoutParams(
-										LayoutParams.WRAP_CONTENT,
+										LayoutParams.WRAP_CONTENT,	// Width
 //										300));
-										lvWidth));
+										lvHeight));					// Height
 		
 		
 		

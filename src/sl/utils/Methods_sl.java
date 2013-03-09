@@ -41,6 +41,7 @@ import sl.items.PS;
 import sl.items.ShoppingItem;
 import sl.main.MainActv;
 import sl.main.R;
+import sl.utils.Tags.SortTags;
 
 public class Methods_sl {
 
@@ -1949,5 +1950,48 @@ public class Methods_sl {
 		
 //		return null;
 	}//public static List<PS> getPSList(Activity actv)
+
+	
+	public static void sortPSList(List<PS> psList, SortTags sortOrder) {
+		
+		switch (sortOrder) {
+		
+		case pslist_store_name:
+
+			Collections.sort(psList, new Comparator<PS>(){
+
+//				@Override
+				public int compare(PS i1, PS i2) {
+
+					
+					return (int) (i1.getStoreName().compareToIgnoreCase(i2.getStoreName()));
+				}//public int compare(PS i1, PS i2)
+
+			});//Collections.sort()
+			
+			break;
+
+		case pslist_due_date:
+
+			Collections.sort(psList, new Comparator<PS>(){
+
+//				@Override
+				public int compare(PS i1, PS i2) {
+
+					
+					return (int) (i1.getDueDate() - i2.getDueDate());
+					
+				}//public int compare(PS i1, PS i2)
+
+			});//Collections.sort()
+			
+			break;
+
+		default:
+			break;
+			
+		}//switch (sortOrder)
+			
+	}//public static void sortPSList(List<PS> psList, SortTags sortOrder)
 
 }//public class Methods_sl

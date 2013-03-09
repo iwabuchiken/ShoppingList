@@ -69,12 +69,12 @@ public class PSListAdapter extends ArrayAdapter<PS> {
 //        tvDueDate.setText(String.valueOf(ps.getDueDate()));
         tvDueDate.setText(Methods.getTimeLabel_Japanese(ps.getDueDate()));
         
-        // Log
-		Log.d("PSListAdapter.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "duedate=" + ps.getDueDate());
+//        // Log
+//		Log.d("PSListAdapter.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "duedate=" + ps.getDueDate());
         
 		return convertView;
 //		return super.getView(position, convertView, parent);

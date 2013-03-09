@@ -2165,7 +2165,7 @@ public class Methods {
 		
 //		 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd_HHmmss");
 //		SimpleDateFormat sdf1 = new SimpleDateFormat("MM月dd日", Locale.JAPAN);
-		SimpleDateFormat sdf1 = new SimpleDateFormat("M月d日", Locale.JAPAN);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("M月d日(E)", Locale.JAPAN);
 		
 		return sdf1.format(new Date(millSec));
 		

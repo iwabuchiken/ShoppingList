@@ -73,4 +73,9 @@ public class Tags {
 		tab_itemList, tab_toBuyList,
 	}
 	
+	public static enum SortTags {
+		//
+		pslist_store_name, pslist_due_date,
+		
+	}
 }//public class Tags
