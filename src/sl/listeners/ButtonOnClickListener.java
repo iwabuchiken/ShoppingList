@@ -292,6 +292,7 @@ public class ButtonOnClickListener implements OnClickListener {
 		
 		/***************************************
 		 * Notify adapter: adpItems
+		 * 	=> The background of the items go green 
 		 ***************************************/
 		CONS.adpItems.notifyDataSetChanged();
 		

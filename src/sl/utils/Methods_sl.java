@@ -1931,8 +1931,6 @@ public class Methods_sl {
 
 		//
 		rdb.close();
-
-		
 		
 	}//public static void updateToBuyList(Activity actv)
 
@@ -1993,5 +1991,56 @@ public class Methods_sl {
 		}//switch (sortOrder)
 			
 	}//public static void sortPSList(List<PS> psList, SortTags sortOrder)
+
+	
+	public static
+	List<ShoppingItem> getSIListFromItemList
+	(Activity actv, String s_ItemList) {
+		// TODO Auto-generated method stub
+		String[] ary_ItemList = s_ItemList.split(" ");
+		
+		List<ShoppingItem> siList = new ArrayList<ShoppingItem>();
+		
+		/***************************************
+		 * Setup db
+		 ***************************************/
+		DBUtils dbu = new DBUtils(actv);
+		
+//		SQLiteDatabase rdb = dbu.getReadableDatabase();
+		
+		for (int i = 0; i < ary_ItemList.length; i++) {
+			
+			ShoppingItem si = dbu.getSIFromDbId(ary_ItemList[i]);
+			
+			if (si == null) {
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "si => null");
+				
+				continue;
+				
+			}//if (si == null)
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "si.getName()=" + si.getName());
+			
+			siList.add(si);
+			
+		}//for (int i = 0; i < ary_ItemList.length; i++)
+
+
+		return siList;
+		
+	}//public static List<ShoppingItem> getSIListFromItemList
 
 }//public class Methods_sl

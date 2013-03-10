@@ -57,6 +57,10 @@ public class ShoppingItem {
 
 	}
 
+	public ShoppingItem() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getStore() {
 		return store;
 	}

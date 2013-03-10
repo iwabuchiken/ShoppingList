@@ -9,6 +9,7 @@ import sl.items.ShoppingItem;
 import sl.listeners.dialog.DialogButtonOnClickListener;
 import sl.listeners.dialog.DialogButtonOnTouchListener;
 import sl.listeners.dialog.DialogOnItemClickListener;
+import sl.listeners.list.ListOnItemClickListener;
 import sl.main.R;
 import sl.main.RegisterItemActv;
 import sl.utils.Tags;
@@ -678,6 +679,9 @@ public class Methods_dlg {
 //										300));
 										lvHeight));					// Height
 		
+		lv.setTag(Tags.ListTags.load_toBuyList);
+		
+		lv.setOnItemClickListener(new ListOnItemClickListener(actv, dlg1, dlg2));
 		
 		
 		lv.setAdapter(adp);

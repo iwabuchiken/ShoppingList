@@ -180,4 +180,10 @@ public class CONS {
 				{"TEXT",		"INTEGER", "INTEGER", "TEXT", "TEXT"};
 
 	}
+	
+	public static class MagicConstants {
+		
+		public static int MODIFY_TAB2_LV_HEIGHT = 150;
+		
+	}
 }//public class CONS

@@ -71,6 +71,7 @@ public class Tags {
 	public static enum ListTags {
 		// TabActv.java
 		tab_itemList, tab_toBuyList,
+		load_toBuyList,
 	}
 	
 	public static enum SortTags {
