@@ -162,6 +162,11 @@ public class Methods_dlg {
 			----------------------------*/
 		dlg.show();
 		
+		//debug
+//		DBUtils.dropTable(actv, CONS.dbName, CONS.DBAdmin.tname_purchaseSchedule);
+		
+		//debug
+		
 		
 	}//public static void dlg_tabActv_adminDb(Activity actv)
 
@@ -599,6 +604,22 @@ public class Methods_dlg {
 		
 		List<PS> psList = Methods_sl.getPSList(actv);
 
+		if (psList == null) {
+			
+			// Log
+			Log.d("Methods_dlg.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "psList => Null");
+			
+			// debug
+			Toast.makeText(actv, "Seems no purchase list", Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}//if (psList == null)
+		
 		/***************************************
 		 * Sort list
 		 ***************************************/

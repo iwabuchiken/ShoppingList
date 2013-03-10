@@ -281,7 +281,7 @@ public class DBUtils extends SQLiteOpenHelper {
 			
 		} catch (Exception e) {
 			// Log
-			Log.d("DBUtils.java" + "["
+			Log.e("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Exception => " + e.toString());
 			
@@ -394,7 +394,7 @@ public class DBUtils extends SQLiteOpenHelper {
 			
 		} catch (Exception e) {
 			// Log
-			Log.d("DBUtils.java" + "["
+			Log.e("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Exception => " + e.toString());
 			
@@ -515,7 +515,7 @@ public class DBUtils extends SQLiteOpenHelper {
 			
 		} catch (Exception e) {
 			// Log
-			Log.d("DBUtils.java" + "["
+			Log.e("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "Exception => " + e.toString());
 			
@@ -588,6 +588,81 @@ public class DBUtils extends SQLiteOpenHelper {
 						"DROP TABLE => failed(table=" + tableName, 
 						3000).show();
 			
+			// Return
+			return false;
+		}//try
+
+	}//public boolean dropTable(String tableName) 
+
+	public static boolean dropTable(Activity actv, String dbName, String tableName) {
+		
+		/*********************************
+		 * Setup DB
+		 *********************************/
+		DBUtils dbu = new DBUtils(actv, dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		
+		/*------------------------------
+		 * The table exists?
+		 *------------------------------*/
+		// The table exists?
+		boolean tempBool = dbu.tableExists(wdb, tableName);
+		
+		if (tempBool == true) {
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Table exists: " + tableName);
+			
+		} else {//if (tempBool == true)
+			// Log
+			Log.e("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Table doesn't exist: " + tableName);
+			
+			return false;
+		}
+
+		/***************************************
+		 * Drop the table
+		 ***************************************/
+		// Define the sql
+        String sql 
+             = "DROP TABLE " + tableName;
+        
+        // Execute
+        try {
+			wdb.execSQL(sql);
+			
+			// Vacuum
+			wdb.execSQL("VACUUM");
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "The table dropped => " + tableName);
+			
+			wdb.close();
+			
+			// Return
+			return true;
+			
+		} catch (SQLException e) {
+			// TODO �����������ꂽ catch �u���b�N
+			// Log
+			Log.e("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "DROP TABLE => failed (table=" + tableName + "): " + e.toString());
+			
+			// debug
+			Toast.makeText(actv, 
+						"DROP TABLE => failed(table=" + tableName, 
+						3000).show();
+
+			wdb.close();
+
 			// Return
 			return false;
 		}//try
@@ -819,7 +894,7 @@ public class DBUtils extends SQLiteOpenHelper {
 		} catch (Exception e) {
 
 			// Log
-			Log.d("DBUtils.java" + "["
+			Log.e("DBUtils.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()

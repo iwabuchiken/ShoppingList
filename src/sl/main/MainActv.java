@@ -92,7 +92,7 @@ public class MainActv extends Activity {
 //		debug_B13_v_1_0();
         
 		//admin
-//		admin_createTable_purchaseSchedule();
+		admin_createTable_purchaseSchedule();
 		
     }//public void onCreate(Bundle savedInstanceState)
 
