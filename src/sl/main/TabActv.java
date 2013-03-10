@@ -766,13 +766,15 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			
 			break;
 
-		case R.id.menu_listitem_tabToBuy_clear_basket:
+		case R.id.menu_listitem_tabToBuy_clear_selections:
+
+			Methods_dlg.dlg_tabActv_clearSelections(this);
 			
-			CONS.toBuyList.clear();
-			CONS.tab_toBuyItemIds.clear();
-			
-			CONS.adpItems.notifyDataSetChanged();
-			CONS.adpToBuys.notifyDataSetChanged();
+//			CONS.toBuyList.clear();
+//			CONS.tab_toBuyItemIds.clear();
+//			
+//			CONS.adpItems.notifyDataSetChanged();
+//			CONS.adpToBuys.notifyDataSetChanged();
 			
 			break;
 			

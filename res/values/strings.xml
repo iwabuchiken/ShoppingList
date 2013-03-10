@@ -71,8 +71,11 @@
     
     <!-- ItemList.java: Option menu -->
     	<string name="menu_listitem_filter">フィルター</string>
-    	<string name="menu_listitem_tabToBuy_clear_basket">Clear basket</string>
+    	<string name="menu_listitem_tabToBuy_clear_selections">Clear selections</string>
     	<string name="menu_listitem_tabToBuy_admin_db">Admin db</string>
+    	
+    	<string name="menu_listitem_tabToBuy_clear_basket">Basket</string>
+    	<string name="menu_listitem_tabToBuy_clear_checked_items">Checked items</string>
     
     <!-- dlg_filter_list.xml -->
     <string name="dlg_filter_list_tv_title">フィルター</string>

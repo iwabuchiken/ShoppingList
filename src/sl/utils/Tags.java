@@ -47,6 +47,9 @@ public class Tags {
 		// dlg_save_tobuy_list.xml
 		dlg_save_tobuy_list_bt_ok,
 		
+		// dlg_clear_selections
+		dlg_clear_selections,
+		
 	}//public static enum DialogTags
 	
 	public static enum ButtonTags {

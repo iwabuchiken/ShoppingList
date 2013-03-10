@@ -127,6 +127,14 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 				
 				break;
 				
+			case dlg_clear_selections:
+				
+				choice = (String) parent.getItemAtPosition(position);
+				
+				case_dlg_clear_selections(choice);
+				
+				break;// case dlg_clear_selections
+				
 			default:
 				break;
 			}//switch (tag)
@@ -180,6 +188,38 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		}//if (dlgName != null && dlgName == "confirm_table_drop")
 		
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+	private void case_dlg_clear_selections(String choice) {
+		// TODO Auto-generated method stub
+		if (choice.equals(actv.getString(
+					R.string.menu_listitem_tabToBuy_clear_basket))) {
+			
+			CONS.toBuyList.clear();
+			CONS.tab_toBuyItemIds.clear();
+			
+			CONS.adpItems.notifyDataSetChanged();
+			CONS.adpToBuys.notifyDataSetChanged();
+			
+			/***************************************
+			 * Close dialog
+			 ***************************************/
+			dlg.dismiss();
+			
+		} else if (choice.equals(actv.getString(
+				R.string.menu_listitem_tabToBuy_clear_checked_items))) {//if (choice.equals(actv.getString(
+			
+			CONS.tab_checkedItemIds.clear();
+			
+			CONS.adpItems.notifyDataSetChanged();
+
+			/***************************************
+			 * Close dialog
+			 ***************************************/
+			dlg.dismiss();
+
+		}//if (choice.equals(actv.getString(
+		
+	}//private void case_dlg_clear_selections(String choice)
 
 	private void case_dlg_tabActv_adminDb(String choice) {
 		// TODO Auto-generated method stub

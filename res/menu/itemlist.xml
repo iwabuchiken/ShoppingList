@@ -8,9 +8,9 @@
     </item>
     
     <item
-        android:id="@+id/menu_listitem_tabToBuy_clear_basket"
+        android:id="@+id/menu_listitem_tabToBuy_clear_selections"
 		android:icon="@drawable/sl_basket_empty_35x35"
-		android:title="@string/menu_listitem_tabToBuy_clear_basket">
+		android:title="@string/menu_listitem_tabToBuy_clear_selections">
         
     </item>
 
