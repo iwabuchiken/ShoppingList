@@ -253,14 +253,14 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		String s = tvTab2DueDate.getText().toString();
 		TextPaint p = tvTab2DueDate.getPaint();
 		p.getTextBounds(s, 0, s.length(), bounds);
-		
-		// Log
-		Log.d("TabActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "bounds.height()=" + bounds.height());
-		
+//		
+//		// Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "bounds.height()=" + bounds.height());
+//		
 		int textHeight = bounds.height();
 
 //		lvTab2ToBuyList.setLayoutParams(new LinearLayout.LayoutParams(
@@ -268,45 +268,45 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //		//				300));
 //					windowHeight - (textHeight + 300)));		// Height
 
-      // Log
-		Log.d("TabActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]",
-				"windowHeight=" + windowHeight
-				+ "/"
-				+ "windowHeight - (textHeight + 10)="
-				+ (windowHeight - (textHeight + 300)));
+//      // Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"windowHeight=" + windowHeight
+//				+ "/"
+//				+ "windowHeight - (textHeight + 10)="
+//				+ (windowHeight - (textHeight + 300)));
 		
-		// Log
-		Log.d("TabActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]",
-				"tabHost.getTabWidget().getMeasuredHeight()="
-				+ tabHost.getTabWidget().getMeasuredHeight()
-				+ "/"
-				+ "tabHost.getTabWidget().getHeight()="
-				+ tabHost.getTabWidget().getHeight()
-				+ "/"
-				+ "tabHost.getTabWidget().getChildAt(1).getBottom()="
-				+ tabHost.getTabWidget().getChildAt(1).getBottom()
-				//REF=> http://stackoverflow.com/questions/2502800/tabwidget-height	(answered Jun 15 '11 at 15:16)
-				+ "tabHost.getTabWidget().getChildAt(1).getLayoutParams().height="
-				+ tabHost.getTabWidget().getChildAt(1).getLayoutParams().height);
+//		// Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"tabHost.getTabWidget().getMeasuredHeight()="
+//				+ tabHost.getTabWidget().getMeasuredHeight()
+//				+ "/"
+//				+ "tabHost.getTabWidget().getHeight()="
+//				+ tabHost.getTabWidget().getHeight()
+//				+ "/"
+//				+ "tabHost.getTabWidget().getChildAt(1).getBottom()="
+//				+ tabHost.getTabWidget().getChildAt(1).getBottom()
+//				//REF=> http://stackoverflow.com/questions/2502800/tabwidget-height	(answered Jun 15 '11 at 15:16)
+//				+ "tabHost.getTabWidget().getChildAt(1).getLayoutParams().height="
+//				+ tabHost.getTabWidget().getChildAt(1).getLayoutParams().height);
 		
 		// Log
 		int widgetHeight = tabHost.getTabWidget().getChildAt(1).getLayoutParams().height;
 
-		Log.d("TabActv.java" + "["
-				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-				+ ":"
-				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]",
-				"(windowHeight - (textHeight + widgetHeight))="
-				+ (windowHeight - (textHeight + widgetHeight)));
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"(windowHeight - (textHeight + widgetHeight))="
+//				+ (windowHeight - (textHeight + widgetHeight)));
 
 		lvTab2ToBuyList.setLayoutParams(new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT,	// Width
@@ -455,6 +455,13 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //		lvTab2.setAdapter(adpTab2);
 		lvTab2.setAdapter(CONS.adpToBuys);
 
+		// Log
+		Log.d("TabActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "CONS.adpToBuys => Set");
+		
 	}//private void setupToBuyListView()
 
 	private int prepareItemList() {

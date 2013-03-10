@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sl.items.PS;
+import sl.items.ShoppingItem;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -980,6 +981,103 @@ public class DBUtils extends SQLiteOpenHelper {
 		return psList;
 		
 	}//public List<PS> getPSList(Activity actv)
+
+	public ShoppingItem getSIFromDbId(String dbId) {
+		// TODO Auto-generated method stub
+		
+		// Log
+		Log.d("DBUtils.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "dbId=" + dbId);
+		
+		SQLiteDatabase rdb = this.getReadableDatabase();
+		
+//		CONS.columns => "store", "name", "price", "genre", "yomi"
+//		Cursor cursor = rdb.query(
+//							CONS.tableName,
+////							CONS.columns,
+//							CONS.columns_with_index2,
+////							android.provider.BaseColumns._ID + "=",	// where
+//							String.valueOf(CONS.columns_with_index2[0]),
+//							new String[]{dbId},	// param
+//							null, null, null);
+
+//		// From: TabActv.java
+//		Cursor cursor = rdb.query(
+//				CONS.tableName, 
+////										DBManager.columns,
+////				CONS.columns_with_index,
+//				CONS.columns_with_index2,
+//				String.valueOf(CONS.columns_with_index2[0]),
+//				new String[]{dbId},
+//				null, null, null);
+		
+		String sql = "SELECT " + "store, name, price, genre, yomi"
+					+ " FROM " + CONS.tableName
+					+ " WHERE " + CONS.columns_with_index2[0]
+					+ " = "
+					+ dbId;
+		
+		Cursor cursor = null;
+		
+		try {
+			
+			cursor = rdb.rawQuery(sql, null);
+			
+		} catch (Exception e) {
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			rdb.close();
+			
+			return null;
+			
+		}
+
+		if (cursor == null) {
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "cursor => null");
+			
+			return null;
+			
+		}//if (cursor == null)
+		
+		/***************************************
+		 * Build item
+		 ***************************************/
+		cursor.moveToFirst();
+		
+		ShoppingItem si = new ShoppingItem();
+		
+		si.setStore(cursor.getString(cursor.getColumnIndex("store")));
+		si.setName(cursor.getString(cursor.getColumnIndex("name")));
+		si.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+		si.setGenre(cursor.getString(cursor.getColumnIndex("genre")));
+		si.setYomi(cursor.getString(cursor.getColumnIndex("yomi")));
+		
+		/***************************************
+		 * Close db
+		 ***************************************/
+		rdb.close();
+		
+		/***************************************
+		 * Return
+		 ***************************************/
+		return si;
+		
+	}//public ShoppingItem getSIFromDbId(String dbId)
 
 }//public class DBUtils extends SQLiteOpenHelper
 

@@ -164,7 +164,56 @@ public class ListOnItemClickListener implements OnItemClickListener {
 		/***************************************
 		 * Get item list
 		 ***************************************/
+		String s_ItemList = ps.getItems();
+
+		CONS.toBuyList.clear();
 		
+//		CONS.toBuyList = Methods_sl.getSIListFromItemList(actv, s_ItemList);
+		CONS.toBuyList.addAll(Methods_sl.getSIListFromItemList(actv, s_ItemList));
+		
+		// Log
+		if (CONS.toBuyList == null) {
+			
+			// debug
+			Toast.makeText(actv, "Couldn't get the list", Toast.LENGTH_LONG).show();
+			
+			// Log
+			Log.d("ListOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "CONS.toBuyList == null");
+			
+			return;
+
+		}//if (CONS.toBuyList == null)
+		
+//		Log.d("ListOnItemClickListener.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "CONS.toBuyList.size()=" + CONS.toBuyList.size());
+		
+		/***************************************
+		 * Set list to the tab
+		 ***************************************/
+		CONS.adpToBuys.notifyDataSetChanged();
+		
+		
+		
+//		String[] ary_ItemList = s_ItemList.split(" ");
+//		
+//		//debug
+//		for (String s_Item : ary_ItemList) {
+//			
+//			// Log
+//			Log.d("ListOnItemClickListener.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "item=" + s_Item);
+//			
+//		}//for (String s_Item : ary_ItemList)
 
 		
 		/***************************************
