@@ -17,6 +17,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -2159,6 +2160,17 @@ public class Methods {
 		
 	}//public static String get_TimeLabel(long millSec)
 
+	public static String getTimeLabel_Japanese(long millSec) {
+		
+		
+//		 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyyMMdd_HHmmss");
+//		SimpleDateFormat sdf1 = new SimpleDateFormat("MM月dd日", Locale.JAPAN);
+		SimpleDateFormat sdf1 = new SimpleDateFormat("M月d日(E)", Locale.JAPAN);
+		
+		return sdf1.format(new Date(millSec));
+		
+	}//public static String get_TimeLabel(long millSec)
+
 	public static int getArrayIndex(String[] targetArray, String targetString) {
 		int index = -1;
 		
@@ -2619,5 +2631,87 @@ public class Methods {
 		return new int[]{w, h};
 
 	}//getDisplaySize(Activity actv)
+
+	public static boolean createTable(Activity actv, String dbName,
+			String t_name, String[] colNames, String[] colTypes) {
+
+		// db setup
+		DBUtils dbu = new DBUtils(actv, dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		// Create a table
+		boolean res = dbu.createTable(wdb, t_name, 
+//					dbu.get_cols(), dbu.get_col_types());
+				colNames, colTypes);
+		
+		// Close db
+		wdb.close();
+		
+		// Return
+		return res;
+
+	}//public static boolean create_table
+
+	public static int getTableSize(Activity actv, String dbName,
+			String tname) {
+		// TODO Auto-generated method stub
+		
+		int count = -1;
+		
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+
+		String sql = "SELECT * FROM " + tname;
+		
+		
+		try {
+			
+			c = rdb.rawQuery(sql, null);
+
+			count = c.getCount();
+
+		} catch (Exception e) {
+			
+			// Log
+			Log.e("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+		} finally {
+			
+			rdb.close();
+			
+			return count;
+		}
+
+	}//public static int getTableSize
+
 	
+	public static int
+	getSmallerNumber(int i, int j)
+			throws NumberFormatException{
+		
+		if (Methods.is_numeric(String.valueOf(i)) == false
+				|| Methods.is_numeric(String.valueOf(j)) == false) {
+			// REF=> http://www.tohoho-web.com/java/exception.htm
+			throw new NumberFormatException("Not a number");
+			
+		}//if (Methods.is_numeric(String.valueOf(i)) == false \)
+		
+		if (i > j) {
+			
+			return j;
+			
+		} else {//if (i > j)
+			
+			return i;
+			
+		}//if (i > j)
+		
+	}//public static int getSmallerNumber(int i, int j)
+
 }//public class Methods

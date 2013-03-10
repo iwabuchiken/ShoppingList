@@ -12,6 +12,7 @@ import sl.tasks.Task_GetYomi;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_dlg;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
 import sl.utils.Tags.DialogTags;
@@ -118,7 +119,16 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 //				
 				break;// case dlg_tabactv_tab2_lv
 
+			case dlg_tabActv_adminDb:
 				
+				choice = (String) parent.getItemAtPosition(position);
+				
+				case_dlg_tabActv_adminDb(choice);
+				
+				break;
+				
+			default:
+				break;
 			}//switch (tag)
 			
 		}//if (tag != null)
@@ -126,40 +136,7 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		/*----------------------------
 		 * 2. Call a method
 			----------------------------*/
-//		//debug
-//		Tags.DialogTags tag = (Tags.DialogTags) v.getTag();
-//		
-//		// Log
-//		Log.d("DialogOnItemClickListener.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "tag=" + tag);
-//		// Log
-//		Log.d("DialogOnItemClickListener.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "v.getClass().getName()=" + v.getClass().getName());
-//		
-//		Tags.DialogTags tag2 = (Tags.DialogTags) parent.getTag();
-//		
-//		// Log
-//		Log.d("DialogOnItemClickListener.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "tag2=" + tag2);
-//		
-//		// Log
-//		Log.d("DialogOnItemClickListener.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "parent.getClass().getName()=" + parent.getClass().getName());
-//		
-		//////////////////////////////////////////////////////////////debug
-		
+
 		//
 		if (dlgTag != null && dlgTag == DialogTags.dlg_drop_table) {
 			
@@ -203,6 +180,34 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		}//if (dlgName != null && dlgName == "confirm_table_drop")
 		
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+	private void case_dlg_tabActv_adminDb(String choice) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Save list data
+		 ***************************************/
+		if (choice.equals(
+					actv.getString(R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list))) {
+			
+			if (CONS.toBuyList.size() < 1) {
+				
+				// debug
+				Toast.makeText(actv, "Seems basket is empty", Toast.LENGTH_LONG).show();
+				
+				return;
+				
+			}//if (CONS.toBuyList.size() == condition)
+			
+			Methods_dlg.dlg_saveToBuyList(actv, dlg);
+			
+		} else if (choice.equals(
+					actv.getString(R.string.menu_listitem_tabToBuy_admin_db_load_tobuy_list))) {
+			
+			Methods_dlg.dlg_LoadToBuyList(actv, dlg);
+			
+		}//if (choice.equals(actv.getString(R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list)))
+		
+	}//private void case_dlg_tabActv_adminDb(String choice)
 
 	private void dlg_tabactv_tab2_lv(String choice) {
 		// TODO Auto-generated method stub

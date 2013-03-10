@@ -37,9 +37,11 @@ import android.widget.Toast;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import sl.items.PS;
 import sl.items.ShoppingItem;
 import sl.main.MainActv;
 import sl.main.R;
+import sl.utils.Tags.SortTags;
 
 public class Methods_sl {
 
@@ -1929,9 +1931,116 @@ public class Methods_sl {
 
 		//
 		rdb.close();
-
-		
 		
 	}//public static void updateToBuyList(Activity actv)
+
+	
+	public static List<PS> getPSList(Activity actv) {
+		
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		List<PS> psList = dbu.getPSList(actv);
+		
+		dbu.close();
+		
+//		return dbu.getPSList(actv);
+		return psList;
+		
+//		return null;
+	}//public static List<PS> getPSList(Activity actv)
+
+	
+	public static void sortPSList(List<PS> psList, SortTags sortOrder) {
+		
+		switch (sortOrder) {
+		
+		case pslist_store_name:
+
+			Collections.sort(psList, new Comparator<PS>(){
+
+//				@Override
+				public int compare(PS i1, PS i2) {
+
+					
+					return (int) (i1.getStoreName().compareToIgnoreCase(i2.getStoreName()));
+				}//public int compare(PS i1, PS i2)
+
+			});//Collections.sort()
+			
+			break;
+
+		case pslist_due_date:
+
+			Collections.sort(psList, new Comparator<PS>(){
+
+//				@Override
+				public int compare(PS i1, PS i2) {
+
+					
+					return (int) (i1.getDueDate() - i2.getDueDate());
+					
+				}//public int compare(PS i1, PS i2)
+
+			});//Collections.sort()
+			
+			break;
+
+		default:
+			break;
+			
+		}//switch (sortOrder)
+			
+	}//public static void sortPSList(List<PS> psList, SortTags sortOrder)
+
+	
+	public static
+	List<ShoppingItem> getSIListFromItemList
+	(Activity actv, String s_ItemList) {
+		// TODO Auto-generated method stub
+		String[] ary_ItemList = s_ItemList.split(" ");
+		
+		List<ShoppingItem> siList = new ArrayList<ShoppingItem>();
+		
+		/***************************************
+		 * Setup db
+		 ***************************************/
+		DBUtils dbu = new DBUtils(actv);
+		
+//		SQLiteDatabase rdb = dbu.getReadableDatabase();
+		
+		for (int i = 0; i < ary_ItemList.length; i++) {
+			
+			ShoppingItem si = dbu.getSIFromDbId(ary_ItemList[i]);
+			
+			if (si == null) {
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "si => null");
+				
+				continue;
+				
+			}//if (si == null)
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "si.getName()=" + si.getName());
+			
+			siList.add(si);
+			
+		}//for (int i = 0; i < ary_ItemList.length; i++)
+
+
+		return siList;
+		
+	}//public static List<ShoppingItem> getSIListFromItemList
 
 }//public class Methods_sl

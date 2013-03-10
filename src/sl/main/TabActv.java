@@ -15,6 +15,7 @@ import sl.listeners.list.ListOnItemLongClickListener;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_dlg;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
 
@@ -24,15 +25,19 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.text.format.Time;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
@@ -202,6 +207,139 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //        thirdTab.setContent(this);
 //        tabHost.addTab(thirdTab);
 
+        /***************************************
+		 * Set size to views: Tab2
+		 ***************************************/
+        ListView lvTab2ToBuyList = (ListView) this.findViewById(R.id.itemlist_tab2_lv);
+        TextView tvTab2DueDate = (TextView) this.findViewById(R.id.itemlist_tab2_tv_due_date);
+        
+        // Window height
+//        int windowHeight = Methods.getDisplaySize(this)[0];
+        int windowHeight = Methods.getDisplaySize(this)[1];
+        
+        // TextView height
+        int tvTab2DueDate_Height = tvTab2DueDate.getHeight();
+//        
+//        lvTab2ToBuyList.setLayoutParams(new LinearLayout.LayoutParams(
+//				LayoutParams.MATCH_PARENT,	// Width
+////				300));
+//				windowHeight - tvTab2DueDate_Height));		// Height
+//        
+//        // Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"windowHeight=" + windowHeight
+//				+ "/"
+//				+ "tvTab2DueDate_Height=" + tvTab2DueDate_Height);
+
+//		// Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"tvTab2DueDate=" + tvTab2DueDate.getLineCount());
+		
+		/***************************************
+		 * Get text view height
+		 ***************************************/
+		// REF=> http://stackoverflow.com/questions/4912687/android-get-the-height-of-the-textview	(answered Feb 6 '11 at 14:03)
+		// REF=> http://stackoverflow.com/questions/3630086/how-to-get-string-width-on-android	(answered Sep 2 '10 at 19:05)
+		Rect bounds = new Rect();
+//		String s = "abcde";
+		String s = tvTab2DueDate.getText().toString();
+		TextPaint p = tvTab2DueDate.getPaint();
+		p.getTextBounds(s, 0, s.length(), bounds);
+//		
+//		// Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "bounds.height()=" + bounds.height());
+//		
+		int textHeight = bounds.height();
+
+//		lvTab2ToBuyList.setLayoutParams(new LinearLayout.LayoutParams(
+//					LayoutParams.MATCH_PARENT,	// Width
+//		//				300));
+//					windowHeight - (textHeight + 300)));		// Height
+
+//      // Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"windowHeight=" + windowHeight
+//				+ "/"
+//				+ "windowHeight - (textHeight + 10)="
+//				+ (windowHeight - (textHeight + 300)));
+		
+//		// Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"tabHost.getTabWidget().getMeasuredHeight()="
+//				+ tabHost.getTabWidget().getMeasuredHeight()
+//				+ "/"
+//				+ "tabHost.getTabWidget().getHeight()="
+//				+ tabHost.getTabWidget().getHeight()
+//				+ "/"
+//				+ "tabHost.getTabWidget().getChildAt(1).getBottom()="
+//				+ tabHost.getTabWidget().getChildAt(1).getBottom()
+//				//REF=> http://stackoverflow.com/questions/2502800/tabwidget-height	(answered Jun 15 '11 at 15:16)
+//				+ "tabHost.getTabWidget().getChildAt(1).getLayoutParams().height="
+//				+ tabHost.getTabWidget().getChildAt(1).getLayoutParams().height);
+		
+		// Log
+		int widgetHeight = tabHost.getTabWidget().getChildAt(1).getLayoutParams().height;
+
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"(windowHeight - (textHeight + widgetHeight))="
+//				+ (windowHeight - (textHeight + widgetHeight)));
+
+		lvTab2ToBuyList.setLayoutParams(new LinearLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT,	// Width
+	//				300));
+//				(windowHeight - (textHeight + widgetHeight + 150))));		// Height
+				(windowHeight - (textHeight + widgetHeight
+									+ CONS.MagicConstants.MODIFY_TAB2_LV_HEIGHT))));		// Height
+
+		
+//		// Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "tabHost.getTabContentView().getHeight()="
+//				+ tabHost.getTabContentView().getHeight());
+//		
+//		// Log
+//		Log.d("TabActv.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "tabHost.getTabContentView().getLayoutParams().height="
+//				+ tabHost.getTabContentView().getLayoutParams().height);
+		
+		/***************************************
+		 * Set default due date
+		 ***************************************/
+		tvTab2DueDate.setText(Methods.getTimeLabel_Japanese(Methods.getMillSeconds_now()));
+
+        /***************************************
+		 * Set current tab
+		 ***************************************/
         //最初にカーソルを当てたいタブを指定
         tabHost.setCurrentTabByTag("First");
         
@@ -317,6 +455,13 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //		lvTab2.setAdapter(adpTab2);
 		lvTab2.setAdapter(CONS.adpToBuys);
 
+		// Log
+		Log.d("TabActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "CONS.adpToBuys => Set");
+		
 	}//private void setupToBuyListView()
 
 	private int prepareItemList() {
@@ -630,6 +775,12 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			CONS.adpToBuys.notifyDataSetChanged();
 			
 			break;
+			
+		case R.id.menu_listitem_tabToBuy_admin_db:
+			
+			Methods_dlg.dlg_tabActv_adminDb(this);
+			
+			break;// case R.id.menu_listitem_tabToBuy_admin_db
 			
 		default:
 			break;
