@@ -239,12 +239,26 @@ public class ListOnItemClickListener implements OnItemClickListener {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "si.getName()=" + si.getName());
 		
+		// Log
+		Log.d("ListOnItemClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "position=" + position);
+		
 		/***************************************
 		 * checkedItemPositions
 		 ***************************************/
 		int itemId = si.getId();
 		
 		if (CONS.tab_boughtItemIds.contains(itemId)) {
+			
+			// Log
+			Log.d("ListOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Contained in CONS.tab_boughtItemIds=" + itemId);
 			
 //			CONS.tab_checkedPositions.remove(itemId);
 			CONS.tab_boughtItemIds.remove(new Integer(itemId));
@@ -264,7 +278,14 @@ public class ListOnItemClickListener implements OnItemClickListener {
 			}//if (bgm == true)
 
 		} else if (!CONS.tab_boughtItemIds.contains(itemId)) {//if (CONS.tab_checkedPositions.contains(itemId))
-			
+
+			// Log
+			Log.d("ListOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Not contained in CONS.tab_boughtItemIds=" + itemId);
+
 			CONS.tab_boughtItemIds.add(itemId);
 			
 			// Log

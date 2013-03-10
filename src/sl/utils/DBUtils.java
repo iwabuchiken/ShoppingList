@@ -1014,7 +1014,8 @@ public class DBUtils extends SQLiteOpenHelper {
 //				new String[]{dbId},
 //				null, null, null);
 		
-		String sql = "SELECT " + "store, name, price, genre, yomi"
+//		String sql = "SELECT " + "store, name, price, genre, yomi"
+		String sql = "SELECT " + "*"
 					+ " FROM " + CONS.tableName
 					+ " WHERE " + CONS.columns_with_index2[0]
 					+ " = "
@@ -1061,6 +1062,7 @@ public class DBUtils extends SQLiteOpenHelper {
 		
 		ShoppingItem si = new ShoppingItem();
 		
+		si.setId((int)cursor.getLong(cursor.getColumnIndex(CONS.columns_with_index2[0])));
 		si.setStore(cursor.getString(cursor.getColumnIndex("store")));
 		si.setName(cursor.getString(cursor.getColumnIndex("name")));
 		si.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
