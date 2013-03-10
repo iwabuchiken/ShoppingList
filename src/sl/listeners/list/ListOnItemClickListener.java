@@ -4,6 +4,7 @@ import java.io.File;
 
 import org.apache.commons.lang.StringUtils;
 
+import sl.items.PS;
 import sl.items.ShoppingItem;
 import sl.main.MainActv;
 import sl.main.R;
@@ -29,6 +30,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -39,6 +41,8 @@ public class ListOnItemClickListener implements OnItemClickListener {
 
 	//
 	Vibrator vib;
+
+	Dialog dlg1, dlg2;
 	
 //	boolean bgm;
 	
@@ -72,6 +76,19 @@ public class ListOnItemClickListener implements OnItemClickListener {
 	}//public ListOnItemClickListener(Activity actv)
 
 	
+	public ListOnItemClickListener(Activity actv, Dialog dlg1, Dialog dlg2) {
+		// TODO Auto-generated constructor stub
+		this.actv = actv;
+		//
+		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
+		
+		this.dlg1 = dlg1;
+		
+		this.dlg2 = dlg2;
+		
+	}
+
+
 	//	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
@@ -104,12 +121,59 @@ public class ListOnItemClickListener implements OnItemClickListener {
 			
 			break;// case tab_toBuyList
 
+		case load_toBuyList:
+
+			load_toBuyList(parent, position);
+			
+			break;// case load_toBuyList
+
 		default:
 			break;
 		
 		}//switch (item)
 
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+
+	private void load_toBuyList(AdapterView<?> parent, int position) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Get PS item
+		 ***************************************/
+		PS ps = (PS) parent.getItemAtPosition(position);
+		
+//		// Log
+//		Log.d("ListOnItemClickListener.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"Due date=" + Methods.getTimeLabel_Japanese(ps.getDueDate()));
+		
+		/***************************************
+		 * Set due date
+		 ***************************************/
+//		TextView tvDueDate = (TextView) parent.findViewById(R.id.tab2_tv_due_date);
+		TextView tvDueDate = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_due_date);
+
+		tvDueDate.setText(Methods.getTimeLabel_Japanese(ps.getDueDate()));
+
+		/***************************************
+		 * Set item list
+		 ***************************************/
+		/***************************************
+		 * Get item list
+		 ***************************************/
+		
+
+		
+		/***************************************
+		 * Close dialogues
+		 ***************************************/
+		dlg1.dismiss();
+		dlg2.dismiss();
+		
+	}//private void load_toBuyList(AdapterView<?> parent, int position)
 
 
 	private void tab_toBuyList(AdapterView<?> parent, int position) {

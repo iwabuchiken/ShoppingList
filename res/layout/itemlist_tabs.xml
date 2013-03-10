@@ -52,14 +52,33 @@
 			</LinearLayout>
 			
 			<!-- Tab: To buy -->
-			<LinearLayout android:id="@+id/second_content"
-				android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+			<LinearLayout
+			    android:id="@+id/second_content"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_gravity="center_horizontal"
+			    android:orientation="vertical"
+			    >
 				
 			    <ListView
-				    android:id="@+id/itemlist_tab2_lv"
-				    android:layout_width="match_parent"
-				    android:layout_height="wrap_content" >
+			        android:id="@+id/itemlist_tab2_lv"
+			        android:layout_width="match_parent"
+			        android:layout_height="300dp"
+			        android:background="@color/black" >
+
 				</ListView>
+
+			    <TextView
+			        android:id="@+id/itemlist_tab2_tv_due_date"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:background="@color/white"
+			        android:gravity="center_horizontal"
+			        android:padding="10dp"
+			        android:text="TextView"
+			        android:textColor="@color/black"
+			        android:textSize="25sp" />
 				
 			</LinearLayout>
 			
