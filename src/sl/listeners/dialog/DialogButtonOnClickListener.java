@@ -7,6 +7,7 @@ import sl.main.R;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_sl;
 import sl.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
@@ -316,6 +317,23 @@ DialogButtonOnClickListener implements OnClickListener {
 		 ***************************************/
 		Spinner spStoreNames = (Spinner) dlg2.findViewById(R.id.dlg_save_tobuy_list_sp_store_name);
 		
+		String storeName = spStoreNames.getSelectedItem().toString();
+		
+		/***************************************
+		 * Is the schedule already in db?
+		 ***************************************/
+		boolean res = Methods_sl.isInDb_PS(actv, storeName, cal);
+		
+		// Log
+		Log.d("DialogButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "res=" + res);
+		
+		//debug
+		
+		
 		/***************************************
 		 * Amount
 		 ***************************************/
@@ -338,18 +356,6 @@ DialogButtonOnClickListener implements OnClickListener {
 		
 		String items = case_dlg_save_tobuy_list_bt_ok__getItemIdsString();
 		
-//		// Log
-//		Log.d("DialogButtonOnClickListener.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]",
-//				"Store=" + spStoreNames.getSelectedItem().toString()
-//				+ "/"
-//				+ "Amount=" + etAmount.getText().toString()
-//				+ "/"
-//				+ "Memo=" + etMemo.getText().toString());
-		
 		/***************************************
 		 * Store data
 		 * 1. Get dbId: Get the number of data already stored
@@ -357,31 +363,6 @@ DialogButtonOnClickListener implements OnClickListener {
 		 * 2. Construct a PS instance
 		 * 3. Store date => DBUtils.
 		 ***************************************/
-		/***************************************
-		 * Get dbId
-		 ***************************************/
-//		int dbId;
-//		
-//		dbId = Methods.getTableSize(
-//						actv,
-//						CONS.dbName,
-//						CONS.DBAdmin.tname_purchaseSchedule);
-//		
-//		// If not -1, then increment by 1
-//		//		=> b/c SQLite table id starts from 0
-//		if (dbId != -1) {
-//			
-//			dbId += 1;
-//			
-//		}//if (dbId == condition)
-//		
-//		// Log
-//		Log.d("DialogButtonOnClickListener.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "dbId=" + dbId);
-		
 		/***************************************
 		 * Construct: A PS instance
 		 ***************************************/
@@ -394,19 +375,19 @@ DialogButtonOnClickListener implements OnClickListener {
 		ps.setItems(items);
 		ps.setDueDate(dueDate);
 		
-		/***************************************
-		 * Store the PS instance to database
-		 ***************************************/
-		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+//		/***************************************
+//		 * Store the PS instance to database
+//		 ***************************************/
+//		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+////		
+////		SQLiteDatabase wdb = dbu.getWritableDatabase();
+//
+//		res = dbu.storeData_PS(
+//								CONS.dbName,
+//								CONS.DBAdmin.tname_purchaseSchedule,
+//								ps);
 //		
-//		SQLiteDatabase wdb = dbu.getWritableDatabase();
-
-		boolean res = dbu.storeData_PS(
-								CONS.dbName,
-								CONS.DBAdmin.tname_purchaseSchedule,
-								ps);
-		
-		
+//		
 		/***************************************
 		 * Dismiss dialog
 		 ***************************************/

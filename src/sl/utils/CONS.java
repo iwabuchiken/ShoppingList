@@ -173,6 +173,7 @@ public class CONS {
 
 		public static
 		String[] col_purchaseSchedule =
+				//	0				1			2		3		4
 				{"store_name", "due_date", "amount", "memo", "items"};
 
 		public static

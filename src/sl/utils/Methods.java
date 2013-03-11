@@ -2714,4 +2714,35 @@ public class Methods {
 		
 	}//public static int getSmallerNumber(int i, int j)
 
+
+	public static int[] getDateArrayFromLongData(long dueDate) {
+		
+		Date d = new Date(dueDate);
+		
+		Calendar cal = Calendar.getInstance();
+		
+		if (cal == null) {
+			
+			// Log
+			Log.d("Methods.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "cal => null");
+			
+			return null;
+			
+		}//if (cal == null)
+		
+		cal.setTime(d);
+		
+//		return new int[]{cal.YEAR, cal.MONTH, cal.DATE};
+		return new int[]{
+				cal.get(Calendar.YEAR),
+				cal.get(Calendar.MONTH),
+				cal.get(Calendar.DATE)
+				};
+		
+	}//public static int[] getDateArrayFromLongData(long dueDate)
+
 }//public class Methods

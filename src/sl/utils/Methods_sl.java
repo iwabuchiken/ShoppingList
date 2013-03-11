@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -2042,5 +2043,170 @@ public class Methods_sl {
 		return siList;
 		
 	}//public static List<ShoppingItem> getSIListFromItemList
+
+	
+	public static boolean isInDb_PS
+	(Activity actv, String storeName, Calendar cal) {
+		
+//		int newYear = cal.YEAR;
+		
+//		int newMonth = cal.MONTH;
+//		
+//		int newDay = cal.DATE;
+
+		int newYear = cal.get(Calendar.YEAR);
+		int newMonth = cal.get(Calendar.MONTH);
+		int newDay = cal.get(Calendar.DATE);
+
+		DBUtils dbu = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbu.getReadableDatabase();
+
+		String sql = "SELECT * FROM " + CONS.DBAdmin.tname_purchaseSchedule;
+
+		Cursor c = null;
+
+		try {
+			
+			c = rdb.rawQuery(sql, null);
+			
+			/*********************************
+			 * Cursor => null?
+			 *********************************/
+			if (null == c) {
+				
+				// Log
+				Log.d("DialogOnItemClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "Cursor => null");
+				
+				rdb.close();
+				
+				return false;
+				
+			}//if (null == c)
+			
+			/*********************************
+			 * Num of entries in the cursor => Less than 1?
+			 *********************************/
+			if (c.getCount() < 1) {
+				
+				// Log
+				Log.d("DialogOnItemClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "Cursor => No entry");
+				
+				rdb.close();
+				
+				return false;
+				
+			}//if (null == c)
+			
+			/*********************************
+			 * 
+			 *********************************/
+			c.moveToFirst();
+			
+			/***************************************
+			 * 1. From the cursor, get due date in millseconds (d1
+			 * 2. From d1, get integer array (d2)
+			 * 3. Compare d2 with the data in the param cal
+			 * 
+			 ***************************************/
+			for (int i = 0; i < c.getCount(); i++) {
+				/***************************************
+				 * Get target data: 1. Due date 2. Store name
+				 ***************************************/
+				long targetDueDate = c.getLong(
+								c.getColumnIndex(
+										CONS.DBAdmin.col_purchaseSchedule[1]));
+				
+				int[] targetDueDateData = Methods.getDateArrayFromLongData(targetDueDate);
+				
+				
+				String targetStoreName = c.getString(
+							c.getColumnIndex(
+									CONS.DBAdmin.col_purchaseSchedule[0]));
+				
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+//						"cal.YEAR=" + cal.YEAR
+//						+ "/"
+//						+ "cal.MONTH=" + cal.MONTH
+//						+ "/"
+//						+ "cal.DATE=" + cal.DATE);
+						"newYear=" + newYear
+						+ "/"
+						+ "newMonth=" + newMonth
+						+ "/"
+						+ "newDay=" + newDay);
+				// Log
+				Log.d("Methods_sl.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"targetStoreName=" + targetStoreName
+						+ "/"
+						+ "targetDueDateData[0]=" + targetDueDateData[0]
+						+ "/"
+						+ "targetDueDateData[1]=" + targetDueDateData[1]
+						+ "/"
+						+ "targetDueDateData[2]=" + targetDueDateData[2]
+						);
+				
+				
+//				if (cal.YEAR == dueDateData[0]
+//						&& cal.MONTH == dueDateData[1]
+//						&& cal.DATE == dueDateData[2]) {
+				if (targetStoreName.equals(storeName)
+					&& newYear == targetDueDateData[0]
+					&& newMonth == targetDueDateData[1]
+					&& newDay == targetDueDateData[2]) {
+					
+					rdb.close();
+					
+					return true;
+					
+				}//if (cal.YEAR == dueDateData[0])
+				
+				c.moveToNext();
+				
+			}//for (int i = 0; i < c.getCount(); i++)
+			
+		} catch (Exception e) {
+
+			// Log
+			Log.e("DialogOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Exception => " + e.toString());
+			
+			rdb.close();
+			
+			return false;
+			
+		}//try 
+		
+		return false;
+		
+	}//public static boolean isInDb_PS()
 
 }//public class Methods_sl
