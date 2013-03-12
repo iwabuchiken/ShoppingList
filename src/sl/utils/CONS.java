@@ -180,6 +180,15 @@ public class CONS {
 		String[] colTypes_purchaseSchedule =
 				{"TEXT",		"INTEGER", "INTEGER", "TEXT", "TEXT"};
 
+		/***************************************
+		 * Query-related constant values
+		 ***************************************/
+		final static int DB_QUERY_FAILED = -1;
+		final static int DB_QUERY_NO_ENTRY = -2;
+		final static int DB_DATA_UPDATE_SUCCESSFUL = 1;
+		
+		final static int DB_DATA_UPDATE_FAILED = -3;
+		
 	}
 	
 	public static class MagicConstants {

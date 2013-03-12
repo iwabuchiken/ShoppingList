@@ -7,6 +7,7 @@ import sl.main.R;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
+import sl.utils.Methods_dlg;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
 import android.app.Activity;
@@ -31,6 +32,7 @@ DialogButtonOnClickListener implements OnClickListener {
 	Activity actv;
 	Dialog dlg1;
 	Dialog dlg2;		//=> Used in dlg_input_empty_btn_XXX
+	Dialog dlg3;		//=> Methods_dlg.java: Dialog dlg_template_okCancel_3Dialogues
 
 	//
 	Vibrator vib;
@@ -55,7 +57,20 @@ DialogButtonOnClickListener implements OnClickListener {
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
 	}
 
-//	@Override
+	public DialogButtonOnClickListener
+	(Activity actv, Dialog dlg1, Dialog dlg2, Dialog dlg3) {
+		//
+		this.actv = actv;
+		this.dlg1 = dlg1;
+		this.dlg2 = dlg2;
+		this.dlg3 = dlg3;
+		
+		//
+		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
+		
+	}
+
+	//	@Override
 	public void onClick(View v) {
 		//
 		Tags.DialogTags tag_name = (Tags.DialogTags) v.getTag();
@@ -269,16 +284,192 @@ DialogButtonOnClickListener implements OnClickListener {
 			
 			break;
 
-		case dlg_save_tobuy_list_bt_ok:
+		case dlg_generic_dismiss_third_dialog://------------------------------------------
+			
+			dlg3.dismiss();
+			
+			break;// case dlg_generic_dismiss_third_dialog
+			
+		case dlg_save_tobuy_list_bt_ok://------------------------------------------
 			
 			case_dlg_save_tobuy_list_bt_ok();
 			
 			break;// case dlg_save_tobuy_list_bt_ok
+		
+		case dlg_scheduleInDb_ok://------------------------------------------
+			
+			case_dlg_scheduleInDb_ok();
+			
+			break;// case dlg_scheduleInDb_ok
+			
+		case dlg_scheduleInDb_update://------------------------------------------
+			
+			case_dlg_scheduleInDb_update();
+			
+			break;// case dlg_scheduleInDb_update
 			
 		default:
 			break;
 		}//switch (tag_name)
 	}
+
+	private void case_dlg_scheduleInDb_update() {
+		/***************************************
+		 * Prepare data
+		 * 1. Date
+		 * 2. Store name
+		 * 3. 
+		 ***************************************/
+		DatePicker dp = (DatePicker) dlg2.findViewById(R.id.dlg_save_tobuy_list_dp);
+		
+		int year = dp.getYear();
+		int month = dp.getMonth();
+//		int month = dp.getMonth() + 1;
+		int day = dp.getDayOfMonth();
+//		// Log
+//		Log.d("DialogButtonOnClickListener.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]",
+//				"year=" + year
+//				+ "/"
+//				+ "month=" + month
+//				+ "/"
+//				+ "day=" + day);
+
+		Calendar cal = Calendar.getInstance();
+		
+		cal.set(year, month, day);
+		
+		long dueDate = cal.getTimeInMillis();
+		
+		/***************************************
+		 * Store name
+		 ***************************************/
+		Spinner spStoreNames = (Spinner) dlg2.findViewById(R.id.dlg_save_tobuy_list_sp_store_name);
+		
+		String storeName = spStoreNames.getSelectedItem().toString();
+		
+		/***************************************
+		 * Update data
+		 ***************************************/
+		this.case_dlg_scheduleInDb_update_execute(spStoreNames, storeName, dueDate);
+		
+		/***************************************
+		 * Close dialog 3
+		 ***************************************/
+		dlg3.dismiss();
+		
+	}//private void case_dlg_scheduleInDb_update()
+
+	private void
+	case_dlg_scheduleInDb_update_execute
+	(Spinner spStoreNames, String storeName, long dueDate) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Item ids string
+		 ***************************************/
+		StringBuilder sb = new StringBuilder();
+		
+		for (Integer id : CONS.tab_toBuyItemIds) {
+			
+			sb.append(String.valueOf(id.intValue()));
+			sb.append(" ");
+			
+		}//for (Integer id : CONS.tab_toBuyItemIds)
+
+		String itemIdsString = sb.toString();		
+		
+		/***************************************
+		 * Update
+		 ***************************************/
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		boolean res = dbu.updateData_PS_ItemIds(actv, storeName, dueDate, itemIdsString);
+		
+		// Log
+		Log.d("DialogButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "res=" + res);
+		
+		/***************************************
+		 * Confirm
+		 ***************************************/
+		if (res == true) {
+			
+			// debug
+			Toast.makeText(actv, "Schedule data => Updated", Toast.LENGTH_LONG).show();
+			
+			/***************************************
+			 * Close dialogues
+			 ***************************************/
+			dlg3.dismiss();
+			dlg2.dismiss();
+			dlg1.dismiss();
+			
+		} else {//if (res == true)
+			
+			// debug
+			Toast.makeText(actv, "Updated schedule data => Failed", Toast.LENGTH_LONG).show();
+
+			dlg3.dismiss();
+			
+		}//if (res == true)
+		
+	}//case_dlg_scheduleInDb_update_execute
+
+	private void case_dlg_scheduleInDb_ok() {
+		/***************************************
+		 * Prepare data
+		 * 1. Date
+		 * 2. Store name
+		 * 3. 
+		 ***************************************/
+		DatePicker dp = (DatePicker) dlg2.findViewById(R.id.dlg_save_tobuy_list_dp);
+		
+		int year = dp.getYear();
+		int month = dp.getMonth();
+//		int month = dp.getMonth() + 1;
+		int day = dp.getDayOfMonth();
+		// Log
+		Log.d("DialogButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"year=" + year
+				+ "/"
+				+ "month=" + month
+				+ "/"
+				+ "day=" + day);
+
+		Calendar cal = Calendar.getInstance();
+		
+		cal.set(year, month, day);
+		
+		long dueDate = cal.getTimeInMillis();
+		
+		/***************************************
+		 * Store name
+		 ***************************************/
+		Spinner spStoreNames = (Spinner) dlg2.findViewById(R.id.dlg_save_tobuy_list_sp_store_name);
+		
+		String storeName = spStoreNames.getSelectedItem().toString();
+		
+		/***************************************
+		 * Store data
+		 ***************************************/
+		this.case_dlg_save_tobuy_list_bt_ok_execute(spStoreNames, storeName, dueDate);
+		
+		/***************************************
+		 * Close dialog 3
+		 ***************************************/
+		dlg3.dismiss();
+		
+	}//private void case_dlg_scheduleInDb_ok()
 
 	private void case_dlg_save_tobuy_list_bt_ok() {
 		// TODO Auto-generated method stub
@@ -331,9 +522,89 @@ DialogButtonOnClickListener implements OnClickListener {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "res=" + res);
 		
-		//debug
+		/***************************************
+		 * Show dialog if the schedule already in db
+		 ***************************************/
+		if (res == true) {
+			
+			Methods_dlg.dlg_scheduleInDb(actv, dlg1, dlg2);
+			
+		} else {//if (res == true)
+			
+			case_dlg_save_tobuy_list_bt_ok_execute(
+							spStoreNames, storeName, dueDate);
+			
+		}//if (res == true)
+		
+//		Methods_dlg.dlg_scheduleInDb(actv, dlg1, dlg2);
 		
 		
+//		/***************************************
+//		 * Amount
+//		 ***************************************/
+//		EditText etAmount = (EditText) dlg2.findViewById(R.id.dlg_save_tobuy_list_et_amount);
+//		
+//		/***************************************
+//		 * Memo
+//		 ***************************************/
+//		EditText etMemo = (EditText) dlg2.findViewById(R.id.dlg_save_tobuy_list_et_memo);
+//		
+//		/***************************************
+//		 * Items
+//		 ***************************************/
+//		// Log
+//		Log.d("DialogButtonOnClickListener.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "Calling => case_dlg_save_tobuy_list_bt_ok__convertToBuyList2String()");
+//		
+//		String items = case_dlg_save_tobuy_list_bt_ok__getItemIdsString();
+//		
+//		/***************************************
+//		 * Store data
+//		 * 1. Get dbId: Get the number of data already stored
+//		 * 		=> Add 1 to the number
+//		 * 2. Construct a PS instance
+//		 * 3. Store date => DBUtils.
+//		 ***************************************/
+//		/***************************************
+//		 * Construct: A PS instance
+//		 ***************************************/
+//		PS ps = new PS();
+//		
+////		ps.setDbId(dbId);
+//		ps.setStoreName(spStoreNames.getSelectedItem().toString());
+//		ps.setAmount(Integer.parseInt(etAmount.getText().toString()));
+//		ps.setMemo(etMemo.getText().toString());
+//		ps.setItems(items);
+//		ps.setDueDate(dueDate);
+//		
+////		/***************************************
+////		 * Store the PS instance to database
+////		 ***************************************/
+////		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+//////		
+//////		SQLiteDatabase wdb = dbu.getWritableDatabase();
+////
+////		res = dbu.storeData_PS(
+////								CONS.dbName,
+////								CONS.DBAdmin.tname_purchaseSchedule,
+////								ps);
+////		
+////		
+//		/***************************************
+//		 * Dismiss dialog
+//		 ***************************************/
+//		dlg1.dismiss();
+//		dlg2.dismiss();
+//		
+	}//private void case_dlg_save_tobuy_list_bt_ok()
+
+	private void
+	case_dlg_save_tobuy_list_bt_ok_execute
+	(Spinner spStoreNames, String storeName, long dueDate) {
+		// TODO Auto-generated method stub
 		/***************************************
 		 * Amount
 		 ***************************************/
@@ -375,26 +646,42 @@ DialogButtonOnClickListener implements OnClickListener {
 		ps.setItems(items);
 		ps.setDueDate(dueDate);
 		
-//		/***************************************
-//		 * Store the PS instance to database
-//		 ***************************************/
-//		DBUtils dbu = new DBUtils(actv, CONS.dbName);
-////		
-////		SQLiteDatabase wdb = dbu.getWritableDatabase();
-//
-//		res = dbu.storeData_PS(
-//								CONS.dbName,
-//								CONS.DBAdmin.tname_purchaseSchedule,
-//								ps);
+		/***************************************
+		 * Store the PS instance to database
+		 ***************************************/
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
 //		
-//		
+//		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		boolean res = dbu.storeData_PS(
+								CONS.dbName,
+								CONS.DBAdmin.tname_purchaseSchedule,
+								ps);
+		
+		/***************************************
+		 * Validate saving
+		 ***************************************/
+		if (res == true) {
+			
+			// debug
+			Toast.makeText(actv, "Schedule saved", Toast.LENGTH_LONG).show();
+			
+		} else {
+
+			// debug
+			Toast.makeText(actv, "Saving schedule => Failed", Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}
+		
 		/***************************************
 		 * Dismiss dialog
 		 ***************************************/
 		dlg1.dismiss();
 		dlg2.dismiss();
 		
-	}//private void case_dlg_save_tobuy_list_bt_ok()
+	}//private void case_dlg_save_tobuy_list_bt_ok_execute()
 
 	private String case_dlg_save_tobuy_list_bt_ok__getItemIdsString() {
 		// TODO Auto-generated method stub

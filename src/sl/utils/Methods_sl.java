@@ -2205,6 +2205,11 @@ public class Methods_sl {
 			
 		}//try 
 		
+		/***************************************
+		 * Close db
+		 ***************************************/
+		rdb.close();
+		
 		return false;
 		
 	}//public static boolean isInDb_PS()

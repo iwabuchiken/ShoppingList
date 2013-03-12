@@ -592,7 +592,129 @@ public class Methods_dlg {
 	
 	}//public static Dialog dlg_template_okCancel()
 
+	public static
+	Dialog dlg_template_okCancel_3Dialogues
+	(Activity actv,
+			int layoutId, int titleStringId,
+			
+			int okButtonId, int cancelButtonId, int choiceButtonId,
+			DialogTags okTag, DialogTags cancelTag, DialogTags thirdTag,
+			
+			Dialog dlg1, Dialog dlg2) {
+		/*----------------------------
+		* Steps
+		* 1. Set up
+		* 2. Add listeners => OnTouch
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		
+		// 
+		Dialog dlg3 = new Dialog(actv);
+		
+		//
+		dlg3.setContentView(layoutId);
+		
+		// Title
+		dlg3.setTitle(titleStringId);
+		
+		/*----------------------------
+		* 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_ok = (Button) dlg3.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg3.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_ok.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		btn_cancel.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		
+		/*----------------------------
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_ok.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+		btn_cancel.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+		
+		//
+		//dlg.show();
+		
+		return dlg3;
 	
+	}//public static Dialog dlg_template_okCancel()
+
+	public static
+	Dialog dlg_template_okCancel_3Dialogues_3Choices
+	(Activity actv,
+			int layoutId, int titleStringId,
+			
+			int okButtonId, int cancelButtonId, int thirdButtonId,
+			
+			DialogTags okTag, DialogTags cancelTag, DialogTags thirdChoiceTag,
+			
+			Dialog dlg1, Dialog dlg2) {
+		/*----------------------------
+		* Steps
+		* 1. Set up
+		* 2. Add listeners => OnTouch
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		
+		// 
+		Dialog dlg3 = new Dialog(actv);
+		
+		//
+		dlg3.setContentView(layoutId);
+		
+		// Title
+		dlg3.setTitle(titleStringId);
+		
+		/*----------------------------
+		* 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_ok = (Button) dlg3.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg3.findViewById(cancelButtonId);
+		Button btn_third = (Button) dlg3.findViewById(thirdButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		btn_third.setTag(thirdChoiceTag);
+		
+		//
+		btn_ok.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		btn_cancel.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		btn_third.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		
+		/*----------------------------
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_ok.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+		btn_cancel.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+		btn_third.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+		
+		//
+		//dlg.show();
+		
+		return dlg3;
+	
+	}//public static Dialog dlg_template_okCancel()
+
 	public static void
 	dlg_LoadToBuyList(Activity actv, Dialog dlg1) {
 		// TODO Auto-generated method stub
@@ -751,5 +873,39 @@ public class Methods_dlg {
 		dlg.show();
 
 	}//public static void dlg_tabActv_clearSelections(Activity actv)
+
+	
+	public static void
+	dlg_scheduleInDb(Activity actv, Dialog dlg1, Dialog dlg2) {
+		// TODO Auto-generated method stub
+//		Methods_dlg.dlg_template_okCancel_3Dialogues_3Choices(actv, layoutId, titleStringId, okButtonId, cancelButtonId, thirdButtonId, okTag, cancelTag, thirdChoiceTag, dlg1, dlg2)
+		Dialog dlg3 = Methods_dlg.dlg_template_okCancel_3Dialogues_3Choices(
+							actv,
+							R.layout.dlg_template_3choices_tv,
+							R.string.generic_title_reconfirm,
+							
+							R.id.dlg_template_3choices_tv_btn_ok,
+							R.id.dlg_template_3choices_tv_btn_cancel,
+							R.id.dlg_template_3choices_tv_btn_choice,
+							
+							Tags.DialogTags.dlg_scheduleInDb_ok,
+							Tags.DialogTags.dlg_generic_dismiss_third_dialog,
+							Tags.DialogTags.dlg_scheduleInDb_update,
+							
+							dlg1, dlg2);
+		
+		/***************************************
+		 * Set text to the third button
+		 ***************************************/
+		Button btChoice = (Button) dlg3.findViewById(R.id.dlg_template_3choices_tv_btn_choice);
+		
+		btChoice.setText(actv.getString(R.string.generic_label_update));
+		
+		/***************************************
+		 * Set message
+		 ***************************************/
+		dlg3.show();
+		
+	}//dlg_scheduleInDb(Activity actv, Dialog dlg1, Dialog dlg2)
 
 }//public class Methods_dlg

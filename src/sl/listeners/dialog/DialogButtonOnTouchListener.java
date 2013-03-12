@@ -63,6 +63,10 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 				
 				case dlg_save_tobuy_list_bt_ok:
 				case dlg_generic_dismiss:
+					
+				case dlg_scheduleInDb_ok:
+				case dlg_generic_dismiss_third_dialog:
+				case dlg_scheduleInDb_update:
 					//
 					v.setBackgroundColor(Color.GRAY);
 					
@@ -104,6 +108,10 @@ public class DialogButtonOnTouchListener implements OnTouchListener {
 
 				case dlg_generic_cancel:
 				case dlg_generic_dismiss_second_dialog:
+
+				case dlg_scheduleInDb_ok:
+				case dlg_generic_dismiss_third_dialog:
+				case dlg_scheduleInDb_update:
 					//
 					v.setBackgroundColor(Color.WHITE);
 					

@@ -6,6 +6,7 @@ public class Tags {
 		// dlg_generic
 		dlg_generic_cancel, dlg_generic_dismiss,
 		dlg_generic_dismiss_second_dialog,
+		dlg_generic_dismiss_third_dialog,
 		
 		// dlg_register_store.xml
 		dlg_register_store_ok, dlg_register_store_cancel,
@@ -49,6 +50,9 @@ public class Tags {
 		
 		// dlg_clear_selections
 		dlg_clear_selections,
+		
+		// dlg_scheduleInDb
+		dlg_scheduleInDb_ok, dlg_scheduleInDb_update,
 		
 	}//public static enum DialogTags
 	
