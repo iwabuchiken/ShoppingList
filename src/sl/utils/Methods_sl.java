@@ -1669,6 +1669,9 @@ public class Methods_sl {
 		
 	}//private static int getYomi_xml(Activity actv, Dialog dlg)
 
+	/***************************************
+	 * Sort list => By Yomi
+	 ***************************************/
 	public static void
 	sortItemList(List<ShoppingItem> tiList) {
 		
@@ -1932,6 +1935,11 @@ public class Methods_sl {
 
 		//
 		rdb.close();
+		
+		/***************************************
+		 * Sort list
+		 ***************************************/
+		Methods_sl.sortItemList(CONS.toBuyList);
 		
 	}//public static void updateToBuyList(Activity actv)
 

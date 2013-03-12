@@ -1,6 +1,7 @@
 package sl.listeners.list;
 
 import java.io.File;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -169,7 +170,14 @@ public class ListOnItemClickListener implements OnItemClickListener {
 		CONS.toBuyList.clear();
 		
 //		CONS.toBuyList = Methods_sl.getSIListFromItemList(actv, s_ItemList);
-		CONS.toBuyList.addAll(Methods_sl.getSIListFromItemList(actv, s_ItemList));
+		List<ShoppingItem> loadedSIList = Methods_sl.getSIListFromItemList(actv, s_ItemList);
+				
+		
+		// Sort list
+		Methods_sl.sortItemList(loadedSIList);
+		
+//		CONS.toBuyList.addAll(Methods_sl.getSIListFromItemList(actv, s_ItemList));
+		CONS.toBuyList.addAll(loadedSIList);
 		
 		// Log
 		if (CONS.toBuyList == null) {
@@ -193,6 +201,22 @@ public class ListOnItemClickListener implements OnItemClickListener {
 //				+ ":"
 //				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 //				+ "]", "CONS.toBuyList.size()=" + CONS.toBuyList.size());
+		
+		/***************************************
+		 * Add new item ids to CONS.tab_toBuyItemIds
+		 * 1. First, clear the current list
+		 * 2. Then, add new item ids
+		 ***************************************/
+		CONS.tab_toBuyItemIds.clear();
+		
+		for (int i = 0; i < loadedSIList.size(); i++) {
+			
+			ShoppingItem si = loadedSIList.get(i);
+			
+			CONS.tab_toBuyItemIds.add(si.getId());
+			
+		}//for (int i = 0; i < loadedSIList.size(); i++)
+		
 		
 		/***************************************
 		 * Set list to the tab
