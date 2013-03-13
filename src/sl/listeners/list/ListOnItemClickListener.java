@@ -1,6 +1,7 @@
 package sl.listeners.list;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -31,6 +32,8 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -128,12 +131,147 @@ public class ListOnItemClickListener implements OnItemClickListener {
 			
 			break;// case load_toBuyList
 
+		case delete_toBuyList:
+
+			case_delete_toBuyList(parent, position);
+			
+			break;// case load_toBuyList
+
 		default:
 			break;
 		
 		}//switch (item)
 
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+
+	/***************************************
+	 * 20130313_131103
+	 * Using... dlg1
+	 ***************************************/
+	private void case_delete_toBuyList(AdapterView<?> parent, int position) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Steps
+		 * 
+		 * Get item
+		 * Get the store name and the due date
+		 * Show a new dialog for confirmation
+		 * 
+		 ***************************************/
+		PS ps = (PS) parent.getItemAtPosition(position);
+		
+		// Log
+		Log.d("ListOnItemClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "ps.getDbId()=" + ps.getDbId());
+		
+		String itemIdString = ps.getItems();
+		
+		List<ShoppingItem> loadedSIList = Methods_sl.getSIListFromItemList(actv, itemIdString);
+		
+		// Log
+		Log.d("ListOnItemClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "loadedSIList.size()=" + loadedSIList.size());
+		
+		Methods_sl.sortItemList(loadedSIList);
+		
+		/***************************************
+		 * Dialog
+		 ***************************************/
+//		Dialog dlg3 = Methods_dlg.dlg_template_okCancel_2Dialogues(
+//							actv, R.layout.dlg_confirm_delete_ps_item,
+//							R.string.menu_listitem_tabToBuy_admin_db_delete_tobuy_list,
+//							
+//							R.id.dlg_confirm_delete_ps_item_bt_ok,
+//							R.id.dlg_confirm_delete_ps_item_bt_cancel,
+//							
+//							Tags.DialogTags.dlg_confirm_delete_ps_item_bt_ok,
+//							Tags.DialogTags.dlg_generic_dismiss_second_dialog,
+//							
+//							dlg1);
+
+//		Dialog dlg3 = Methods_dlg.dlg_template_okCancel_3Dialogues(
+		Dialog dlg3 = Methods_dlg.dlg_template_okCancel_3Dialogues_withPS(
+				actv, R.layout.dlg_confirm_delete_ps_item,
+				R.string.menu_listitem_tabToBuy_admin_db_delete_tobuy_list,
+				
+				R.id.dlg_confirm_delete_ps_item_bt_ok,
+				R.id.dlg_confirm_delete_ps_item_bt_cancel,
+				
+				Tags.DialogTags.dlg_confirm_delete_ps_item_bt_ok,
+//				Tags.DialogTags.dlg_generic_dismiss_second_dialog,
+				Tags.DialogTags.dlg_generic_dismiss_third_dialog,
+				
+				dlg1, dlg2, ps);
+
+		/***************************************
+		 * Store name
+		 ***************************************/
+		TextView tvStoreName =
+				(TextView) dlg3.findViewById(R.id.dlg_confirm_delete_ps_item_tv_val_store_name);
+		
+		tvStoreName.setText(ps.getStoreName());
+		
+		/***************************************
+		 * Due date
+		 ***************************************/
+		TextView tvDueDate =
+				(TextView) dlg3.findViewById(R.id.dlg_confirm_delete_ps_item_tv_val_due_date);
+		
+		tvDueDate.setText(Methods.getTimeLabel_Japanese(ps.getDueDate()));
+		
+		
+		/***************************************
+		 * Get list view
+		 ***************************************/
+		ListView lv = (ListView) dlg3.findViewById(R.id.dlg_confirm_delete_ps_item_lv);
+		
+		/***************************************
+		 * Get item name list
+		 ***************************************/
+		List<String> itemNameList = new ArrayList<String>();
+		
+		for (int i = 0; i < loadedSIList.size(); i++) {
+			
+			ShoppingItem si = loadedSIList.get(i);
+			
+			itemNameList.add(si.getName());
+			
+		}//for (int i = 0; i < loadedSIList.size(); i++)
+		
+		// Log
+		Log.d("ListOnItemClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "itemNameList.size()=" + itemNameList.size());
+		
+		/***************************************
+		 * Array adapter
+		 ***************************************/
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+	              actv,
+//	              android.R.layout.simple_spinner_item,
+	              android.R.layout.simple_list_item_1,
+	              itemNameList);
+		
+		/***************************************
+		 * Set item names to list
+		 ***************************************/
+		lv.setAdapter(adapter);
+		
+		/***************************************
+		 * Show dialog
+		 ***************************************/
+		dlg3.show();
+		
+	}//private void case_delete_toBuyList(AdapterView<?> parent, int position)
 
 
 	private void load_toBuyList(AdapterView<?> parent, int position) {

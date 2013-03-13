@@ -34,6 +34,8 @@ DialogButtonOnClickListener implements OnClickListener {
 	Dialog dlg2;		//=> Used in dlg_input_empty_btn_XXX
 	Dialog dlg3;		//=> Methods_dlg.java: Dialog dlg_template_okCancel_3Dialogues
 
+	PS ps;
+	
 	//
 	Vibrator vib;
 	
@@ -68,6 +70,20 @@ DialogButtonOnClickListener implements OnClickListener {
 		//
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
 		
+	}
+
+	public DialogButtonOnClickListener(Activity actv, Dialog dlg1,
+			Dialog dlg2, Dialog dlg3, PS ps) {
+		this.actv = actv;
+		this.dlg1 = dlg1;
+		this.dlg2 = dlg2;
+		this.dlg3 = dlg3;
+	
+		this.ps = ps;
+		
+		//
+		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
+
 	}
 
 	//	@Override
@@ -308,10 +324,65 @@ DialogButtonOnClickListener implements OnClickListener {
 			
 			break;// case dlg_scheduleInDb_update
 			
+		case dlg_confirm_delete_ps_item_bt_ok://------------------------------------------
+			
+			case_dlg_confirm_delete_ps_item_bt_ok();
+			
+			break;// case dlg_confirm_delete_ps_item_bt_ok
+			
 		default:
 			break;
 		}//switch (tag_name)
 	}
+
+	private void case_dlg_confirm_delete_ps_item_bt_ok() {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Get ps id
+		 ***************************************/
+		long dbId = ps.getDbId();
+		
+		// Log
+		Log.d("DialogButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "dbId=" + dbId);
+		
+		/***************************************
+		 * Setup db
+		 ***************************************/
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		boolean res = dbu.deleteItem(CONS.DBAdmin.tname_purchaseSchedule, dbId);
+		
+		// Log
+		Log.d("DialogButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "res=" + res);
+		
+		if (res == true) {
+
+			// debug
+			Toast.makeText(actv, "Schedule => Deleted: " + dbId, Toast.LENGTH_LONG).show();
+
+			dlg3.dismiss();
+			dlg2.dismiss();
+			dlg1.dismiss();
+			
+		} else {//if (res == true)
+
+			// debug
+			Toast.makeText(actv, "Delete schedule => Failed: " + dbId, Toast.LENGTH_LONG).show();
+
+		}//if (res == true)
+		
+		
+		
+		
+	}//private void case_dlg_confirm_delete_ps_item_bt_ok()
 
 	private void case_dlg_scheduleInDb_update() {
 		/***************************************

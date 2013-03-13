@@ -177,6 +177,14 @@ public class CONS {
 				{"store_name", "due_date", "amount", "memo", "items"};
 
 		public static
+		String[] col_purchaseSchedule_full =
+				//	0				1			2		3		4
+				{android.provider.BaseColumns._ID,	// 0
+				"created_at", "modified_at",		// 1
+				//	2			3			4		5		6
+				"store_name", "due_date", "amount", "memo", "items"};
+
+		public static
 		String[] colTypes_purchaseSchedule =
 				{"TEXT",		"INTEGER", "INTEGER", "TEXT", "TEXT"};
 

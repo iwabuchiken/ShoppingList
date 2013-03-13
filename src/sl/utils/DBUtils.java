@@ -889,7 +889,8 @@ public class DBUtils extends SQLiteOpenHelper {
 			
 			c = rdb.query(
 							CONS.DBAdmin.tname_purchaseSchedule,
-							CONS.DBAdmin.col_purchaseSchedule,
+//							CONS.DBAdmin.col_purchaseSchedule,
+							CONS.DBAdmin.col_purchaseSchedule_full,
 							null, null, null, null, null);
 			
 		} catch (Exception e) {
@@ -951,6 +952,9 @@ public class DBUtils extends SQLiteOpenHelper {
 			
 			PS ps = new PS();
 			
+			ps.setDbId(c.getLong(
+							c.getColumnIndex(CONS.DBAdmin.col_purchaseSchedule_full[0])));
+			
 			ps.setStoreName(c.getString(c.getColumnIndex("store_name")));
 //			ps.setDueDate(c.getInt(c.getColumnIndex("due_date")));
 			ps.setDueDate(c.getLong(c.getColumnIndex("due_date")));
@@ -960,19 +964,19 @@ public class DBUtils extends SQLiteOpenHelper {
 			
 			psList.add(ps);
 			
-			// Log
-			Log.d("DBUtils.java" + "["
-					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-					+ ":"
-					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]",
-					"ColumnIndex(\"due_date\")="
-					+ c.getColumnIndex("due_date")
-					+ "/"
-//					+ "c.getInt(c.getColumnIndex(\"due_date\"))="
-					+ "c.getLong(c.getColumnIndex(\"due_date\"))="
-//					+ c.getInt(c.getColumnIndex("due_date")));
-					+ c.getLong(c.getColumnIndex("due_date")));
+//			// Log
+//			Log.d("DBUtils.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]",
+//					"ColumnIndex(\"due_date\")="
+//					+ c.getColumnIndex("due_date")
+//					+ "/"
+////					+ "c.getInt(c.getColumnIndex(\"due_date\"))="
+//					+ "c.getLong(c.getColumnIndex(\"due_date\"))="
+////					+ c.getInt(c.getColumnIndex("due_date")));
+//					+ c.getLong(c.getColumnIndex("due_date")));
 			
 			c.moveToNext();
 			
@@ -1269,6 +1273,50 @@ public class DBUtils extends SQLiteOpenHelper {
 		return CONS.DBAdmin.DB_QUERY_NO_ENTRY;
 		
 	}//private long getDbId_PS(String storeName, long dueDate)
+
+	
+	public boolean deleteItem(String tname, long dbId) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Get db
+		 ***************************************/
+		SQLiteDatabase wdb = this.getWritableDatabase();
+		
+		int res = -1;
+		
+		try {
+			
+			res = wdb.delete(
+						tname,
+						android.provider.BaseColumns._ID + " = ?",
+						new String[]{String.valueOf(dbId)});
+			
+		} catch (Exception e) {
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			wdb.close();
+			
+			return false;
+		}
+		
+		// Log
+		Log.d("DBUtils.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "res=" + res);
+		
+		wdb.close();
+		
+		return true;
+		
+	}//public boolean deleteItem(String tname, long dbId)
 
 }//public class DBUtils extends SQLiteOpenHelper
 

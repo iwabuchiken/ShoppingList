@@ -54,6 +54,9 @@ public class Tags {
 		// dlg_scheduleInDb
 		dlg_scheduleInDb_ok, dlg_scheduleInDb_update,
 		
+		//dlg_confirm_delete_ps_item.xml
+		dlg_confirm_delete_ps_item_bt_ok,
+		
 	}//public static enum DialogTags
 	
 	public static enum ButtonTags {
@@ -78,7 +81,7 @@ public class Tags {
 	public static enum ListTags {
 		// TabActv.java
 		tab_itemList, tab_toBuyList,
-		load_toBuyList,
+		load_toBuyList, delete_toBuyList,
 	}
 	
 	public static enum SortTags {

@@ -122,6 +122,7 @@ public class Methods_dlg {
 		String[] choices = {
 				actv.getString(R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list),
 				actv.getString(R.string.menu_listitem_tabToBuy_admin_db_load_tobuy_list),
+				actv.getString(R.string.menu_listitem_tabToBuy_admin_db_delete_tobuy_list),
 				
 		};
 		
@@ -597,6 +598,65 @@ public class Methods_dlg {
 	(Activity actv,
 			int layoutId, int titleStringId,
 			
+			int okButtonId, int cancelButtonId,
+			DialogTags okTag, DialogTags cancelTag,
+			
+			Dialog dlg1, Dialog dlg2) {
+		/*----------------------------
+		* Steps
+		* 1. Set up
+		* 2. Add listeners => OnTouch
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		
+		// 
+		Dialog dlg3 = new Dialog(actv);
+		
+		//
+		dlg3.setContentView(layoutId);
+		
+		// Title
+		dlg3.setTitle(titleStringId);
+		
+		/*----------------------------
+		* 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_ok = (Button) dlg3.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg3.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_ok.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		btn_cancel.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		
+		/*----------------------------
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_ok.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+		btn_cancel.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+		
+		//
+		//dlg.show();
+		
+		return dlg3;
+	
+	}//public static Dialog dlg_template_okCancel()
+
+	
+	public static
+	Dialog dlg_template_okCancel_3Dialogues
+	(Activity actv,
+			int layoutId, int titleStringId,
+			
 			int okButtonId, int cancelButtonId, int choiceButtonId,
 			DialogTags okTag, DialogTags cancelTag, DialogTags thirdTag,
 			
@@ -649,6 +709,65 @@ public class Methods_dlg {
 		return dlg3;
 	
 	}//public static Dialog dlg_template_okCancel()
+
+	public static
+	Dialog dlg_template_okCancel_3Dialogues_withPS
+	(Activity actv,
+			int layoutId, int titleStringId,
+			
+			int okButtonId, int cancelButtonId,
+			DialogTags okTag, DialogTags cancelTag,
+			
+			Dialog dlg1, Dialog dlg2, PS ps) {
+		/*----------------------------
+		* Steps
+		* 1. Set up
+		* 2. Add listeners => OnTouch
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		
+		// 
+		Dialog dlg3 = new Dialog(actv);
+		
+		//
+		dlg3.setContentView(layoutId);
+		
+		// Title
+		dlg3.setTitle(titleStringId);
+		
+		/*----------------------------
+		* 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_ok = (Button) dlg3.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg3.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_ok.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		btn_cancel.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg3));
+		
+		/*----------------------------
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_ok.setOnClickListener(
+//				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3, ps));
+		btn_cancel.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, dlg3));
+		
+		//
+		//dlg.show();
+		
+		return dlg3;
+	
+	}//Dialog dlg_template_okCancel_3Dialogues_withPS
 
 	public static
 	Dialog dlg_template_okCancel_3Dialogues_3Choices
@@ -816,6 +935,112 @@ public class Methods_dlg {
 		
 	}//dlg_LoadToBuyList(Activity actv, Dialog dlg)
 
+	public static void
+	dlg_DeleteToBuyList(Activity actv, Dialog dlg1) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * 1. Get cursor
+		 * 2. Build a PS list
+		 * 3. Show the list in the dialog
+		 ***************************************/
+//		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		List<PS> psList = Methods_sl.getPSList(actv);
+
+		//debug
+//		PS ps = psList.get(0);
+		
+		for (PS ps : psList) {
+			
+			// Log
+			Log.d("Methods_dlg.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "ps.getDbId()=" + ps.getDbId());
+			
+		}//for (PS ps : psList)
+//		// Log
+//		Log.d("Methods_dlg.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "ps.getDbId()=" + ps.getDbId());
+
+		//////////////////////////////////////////
+		if (psList == null) {
+			
+			// Log
+			Log.d("Methods_dlg.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "psList => Null");
+			
+			// debug
+			Toast.makeText(actv, "Seems no purchase list", Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}//if (psList == null)
+		
+		/***************************************
+		 * Sort list
+		 ***************************************/
+		Methods_sl.sortPSList(psList, Tags.SortTags.pslist_due_date);
+		
+		/***************************************
+		 * 3. Show the list in the dialog
+		 ***************************************/
+//		(Activity actv, int layoutId, int titleStringId,
+//				int cancelButtonId, DialogTags cancelTag, Dialog dlg1)
+		Dialog dlg2 = Methods_dlg.dlg_template_cancel_2Dialogues(
+				actv,
+				R.layout.dlg_tmpl_cancel_lv, 
+//				R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list,
+				R.string.menu_listitem_tabToBuy_admin_db_delete_tobuy_list,
+				
+				R.id.dlg_tmpl_cancel_lv_bt_cancel,
+//				dlg_generic_dismiss
+//				Tags.DialogTags.dlg_generic_dismiss,
+				Tags.DialogTags.dlg_generic_dismiss_second_dialog,
+				
+				dlg1);
+
+		/***************************************
+		 * Set list
+		 ***************************************/
+		PSListAdapter adp = new PSListAdapter(
+				actv,
+				R.layout.listrow_load_tobuy_list,
+				psList
+				);
+		
+		ListView lv = (ListView) dlg2.findViewById(R.id.dlg_tmpl_cancel_lv_lv);
+		
+		int lvHeight = Methods.getSmallerNumber(350, 75 * psList.size());
+		
+		lv.setLayoutParams(new LinearLayout.LayoutParams(
+										LayoutParams.WRAP_CONTENT,	// Width
+//										300));
+										lvHeight));					// Height
+		
+//		lv.setTag(Tags.ListTags.load_toBuyList);
+		lv.setTag(Tags.ListTags.delete_toBuyList);
+		
+		lv.setOnItemClickListener(new ListOnItemClickListener(actv, dlg1, dlg2));
+		
+		
+		lv.setAdapter(adp);
+		
+		/***************************************
+		 * Show dialog
+		 ***************************************/
+		dlg2.show();
+		
+		
+	}//dlg_LoadToBuyList(Activity actv, Dialog dlg)
+
 	
 	public static void
 	dlg_tabActv_clearSelections(Activity actv) {
@@ -907,5 +1132,6 @@ public class Methods_dlg {
 		dlg3.show();
 		
 	}//dlg_scheduleInDb(Activity actv, Dialog dlg1, Dialog dlg2)
+
 
 }//public class Methods_dlg
