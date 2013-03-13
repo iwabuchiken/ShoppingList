@@ -315,7 +315,9 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			
 //			if (name != null) {
 //			if (name != null && (yomi == null || yomi == "null")) {
-			if (name != null && (yomi == null || yomi.equals("null"))) {
+//			if (name != null && (yomi == null || yomi.equals("null"))) {
+			if (name != null 
+					&& (yomi == null || yomi.equals("null") || yomi.equals(""))) {
 				
 //				// Log
 //				Log.d("Task_GetYomi.java"
