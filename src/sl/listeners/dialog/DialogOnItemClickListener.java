@@ -217,6 +217,18 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			 ***************************************/
 			dlg.dismiss();
 
+		} else if (choice.equals(actv.getString(
+				R.string.generic_label_all))) {//if (choice.equals(actv.getString(
+			
+			CONS.toBuyList.clear();
+			CONS.tab_toBuyItemIds.clear();
+			CONS.tab_checkedItemIds.clear();
+			
+			CONS.adpItems.notifyDataSetChanged();
+			CONS.adpToBuys.notifyDataSetChanged();
+			
+			dlg.dismiss();
+			
 		}//if (choice.equals(actv.getString(
 		
 	}//private void case_dlg_clear_selections(String choice)

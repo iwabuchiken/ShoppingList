@@ -1058,6 +1058,7 @@ public class Methods_dlg {
 		String[] choices = {
 			actv.getString(R.string.menu_listitem_tabToBuy_clear_basket),
 			actv.getString(R.string.menu_listitem_tabToBuy_clear_checked_items),
+			actv.getString(R.string.generic_label_all),
 		};
 		
 		List<String> list = new ArrayList<String>();
