@@ -133,4 +133,8 @@
 		<string name="dlg_save_tobuy_list_amount">金額</string>
 		<string name="dlg_save_tobuy_list_memo">メモ</string>
 		
+	<!-- itemlist_tabs.xml -->
+		<string name="itemlist_tabs_tobuy_sum">合計</string>
+		<string name="itemlist_tabs_tobuy_sum_initial">0 円</string>
+		
 </resources>

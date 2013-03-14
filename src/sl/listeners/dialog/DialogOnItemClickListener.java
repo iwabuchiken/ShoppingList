@@ -26,6 +26,7 @@ import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -205,6 +206,12 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			 ***************************************/
 			dlg.dismiss();
 			
+			/***************************************
+			 * Clear sum
+			 ***************************************/
+			TextView tvSum = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_sum);
+			tvSum.setText(actv.getString(R.string.itemlist_tabs_tobuy_sum));
+			
 		} else if (choice.equals(actv.getString(
 				R.string.menu_listitem_tabToBuy_clear_checked_items))) {//if (choice.equals(actv.getString(
 			
@@ -228,7 +235,13 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			CONS.adpToBuys.notifyDataSetChanged();
 			
 			dlg.dismiss();
-			
+
+			/***************************************
+			 * Clear sum
+			 ***************************************/
+			TextView tvSum = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_sum);
+			tvSum.setText(actv.getString(R.string.itemlist_tabs_tobuy_sum));
+
 		}//if (choice.equals(actv.getString(
 		
 	}//private void case_dlg_clear_selections(String choice)

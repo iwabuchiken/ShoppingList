@@ -33,6 +33,7 @@ import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.util.Log;
 import android.util.Xml;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -1940,6 +1941,25 @@ public class Methods_sl {
 		 * Sort list
 		 ***************************************/
 		Methods_sl.sortItemList(CONS.toBuyList);
+		
+		/***************************************
+		 * Update "sum" value
+		 ***************************************/
+		TextView tvSum = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_sum);
+		
+		// Get sum
+		int sum = 0;
+		
+		for (int i = 0; i < CONS.toBuyList.size(); i++) {
+			
+			ShoppingItem si = CONS.toBuyList.get(0);
+			
+			sum += si.getPrice();
+			
+		}//for (int i = 0; i < CONS.toBuyList.size(); i++)
+		
+		// Display
+		tvSum.setText(String.format("%d 円", sum));
 		
 	}//public static void updateToBuyList(Activity actv)
 

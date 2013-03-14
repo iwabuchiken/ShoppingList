@@ -201,7 +201,8 @@ public class CONS {
 	
 	public static class MagicConstants {
 		
-		public static int MODIFY_TAB2_LV_HEIGHT = 150;
+//		public static int MODIFY_TAB2_LV_HEIGHT = 150;
+		public static int MODIFY_TAB2_LV_HEIGHT = 300;
 		
 	}
 }//public class CONS

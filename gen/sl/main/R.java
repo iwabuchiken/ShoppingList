@@ -161,32 +161,33 @@ public final class R {
         public static final int itemlist_tab1_ib=0x7f0a0070;
         public static final int itemlist_tab1_lv=0x7f0a006f;
         public static final int itemlist_tab2_lv=0x7f0a0072;
-        public static final int itemlist_tab2_tv_due_date=0x7f0a0073;
-        public static final int listrow_load_tobuy_list_tv_due_date=0x7f0a0075;
-        public static final int listrow_load_tobuy_list_tv_store_name=0x7f0a0074;
-        public static final int menu_listitem_filter=0x7f0a0082;
-        public static final int menu_listitem_tabToBuy_admin_db=0x7f0a0084;
-        public static final int menu_listitem_tabToBuy_clear_selections=0x7f0a0083;
-        public static final int menu_main_pref_actv=0x7f0a0087;
-        public static final int menu_main_tab_actv=0x7f0a0086;
+        public static final int itemlist_tab2_tv_due_date=0x7f0a0074;
+        public static final int itemlist_tab2_tv_sum=0x7f0a0073;
+        public static final int listrow_load_tobuy_list_tv_due_date=0x7f0a0076;
+        public static final int listrow_load_tobuy_list_tv_store_name=0x7f0a0075;
+        public static final int menu_listitem_filter=0x7f0a0083;
+        public static final int menu_listitem_tabToBuy_admin_db=0x7f0a0085;
+        public static final int menu_listitem_tabToBuy_clear_selections=0x7f0a0084;
+        public static final int menu_main_pref_actv=0x7f0a0088;
+        public static final int menu_main_tab_actv=0x7f0a0087;
         public static final int second_content=0x7f0a0071;
         public static final int sl_tv_item_list=0x7f0a0002;
         public static final int sl_tv_register=0x7f0a0003;
         public static final int tableRow1=0x7f0a000b;
         public static final int tableRow2=0x7f0a000e;
-        public static final int v1_btn_register=0x7f0a0081;
-        public static final int v1_et_name=0x7f0a007a;
-        public static final int v1_et_price=0x7f0a007e;
-        public static final int v1_et_yomi=0x7f0a007c;
-        public static final int v1_menu_db_manager=0x7f0a0085;
-        public static final int v1_sp_genre=0x7f0a0080;
-        public static final int v1_sp_store=0x7f0a0078;
-        public static final int v1_tl=0x7f0a0076;
-        public static final int v1_tv_genre=0x7f0a007f;
-        public static final int v1_tv_name=0x7f0a0079;
-        public static final int v1_tv_price=0x7f0a007d;
-        public static final int v1_tv_store=0x7f0a0077;
-        public static final int v1_tv_yomi=0x7f0a007b;
+        public static final int v1_btn_register=0x7f0a0082;
+        public static final int v1_et_name=0x7f0a007b;
+        public static final int v1_et_price=0x7f0a007f;
+        public static final int v1_et_yomi=0x7f0a007d;
+        public static final int v1_menu_db_manager=0x7f0a0086;
+        public static final int v1_sp_genre=0x7f0a0081;
+        public static final int v1_sp_store=0x7f0a0079;
+        public static final int v1_tl=0x7f0a0077;
+        public static final int v1_tv_genre=0x7f0a0080;
+        public static final int v1_tv_name=0x7f0a007a;
+        public static final int v1_tv_price=0x7f0a007e;
+        public static final int v1_tv_store=0x7f0a0078;
+        public static final int v1_tv_yomi=0x7f0a007c;
     }
     public static final class layout {
         public static final int actv_db=0x7f030000;
@@ -301,6 +302,10 @@ public final class R {
          */
         public static final int itemlist_bt_choose=0x7f070044;
         public static final int itemlist_bt_see_chosen=0x7f070045;
+        /**  itemlist_tabs.xml 
+         */
+        public static final int itemlist_tabs_tobuy_sum=0x7f07005a;
+        public static final int itemlist_tabs_tobuy_sum_initial=0x7f07005b;
         /**  ItemList.java: Option menu 
          */
         public static final int menu_listitem_filter=0x7f070035;

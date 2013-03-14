@@ -312,7 +312,8 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 				LayoutParams.MATCH_PARENT,	// Width
 	//				300));
 //				(windowHeight - (textHeight + widgetHeight + 150))));		// Height
-				(windowHeight - (textHeight + widgetHeight
+//				(windowHeight - (textHeight + widgetHeight				// Due date
+				(windowHeight - (textHeight * 2 + widgetHeight			// Due date and sum
 									+ CONS.MagicConstants.MODIFY_TAB2_LV_HEIGHT))));		// Height
 
 		
