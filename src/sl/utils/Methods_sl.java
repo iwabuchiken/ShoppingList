@@ -1952,14 +1952,15 @@ public class Methods_sl {
 		
 		for (int i = 0; i < CONS.toBuyList.size(); i++) {
 			
-			ShoppingItem si = CONS.toBuyList.get(0);
+//			ShoppingItem si = CONS.toBuyList.get(0);
+			ShoppingItem si = CONS.toBuyList.get(i);
 			
 			sum += si.getPrice();
 			
 		}//for (int i = 0; i < CONS.toBuyList.size(); i++)
 		
 		// Display
-		tvSum.setText(String.format("%d 円", sum));
+		tvSum.setText(String.format("合計 %d 円", sum));
 		
 	}//public static void updateToBuyList(Activity actv)
 

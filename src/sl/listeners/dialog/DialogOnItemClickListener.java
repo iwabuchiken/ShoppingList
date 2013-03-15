@@ -212,6 +212,13 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			TextView tvSum = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_sum);
 			tvSum.setText(actv.getString(R.string.itemlist_tabs_tobuy_sum));
 			
+			/***************************************
+			 * Clear due date (and store name if clearing after	
+			 * 	loading a list)
+			 ***************************************/
+			TextView tvDueDate = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_due_date);
+			tvDueDate.setText(Methods.getTimeLabel_Japanese(Methods.getMillSeconds_now()));
+			
 		} else if (choice.equals(actv.getString(
 				R.string.menu_listitem_tabToBuy_clear_checked_items))) {//if (choice.equals(actv.getString(
 			
@@ -241,6 +248,13 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			 ***************************************/
 			TextView tvSum = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_sum);
 			tvSum.setText(actv.getString(R.string.itemlist_tabs_tobuy_sum));
+
+			/***************************************
+			 * Clear due date (and store name if clearing after	
+			 * 	loading a list)
+			 ***************************************/
+			TextView tvDueDate = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_due_date);
+			tvDueDate.setText(Methods.getTimeLabel_Japanese(Methods.getMillSeconds_now()));
 
 		}//if (choice.equals(actv.getString(
 		

@@ -295,7 +295,12 @@ public class ListOnItemClickListener implements OnItemClickListener {
 //		TextView tvDueDate = (TextView) parent.findViewById(R.id.tab2_tv_due_date);
 		TextView tvDueDate = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_due_date);
 
-		tvDueDate.setText(Methods.getTimeLabel_Japanese(ps.getDueDate()));
+//		tvDueDate.setText(Methods.getTimeLabel_Japanese(ps.getDueDate()));
+		tvDueDate.setText(
+				String.format("%s %s",
+						Methods.getTimeLabel_Japanese(ps.getDueDate()),
+						ps.getStoreName())
+				);
 
 		/***************************************
 		 * Set item list
@@ -384,6 +389,25 @@ public class ListOnItemClickListener implements OnItemClickListener {
 		dlg1.dismiss();
 		dlg2.dismiss();
 		
+		/***************************************
+		 * Update sum
+		 ***************************************/
+		TextView tvSum = (TextView) actv.findViewById(R.id.itemlist_tab2_tv_sum);
+		
+		// Get sum
+		int sum = 0;
+		
+		for (int i = 0; i < CONS.toBuyList.size(); i++) {
+			
+			ShoppingItem si = CONS.toBuyList.get(i);
+			
+			sum += si.getPrice();
+			
+		}//for (int i = 0; i < CONS.toBuyList.size(); i++)
+		
+		// Display
+		tvSum.setText(String.format("合計 %d 円", sum));
+
 	}//private void load_toBuyList(AdapterView<?> parent, int position)
 
 
