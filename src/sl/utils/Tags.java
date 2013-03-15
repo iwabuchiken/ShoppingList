@@ -57,6 +57,10 @@ public class Tags {
 		//dlg_confirm_delete_ps_item.xml
 		dlg_confirm_delete_ps_item_bt_ok,
 		
+		// dlg_edit_items.xml
+		dlg_edit_items_bt_ok,
+		
+		
 	}//public static enum DialogTags
 	
 	public static enum ButtonTags {

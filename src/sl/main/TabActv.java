@@ -102,6 +102,8 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		
 		lvTab1.setOnItemClickListener(new ListOnItemClickListener(this));
 
+		lvTab1.setOnItemLongClickListener(new ListOnItemLongClickListener(this));
+		
 		/***************************************
 		 * Set listener: ImageButton
 		 ***************************************/
