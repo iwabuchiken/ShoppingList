@@ -3,7 +3,9 @@ package sl.listeners.dialog;
 import java.util.Calendar;
 
 import sl.items.PS;
+import sl.items.ShoppingItem;
 import sl.main.R;
+import sl.main.RegisterItemActv;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
@@ -35,6 +37,8 @@ DialogButtonOnClickListener implements OnClickListener {
 	Dialog dlg3;		//=> Methods_dlg.java: Dialog dlg_template_okCancel_3Dialogues
 
 	PS ps;
+	
+	ShoppingItem si;
 	
 	//
 	Vibrator vib;
@@ -80,6 +84,19 @@ DialogButtonOnClickListener implements OnClickListener {
 		this.dlg3 = dlg3;
 	
 		this.ps = ps;
+		
+		//
+		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
+
+	}
+
+	public DialogButtonOnClickListener(Activity actv, Dialog dlg1,
+			ShoppingItem si) {
+		// TODO Auto-generated constructor stub
+		this.actv = actv;
+		this.dlg1 = dlg1;
+		
+		this.si = si;
 		
 		//
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
@@ -330,9 +347,114 @@ DialogButtonOnClickListener implements OnClickListener {
 			
 			break;// case dlg_confirm_delete_ps_item_bt_ok
 			
+		case dlg_edit_items_bt_ok://------------------------------------------
+			
+			case_dlg_edit_items_bt_ok();
+			
+			break;// case dlg_edit_items_bt_ok
+			
 		default:
 			break;
 		}//switch (tag_name)
+	}
+
+	private void case_dlg_edit_items_bt_ok() {
+		/***************************************
+		 * Get views
+		 ***************************************/
+		EditText etItemName = (EditText) dlg1.findViewById(R.id.dlg_edit_items_et_name);
+		EditText etPrice = (EditText) dlg1.findViewById(R.id.dlg_edit_items_et_price);	
+		EditText etYomi = (EditText) dlg1.findViewById(R.id.dlg_edit_items_et_yomi);
+		
+		Spinner spStoreName = (Spinner) dlg1.findViewById(R.id.dlg_edit_items_sp_store);
+		Spinner spGenre = (Spinner) dlg1.findViewById(R.id.dlg_edit_items_sp_genre);
+		
+		/***************************************
+		 * Build a new si
+		 ***************************************/
+		ShoppingItem newSI = new ShoppingItem();
+		
+		newSI.setId(si.getId());
+		newSI.setStore(spStoreName.getSelectedItem().toString());
+		newSI.setName(etItemName.getText().toString());
+		newSI.setYomi(etYomi.getText().toString());
+		newSI.setPrice(Integer.parseInt(etPrice.getText().toString()));
+		newSI.setGenre(spGenre.getSelectedItem().toString());
+		
+		/***************************************
+		 * Database
+		 ***************************************/
+		DBUtils dbu = new DBUtils(actv);
+		
+//		SQLiteDatabase db = dbm.getWritableDatabase();
+		
+//		columns => {"store", "name", "price", "genre", "yomi"};
+//		boolean result = dbm.storeData(
+//		boolean result = dbu.updateData_SI_all(si);
+		boolean result = dbu.updateData_SI_all(newSI);
+		
+		if (result == true) {
+			// Log
+			Log.d("DialogButtonOnClickListener.java"
+					+ "["
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "Data stored");
+			// debug
+			Toast.makeText(actv, "Data updated", Toast.LENGTH_LONG)
+					.show();
+			
+			dlg1.dismiss();
+
+			/***************************************
+			 * Update the item list
+			 ***************************************/
+			case_dlg_edit_items_bt_ok__updateItemList(newSI);
+			
+		} else {//if (result == true)
+			
+			// Log
+			Log.d("DialogButtonOnClickListener.java"
+					+ "["
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "Data update => Failed");
+			// debug
+			Toast.makeText(actv, "Data update => Failed", Toast.LENGTH_LONG)
+					.show();
+
+		}//if (result == true)
+		
+//		db.close();
+
+	}//private void case_dlg_edit_items_bt_ok()
+
+	private void case_dlg_edit_items_bt_ok__updateItemList(ShoppingItem newSI) {
+		// TODO Auto-generated method stub
+		
+		for (int i = 0; i < CONS.itemList.size(); i++) {
+			
+			ShoppingItem si = CONS.itemList.get(i);
+			
+			if (si.getId() == newSI.getId()) {
+				
+				si.setStore(newSI.getStore());
+				si.setName(newSI.getName());
+				si.setYomi(newSI.getYomi());
+				si.setPrice(newSI.getPrice());
+				si.setGenre(newSI.getGenre());
+			
+				CONS.itemList.remove(i);
+				CONS.itemList.add(si);
+				
+				Methods_sl.sortItemList(CONS.itemList);
+				
+				CONS.adpItems.notifyDataSetChanged();
+
+				break;
+			}//if (si.getId() == newSI.getId())
+			
+		}//for (int i = 0; i < CONS.itemList.size(); i++)
+		
+		
 	}
 
 	private void case_dlg_confirm_delete_ps_item_bt_ok() {

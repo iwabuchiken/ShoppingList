@@ -1134,5 +1134,63 @@ public class Methods_dlg {
 		
 	}//dlg_scheduleInDb(Activity actv, Dialog dlg1, Dialog dlg2)
 
+	
+	public static
+	Dialog dlg_template_okCancel(
+			Activity actv,
+			int layoutId, int titleStringId,
+			
+			int okButtonId, int cancelButtonId,
+			
+			DialogTags okTag, DialogTags cancelTag,
+			ShoppingItem si) {
+		// TODO Auto-generated method stub
+		/*----------------------------
+		* Steps
+		* 1. Set up
+		* 2. Add listeners => OnTouch
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		
+		// 
+		Dialog dlg = new Dialog(actv);
+		
+		//
+		dlg.setContentView(layoutId);
+		
+		// Title
+		dlg.setTitle(titleStringId);
+		
+		/*----------------------------
+		* 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_ok = (Button) dlg.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_ok.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
+		btn_cancel.setOnTouchListener(new DialogButtonOnTouchListener(actv, dlg));
+		
+		/*----------------------------
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_ok.setOnClickListener(new DialogButtonOnClickListener(actv, dlg, si));
+		btn_cancel.setOnClickListener(new DialogButtonOnClickListener(actv, dlg));
+		
+		//
+		//dlg.show();
+		
+		return dlg;
+		
+		
+//		return null;
+	}//dlg_template_okCancel()
+
 
 }//public class Methods_dlg

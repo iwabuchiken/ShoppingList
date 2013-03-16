@@ -62,6 +62,14 @@ public class ListOnItemLongClickListener implements OnItemLongClickListener {
 
 	private void case_tab_itemList(AdapterView<?> parent, int position) {
 		// TODO Auto-generated method stub
+		/***************************************
+		 * Get item
+		 ***************************************/
+		ShoppingItem si = (ShoppingItem) parent.getItemAtPosition(position); 
+
+		/***************************************
+		 * Dialog
+		 ***************************************/
 		Dialog dlg = Methods_dlg.dlg_template_okCancel(
 						actv,
 						R.layout.dlg_edit_items,
@@ -71,13 +79,10 @@ public class ListOnItemLongClickListener implements OnItemLongClickListener {
 						R.id.dlg_edit_items_btn_cancel,
 						
 						Tags.DialogTags.dlg_edit_items_bt_ok,
-						Tags.DialogTags.dlg_generic_cancel);
-		
-		/***************************************
-		 * Get item
-		 ***************************************/
-		ShoppingItem si = (ShoppingItem) parent.getItemAtPosition(position); 
-		
+						Tags.DialogTags.dlg_generic_cancel,
+						
+						si);
+
 		/***************************************
 		 * Set store name
 		 ***************************************/
@@ -111,7 +116,7 @@ public class ListOnItemLongClickListener implements OnItemLongClickListener {
 		 * Set: Genre
 		 ***************************************/
 		case_tab_itemList__setGenre(si, dlg);
-		
+
 		dlg.show();
 		
 	}//private void case_tab_itemList(AdapterView<?> parent, int position)

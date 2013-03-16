@@ -1318,5 +1318,93 @@ public class DBUtils extends SQLiteOpenHelper {
 		
 	}//public boolean deleteItem(String tname, long dbId)
 
+	public boolean updateData_SI_all(ShoppingItem si) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Build value set
+		 ***************************************/
+		ContentValues cv = new ContentValues();
+		
+//		0			1		2		3		4
+//		"store", "name", "price", "genre", "yomi"
+		cv.put(CONS.columns[0], si.getStore());
+		cv.put(CONS.columns[1], si.getName());
+		cv.put(CONS.columns[2], si.getPrice());
+		cv.put(CONS.columns[3], si.getGenre());
+		cv.put(CONS.columns[4], si.getYomi());
+		
+		/***************************************
+		 * Setup db
+		 ***************************************/
+		SQLiteDatabase wdb = this.getWritableDatabase();
+		
+		try {
+			//
+			wdb.beginTransaction();
+			
+//			//
+//			ContentValues cv = new ContentValues();
+//			
+//			// Put values
+//			for (int i = 0; i < cols.length; i++) {
+//				cv.put(cols[i], values[i]);
+//			}//for (int i = 0; i < columnNames.length; i++)
+
+			// Insert data
+//			long res = wdb.insert(CONS.tableName, null, cv);
+			long res = wdb.update(
+							CONS.tableName,
+							cv,
+							android.provider.BaseColumns._ID + " = ?",
+							new String[]{String.valueOf(si.getId())});
+			
+			if (res < 1) {
+				
+				// Log
+				Log.d("DBUtils.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "Update => Returned less than 1");
+				
+				wdb.close();
+				
+				return false;
+				
+			}	
+			
+			// Set as successful
+			wdb.setTransactionSuccessful();
+
+			// End transaction
+			wdb.endTransaction();
+
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Update => Successful");
+			
+			wdb.close();
+			
+			return true;
+			
+		} catch (Exception e) {
+			// Log
+			Log.e("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			wdb.close();
+			
+			return false;
+			
+		}//try
+		
+	}//public boolean updateData_SI_all(ShoppingItem si)
+
 }//public class DBUtils extends SQLiteOpenHelper
 
