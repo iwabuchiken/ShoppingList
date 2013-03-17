@@ -1554,6 +1554,138 @@ public class Methods {
 		
 	}//public static void filterList2(Activity actv, Dialog dlg)
 
+	public static void
+	filterList3(Activity actv, String storeName, String genreName) {
+		/*----------------------------
+		 * Steps
+		 * 1. Get db
+		 * 2. Get store name and genre name
+		 * 2-2. Dismiss dlg
+		 * 3. Build query
+		 * 4. Exec query
+		 * 5. Update list
+		 * 6. Close db
+		 * 7. Notify adapter
+		 * 8. Sort adapter
+			----------------------------*/
+		// 
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase db = dbm.getReadableDatabase();
+
+		/***************************************
+		 * 3. Build query
+		 ***************************************/
+		//
+//		String query;
+		String query = filterList2__buildQuery(actv, storeName, genreName);
+		
+		/***************************************
+		 * 4. Exec query
+		 ***************************************/
+		Cursor c = db.rawQuery(query, null);
+		
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "c.getCount() => " + c.getCount());
+		
+		if (c.getCount() < 1) {
+			
+			db.close();
+			
+			// debug
+			Toast.makeText(actv, "No entry", Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}//if (c.getCount() == condition)
+		
+		/***************************************
+		 * 5. Update list
+		 ***************************************/
+		//
+//		c.moveToFirst();
+		
+//		ItemListActv.list.clear();
+		CONS.itemList.clear();
+		
+		while(c.moveToNext()) {
+			
+			ShoppingItem item = new ShoppingItem(
+					c.getInt(0),		// id
+					c.getString(1),		// store
+					c.getString(2),		// name
+					c.getInt(3),		// price
+					c.getString(4),		//	genre
+					c.getString(5)			// yomi
+					);
+			
+//			// Log
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(0) => " + c.getString(0));
+//			
+//			Log.d("Methods.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", "c.getString(1) => " + c.getString(1));
+//			
+//			//
+////			ItemListActv.list.add(item);
+			CONS.itemList.add(item);
+			
+		}
+
+//		for (int i = 0; i < c.getCount(); i++) {
+//			
+////			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
+//			//
+//
+//			ShoppingItem item = new ShoppingItem(
+//					c.getInt(0),		// id
+//					c.getString(1),		// store
+//					c.getString(2),		// name
+//					c.getInt(3),		// price
+//					c.getString(4),		//	genre
+//					c.getString(5)			// yomi
+//					);
+//			
+////			// Log
+////			Log.d("Methods.java" + "["
+////					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+////					+ "]", "c.getString(0) => " + c.getString(0));
+////			
+////			Log.d("Methods.java" + "["
+////					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+////					+ "]", "c.getString(1) => " + c.getString(1));
+////			
+////			//
+//////			ItemListActv.list.add(item);
+//			CONS.itemList.add(item);
+//			
+//			//
+//			c.moveToNext();
+//
+//		}//for (int i = 0; i < c.getCount(); i++)
+
+		/***************************************
+		 * 6. Close db
+		 ***************************************/
+		db.close();
+
+		/***************************************
+		 * Sort list
+		 ***************************************/
+		Methods_sl.sortItemList(CONS.itemList);
+		
+		/*----------------------------
+		 * 7. Notify adapter
+			----------------------------*/
+//		ItemListActv.adapter.notifyDataSetChanged();
+		CONS.adpItems.notifyDataSetChanged();
+
+	}//filterList3(Activity actv, String storeName, String genreName)
+
 	private static
 	String filterList2__buildQuery
 	(Activity actv, String storeName, String genreName) {

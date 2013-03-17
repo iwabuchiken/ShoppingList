@@ -10,6 +10,7 @@ import sl.adapters.ToBuyListAdapter;
 import sl.items.ShoppingItem;
 import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
+import sl.listeners.ItemSelectedListener;
 import sl.listeners.list.ListOnItemClickListener;
 import sl.listeners.list.ListOnItemLongClickListener;
 import sl.utils.CONS;
@@ -52,6 +53,9 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 
 	ListView lvTab1;
 	ListView lvTab2;
+
+	Spinner spStore;
+	Spinner spGenre;
 	
 //	ArrayAdapter<String> adpTab1;
 //	ArrayAdapter<String> adpTab2;
@@ -130,6 +134,11 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 * Listener: Item long click
 		 ***************************************/
 		lvTab2.setOnItemLongClickListener(new ListOnItemLongClickListener(this));
+		
+		/***************************************
+		 * Change listeners: Spinner: store
+		 ***************************************/
+		spStore.setOnItemSelectedListener(new ItemSelectedListener(this));
 		
 	}//private void setupListeners()
 
@@ -392,11 +401,11 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
       /***************************************
 	 * Spinners
 	 ***************************************/
-		Spinner spStore = (Spinner) this.findViewById(R.id.itemlist_tab1_sp_store_name);
+		spStore = (Spinner) this.findViewById(R.id.itemlist_tab1_sp_store_name);
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
 	              this, android.R.layout.simple_spinner_item);
-
+	
 		/***************************************
 		 * Get store names from db
 		 ***************************************/
@@ -410,25 +419,27 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		Log.d("ListOnItemLongClickListener.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ "]", "c.getCount()" + c.getCount());
-
-		int count = 0;
+	
+	//		int count = 0;
 		
 		while (c.moveToNext()) {
 			
 			adapter.add(c.getString(1));
 			
 		}
+	
+		adapter.add(this.getString(R.string.generic_label_all));
 		
-//		c.moveToFirst();
-//		
-//		// Log
-//		for (int i = 0; i < c.getCount(); i++) {
-//
-//			adapter.add(c.getString(1));
-//
-//			c.moveToNext();
-//			
-//		}//for (int i = 0; i < c.getCount(); i++)
+	//		c.moveToFirst();
+	//		
+	//		// Log
+	//		for (int i = 0; i < c.getCount(); i++) {
+	//
+	//			adapter.add(c.getString(1));
+	//
+	//			c.moveToNext();
+	//			
+	//		}//for (int i = 0; i < c.getCount(); i++)
 		
 		
 		/*----------------------------
@@ -446,7 +457,106 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 * 4. Set adapter to spinner
 			----------------------------*/
 		spStore.setAdapter(adapter);
-      
+	
+		/***************************************
+		 * Set initial value
+		 ***************************************/
+		int num = 0;
+		
+		for (int i = 0; i < adapter.getCount(); i++) {
+			
+			String genreName = adapter.getItem(i);
+	
+			if (genreName.equals(this.getString(R.string.generic_label_all))) {
+				
+				num = i;
+				
+				break;
+				
+			}//if (si.getName() == condition)
+			
+		}//for (int i = 0; i < adapter.getCount(); i++)
+		
+		spStore.setSelection(num);
+	
+		/***************************************
+		 * Spinner: Genre
+		 ***************************************/
+		spGenre = (Spinner) this.findViewById(R.id.itemlist_tab1_sp_genre);
+		
+		ArrayAdapter<String> adapterGenre = new ArrayAdapter<String>(
+	              this, android.R.layout.simple_spinner_item);
+	//
+		/*----------------------------
+		 * 2. Get genre names from db
+			----------------------------*/
+		dbm = new DBUtils(this);
+		
+		db = dbm.getReadableDatabase();
+		
+		c = dbm.getAllData(db, "genres", CONS.columns_for_table_genres_with_index);
+		
+		// Log
+		Log.d("RegisterItem.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "c.getCount()" + c.getCount());
+	
+		while (c.moveToNext()) {
+			
+			adapterGenre.add(c.getString(1));
+			
+		}
+	
+		adapterGenre.add(this.getString(R.string.generic_label_all));
+		
+	//		c.moveToFirst();
+	//		
+	//		// Log
+	//		for (int i = 0; i < c.getCount(); i++) {
+	//
+	//			adapter.add(c.getString(1));
+	//
+	//			c.moveToNext();
+	//		}//for (int i = 0; i < c.getCount(); i++)
+		
+		
+		/*----------------------------
+		 * 3-1. setDropDownViewResource
+			----------------------------*/
+		adapterGenre.setDropDownViewResource(
+						android.R.layout.simple_spinner_dropdown_item);
+		
+		/*----------------------------
+		 * 3-2. Close db
+			----------------------------*/
+		db.close();
+		
+		/*----------------------------
+		 * 4. Set adapter to spinner
+			----------------------------*/
+		spGenre.setAdapter(adapterGenre);
+		
+		/***************************************
+		 * Set initial value
+		 ***************************************/
+		num = 0;
+		
+		for (int i = 0; i < adapterGenre.getCount(); i++) {
+			
+			String genreName = adapterGenre.getItem(i);
+	
+			if (genreName.equals(this.getString(R.string.generic_label_all))) {
+				
+				num = i;
+				
+				break;
+				
+			}//if (si.getName() == condition)
+			
+		}//for (int i = 0; i < adapter.getCount(); i++)
+		
+		spGenre.setSelection(num);
+		
 	}//private void setupTabs__first()
 
 	private void setupItemListView() {
