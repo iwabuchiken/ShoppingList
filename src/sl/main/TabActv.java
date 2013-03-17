@@ -138,7 +138,15 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		/***************************************
 		 * Change listeners: Spinner: store
 		 ***************************************/
+		spStore.setTag(Tags.SpinnerTag.spStrore);
 		spStore.setOnItemSelectedListener(new ItemSelectedListener(this));
+		
+		/***************************************
+		 * Change listeners: Spinner: store
+		 ***************************************/
+		spGenre.setTag(Tags.SpinnerTag.spGenre);
+		spGenre.setOnItemSelectedListener(new ItemSelectedListener(this));
+		
 		
 	}//private void setupListeners()
 

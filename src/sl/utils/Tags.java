@@ -93,4 +93,8 @@ public class Tags {
 		pslist_store_name, pslist_due_date,
 		
 	}
+
+	public static enum SpinnerTag {
+		spStrore, spGenre,
+	}
 }//public class Tags
