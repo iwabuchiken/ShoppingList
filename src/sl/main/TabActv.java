@@ -39,6 +39,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
@@ -170,39 +171,41 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         /***************************************
 		 * First tab
 		 ***************************************/
-        // TabHostからTabSpecの生成
-//        TabSpec firstTab = tabHost.newTabSpec("First");
-//        firstTab = tabHost.newTabSpec("First");
-        firstTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_first));
-        
-        // タブ部分に表示するテキストおよびアイコンのセット
-//        firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
-        firstTab.setIndicator(
-        		"",
-        		getResources().getDrawable(R.drawable.sl_tab_itemlist));
-        
-        // タブ選択時に表示したいViewのセット
-        firstTab.setContent(R.id.first_content);
-        // タブをTabHostに追加
-        tabHost.addTab(firstTab);
+        setupTabs__first();
+//        // TabHostからTabSpecの生成
+////        TabSpec firstTab = tabHost.newTabSpec("First");
+////        firstTab = tabHost.newTabSpec("First");
+//        firstTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_first));
+//        
+//        // タブ部分に表示するテキストおよびアイコンのセット
+////        firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
+//        firstTab.setIndicator(
+//        		"",
+//        		getResources().getDrawable(R.drawable.sl_tab_itemlist));
+//        
+//        // タブ選択時に表示したいViewのセット
+//        firstTab.setContent(R.id.first_content);
+//        // タブをTabHostに追加
+//        tabHost.addTab(firstTab);
         
         /***************************************
 		 * Second tab
 		 ***************************************/
-//        TabSpec secondTab = tabHost.newTabSpec("Second");
-//        secondTab = tabHost.newTabSpec("Second");
-//        secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
-        
-        secondTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_second));
-        
-        secondTab.setIndicator(
-        		"",
-        		getResources().getDrawable(R.drawable.sl_basket));
-
-        secondTab.setContent(R.id.second_content);
-        
-        tabHost.addTab(secondTab);
-        
+        setupTabs__second();
+////        TabSpec secondTab = tabHost.newTabSpec("Second");
+////        secondTab = tabHost.newTabSpec("Second");
+////        secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
+//        
+//        secondTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_second));
+//        
+//        secondTab.setIndicator(
+//        		"",
+//        		getResources().getDrawable(R.drawable.sl_basket));
+//
+//        secondTab.setContent(R.id.second_content);
+//        
+//        tabHost.addTab(secondTab);
+//        
 //        //３つ目のタブを生成
 //        TabSpec thirdTab = tabHost.newTabSpec("Third");
 //        thirdTab.setIndicator("thirdTab", getResources().getDrawable(android.R.drawable.ic_menu_add));
@@ -349,6 +352,102 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
         
         
 	}//private void setupTabs()
+
+	private void setupTabs__second() {
+		// TODO Auto-generated method stub
+//      TabSpec secondTab = tabHost.newTabSpec("Second");
+//      secondTab = tabHost.newTabSpec("Second");
+//      secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
+      
+      secondTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_second));
+      
+      secondTab.setIndicator(
+      		"",
+      		getResources().getDrawable(R.drawable.sl_basket));
+
+      secondTab.setContent(R.id.second_content);
+      
+      tabHost.addTab(secondTab);
+
+	}
+
+	private void setupTabs__first() {
+		// TODO Auto-generated method stub
+        // TabHostからTabSpecの生成
+//      TabSpec firstTab = tabHost.newTabSpec("First");
+//      firstTab = tabHost.newTabSpec("First");
+      firstTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_first));
+      
+      // タブ部分に表示するテキストおよびアイコンのセット
+//      firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
+      firstTab.setIndicator(
+      		"",
+      		getResources().getDrawable(R.drawable.sl_tab_itemlist));
+      
+      // タブ選択時に表示したいViewのセット
+      firstTab.setContent(R.id.first_content);
+      // タブをTabHostに追加
+      tabHost.addTab(firstTab);
+
+      /***************************************
+	 * Spinners
+	 ***************************************/
+		Spinner spStore = (Spinner) this.findViewById(R.id.itemlist_tab1_sp_store_name);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+	              this, android.R.layout.simple_spinner_item);
+
+		/***************************************
+		 * Get store names from db
+		 ***************************************/
+		DBUtils dbm = new DBUtils(this);
+		
+		SQLiteDatabase db = dbm.getReadableDatabase();
+		
+		Cursor c = dbm.getAllData(db, "stores", CONS.columns_for_table_stores_with_index);
+		
+		// Log
+		Log.d("ListOnItemLongClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "c.getCount()" + c.getCount());
+
+		int count = 0;
+		
+		while (c.moveToNext()) {
+			
+			adapter.add(c.getString(1));
+			
+		}
+		
+//		c.moveToFirst();
+//		
+//		// Log
+//		for (int i = 0; i < c.getCount(); i++) {
+//
+//			adapter.add(c.getString(1));
+//
+//			c.moveToNext();
+//			
+//		}//for (int i = 0; i < c.getCount(); i++)
+		
+		
+		/*----------------------------
+		 * 3-1. setDropDownViewResource
+			----------------------------*/
+		adapter.setDropDownViewResource(
+						android.R.layout.simple_spinner_dropdown_item);
+		
+		/*----------------------------
+		 * 3-2. Close db
+			----------------------------*/
+		db.close();
+		
+		/*----------------------------
+		 * 4. Set adapter to spinner
+			----------------------------*/
+		spStore.setAdapter(adapter);
+      
+	}//private void setupTabs__first()
 
 	private void setupItemListView() {
 		

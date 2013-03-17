@@ -27,9 +27,62 @@
 				<ListView
 				    android:id="@+id/itemlist_tab1_lv"
 				    android:layout_width="match_parent"
-				    android:layout_height="440dp" >
+				    android:layout_height="400dp" >
 
 				</ListView>
+
+				<LinearLayout
+				    android:layout_width="match_parent"
+				    android:layout_height="wrap_content" >
+
+					<LinearLayout
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent" >
+
+						<TextView
+						    android:id="@+id/itemlist_tab1_tv_store_name"
+						    android:layout_width="wrap_content"
+						    android:layout_height="wrap_content"
+						    android:layout_margin="3dp"
+						    android:background="@color/white"
+						    android:padding="3dp"
+						    android:text="@string/v1_tv_store"
+						    android:textColor="@color/black"
+						    android:textSize="20sp" />
+
+						<Spinner
+						    android:id="@+id/itemlist_tab1_sp_store_name"
+						    android:layout_width="wrap_content"
+						    android:layout_height="wrap_content"
+						    android:layout_weight="1" />
+
+					</LinearLayout>
+
+					<LinearLayout
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent" >
+
+						<TextView
+						    android:id="@+id/itemlist_tab1_tv_genre"
+						    android:layout_width="wrap_content"
+						    android:layout_height="wrap_content"
+						    android:layout_margin="3dp"
+						    android:layout_weight="1"
+						    android:background="@color/white"
+						    android:padding="3dp"
+						    android:text="@string/v1_tv_genre"
+						    android:textColor="@color/black"
+						    android:textSize="20sp" />
+
+						<Spinner
+						    android:id="@+id/itemlist_tab1_sp_genre"
+						    android:layout_width="wrap_content"
+						    android:layout_height="wrap_content"
+						    android:layout_weight="1" />
+
+					</LinearLayout>
+
+				</LinearLayout>
 
 				<LinearLayout
 				    android:layout_width="match_parent"
@@ -64,7 +117,7 @@
 			    <ListView
 			        android:id="@+id/itemlist_tab2_lv"
 			        android:layout_width="match_parent"
-			        android:layout_height="300dp"
+			        android:layout_height="250dp"
 			        android:background="@color/black" >
 
 				</ListView>

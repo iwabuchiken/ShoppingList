@@ -60,6 +60,10 @@ public class ListOnItemLongClickListener implements OnItemLongClickListener {
 		return true;
 	}
 
+	/***************************************
+	 * case_tab_itemList(AdapterView<?> parent, int position)<br>
+	 * Tab 1: Edit item
+	 ***************************************/
 	private void case_tab_itemList(AdapterView<?> parent, int position) {
 		// TODO Auto-generated method stub
 		/***************************************
