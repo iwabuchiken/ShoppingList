@@ -61,6 +61,7 @@
     	<string name="v1_menu_db_manager">データベース</string>
     	<string name="menu_main_tab_actv">TabActv</string>
     	<string name="menu_main_pref_actv">Preference</string>
+    	<string name="menu_main_sort_list">Sort list</string>
     
     <!-- db_manager.xml -->
     <string name="dlg_create_table_title">テーブル作成</string>
@@ -139,5 +140,15 @@
 		
 	<!-- dlg_edit_items.xml -->
 		<string name="dlg_edit_items_title">Edit items</string>
+		
+	<!-- dlg_sort_list.xml -->
+		<string name="dlg_sort_list_title">Sort by</string>
+		<string name="dlg_sort_list_item_name">Item name</string>
+		<string name="dlg_sort_list_genre">Genre</string>
+		<string name="dlg_sort_list_store">Store</string>
+		
+		
+		
+		
 		
 </resources>
