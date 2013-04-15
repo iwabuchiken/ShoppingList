@@ -60,6 +60,8 @@ public class Tags {
 		// dlg_edit_items.xml
 		dlg_edit_items_bt_ok,
 		
+		// dlg_sort_list.xml
+		dlg_sort_list_lv,
 		
 	}//public static enum DialogTags
 	

@@ -128,13 +128,21 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 				
 				break;
 				
-			case dlg_clear_selections:
+			case dlg_clear_selections://----------------------------
 				
 				choice = (String) parent.getItemAtPosition(position);
 				
 				case_dlg_clear_selections(choice);
 				
 				break;// case dlg_clear_selections
+				
+			case dlg_sort_list_lv://----------------------------
+				
+				choice = (String) parent.getItemAtPosition(position);
+				
+				case_dlg_sort_list_lv(choice);
+				
+				break;// case dlg_sort_list_lv
 				
 			default:
 				break;
@@ -189,6 +197,36 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		}//if (dlgName != null && dlgName == "confirm_table_drop")
 		
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+	private void case_dlg_sort_list_lv(String choice) {
+		
+		if (choice.equals(actv.getString(
+				R.string.dlg_sort_list_item_name))) {
+			
+			// debug
+			Toast.makeText(actv, "Item name", Toast.LENGTH_LONG).show();
+			
+		} else if (choice.equals(actv.getString(
+				R.string.dlg_sort_list_genre))) {
+
+			case_dlg_sort_list_Genre();
+
+		} else if (choice.equals(actv.getString(
+				R.string.dlg_sort_list_store))) {
+
+			// debug
+			Toast.makeText(actv, "Store", Toast.LENGTH_LONG).show();
+
+		}
+			
+	}//private void case_dlg_sort_list_lv(String choice)
+
+	private void case_dlg_sort_list_Genre() {
+
+		// debug
+		Toast.makeText(actv, "Genre", Toast.LENGTH_LONG).show();
+		
+	}//private void case_dlg_sort_list_Genre()
 
 	private void case_dlg_clear_selections(String choice) {
 		// TODO Auto-generated method stub

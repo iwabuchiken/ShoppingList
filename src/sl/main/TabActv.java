@@ -1004,6 +1004,12 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 			
 			break;// case R.id.menu_listitem_tabToBuy_admin_db
 			
+		case R.id.menu_listitem_tabToBuy_sort_list://-------------------------------
+			
+			Methods_dlg.dlg_SortList(this);
+			
+			break;// case R.id.menu_listitem_tabToBuy_sort_list
+			
 		default:
 			break;
 		}//switch (item.getItemId())
