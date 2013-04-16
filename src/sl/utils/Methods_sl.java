@@ -2243,4 +2243,55 @@ public class Methods_sl {
 		
 	}//public static boolean isInDb_PS()
 
+	public static void sortItemList_GenreItemName() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void
+	sortItemList_GenreItemName(List<ShoppingItem> itemList) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Sort: Genre
+		 ***************************************/
+		Collections.sort(itemList, new Comparator<ShoppingItem>(){
+
+//			@Override
+			public int compare(ShoppingItem i1, ShoppingItem i2) {
+
+				
+				return (int) (i1.getGenre().compareTo(i2.getGenre()));
+				
+			}//public int compare(PS i1, PS i2)
+
+		});//Collections.sort()
+
+		/***************************************
+		 * Sort: Item name
+		 ***************************************/
+		Collections.sort(itemList, new Comparator<ShoppingItem>(){
+
+//			@Override
+			public int compare(ShoppingItem i1, ShoppingItem i2) {
+				
+//				if (!i1.getName().equals(i2.getName())) {
+				if (i1.getGenre().equals(i2.getGenre())) {
+					
+					return (i1.getYomi().compareTo(i2.getYomi()));
+					
+				} else {//if (i1.getName().equals(i2.getName()) == condition)
+					
+					return 0;
+					
+				}//if (i1.getName().equals(i2.getName()) == condition)
+				
+				
+//				return (int) (i1.getName().compareTo(i2.getName()));
+				
+			}//public int compare(PS i1, PS i2)
+
+		});//Collections.sort()
+
+	}//sortItemList_GenreItemName(List<ShoppingItem> itemList)
+
 }//public class Methods_sl

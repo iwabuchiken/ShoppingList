@@ -1,6 +1,8 @@
 package sl.listeners.dialog;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -203,13 +205,12 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		if (choice.equals(actv.getString(
 				R.string.dlg_sort_list_item_name))) {
 			
-			// debug
-			Toast.makeText(actv, "Item name", Toast.LENGTH_LONG).show();
+			case_dlg_sort_list_ItemName();
 			
 		} else if (choice.equals(actv.getString(
-				R.string.dlg_sort_list_genre))) {
+				R.string.dlg_sort_list_genre_item_name))) {
 
-			case_dlg_sort_list_Genre();
+			case_dlg_sort_list_GenreItemName();
 
 		} else if (choice.equals(actv.getString(
 				R.string.dlg_sort_list_store))) {
@@ -220,6 +221,70 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		}
 			
 	}//private void case_dlg_sort_list_lv(String choice)
+
+	private void case_dlg_sort_list_ItemName() {
+		String currrentTabTag = CONS.TabActv.tabHost.getCurrentTabTag();
+		
+		if (currrentTabTag.equals(actv.getString(
+				R.string.tabactv_tabtags_first))) {
+
+			Methods_sl.sortItemList(CONS.itemList);
+			
+			CONS.adpItems.notifyDataSetChanged();
+			
+			dlg.dismiss();
+		
+		} else if (currrentTabTag.equals(actv.getString(
+						R.string.tabactv_tabtags_second))) {
+		
+			Methods_sl.sortItemList(CONS.toBuyList);
+			
+			CONS.adpToBuys.notifyDataSetChanged();
+			
+			dlg.dismiss();
+		
+		}//if (currrentTabTag.equals(actv.getString(
+
+		Methods_sl.sortItemList(CONS.toBuyList);
+		
+		CONS.adpToBuys.notifyDataSetChanged();
+		
+		dlg.dismiss();
+		
+	}
+
+	private void case_dlg_sort_list_GenreItemName() {
+		
+		String currrentTabTag = CONS.TabActv.tabHost.getCurrentTabTag();
+		
+		// Log
+		Log.d("DialogOnItemClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "currrentTabTag=" + currrentTabTag);
+		
+		if (currrentTabTag.equals(actv.getString(
+								R.string.tabactv_tabtags_first))) {
+			
+			Methods_sl.sortItemList_GenreItemName(CONS.itemList);
+			
+			CONS.adpItems.notifyDataSetChanged();
+		
+			dlg.dismiss();
+			
+		} else if (currrentTabTag.equals(actv.getString(
+								R.string.tabactv_tabtags_second))) {
+
+			Methods_sl.sortItemList_GenreItemName(CONS.toBuyList);
+			
+			CONS.adpToBuys.notifyDataSetChanged();
+		
+			dlg.dismiss();
+			
+		}//if (currrentTabTag.equals(actv.getString(
+		
+	}//private void case_dlg_sort_list_GenreItemName()
 
 	private void case_dlg_sort_list_Genre() {
 

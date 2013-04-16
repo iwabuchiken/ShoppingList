@@ -8,6 +8,7 @@ import sl.items.ShoppingItem;
 
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 
 public class CONS {
 
@@ -203,6 +204,14 @@ public class CONS {
 		
 //		public static int MODIFY_TAB2_LV_HEIGHT = 150;
 		public static int MODIFY_TAB2_LV_HEIGHT = 300;
+		
+	}
+	
+	public static class TabActv {
+		
+		public static TabHost tabHost;
+		public static TabSpec firstTab;
+		public static TabSpec secondTab;
 		
 	}
 }//public class CONS

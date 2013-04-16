@@ -1207,8 +1207,9 @@ public class Methods_dlg {
 		----------------------------*/
 		String[] choices = {
 					actv.getString(R.string.dlg_sort_list_item_name),
-					actv.getString(R.string.dlg_sort_list_genre),
-					actv.getString(R.string.dlg_sort_list_store),
+					actv.getString(R.string.dlg_sort_list_genre_item_name),
+					actv.getString(R.string.dlg_sort_list_store_item_name),
+					actv.getString(R.string.dlg_sort_list_store_genre_item_name),
 		};
 		
 		List<String> list = new ArrayList<String>();

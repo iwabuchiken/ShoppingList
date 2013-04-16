@@ -2,11 +2,15 @@ package sl.main;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.List;
 
 import sl.adapters.ItemListAdapter;
 import sl.adapters.ItemListAdapter2;
 import sl.adapters.ToBuyListAdapter;
+import sl.items.PS;
 import sl.items.ShoppingItem;
 import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
@@ -47,9 +51,9 @@ import android.widget.TextView;
 
 public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 	
-	TabHost tabHost;
-	TabSpec firstTab;
-	TabSpec secondTab;
+//	public static TabHost CONS.TabActv.tabHost;
+//	TabSpec CONS.TabActv.firstTab;
+//	TabSpec CONS.TabActv.secondTab;
 
 	ListView lvTab1;
 	ListView lvTab2;
@@ -96,9 +100,133 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 				+ "/"
 				+ "window size: height=" + size[1]);
          
+		//debug
+		test_B32_v_1_2();
+		
     }//public void onCreate(Bundle savedInstanceState)
 
-    private void setupListeners() {
+    private void test_B32_v_1_2() {
+		// TODO Auto-generated method stub
+    	/***************************************
+		 * Build: List
+		 ***************************************/
+    	List<ShoppingItem> itemList = new ArrayList<ShoppingItem>();
+    	
+		itemList.add(new ShoppingItem.Builder().setName("B").setPrice(1).build());
+		itemList.add(new ShoppingItem.Builder().setName("C").setPrice(1).build());
+		itemList.add(new ShoppingItem.Builder().setName("A").setPrice(2).build());
+		itemList.add(new ShoppingItem.Builder().setName("B").setPrice(3).build());
+		itemList.add(new ShoppingItem.Builder().setName("B").setPrice(2).build());
+		itemList.add(new ShoppingItem.Builder().setName("A").setPrice(1).build());
+		
+		// Log
+		Log.d("TabActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "<Original>");
+		
+		for (int i = 0; i < itemList.size(); i++) {
+			
+			// Log
+			Log.d("TabActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Name=" + itemList.get(i).getName()
+					+ "/"
+					+ "Price=" + itemList.get(i).getPrice());
+			
+		}//for (int i = 0; i < itemList.size(); i++)
+    	
+		/***************************************
+		 * Sort: Name
+		 ***************************************/
+		Collections.sort(itemList, new Comparator<ShoppingItem>(){
+
+//			@Override
+			public int compare(ShoppingItem i1, ShoppingItem i2) {
+
+				
+				return (int) (i1.getName().compareTo(i2.getName()));
+				
+			}//public int compare(PS i1, PS i2)
+
+		});//Collections.sort()
+
+		// Log
+		Log.d("TabActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "<Sorted: Name>");
+		
+		for (int i = 0; i < itemList.size(); i++) {
+			
+			// Log
+			Log.d("TabActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Name=" + itemList.get(i).getName()
+					+ "/"
+					+ "Price=" + itemList.get(i).getPrice());
+			
+		}//for (int i = 0; i < itemList.size(); i++)
+    	
+		/***************************************
+		 * Sort: Price
+		 ***************************************/
+		Collections.sort(itemList, new Comparator<ShoppingItem>(){
+
+//			@Override
+			public int compare(ShoppingItem i1, ShoppingItem i2) {
+				
+//				if (!i1.getName().equals(i2.getName())) {
+				if (i1.getName().equals(i2.getName())) {
+					
+					return (i1.getPrice() - i2.getPrice());
+					
+				} else {//if (i1.getName().equals(i2.getName()) == condition)
+					
+					return 0;
+					
+				}//if (i1.getName().equals(i2.getName()) == condition)
+				
+				
+//				return (int) (i1.getName().compareTo(i2.getName()));
+				
+			}//public int compare(PS i1, PS i2)
+
+		});//Collections.sort()
+
+		// Log
+		Log.d("TabActv.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "<Sorted: Price>");
+		
+		for (int i = 0; i < itemList.size(); i++) {
+			
+			// Log
+			Log.d("TabActv.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Name=" + itemList.get(i).getName()
+					+ "/"
+					+ "Price=" + itemList.get(i).getPrice());
+			
+		}//for (int i = 0; i < itemList.size(); i++)
+
+		
+	}//private void test_B32_v_1_2()
+
+	private void setupListeners() {
 		// TODO Auto-generated method stub
 		/***************************************
 		 * Set listener: lvTab1
@@ -182,52 +310,52 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 * Tab host
 		 ***************************************/
         //TabHostクラスのインスタンス生成
-//        TabHost tabHost = getTabHost();
-        tabHost = getTabHost();
+//        TabHost CONS.TabActv.tabHost = getTabHost();
+        CONS.TabActv.tabHost = getTabHost();
         
         /***************************************
 		 * First tab
 		 ***************************************/
         setupTabs__first();
 //        // TabHostからTabSpecの生成
-////        TabSpec firstTab = tabHost.newTabSpec("First");
-////        firstTab = tabHost.newTabSpec("First");
-//        firstTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_first));
+////        TabSpec CONS.TabActv.firstTab = CONS.TabActv.tabHost.newTabSpec("First");
+////        CONS.TabActv.firstTab = CONS.TabActv.tabHost.newTabSpec("First");
+//        CONS.TabActv.firstTab = CONS.TabActv.tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_first));
 //        
 //        // タブ部分に表示するテキストおよびアイコンのセット
-////        firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
-//        firstTab.setIndicator(
+////        CONS.TabActv.firstTab.setIndicator("CONS.TabActv.firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
+//        CONS.TabActv.firstTab.setIndicator(
 //        		"",
 //        		getResources().getDrawable(R.drawable.sl_tab_itemlist));
 //        
 //        // タブ選択時に表示したいViewのセット
-//        firstTab.setContent(R.id.first_content);
+//        CONS.TabActv.firstTab.setContent(R.id.first_content);
 //        // タブをTabHostに追加
-//        tabHost.addTab(firstTab);
+//        CONS.TabActv.tabHost.addTab(CONS.TabActv.firstTab);
         
         /***************************************
 		 * Second tab
 		 ***************************************/
         setupTabs__second();
-////        TabSpec secondTab = tabHost.newTabSpec("Second");
-////        secondTab = tabHost.newTabSpec("Second");
-////        secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
+////        TabSpec CONS.TabActv.secondTab = CONS.TabActv.tabHost.newTabSpec("Second");
+////        CONS.TabActv.secondTab = CONS.TabActv.tabHost.newTabSpec("Second");
+////        CONS.TabActv.secondTab.setIndicator("CONS.TabActv.secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
 //        
-//        secondTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_second));
+//        CONS.TabActv.secondTab = CONS.TabActv.tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_second));
 //        
-//        secondTab.setIndicator(
+//        CONS.TabActv.secondTab.setIndicator(
 //        		"",
 //        		getResources().getDrawable(R.drawable.sl_basket));
 //
-//        secondTab.setContent(R.id.second_content);
+//        CONS.TabActv.secondTab.setContent(R.id.second_content);
 //        
-//        tabHost.addTab(secondTab);
+//        CONS.TabActv.tabHost.addTab(CONS.TabActv.secondTab);
 //        
 //        //３つ目のタブを生成
-//        TabSpec thirdTab = tabHost.newTabSpec("Third");
+//        TabSpec thirdTab = CONS.TabActv.tabHost.newTabSpec("Third");
 //        thirdTab.setIndicator("thirdTab", getResources().getDrawable(android.R.drawable.ic_menu_add));
 //        thirdTab.setContent(this);
-//        tabHost.addTab(thirdTab);
+//        CONS.TabActv.tabHost.addTab(thirdTab);
 
         /***************************************
 		 * Set size to views: Tab2
@@ -307,20 +435,20 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //				+ ":"
 //				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 //				+ "]",
-//				"tabHost.getTabWidget().getMeasuredHeight()="
-//				+ tabHost.getTabWidget().getMeasuredHeight()
+//				"CONS.TabActv.tabHost.getTabWidget().getMeasuredHeight()="
+//				+ CONS.TabActv.tabHost.getTabWidget().getMeasuredHeight()
 //				+ "/"
-//				+ "tabHost.getTabWidget().getHeight()="
-//				+ tabHost.getTabWidget().getHeight()
+//				+ "CONS.TabActv.tabHost.getTabWidget().getHeight()="
+//				+ CONS.TabActv.tabHost.getTabWidget().getHeight()
 //				+ "/"
-//				+ "tabHost.getTabWidget().getChildAt(1).getBottom()="
-//				+ tabHost.getTabWidget().getChildAt(1).getBottom()
+//				+ "CONS.TabActv.tabHost.getTabWidget().getChildAt(1).getBottom()="
+//				+ CONS.TabActv.tabHost.getTabWidget().getChildAt(1).getBottom()
 //				//REF=> http://stackoverflow.com/questions/2502800/tabwidget-height	(answered Jun 15 '11 at 15:16)
-//				+ "tabHost.getTabWidget().getChildAt(1).getLayoutParams().height="
-//				+ tabHost.getTabWidget().getChildAt(1).getLayoutParams().height);
+//				+ "CONS.TabActv.tabHost.getTabWidget().getChildAt(1).getLayoutParams().height="
+//				+ CONS.TabActv.tabHost.getTabWidget().getChildAt(1).getLayoutParams().height);
 		
 		// Log
-		int widgetHeight = tabHost.getTabWidget().getChildAt(1).getLayoutParams().height;
+		int widgetHeight = CONS.TabActv.tabHost.getTabWidget().getChildAt(1).getLayoutParams().height;
 
 //		Log.d("TabActv.java" + "["
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
@@ -344,16 +472,16 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //				+ ":"
 //				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "tabHost.getTabContentView().getHeight()="
-//				+ tabHost.getTabContentView().getHeight());
+//				+ "]", "CONS.TabActv.tabHost.getTabContentView().getHeight()="
+//				+ CONS.TabActv.tabHost.getTabContentView().getHeight());
 //		
 //		// Log
 //		Log.d("TabActv.java" + "["
 //				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //				+ ":"
 //				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "tabHost.getTabContentView().getLayoutParams().height="
-//				+ tabHost.getTabContentView().getLayoutParams().height);
+//				+ "]", "CONS.TabActv.tabHost.getTabContentView().getLayoutParams().height="
+//				+ CONS.TabActv.tabHost.getTabContentView().getLayoutParams().height);
 		
 		/***************************************
 		 * Set default due date
@@ -364,7 +492,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		 * Set current tab
 		 ***************************************/
         //最初にカーソルを当てたいタブを指定
-        tabHost.setCurrentTabByTag("First");
+        CONS.TabActv.tabHost.setCurrentTabByTag("First");
         
         
         
@@ -372,39 +500,40 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 
 	private void setupTabs__second() {
 		// TODO Auto-generated method stub
-//      TabSpec secondTab = tabHost.newTabSpec("Second");
-//      secondTab = tabHost.newTabSpec("Second");
-//      secondTab.setIndicator("secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
+//      TabSpec CONS.TabActv.secondTab = CONS.TabActv.tabHost.newTabSpec("Second");
+//      CONS.TabActv.secondTab = CONS.TabActv.tabHost.newTabSpec("Second");
+//      CONS.TabActv.secondTab.setIndicator("CONS.TabActv.secondTab", getResources().getDrawable(android.R.drawable.ic_media_next));
       
-      secondTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_second));
+      CONS.TabActv.secondTab = CONS.TabActv.tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_second));
       
-      secondTab.setIndicator(
+      CONS.TabActv.secondTab.setIndicator(
       		"",
       		getResources().getDrawable(R.drawable.sl_basket));
 
-      secondTab.setContent(R.id.second_content);
+      CONS.TabActv.secondTab.setContent(R.id.second_content);
       
-      tabHost.addTab(secondTab);
+      CONS.TabActv.tabHost.addTab(CONS.TabActv.secondTab);
 
 	}
 
 	private void setupTabs__first() {
 		// TODO Auto-generated method stub
         // TabHostからTabSpecの生成
-//      TabSpec firstTab = tabHost.newTabSpec("First");
-//      firstTab = tabHost.newTabSpec("First");
-      firstTab = tabHost.newTabSpec(this.getString(R.string.tabactv_tabtags_first));
+//      TabSpec CONS.TabActv.firstTab = CONS.TabActv.tabHost.newTabSpec("First");
+//      CONS.TabActv.firstTab = CONS.TabActv.tabHost.newTabSpec("First");
+      CONS.TabActv.firstTab = CONS.TabActv.tabHost.newTabSpec(
+    		  					this.getString(R.string.tabactv_tabtags_first));
       
       // タブ部分に表示するテキストおよびアイコンのセット
-//      firstTab.setIndicator("firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
-      firstTab.setIndicator(
+//      CONS.TabActv.firstTab.setIndicator("CONS.TabActv.firstTab", getResources().getDrawable(android.R.drawable.ic_menu_agenda));
+      CONS.TabActv.firstTab.setIndicator(
       		"",
       		getResources().getDrawable(R.drawable.sl_tab_itemlist));
       
       // タブ選択時に表示したいViewのセット
-      firstTab.setContent(R.id.first_content);
+      CONS.TabActv.firstTab.setContent(R.id.first_content);
       // タブをTabHostに追加
-      tabHost.addTab(firstTab);
+      CONS.TabActv.tabHost.addTab(CONS.TabActv.firstTab);
 
       /***************************************
 	 * Spinners
@@ -938,7 +1067,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		
-		String tabTag = tabHost.getCurrentTabTag();
+		String tabTag = CONS.TabActv.tabHost.getCurrentTabTag();
 
 //		/***************************************
 //		 * Switch the menu file using tab tag
@@ -964,7 +1093,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		switch (item.getItemId()) {
 		case R.id.menu_listitem_filter:
 
-			String tabTag = tabHost.getCurrentTabTag();
+			String tabTag = CONS.TabActv.tabHost.getCurrentTabTag();
 			
 			if (tabTag.equals(this.getString(R.string.tabactv_tabtags_first))) {
 				
@@ -980,7 +1109,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 //					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //					+ ":"
 //					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "tabHost.getCurrentTabTag()=" + tabHost.getCurrentTabTag());
+//					+ "]", "CONS.TabActv.tabHost.getCurrentTabTag()=" + CONS.TabActv.tabHost.getCurrentTabTag());
 			
 //			Methods.dlg_filterList2(this);
 			

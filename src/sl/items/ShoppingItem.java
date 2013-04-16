@@ -1,12 +1,24 @@
 package sl.items;
 
+
 public class ShoppingItem {
 
 	//
 	String store, name, genre, yomi;
 	int price;
 	int id;
-	
+
+	public ShoppingItem(Builder builder) {
+
+		store = builder.store;
+		name = builder.name;
+		genre = builder.genre;
+		yomi = builder.yomi;
+		price = builder.price;
+		id = builder.id;
+		
+	}//public BM(Builder builder)
+
 	public ShoppingItem(String store, String name, int price, String genre) {
 		
 		this.store = store;
@@ -108,5 +120,39 @@ public class ShoppingItem {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
+	public static class Builder {
+		
+		private String store, name, genre, yomi;
+		private int price;
+		private int id;
+		
+		public ShoppingItem build() {
+			
+			return new ShoppingItem(this);
+			
+		}
+		
+		public Builder setStore(String store) {
+			this.store = store;	return this;
+		}
+		public Builder setName(String name) {
+			this.name = name;	return this;
+		}
+		public Builder setGenre(String genre) {
+			this.genre = genre;	return this;
+		}
+		public Builder setYomi(String yomi) {
+			this.yomi = yomi;	return this;
+		}
+		public Builder setPrice(int price) {
+			this.price = price;	return this;
+		}
+		public Builder setId(int id) {
+			this.id = id;	return this;
+		}
+
+		
+		
+	}//public static class Builder
 }

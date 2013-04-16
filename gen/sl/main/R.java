@@ -309,8 +309,11 @@ public final class R {
         public static final int dlg_save_tobuy_list_scheduled_date=0x7f070057;
         public static final int dlg_save_tobuy_list_store_name=0x7f070058;
         public static final int dlg_sort_list_genre=0x7f070060;
+        public static final int dlg_sort_list_genre_item_name=0x7f070062;
         public static final int dlg_sort_list_item_name=0x7f07005f;
         public static final int dlg_sort_list_store=0x7f070061;
+        public static final int dlg_sort_list_store_genre_item_name=0x7f070064;
+        public static final int dlg_sort_list_store_item_name=0x7f070063;
         /**  dlg_sort_list.xml 
          */
         public static final int dlg_sort_list_title=0x7f07005e;
