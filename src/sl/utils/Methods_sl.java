@@ -2006,7 +2006,29 @@ public class Methods_sl {
 //				@Override
 				public int compare(PS i1, PS i2) {
 
-					
+					// Log
+					Log.d("Methods_sl.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+							"i1=" + i1.getStoreName() + "(" + String.valueOf(i1.getDueDate()) +
+									" " + Methods.get_TimeLabel(i1.getDueDate()) + ")"
+							+ "i2=" + i2.getStoreName() + "(" + String.valueOf(i2.getDueDate()) +
+									" " + Methods.get_TimeLabel(i2.getDueDate()) + ")");
+					// Log
+					Log.d("Methods_sl.java"
+							+ "["
+							+ Thread.currentThread().getStackTrace()[2]
+									.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+							"i1-i2=" + String.valueOf(i1.getDueDate() - i2.getDueDate()));
+//					"i2-i1=" + String.valueOf(i2.getDueDate() - i1.getDueDate()));
+//					return (int) (i2.getDueDate() - i1.getDueDate());
 					return (int) (i1.getDueDate() - i2.getDueDate());
 					
 				}//public int compare(PS i1, PS i2)

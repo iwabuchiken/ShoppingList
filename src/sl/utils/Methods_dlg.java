@@ -862,11 +862,44 @@ public class Methods_dlg {
 			
 		}//if (psList == null)
 		
+		// Log
+		for (int i = 0; i < psList.size(); i++) {
+			
+			Log.d("Methods_dlg.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Store=" + psList.get(i).getStoreName()
+					+ "/"
+					+ "Due date=" + psList.get(i).getDueDate()
+					+ "(" + Methods.get_TimeLabel(psList.get(i).getDueDate()) + ")");
+			
+			
+		}//for (int i = 0; i < psList.size(); i++)
+		
+		
 		/***************************************
 		 * Sort list
 		 ***************************************/
 		Methods_sl.sortPSList(psList, Tags.SortTags.pslist_due_date);
 		
+		
+		// Log
+		for (int i = 0; i < psList.size(); i++) {
+			
+			Log.d("Methods_dlg.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Store=" + psList.get(i).getStoreName()
+					+ "/"
+					+ "Due date=" + psList.get(i).getDueDate()
+					+ "(" + Methods.get_TimeLabel(psList.get(i).getDueDate()) + ")");
+			
+			
+		}//for (int i = 0; i < psList.size(); i++)
 //		for (PS item : psList) {
 //			
 //			// Log
