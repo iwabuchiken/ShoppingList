@@ -2029,7 +2029,16 @@ public class Methods_sl {
 							"i1-i2=" + String.valueOf(i1.getDueDate() - i2.getDueDate()));
 //					"i2-i1=" + String.valueOf(i2.getDueDate() - i1.getDueDate()));
 //					return (int) (i2.getDueDate() - i1.getDueDate());
-					return (int) (i1.getDueDate() - i2.getDueDate());
+//					return (int) (i1.getDueDate() - i2.getDueDate());
+					
+					if ((i1.getDueDate() - i2.getDueDate()) > 0) {
+						return 1;
+					} else if ((i1.getDueDate() - i2.getDueDate()) < 0) {//if ((i1.getDueDate() - i2.getDueDate()) > 0)
+						return -1;
+					} else {//if ((i1.getDueDate() - i2.getDueDate()) > 0)
+						return 0;
+					}//if ((i1.getDueDate() - i2.getDueDate()) > 0)
+					
 					
 				}//public int compare(PS i1, PS i2)
 

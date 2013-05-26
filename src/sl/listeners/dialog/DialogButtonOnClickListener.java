@@ -729,69 +729,6 @@ DialogButtonOnClickListener implements OnClickListener {
 			
 		}//if (res == true)
 		
-//		Methods_dlg.dlg_scheduleInDb(actv, dlg1, dlg2);
-		
-		
-//		/***************************************
-//		 * Amount
-//		 ***************************************/
-//		EditText etAmount = (EditText) dlg2.findViewById(R.id.dlg_save_tobuy_list_et_amount);
-//		
-//		/***************************************
-//		 * Memo
-//		 ***************************************/
-//		EditText etMemo = (EditText) dlg2.findViewById(R.id.dlg_save_tobuy_list_et_memo);
-//		
-//		/***************************************
-//		 * Items
-//		 ***************************************/
-//		// Log
-//		Log.d("DialogButtonOnClickListener.java" + "["
-//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//				+ ":"
-//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//				+ "]", "Calling => case_dlg_save_tobuy_list_bt_ok__convertToBuyList2String()");
-//		
-//		String items = case_dlg_save_tobuy_list_bt_ok__getItemIdsString();
-//		
-//		/***************************************
-//		 * Store data
-//		 * 1. Get dbId: Get the number of data already stored
-//		 * 		=> Add 1 to the number
-//		 * 2. Construct a PS instance
-//		 * 3. Store date => DBUtils.
-//		 ***************************************/
-//		/***************************************
-//		 * Construct: A PS instance
-//		 ***************************************/
-//		PS ps = new PS();
-//		
-////		ps.setDbId(dbId);
-//		ps.setStoreName(spStoreNames.getSelectedItem().toString());
-//		ps.setAmount(Integer.parseInt(etAmount.getText().toString()));
-//		ps.setMemo(etMemo.getText().toString());
-//		ps.setItems(items);
-//		ps.setDueDate(dueDate);
-//		
-////		/***************************************
-////		 * Store the PS instance to database
-////		 ***************************************/
-////		DBUtils dbu = new DBUtils(actv, CONS.dbName);
-//////		
-//////		SQLiteDatabase wdb = dbu.getWritableDatabase();
-////
-////		res = dbu.storeData_PS(
-////								CONS.dbName,
-////								CONS.DBAdmin.tname_purchaseSchedule,
-////								ps);
-////		
-////		
-//		/***************************************
-//		 * Dismiss dialog
-//		 ***************************************/
-//		dlg1.dismiss();
-//		dlg2.dismiss();
-//		
 	}//private void case_dlg_save_tobuy_list_bt_ok()
 
 	private void
@@ -811,14 +748,28 @@ DialogButtonOnClickListener implements OnClickListener {
 		/***************************************
 		 * Items
 		 ***************************************/
+//		// Log
+//		Log.d("DialogButtonOnClickListener.java" + "["
+//				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ ":"
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "Calling => case_dlg_save_tobuy_list_bt_ok__convertToBuyList2String()");
+//		
+		String items = case_dlg_save_tobuy_list_bt_ok__getItemIdsString();
+		
 		// Log
 		Log.d("DialogButtonOnClickListener.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ ":"
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "Calling => case_dlg_save_tobuy_list_bt_ok__convertToBuyList2String()");
+				+ "]", "items=" + items);
 		
-		String items = case_dlg_save_tobuy_list_bt_ok__getItemIdsString();
+		// Log
+		Log.d("DialogButtonOnClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "dueDate="+ dueDate);
 		
 		/***************************************
 		 * Store data
