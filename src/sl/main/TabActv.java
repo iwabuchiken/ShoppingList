@@ -101,7 +101,7 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 				+ "window size: height=" + size[1]);
          
 		//debug
-		test_B32_v_1_2();
+//		test_B32_v_1_2();
 		
     }//public void onCreate(Bundle savedInstanceState)
 

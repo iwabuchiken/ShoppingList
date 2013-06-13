@@ -1,7 +1,7 @@
 a
 a p && pushd C:\WORKS\WS\WS_Android~\ShoppingList && gitk
 
-pushd C:\WORKS\WS\WS_Android~\ShoppingList
+pushd C:\WORKS\WS\WS_Android~\ShoppingList && gitk
 gitk
 
 
