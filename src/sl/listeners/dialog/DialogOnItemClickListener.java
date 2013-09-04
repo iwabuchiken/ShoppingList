@@ -21,6 +21,7 @@ import sl.utils.Tags.DialogTags;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -36,7 +37,11 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 
 	//
 	Activity actv;
+	
 	Dialog dlg;
+	Dialog dlg1;
+	Dialog dlg2;
+	
 	ShoppingItem si;
 	//
 	Vibrator vib;
@@ -74,6 +79,20 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
 
 	}
+
+	public DialogOnItemClickListener
+	(Activity actv, Dialog dlg1, DialogTags dlgTag, ShoppingItem si) {
+		
+		this.actv = actv;
+		this.dlg1 = dlg1;
+		this.si = si;
+		this.dlgTag = dlgTag;
+		
+		//
+		vib = (Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
+		
+		
+	}//public DialogOnItemClickListener
 
 	//	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -146,6 +165,14 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 				
 				break;// case dlg_sort_list_lv
 				
+			case dlg_item_list_long_click://----------------------------
+				
+				choice = (String) parent.getItemAtPosition(position);
+				
+				case_dlg_item_list_long_click(choice);
+				
+				break;// case dlg_sort_list_lv
+				
 			default:
 				break;
 			}//switch (tag)
@@ -199,6 +226,23 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		}//if (dlgName != null && dlgName == "confirm_table_drop")
 		
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+	private void
+	case_dlg_item_list_long_click(String choice) {
+		
+		if (choice.equals(actv.getString(
+				R.string.dlg_item_list_long_click_edit))) {
+			
+//			Methods_dlg.dlg_tab1_edit_item(actv, parent, position)
+			
+			
+		} else if (choice.equals(actv.getString(
+				R.string.dlg_item_list_long_click_delete))) {
+
+
+		}//if (choice.equals(actv.getString(
+		
+	}//case_dlg_item_list_long_click(String choice)・・
 
 	private void case_dlg_sort_list_lv(String choice) {
 		

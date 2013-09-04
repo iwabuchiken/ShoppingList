@@ -63,6 +63,9 @@ public class Tags {
 		// dlg_sort_list.xml
 		dlg_sort_list_lv,
 		
+		// dlg_item_list_long_click
+		dlg_item_list_long_click,
+		
 	}//public static enum DialogTags
 	
 	public static enum ButtonTags {

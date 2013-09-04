@@ -284,6 +284,10 @@ public final class R {
         public static final int dlg_input_empty_message=0x7f07001e;
         public static final int dlg_input_empty_reenter=0x7f07001f;
         public static final int dlg_input_empty_title=0x7f07001d;
+        public static final int dlg_item_list_long_click_delete=0x7f070066;
+        /**  Dialog: Tab1, item list, long click 
+         */
+        public static final int dlg_item_list_long_click_edit=0x7f070065;
         public static final int dlg_reconfirm_genre_name=0x7f070004;
         public static final int dlg_reconfirm_store_name_cancel=0x7f070026;
         public static final int dlg_reconfirm_store_name_label_store_name=0x7f070022;

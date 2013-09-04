@@ -21,6 +21,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -189,6 +190,7 @@ public class Methods_dlg {
 		
 		// Title
 		dlg.setTitle(titleStringId);
+		
 		
 		/*----------------------------
 		* 2. Add listeners => OnTouch
@@ -1291,5 +1293,283 @@ public class Methods_dlg {
 		
 	}//public static void dlg_SortList(Activity actv)
 
+	public static void
+	dlg_tab1_edit_item
+	(Activity actv, ShoppingItem si) {
+
+		/***************************************
+		 * Dialog
+		 ***************************************/
+		Dialog dlg = Methods_dlg.dlg_template_okCancel(
+						actv,
+						R.layout.dlg_edit_items,
+						R.string.dlg_edit_items_title,
+						
+						R.id.dlg_edit_items_btn_ok,
+						R.id.dlg_edit_items_btn_cancel,
+						
+						Tags.DialogTags.dlg_edit_items_bt_ok,
+						Tags.DialogTags.dlg_generic_cancel,
+						
+						si);
+
+		/***************************************
+		 * Set store name
+		 ***************************************/
+		case_tab_itemList__setStoreName(si, dlg, actv);
+		
+		// Log
+		Log.d("ListOnItemLongClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "setStoreName => Done");
+		
+		/***************************************
+		 * Set: Item name
+		 ***************************************/
+		case_tab_itemList__setItemNameAndYomi(si, dlg);
+		
+		// Log
+		Log.d("ListOnItemLongClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Item name and yomi => Done");
+		
+		/***************************************
+		 * Set: Price and genre
+		 ***************************************/
+		case_tab_itemList__setPrice(si, dlg);
+
+		/***************************************
+		 * Set: Genre
+		 ***************************************/
+		case_tab_itemList__setGenre(actv, si, dlg);
+
+		dlg.show();
+		
+	}//dlg_tab1_edit_item(AdapterView<?> parent, int position)
+
+	private static void
+	case_tab_itemList__setItemNameAndYomi(ShoppingItem si, Dialog dlg) {
+		// TODO Auto-generated method stub
+		EditText etItemName = (EditText) dlg.findViewById(R.id.dlg_edit_items_et_name);
+		etItemName.setText(si.getName());
+
+		EditText etYomi = (EditText) dlg.findViewById(R.id.dlg_edit_items_et_yomi);
+		etYomi.setText(si.getYomi());
+		
+	}//case_tab_itemList__setItemNameAndYomi(ShoppingItem si, Dialog dlg)
+	
+	private static void
+	case_tab_itemList__setPrice(ShoppingItem si, Dialog dlg) {
+		// TODO Auto-generated method stub
+
+		EditText etPrice = (EditText) dlg.findViewById(R.id.dlg_edit_items_et_price);
+		
+//		etPrice.setText(si.getPrice());				//=> android.content.res.Resources$NotFoundException: String resource ID #0x64
+
+		etPrice.setText(String.valueOf(si.getPrice()));
+		
+	}//case_tab_itemList__setPrice(ShoppingItem si, Dialog dlg)
+
+	private static void
+	case_tab_itemList__setStoreName
+	(ShoppingItem si, Dialog dlg, Activity actv) {
+		// TODO Auto-generated method stub
+		// Resource => http://www.java2s.com/Open-Source/Android/Samples/techbooster/org/jpn/techbooster/sample/spinner/SpinnerActivity.java.htm
+		Spinner sp_store_name = (Spinner) dlg.findViewById(R.id.dlg_edit_items_sp_store);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+	              actv, android.R.layout.simple_spinner_item);
+
+		/***************************************
+		 * Get store names from db
+		 ***************************************/
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase db = dbm.getReadableDatabase();
+		
+		Cursor c = dbm.getAllData(db, "stores", CONS.columns_for_table_stores_with_index);
+		
+		// Log
+		Log.d("ListOnItemLongClickListener.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "c.getCount()" + c.getCount());
+		
+		c.moveToFirst();
+		
+		// Log
+		for (int i = 0; i < c.getCount(); i++) {
+
+			adapter.add(c.getString(1));
+
+			c.moveToNext();
+			
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		
+		/*----------------------------
+		 * 3-1. setDropDownViewResource
+			----------------------------*/
+		adapter.setDropDownViewResource(
+						android.R.layout.simple_spinner_dropdown_item);
+		
+		/*----------------------------
+		 * 3-2. Close db
+			----------------------------*/
+		db.close();
+		
+		/*----------------------------
+		 * 4. Set adapter to spinner
+			----------------------------*/
+		sp_store_name.setAdapter(adapter);
+
+		/***************************************
+		 * Set the initial store name
+		 * 1. Get the position number
+		 * 2. Set the selection
+		 ***************************************/
+		/***************************************
+		 * 1. Get the position number
+		 ***************************************/
+		int num = 0;
+		
+		for (int i = 0; i < adapter.getCount(); i++) {
+			
+			String storeName = adapter.getItem(i);
+			
+			// Log
+			Log.d("ListOnItemLongClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+//					"si.getName()=" + si.getName()
+					"si.getStore()=" + si.getStore()
+					+ "/"
+					+ "storeName=" + storeName);
+			
+//			if (si.getName().equals(storeName)) {
+			if (si.getStore().equals(storeName)) {
+				
+				// Log
+				Log.d("ListOnItemLongClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "si.getName().equals(storeName)");
+				
+				num = i;
+				
+				break;
+				
+			}//if (si.getName() == condition)
+			
+		}//for (int i = 0; i < adapter.getCount(); i++)
+		
+		sp_store_name.setSelection(num);
+		
+	}//case_tab_itemList__setStoreName(ShoppingItem si, Dialog dlg)
+
+	private static void
+	case_tab_itemList__setGenre
+	(Activity actv, ShoppingItem si, Dialog dlg) {
+		// TODO Auto-generated method stub
+		// Resource => http://www.java2s.com/Open-Source/Android/Samples/techbooster/org/jpn/techbooster/sample/spinner/SpinnerActivity.java.htm
+		Spinner sp_genre_name = (Spinner) dlg.findViewById(R.id.dlg_edit_items_sp_genre);
+		
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+	              actv, android.R.layout.simple_spinner_item);
+//
+		/*----------------------------
+		 * 2. Get genre names from db
+			----------------------------*/
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase db = dbm.getReadableDatabase();
+		
+		Cursor c = dbm.getAllData(db, "genres", CONS.columns_for_table_genres_with_index);
+		
+		// Log
+		Log.d("RegisterItem.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "c.getCount()" + c.getCount());
+		
+		c.moveToFirst();
+		
+		// Log
+		for (int i = 0; i < c.getCount(); i++) {
+
+			adapter.add(c.getString(1));
+
+			c.moveToNext();
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		
+		/*----------------------------
+		 * 3-1. setDropDownViewResource
+			----------------------------*/
+		adapter.setDropDownViewResource(
+						android.R.layout.simple_spinner_dropdown_item);
+		
+		/*----------------------------
+		 * 3-2. Close db
+			----------------------------*/
+		db.close();
+		
+		/*----------------------------
+		 * 4. Set adapter to spinner
+			----------------------------*/
+		sp_genre_name.setAdapter(adapter);
+		
+		/***************************************
+		 * Set initial value
+		 ***************************************/
+		int num = 0;
+		
+		for (int i = 0; i < adapter.getCount(); i++) {
+			
+			String genreName = adapter.getItem(i);
+			
+			// Log
+			Log.d("ListOnItemLongClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+//					"si.getName()=" + si.getName()
+					"si.getGenre()=" + si.getGenre()
+					+ "/"
+					+ "genreName=" + genreName);
+			
+//			if (si.getName().equals(storeName)) {
+			if (si.getGenre().equals(genreName)) {
+				
+				// Log
+				Log.d("ListOnItemLongClickListener.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ ":"
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"si.getGenre().equals(genreName)");
+				
+				num = i;
+				
+				break;
+				
+			}//if (si.getName() == condition)
+			
+		}//for (int i = 0; i < adapter.getCount(); i++)
+		
+		sp_genre_name.setSelection(num);
+
+	
+	}//case_tab_itemList__setGenre(ShoppingItem si, Dialog dlg)
 
 }//public class Methods_dlg

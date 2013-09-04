@@ -150,5 +150,9 @@
 		<string name="dlg_sort_list_genre_item_name">Genre/Item name</string>
 		<string name="dlg_sort_list_store_item_name">Store/Item name</string>
 		<string name="dlg_sort_list_store_genre_item_name">Store/Genre/Item name</string>
+	
+	<!-- Dialog: Tab1, item list, long click -->
+		<string name="dlg_item_list_long_click_edit">Edit</string>
+		<string name="dlg_item_list_long_click_delete">Delete</string>
 		
 </resources>
