@@ -875,6 +875,14 @@ public class TabActv extends TabActivity implements TabHost.TabContentFactory {
 		//
 		rdb.close();
 
+		// Log
+		Log.d("[" + "TabActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "CONS.itemList.size()=" + CONS.itemList.size());
+		
+		
 		/***************************************
 		 * Sort list
 		 ***************************************/

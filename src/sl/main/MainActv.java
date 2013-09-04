@@ -243,7 +243,8 @@ public class MainActv extends Activity {
 		 *********************************/
 		String src = StringUtils.join(
 				new String[]{CONS.dirPath_db_backup,
-						"shoppinglist_backup_20121108_122426.bk"},
+//						"shoppinglist_backup_20121108_122426.bk"},
+						"shoppinglist_backup_20130905_004749.bk"},
 				File.separator);
 		
 		String dst = StringUtils.join(
@@ -520,6 +521,15 @@ public class MainActv extends Activity {
 				i.setClass(this, TabActv.class);
 				
 				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+				
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ " : "
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "Starting TabActv");
 				
 				startActivity(i);
 
