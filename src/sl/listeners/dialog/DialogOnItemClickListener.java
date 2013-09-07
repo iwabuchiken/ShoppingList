@@ -112,7 +112,39 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		 *********************************/
 		Tags.DialogTags tag = (Tags.DialogTags) parent.getTag();
 		
+		//debug
 		if (tag != null) {
+			
+			// Log
+			Log.d("["
+					+ "DialogOnItemClickListener.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "tag.name()=" + tag.name());
+			
+		} else {//if (tag != nill)
+			
+			// Log
+			Log.d("["
+					+ "DialogOnItemClickListener.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "tag => null");
+			
+		}//if (tag != nill)
+		
+		
+		if (tag != null) {
+			
+			// Log
+			Log.d("["
+					+ "DialogOnItemClickListener.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "tag.name()=" + tag.name());
 			
 			switch (tag) {
 			
@@ -223,17 +255,43 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 			
 			}//switch (item)
 
-		}//if (dlgName != null && dlgName == "confirm_table_drop")
+		} else if (dlgTag != null && dlgTag == DialogTags.dlg_item_list_long_click) {
+			
+			String choice = (String) parent.getItemAtPosition(position);
+			
+			if (choice.equals(actv.getString(
+					R.string.dlg_item_list_long_click_edit))) {
+				
+				Methods_dlg.dlg_tab1_edit_item(actv, si, dlg);
+				
+				
+			} else if (choice.equals(actv.getString(
+					R.string.dlg_item_list_long_click_delete))) {
+
+				// debug
+				Toast.makeText(actv, "DELETE", Toast.LENGTH_SHORT).show();
+
+			}//if (choice.equals(actv.getString(
+			
+			
+		} //if (dlgName != null && dlgName == "confirm_table_drop")
 		
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
 
 	private void
 	case_dlg_item_list_long_click(String choice) {
 		
+		// Log
+		Log.d("[" + "DialogOnItemClickListener.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "choice=" + choice);
+		
 		if (choice.equals(actv.getString(
 				R.string.dlg_item_list_long_click_edit))) {
 			
-//			Methods_dlg.dlg_tab1_edit_item(actv, parent, position)
+			Methods_dlg.dlg_tab1_edit_item(actv, si, dlg);
 			
 			
 		} else if (choice.equals(actv.getString(
