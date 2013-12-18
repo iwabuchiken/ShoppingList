@@ -2022,13 +2022,6 @@ public class Methods {
 		 * 4. Copy file
 		 * 
 		 *********************************/
-//		// Setup db
-//		DBUtils dbu = new DBUtils(actv, dbName);
-//		
-//		SQLiteDatabase wdb = dbu.getWritableDatabase();
-//	
-//		wdb.close();
-	
 		// Log
 		Log.d("Methods.java" + "["
 				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
@@ -2039,15 +2032,6 @@ public class Methods {
 				+ "/"
 				+ "dst=" + dst);
 		
-		/*********************************
-		 * \/data/data
-		 *********************************/
-
-//
-		/*********************************
-		 * 2. Setup: File paths
-		 *********************************/
-	
 		/*********************************
 		 * 3. Setup: File objects
 		 *********************************/

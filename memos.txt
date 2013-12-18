@@ -4,6 +4,9 @@ a p && pushd C:\WORKS\WS\WS_Android~\ShoppingList && gitk
 pushd C:\WORKS\WS\WS_Android~\ShoppingList && gitk
 gitk
 
+[db]
+/data/data/sl.main/databases/sl
+/mnt/sdcard-ext/ShoppingList_backup
 
 
 C:\WORKS\WS\a

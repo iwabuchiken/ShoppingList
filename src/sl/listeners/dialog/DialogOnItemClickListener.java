@@ -572,7 +572,8 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		String src = StringUtils.join(
 						new String[]{
 								CONS.dirPath_db_backup,
-								"shoppinglist_backup_20130213_121226.bk"},
+								"shoppinglist_backup_20131218_160952.bk"},
+//								"shoppinglist_backup_20130213_121226.bk"},
 						File.separator);
 		
 		String dst = StringUtils.join(
