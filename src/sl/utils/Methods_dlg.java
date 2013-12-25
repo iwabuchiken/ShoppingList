@@ -596,6 +596,61 @@ public class Methods_dlg {
 	}//public static Dialog dlg_template_okCancel()
 
 	public static
+	Dialog dlg_template_okCancel_2Dialogues_SI
+	(Activity actv,
+			int layoutId, int titleStringId,
+			int okButtonId, int cancelButtonId,
+			DialogTags okTag, DialogTags cancelTag,
+			Dialog dlg1, ShoppingItem si) {
+		/*----------------------------
+		 * Steps
+		 * 1. Set up
+		 * 2. Add listeners => OnTouch
+		 * 3. Add listeners => OnClick
+		----------------------------*/
+		// 
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(layoutId);
+		
+		// Title
+		dlg2.setTitle(titleStringId);
+		
+		/*----------------------------
+		 * 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_ok = (Button) dlg2.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg2.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_ok.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg2));
+		btn_cancel.setOnTouchListener(
+				new DialogButtonOnTouchListener(actv, dlg2));
+		
+		/*----------------------------
+		 * 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_ok.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2, si));
+		btn_cancel.setOnClickListener(
+				new DialogButtonOnClickListener(actv, dlg1, dlg2));
+		
+		//
+		//dlg.show();
+		
+		return dlg2;
+		
+	}//public static Dialog dlg_template_okCancel()
+
+	public static
 	Dialog dlg_template_okCancel_3Dialogues
 	(Activity actv,
 			int layoutId, int titleStringId,
@@ -1295,12 +1350,13 @@ public class Methods_dlg {
 
 	public static void
 	dlg_tab1_edit_item
-	(Activity actv, ShoppingItem si) {
+	(Activity actv, ShoppingItem si, Dialog dlg1) {
 
 		/***************************************
 		 * Dialog
 		 ***************************************/
-		Dialog dlg = Methods_dlg.dlg_template_okCancel(
+//		Dialog dlg2 = Methods_dlg.dlg_template_okCancel(
+		Dialog dlg2 = Methods_dlg.dlg_template_okCancel_2Dialogues_SI(
 						actv,
 						R.layout.dlg_edit_items,
 						R.string.dlg_edit_items_title,
@@ -1309,14 +1365,16 @@ public class Methods_dlg {
 						R.id.dlg_edit_items_btn_cancel,
 						
 						Tags.DialogTags.dlg_edit_items_bt_ok,
-						Tags.DialogTags.dlg_generic_cancel,
+//						Tags.DialogTags.dlg_generic_cancel,
+						Tags.DialogTags.dlg_generic_dismiss_second_dialog,
 						
+						dlg1,
 						si);
 
 		/***************************************
 		 * Set store name
 		 ***************************************/
-		case_tab_itemList__setStoreName(si, dlg, actv);
+		case_tab_itemList__setStoreName(si, dlg2, actv);
 		
 		// Log
 		Log.d("ListOnItemLongClickListener.java" + "["
@@ -1328,7 +1386,7 @@ public class Methods_dlg {
 		/***************************************
 		 * Set: Item name
 		 ***************************************/
-		case_tab_itemList__setItemNameAndYomi(si, dlg);
+		case_tab_itemList__setItemNameAndYomi(si, dlg2);
 		
 		// Log
 		Log.d("ListOnItemLongClickListener.java" + "["
@@ -1340,14 +1398,14 @@ public class Methods_dlg {
 		/***************************************
 		 * Set: Price and genre
 		 ***************************************/
-		case_tab_itemList__setPrice(si, dlg);
+		case_tab_itemList__setPrice(si, dlg2);
 
 		/***************************************
 		 * Set: Genre
 		 ***************************************/
-		case_tab_itemList__setGenre(actv, si, dlg);
+		case_tab_itemList__setGenre(actv, si, dlg2);
 
-		dlg.show();
+		dlg2.show();
 		
 	}//dlg_tab1_edit_item(AdapterView<?> parent, int position)
 

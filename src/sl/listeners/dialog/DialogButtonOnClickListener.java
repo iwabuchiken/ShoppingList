@@ -14,6 +14,7 @@ import sl.utils.Methods_sl;
 import sl.utils.Tags;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Vibrator;
 import android.util.Log;
@@ -99,7 +100,21 @@ DialogButtonOnClickListener implements OnClickListener {
 		this.si = si;
 		
 		//
-		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
+		vib = (Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
+
+	}
+
+	public DialogButtonOnClickListener(Activity actv, Dialog dlg1,
+			Dialog dlg2, ShoppingItem si) {
+		
+		this.actv = actv;
+		this.dlg1 = dlg1;
+		this.dlg2 = dlg2;
+		
+		this.si = si;
+		
+		//
+		vib = (Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
 
 	}
 
