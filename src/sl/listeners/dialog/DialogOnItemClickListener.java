@@ -500,6 +500,13 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 
 	private void dlg_tabactv_tab2_lv(String choice) {
 		// TODO Auto-generated method stub
+		// Log
+		Log.d("[" + "DialogOnItemClickListener.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "choice => " + choice);
+		
 		if (choice.equals(actv.getString(R.string.tabactv_tab2_lv_delete_from_list))) {
 		
 			/***************************************

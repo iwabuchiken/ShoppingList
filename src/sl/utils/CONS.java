@@ -38,6 +38,14 @@ public class CONS {
 	};
 			
 	/*********************************
+	 * From: List tags
+	 *********************************/
+	public static enum ListTags {
+		tab1_long_click,
+	};
+	
+	
+	/*********************************
 	 * From: DBManager.java
 	 *********************************/
 	public static String tableName = "shopping_item";
@@ -214,4 +222,5 @@ public class CONS {
 		public static TabSpec secondTab;
 		
 	}
+	
 }//public class CONS
