@@ -6,6 +6,8 @@ import java.util.List;
 import sl.adapters.PSListAdapter;
 import sl.items.PS;
 import sl.items.ShoppingItem;
+import sl.listeners.dialog.DB_CL;
+import sl.listeners.dialog.DB_TL;
 import sl.listeners.dialog.DialogButtonOnClickListener;
 import sl.listeners.dialog.DialogButtonOnTouchListener;
 import sl.listeners.dialog.DialogOnItemClickListener;
@@ -650,6 +652,64 @@ public class Methods_dlg {
 		
 	}//public static Dialog dlg_template_okCancel()
 
+	public static
+	Dialog dlg_template_okCancel_2Dialogues_SI
+	(Activity actv,
+			int layoutId, int titleStringId,
+			
+			int okButtonId, int cancelButtonId,
+			
+			CONS.DialogButtonTags okTag, CONS.DialogButtonTags cancelTag,
+			
+			Dialog dlg1, ShoppingItem si) {
+		/*----------------------------
+		 * Steps
+		 * 1. Set up
+		 * 2. Add listeners => OnTouch
+		 * 3. Add listeners => OnClick
+		----------------------------*/
+		// 
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(layoutId);
+		
+		// Title
+		dlg2.setTitle(titleStringId);
+		
+		/*----------------------------
+		 * 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_ok = (Button) dlg2.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg2.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(okTag);
+		btn_cancel.setTag(cancelTag);
+		
+		//
+		btn_ok.setOnTouchListener(
+				new DB_TL(actv, dlg2));
+		btn_cancel.setOnTouchListener(
+				new DB_TL(actv, dlg2));
+		
+		/*----------------------------
+		 * 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_ok.setOnClickListener(
+				new DB_CL(actv, dlg1, dlg2, si));
+		btn_cancel.setOnClickListener(
+				new DB_CL(actv, dlg1, dlg2));
+		
+		//
+		//dlg.show();
+		
+		return dlg2;
+		
+	}//public static Dialog dlg_template_okCancel()
+	
 	public static
 	Dialog dlg_template_okCancel_3Dialogues
 	(Activity actv,
@@ -1629,5 +1689,35 @@ public class Methods_dlg {
 
 	
 	}//case_tab_itemList__setGenre(ShoppingItem si, Dialog dlg)
+
+	public static void
+	dlg_tab1_delete_item
+	(Activity actv, ShoppingItem si, Dialog dlg1) {
+		// TODO Auto-generated method stub
+		Dialog dlg2 = Methods_dlg.dlg_template_okCancel_2Dialogues_SI(
+						actv,
+						R.layout.dlg_template_ok_cancel,
+						R.string.generic_title_reconfirm,
+						
+						R.id.dlg_template_ok_cancel_btn_ok,
+//						R.id.dlg_template_ok_cancel_btn_ok,
+						R.id.dlg_template_ok_cancel_btn_cancel,
+						
+						CONS.DialogButtonTags.tab1_delete_item_ok,
+						CONS.DialogButtonTags.generic_cancel_second_dialog,
+				
+						dlg1, si);
+		
+		/*********************************
+		 * Set: Item name to the dialog
+		 *********************************/
+		
+		
+		/*********************************
+		 * Show: dlg2
+		 *********************************/
+		dlg2.show();
+		
+	}//dlg_tab1_delete_item
 
 }//public class Methods_dlg

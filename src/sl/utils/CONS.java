@@ -38,10 +38,17 @@ public class CONS {
 	};
 			
 	/*********************************
-	 * From: List tags
+	 * List tags
 	 *********************************/
 	public static enum ListViewTags {
 		tab1_long_click,
+	};
+	
+	/*********************************
+	 * Dialog button tags
+	 *********************************/
+	public static enum DialogButtonTags {
+		tab1_delete_item_ok, generic_cancel_second_dialog,
 	};
 	
 	

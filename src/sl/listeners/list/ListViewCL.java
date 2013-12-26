@@ -120,6 +120,8 @@ public class ListViewCL implements OnItemClickListener {
 		} else if (choice.equals(actv.getString(
 						R.string.dlg_item_list_long_click_delete))) {//if (choice.equals(actv.getString(R.string.dlg_item_list_long_click_edit)))
 			
+			Methods_dlg.dlg_tab1_delete_item(actv, si, dlg);
+			
 		} else {//if (choice.equals(actv.getString(R.string.dlg_item_list_long_click_edit)))
 			
 		}//if (choice.equals(actv.getString(R.string.dlg_item_list_long_click_edit)))
