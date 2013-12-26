@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import sl.items.ShoppingItem;
-import sl.listeners.dialog.DOICL_2;
 import sl.listeners.dialog.DialogOnItemClickListener;
 import sl.main.R;
 import sl.main.RegisterItemActv;
@@ -109,17 +108,17 @@ public class ListOnItemLongClickListener implements OnItemLongClickListener {
 		/*********************************
 		 * Set: tag
 		 *********************************/
-		lv.setTag(CONS.ListTags.tab1_long_click);
+		lv.setTag(CONS.ListViewTags.tab1_long_click);
 
 		
 		/*----------------------------
 		 * 3. Set listener => list
 			----------------------------*/
 		lv.setOnItemClickListener(
-				new DOICL_2(
+				new ListViewCL(
 						actv, 
 						dlg, 
-						Tags.DialogTags.dlg_item_list_long_click,
+//						Tags.DialogTags.dlg_item_list_long_click,
 						si));
 //		lv.setOnItemClickListener(
 //				new DialogOnItemClickListener(

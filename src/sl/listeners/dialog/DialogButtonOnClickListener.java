@@ -377,12 +377,19 @@ DialogButtonOnClickListener implements OnClickListener {
 		/***************************************
 		 * Get views
 		 ***************************************/
-		EditText etItemName = (EditText) dlg1.findViewById(R.id.dlg_edit_items_et_name);
-		EditText etPrice = (EditText) dlg1.findViewById(R.id.dlg_edit_items_et_price);	
-		EditText etYomi = (EditText) dlg1.findViewById(R.id.dlg_edit_items_et_yomi);
+		EditText etItemName = (EditText) dlg2.findViewById(R.id.dlg_edit_items_et_name);
+		EditText etPrice = (EditText) dlg2.findViewById(R.id.dlg_edit_items_et_price);	
+		EditText etYomi = (EditText) dlg2.findViewById(R.id.dlg_edit_items_et_yomi);
 		
-		Spinner spStoreName = (Spinner) dlg1.findViewById(R.id.dlg_edit_items_sp_store);
-		Spinner spGenre = (Spinner) dlg1.findViewById(R.id.dlg_edit_items_sp_genre);
+		Spinner spStoreName = (Spinner) dlg2.findViewById(R.id.dlg_edit_items_sp_store);
+		Spinner spGenre = (Spinner) dlg2.findViewById(R.id.dlg_edit_items_sp_genre);
+		
+		// Log
+		Log.d("[" + "DialogButtonOnClickListener.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "spStoreName => " + spStoreName.toString());
 		
 		/***************************************
 		 * Build a new si
@@ -418,7 +425,9 @@ DialogButtonOnClickListener implements OnClickListener {
 			Toast.makeText(actv, "Data updated", Toast.LENGTH_LONG)
 					.show();
 			
+			// Close dialogues
 			dlg1.dismiss();
+			dlg2.dismiss();
 
 			/***************************************
 			 * Update the item list

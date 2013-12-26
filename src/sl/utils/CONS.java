@@ -40,7 +40,7 @@ public class CONS {
 	/*********************************
 	 * From: List tags
 	 *********************************/
-	public static enum ListTags {
+	public static enum ListViewTags {
 		tab1_long_click,
 	};
 	

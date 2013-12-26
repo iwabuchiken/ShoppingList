@@ -1,4 +1,4 @@
-package sl.listeners.dialog;
+package sl.listeners.list;
 
 import java.io.File;
 import java.util.Collections;
@@ -33,7 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-public class DOICL_2 implements OnItemClickListener {
+public class ListViewCL implements OnItemClickListener {
 
 	//
 	Activity actv;
@@ -47,31 +47,19 @@ public class DOICL_2 implements OnItemClickListener {
 	Vibrator vib;
 	
 	//
-	Tags.DialogTags dlgTag = null;
+	CONS.ListViewTags lvTag = null;
 	
-	public DOICL_2(Activity actv, Dialog dlg, Tags.DialogTags dlgTag) {
+	public ListViewCL(Activity actv, Dialog dlg, ShoppingItem si) {
 		// 
 		this.actv = actv;
 		this.dlg = dlg;
-		this.dlgTag = dlgTag;
+		this.si = si;
 		
 		//
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
 		
 	}//public DialogOnItemClickListener(Activity actv, Dialog dlg)
 	
-	public DOICL_2(Activity actv, Dialog dlg1,
-			DialogTags dlgItemListLongClick, ShoppingItem si) {
-		// 
-		this.actv = actv;
-		this.dlg = dlg;
-		this.dlgTag = dlgTag;
-		
-		//
-		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
-		
-	}
-
 	//	@Override
 	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 		/*----------------------------
@@ -88,7 +76,7 @@ public class DOICL_2 implements OnItemClickListener {
 		/*********************************
 		 * Called from: Methods_dlg.dlg_db_activity()
 		 *********************************/
-		Tags.DialogTags tag = (Tags.DialogTags) parent.getTag();
+		CONS.ListViewTags tag = (CONS.ListViewTags) parent.getTag();
 		
 		// Log
 		Log.d("[" + "DOICL_2.java : "
@@ -97,7 +85,46 @@ public class DOICL_2 implements OnItemClickListener {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "tag => " + tag);
 		
+		if (tag == null) {
+			
+			// debug
+			Toast.makeText(actv, "tag => null", Toast.LENGTH_SHORT).show();
+			
+		} else {//if (tag == null)
+			
+			switch (tag) {
+			
+			case tab1_long_click:
+				
+				case_tab1_long_click(parent, position);
+			
+			default:
+				break;
+				
+			}//switch (tag) {
+			
+		}//if (tag == null)
+		
+		
 	}//public void onItemClick(AdapterView<?> parent, View v, int position, long id)
+
+	private void case_tab1_long_click(AdapterView<?> parent, int position) {
+		// TODO Auto-generated method stub
+		String choice = (String) parent.getItemAtPosition(position);
+
+		if (choice.equals(actv.getString(
+						R.string.dlg_item_list_long_click_edit))) {
+			
+			Methods_dlg.dlg_tab1_edit_item(actv, si, dlg);
+			
+		} else if (choice.equals(actv.getString(
+						R.string.dlg_item_list_long_click_delete))) {//if (choice.equals(actv.getString(R.string.dlg_item_list_long_click_edit)))
+			
+		} else {//if (choice.equals(actv.getString(R.string.dlg_item_list_long_click_edit)))
+			
+		}//if (choice.equals(actv.getString(R.string.dlg_item_list_long_click_edit)))
+		
+	}//private void case_tab1_long_click(AdapterView<?> parent, int position) {
 
 
 }//public class DialogOnItemClickListener implements OnItemClickListener
