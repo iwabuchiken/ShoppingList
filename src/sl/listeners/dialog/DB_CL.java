@@ -105,6 +105,63 @@ DB_CL implements OnClickListener {
 	private void
 	case_tab1_delete_item_ok(View v) {
 		// TODO Auto-generated method stub
+		/*********************************
+		 * Delete item from: database
+		 * Delete item from: tab1 list
+		 * Dismiss dialogues
+		 *********************************/
+		boolean result;
+		
+		/*********************************
+		 * Delete item from: database
+		 *********************************/
+		result = Methods_sl.delete_item_from_database(actv, si);
+		
+		if (result == false) {
+			
+			// debug
+			Toast.makeText(actv,
+					"Delete from db => Failed: " + si.getName(),
+					Toast.LENGTH_SHORT).show();
+			
+			return;
+		} else {
+			
+			// debug
+			Toast.makeText(actv,
+					"Deleted from db: " + si.getName(),
+					Toast.LENGTH_SHORT).show();
+			
+		}
+		
+		/*********************************
+		 * Delete item from: tab1 list
+		 *********************************/
+		result = Methods_sl.delete_item_from_item_list(actv, si);
+		
+		if (result == false) {
+			
+			// debug
+			Toast.makeText(actv,
+					"Delete from tab list => Failed: " + si.getName(),
+					Toast.LENGTH_SHORT).show();
+			
+			return;
+			
+		} else {
+			
+			// debug
+			Toast.makeText(actv,
+					"Deleted from tab list: " + si.getName(),
+					Toast.LENGTH_SHORT).show();
+			
+		}
+		
+		/*********************************
+		 * Dismiss dialogues
+		 *********************************/
+		dlg2.dismiss();
+		dlg1.dismiss();
 		
 	}//case_tab1_delete_item_ok(View v)
 
