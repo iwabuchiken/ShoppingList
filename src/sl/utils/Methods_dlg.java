@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class Methods_dlg {
@@ -1709,9 +1710,24 @@ public class Methods_dlg {
 						dlg1, si);
 		
 		/*********************************
-		 * Set: Item name to the dialog
+		 * Set: message
 		 *********************************/
+		TextView tv_message =
+				(TextView) dlg2.findViewById(
+						R.id.dlg_template_ok_cancel_tv_message);
+//		R.id.dlg_template_ok_cancel_tv_string);
 		
+		tv_message.setText("Delete the item?");
+		
+		/*********************************
+		 * Set: Item name
+		 *********************************/
+		TextView tv_itemName =
+				(TextView) dlg2.findViewById(
+						R.id.dlg_template_ok_cancel_tv_item_name);
+//		R.id.dlg_template_ok_cancel_tv_string);
+		
+		tv_itemName.setText(si.getName());
 		
 		/*********************************
 		 * Show: dlg2

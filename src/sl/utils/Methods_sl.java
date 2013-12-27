@@ -2328,4 +2328,58 @@ public class Methods_sl {
 
 	}//sortItemList_GenreItemName(List<ShoppingItem> itemList)
 
+	public static boolean
+	delete_item_from_database
+	(Activity actv, ShoppingItem si) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Database
+		 ***************************************/
+		DBUtils dbu = new DBUtils(actv);
+		
+		boolean result = dbu.deleteItem(CONS.tableName, si.getId());
+		
+		if (result == true) {
+			// Log
+			Log.d("Methods_sl.java"
+					+ "["
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]",
+					"Data deleted: " + si.getName());
+			
+		} else {//if (result == true)
+			
+			// Log
+			Log.d("Methods_sl.java"
+					+ "["
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]",
+					"Data deletion => Failed: " + si.getName()); 
+
+		}//if (result == true)
+		
+		return result;
+		
+	}//delete_item_from_database
+
+	public static boolean
+	delete_item_from_item_list
+	(Activity actv, ShoppingItem si) {
+		// TODO Auto-generated method stub
+		boolean res = true;
+		
+		res = CONS.itemList.remove(si);
+		
+		if (res == false) {
+			
+			return res;
+			
+		}
+		
+		CONS.adpItems.notifyDataSetChanged();
+		
+		return res;
+		
+	}//(Activity actv, ShoppingItem si)
+
 }//public class Methods_sl
