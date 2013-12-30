@@ -2382,4 +2382,230 @@ public class Methods_sl {
 		
 	}//(Activity actv, ShoppingItem si)
 
+	public static
+	List<ShoppingItem> getSIList(Activity actv) {
+		// TODO Auto-generated method stub
+		
+		List<ShoppingItem> si_list = new ArrayList<ShoppingItem>();
+		
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+		
+		try {
+			
+			c = rdb.query(
+					CONS.tableName, 
+					CONS.columns_with_index2,
+											null, null, null, null, null);
+		} catch (Exception e) {
+			
+			
+			rdb.close();
+			
+			return null;
+			
+		}//try
+		
+		//
+		c.moveToFirst();
+		
+		for (int i = 0; i < c.getCount(); i++) {
+
+//			0									1		2		3		4			5
+//			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
+			ShoppingItem item = new ShoppingItem(
+					c.getInt(0),		// id store
+					c.getString(1),		// name
+					c.getString(2),		// yomi
+					c.getString(3),		// genre
+					c.getString(4),		//	store
+					c.getInt(5)			// price
+					);
+			
+			//
+			si_list.add(item);
+			
+			//
+			c.moveToNext();
+			
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		//
+		rdb.close();
+
+		return si_list;
+		
+	}//List<ShoppingItem> getSIList(Activity actv)
+
+	/*********************************
+	 * get_StoreId_from_StoreName
+	 * 
+	 * @return CONS.ReturnValues.NoStoreData(-99)	=> data not found<br>
+	 *********************************/
+	public static int
+	get_StoreId_from_StoreName
+	(Activity actv, String store_name) {
+		// TODO Auto-generated method stub
+		
+		int store_id = CONS.ReturnValues.NoStoreData;
+		
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+		
+		try {
+			
+			c = rdb.query(
+					CONS.DBAdmin.tname_stores, 
+					CONS.columns_for_table_stores_with_index,
+											null, null, null, null, null);
+			
+		} catch (Exception e) {
+			
+			
+			rdb.close();
+			
+			return CONS.ReturnValues.QueryFailed;
+			
+		}//try
+		
+		//
+		c.moveToFirst();
+		
+		for (int i = 0; i < c.getCount(); i++) {
+			
+			if (c.getString(1).equals(store_name)) {
+				
+				store_id = c.getInt(0);
+				
+				break;
+				
+			}
+
+			c.moveToNext();
+			
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		//
+		rdb.close();
+		
+		
+		return store_id;
+		
+	}//get_StoreId_from_StoreName
+
+	/*********************************
+	 * get_StoreId_from_StoreName
+	 * 
+	 * @return CONS.ReturnValues.NoStoreData(-99)	=> data not found<br>
+	 *********************************/
+	public static int
+	get_GenreId_from_GenreName
+	(Activity actv, String genre_name) {
+		// TODO Auto-generated method stub
+		
+		// Log
+		Log.d("[" + "Methods_sl.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Starting => get genre id");
+		
+		int genre_id = CONS.ReturnValues.NoGenreData;
+		
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+		
+		try {
+			
+			c = rdb.query(
+					CONS.DBAdmin.tname_genres, 
+					CONS.columns_for_table_genres_with_index,
+					null, null, null, null, null);
+			
+		} catch (Exception e) {
+			
+			
+			rdb.close();
+			
+			return CONS.ReturnValues.QueryFailed;
+			
+		}//try
+		
+		//
+		c.moveToFirst();
+		
+		for (int i = 0; i < c.getCount(); i++) {
+			
+			if (c.getString(1).equals(genre_name)) {
+				
+				genre_id = c.getInt(0);
+				
+				break;
+				
+			}
+			
+			c.moveToNext();
+			
+		}//for (int i = 0; i < c.getCount(); i++)
+		
+		//
+		rdb.close();
+		
+		// Log
+		Log.d("[" + "Methods_sl.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Done => Get genre id");
+		
+		return genre_id;
+		
+	}//get_GenreId_from_StoreName
+
+	/*********************************
+	 * JSONObject get_json_body_SI
+	 * 
+	 * @return null		=> Put value ~~> Failed<br>
+	 *********************************/
+	public static
+	JSONObject get_json_body_SI
+	(String[] keys, Object[] values) {
+		// TODO Auto-generated method stub
+		
+		JSONObject joBody = new JSONObject();
+		
+		try {
+			
+			for(int i = 0; i < keys.length; i++) {
+				
+				joBody.put(keys[i], values[i]);
+				
+			}
+			
+		} catch (JSONException e) {
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		}
+
+		return joBody;
+		
+	}//JSONObject get_json_body_SI
+	
 }//public class Methods_sl

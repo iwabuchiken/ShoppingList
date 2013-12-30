@@ -11,6 +11,7 @@ import sl.main.MainActv;
 import sl.main.R;
 import sl.main.RegisterItemActv;
 import sl.tasks.Task_GetYomi;
+import sl.tasks.Task_PostData;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
@@ -559,18 +560,32 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 				
 				dlg_db_admin_lv_GetYomi();
 				
+		} else if (choice.equals(actv.getString(
+				R.string.dlg_db_admin_item_post_data))) {
+			
+			dlg_db_admin_lv_PostData();
+			
 		}//if
 		
 	}//private void dlg_db_admin_lv(String choice)
+
+	private void dlg_db_admin_lv_PostData() {
+		// TODO Auto-generated method stub
+		Task_PostData task = new Task_PostData(actv, dlg);
+		
+		task.execute("Start");
+		
+		dlg.dismiss();
+		
+	}//private void dlg_db_admin_lv_PostData()
 
 	private void dlg_db_admin_lv_GetYomi() {
 		// TODO Auto-generated method stub
 //		int res = Methods_sl.getYomi(actv, dlg);
 		
-		Task_GetYomi task = new Task_GetYomi(actv, dlg);
+		Task_GetYomi task = new Task_GetYomi(actv);
 		
 		task.execute("Start");
-		
 		
 	}//private void dlg_db_admin_lv_GetYomi()
 

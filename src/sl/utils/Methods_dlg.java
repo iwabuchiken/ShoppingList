@@ -60,7 +60,8 @@ public class Methods_dlg {
 				actv.getString(R.string.dlg_db_admin_item_refresh_db),
 				actv.getString(R.string.dlg_db_admin_item_refatcor_db),
 				actv.getString(R.string.dlg_db_admin_item_restore_db),
-				actv.getString(R.string.dlg_db_admin_item_get_yomi)
+				actv.getString(R.string.dlg_db_admin_item_get_yomi),
+				actv.getString(R.string.dlg_db_admin_item_post_data),
 		};
 		
 		List<String> list = new ArrayList<String>();

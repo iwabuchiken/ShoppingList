@@ -180,6 +180,17 @@ public class CONS {
 //	}
 	
 	public static class DBAdmin {
+		
+		/*********************************
+		 * Table names
+		 *********************************/
+		public static final String tname_stores	= "stores";
+		
+		public static final String tname_genres	= "genres";
+		
+		/*********************************
+		 * 
+		 *********************************/
 //		created_at INTEGER, modified_at INTEGER,
 		public static final
 		String[] timeStamps = {"created_at", "modified_at"};
@@ -227,6 +238,33 @@ public class CONS {
 		public static TabHost tabHost;
 		public static TabSpec firstTab;
 		public static TabSpec secondTab;
+		
+	}
+	
+	public static class HTTPData {
+		
+		public static String UrlPostSI
+					= "http://cosmos-jqm-1.herokuapp.com/items";
+		
+		public static String[] siKeys = {
+						"item[store_id]",	"item[name]",
+						"item[price]",		"item[genre_id]",
+						"item[yomi]",		"item[mobile_id]",
+						};
+		
+	}
+	
+	public static class ReturnValues {
+		
+		public static int PostSI_NoSIList	= -1;
+		
+		public static int NoStoreData		= -2;
+		
+		public static int NoGenreData		= -4;
+		
+		public static int QueryFailed		= -3;
+		
+		public static int NOP				= -99;
 		
 	}
 	

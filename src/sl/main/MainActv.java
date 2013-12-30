@@ -486,34 +486,10 @@ public class MainActv extends Activity {
 				
 				Methods_dlg.dlg_db_activity(this);
 				
-				
-//				Intent i = new Intent();
-//				
-//				i = new Intent();
-//				
-//				i.setClass(this, DBActv.class);
-//				
-//				i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-//				
-//				startActivity(i);
-
-				
 				break;
 				
 			case R.id.menu_main_tab_actv:
 				
-//				// Log
-//				Log.d("MainActv.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]", "tab_actv");
-				
-//				Methods_dlg.dlg_db_activity(this);
-//
-//				
 				Intent i = new Intent();
 				
 				i = new Intent();
@@ -537,18 +513,6 @@ public class MainActv extends Activity {
 
 			case R.id.menu_main_pref_actv:
 				
-//				// Log
-//				Log.d("MainActv.java"
-//						+ "["
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getLineNumber()
-//						+ ":"
-//						+ Thread.currentThread().getStackTrace()[2]
-//								.getMethodName() + "]", "tab_actv");
-				
-//				Methods_dlg.dlg_db_activity(this);
-//
-//				
 				i = new Intent();
 				
 				i = new Intent();

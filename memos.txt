@@ -1,6 +1,7 @@
 a
 a p && pushd C:\WORKS\WS\WS_Android~\ShoppingList && gitk
 
+
 pushd C:\WORKS\WS\WS_Android~\ShoppingList && gitk
 gitk
 
@@ -32,3 +33,12 @@ pushd C:\WORKS\WORKSPACES_ANDROID\FM
 pushd C:\WORKS\WS\WS_Android~\Sample\05_Techbooster
 svn co https://techbooster.googlecode.com/svn/trunk/ContextMenu/ ContextMenu
 svn co http://techbooster.googlecode.com/svn/trunk/audioTrack/
+
+[sqlite3]
+.explain on
+.tables
+
+pragma table_info(shopping_item);
+pragma table_info(stores);
+
+SELECT 
