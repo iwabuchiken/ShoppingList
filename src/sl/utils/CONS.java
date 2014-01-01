@@ -255,16 +255,34 @@ public class CONS {
 	}
 	
 	public static class ReturnValues {
-		
+		/*********************************
+		 * No data
+		 *********************************/
 		public static int PostSI_NoSIList	= -1;
 		
 		public static int NoStoreData		= -2;
 		
-		public static int NoGenreData		= -4;
+		public static int NoGenreData		= -3;
 		
-		public static int QueryFailed		= -3;
+		/*********************************
+		 * Operation failed
+		 *********************************/
+		public static int QueryFailed		= -10;
 		
-		public static int NOP				= -99;
+		public static int BuildJOBodyFailed	= -11;
+		
+		public static int BuildEntityFailed	= -12;
+		
+		public static int BuildHttpPostFailed	= -13;
+		
+		/*********************************
+		 * Others
+		 *********************************/
+		public static int OK				= 1;
+		
+		public static int NOP				= -90;
+		
+		public static int FAILED			= -91;
 		
 	}
 	
