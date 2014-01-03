@@ -43,6 +43,7 @@ import android.app.Dialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
+import android.os.Vibrator;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -51,10 +52,15 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	static Activity actv;
 	
 	Dialog dlg;
+
+	public static Vibrator vib;
 	
 	public Task_PostData(Activity actv) {
 		// TODO Auto-generated constructor stub
 		this.actv = actv;
+		
+		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
+		
 	}
 
 	public Task_PostData(Activity actv, Dialog dlg) {
@@ -62,6 +68,8 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		this.actv = actv;
 		
 		this.dlg = dlg;
+		
+		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
 		
 	}
 
@@ -79,9 +87,47 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		 *********************************/
 		List<ShoppingItem> si_list = Methods_sl.getSIList(actv);
 		
-		JSONObject joBody =
-					_doInBackground__1_getJSONBody(si_list.get(0));
+		if (si_list == null) {
+			
+			return CONS.ReturnValues.FAILED;
+		}
 		
+		int num = si_list.size();
+		
+//		if (si_list.size() < 10) {
+//			
+//			num = si_list.size();
+//			
+//		} else {//if (si_list.size() < 10)
+//			
+//			num = 10;
+//			
+//		}//if (si_list.size() < 10)
+		
+		int count = 0;
+		int result;
+		
+		for (int i = 0; i < num; i++) {
+			
+			result = _exec_post(si_list.get(i));
+			
+			if (result == CONS.ReturnValues.OK) {
+				
+				count += 1;
+				
+			}
+			
+		}
+		
+		return count;
+		
+	}//doInBackground(String... params)
+
+	private int _exec_post(ShoppingItem si) {
+		// TODO Auto-generated method stub
+		JSONObject joBody =
+				_doInBackground__1_getJSONBody(si);
+	
 		if (joBody == null) {
 			
 			// Log
@@ -104,18 +150,18 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				+ "]",
 				"joBody => " + "[" + joBody.toString() + "]");
 		
-//		
+	//	
 		//REF post json: http://stackoverflow.com/questions/6218143/android-post-json-using-http answered Jun 2 '11 at 18:16
 		
 		/*********************************
 		 * Build: HTTP object
 		 *********************************/
-//		DefaultHttpClient httpclient = new DefaultHttpClient();
+	//	DefaultHttpClient httpclient = new DefaultHttpClient();
 		
 		String url = CONS.HTTPData.UrlPostSI;
 		
 	    //url with the post data
-//		HttpPost httpPost = new HttpPost(url);
+	//	HttpPost httpPost = new HttpPost(url);
 		HttpPost httpPost = _doInBackground__2_getHttpPost(url, joBody);
 		
 		if (httpPost == null) {
@@ -137,103 +183,63 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ " : "
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "httpPost => " + httpPost.toString());
+				+ "]",
+				"httpPost => " + httpPost.toString()
+				+ "(" + httpPost.getURI().toString() + ")"
+				);
 		
-		return CONS.ReturnValues.NOP;
+	    /***************************************
+		 * Post
+		 ***************************************/
+	    DefaultHttpClient dhc = new DefaultHttpClient();
+	    
+		HttpResponse hr = null;
 		
-//	    /***************************************
-//		 * Post
-//		 ***************************************/
-//	    DefaultHttpClient dhc = new DefaultHttpClient();
-//	    
-//		HttpResponse hr = null;
-//		
-//		try {
-//			
-//			hr = dhc.execute(httpPost);
-//			
-//		} catch (ClientProtocolException e) {
-//			// Log
-//			Log.d("TaskHTTP.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", e.toString());
-//			
-//		} catch (IOException e) {
-//			
-//			// Log
-//			Log.d("TaskHTTP.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", e.toString());
-//			
-//		}
-//		
-//		/***************************************
-//		 * Validate: Return
-//		 ***************************************/
-//		if (hr == null) {
-//			
-////			// debug
-////			Toast.makeText(actv, "hr == null", 2000).show();
-//			
-//			// Log
-//			Log.d("TaskHTTP.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "hr == null");
-//			
-////			return CONS.Task_GetTexts.EXECUTE_POST_NULL;
-//			return null;
-//			
-//		} else {//if (hr == null)
-//			
-//			// Log
-//			Log.d("Task_GetTexts.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "Http response => Obtained");
-//
-//			
-////			return null;
-//			
-//		}//if (hr == null)
-//
-//		/***************************************
-//		 * Status code
-//		 ***************************************/
-//		/*********************************
-//		 * Status code
-//		 *********************************/
-//		int status = hr.getStatusLine().getStatusCode();
-//		
-//		if (status == CONS.HTTP_Response.CREATED
-//				|| status == CONS.HTTP_Response.OK) {
-//
-//			// Log
-//			Log.d("Task_GetYomi.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "status=" + status);
-//
-////			return CONS.HTTP_Response.CREATED;
-//			
-//		} else {//if (status == CONS.HTTP_Response.CREATED)
-//			
-//			// Log
-//			Log.d("Task_GetTexts.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "status=" + status);
-//			
-//			return CONS.HTTP_Response.NOT_CREATED;
-//			
-//		}//if (status == CONS.HTTP_Response.CREATED)
-//		
-//		return null;
+		try {
+			
+			hr = dhc.execute(httpPost);
+			
+		} catch (ClientProtocolException e) {
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", e.toString());
+			
+			return CONS.ReturnValues.HttpPostFailed;
+			
+		} catch (IOException e) {
+			
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", e.toString());
+			
+			return CONS.ReturnValues.HttpPostFailed;
+			
+		}
+		
+		if (hr == null) {
+		
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "hr => null");
+			
+			return CONS.ReturnValues.HttpPostFailed;
+			
+		}//if (hr == null)
+	
+		// Log
+		Log.d("[" + "Task_PostData.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "hr => " + hr.getStatusLine().getStatusCode());
+		
+		return CONS.ReturnValues.OK;
+//		return CONS.ReturnValues.NOP;
 
-		
-	}//doInBackground(String... params)
+	}//private int _exec_post()
 
 	private HttpPost
 	_doInBackground__2_getHttpPost(String url, JSONObject joBody) {
@@ -276,6 +282,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	}//_doInBackground__2_getHttpPost(String url, JSONObject joBody)
 	
 
+	@SuppressWarnings("unused")
 	private JSONObject
 	_doInBackground__1_getJSONBody(ShoppingItem si) {
 		
@@ -369,6 +376,31 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		
 		JSONObject joBody = Methods_sl.get_json_body_SI(keys, values);
 		
+		// Add password parameter
+		try {
+			
+//			joBody.put("passwd[sl]", "abc");
+//			joBody.put("pass_sl", "abc");
+			joBody.put("passwd_sl", "abc");
+//			joBody.put("password_sl", "abc");
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			
+			// Log
+			Log.d("["
+					+ "Task_PostData.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					
+					"add password param => Failed"
+					+ "(" + e.getMessage() + ")");
+		
+			return null;
+		}
+		
 		if (joBody == null) {
 			
 			// Log
@@ -395,9 +427,26 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 
 	@Override
 	protected void onPostExecute(Integer res) {
+
+		vib.vibrate(150);
+		
+		String message;
+		
+		if (res.intValue() == CONS.ReturnValues.FAILED) {
+			
+			message = "Posting => Failed";
+			
+		} else {//if (res.intValue() == CONS.ReturnValues.FAILED)
+			
+			message = "Posting => Done(" 
+					+ String.valueOf(res.intValue()) + " items)";
+			
+		}//if (res.intValue() == CONS.ReturnValues.FAILED)
 		
 		// debug
-		Toast.makeText(actv, "Posting => Done", Toast.LENGTH_SHORT).show();
+		Toast.makeText(actv,
+				message,
+				Toast.LENGTH_SHORT).show();
 		
 		
 	}//protected void onPostExecute(Integer res)

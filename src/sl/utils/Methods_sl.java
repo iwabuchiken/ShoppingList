@@ -2382,6 +2382,13 @@ public class Methods_sl {
 		
 	}//(Activity actv, ShoppingItem si)
 
+	//REF @literal http://stackoverflow.com/questions/2290757/how-can-you-escape-the-character-in-javadoc answered Dec 11 '11 at 11:11
+	/*********************************
+	 * getSIList(Activity actv)
+	 * 
+	 * @return 1. null => Query failed<br/>
+	 * 			2. else => List{@literal <ShoppingItem>}<br/>
+	 *********************************/
 	public static
 	List<ShoppingItem> getSIList(Activity actv) {
 		// TODO Auto-generated method stub
