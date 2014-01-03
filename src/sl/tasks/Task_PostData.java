@@ -137,36 +137,61 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
 				+ " : "
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
-				+ "]", "httpPost => " + httpPost.toString());
+				+ "]",
+				"httpPost => " + httpPost.toString()
+				+ "(" + httpPost.getURI().toString() + ")"
+				);
+		
+	    /***************************************
+		 * Post
+		 ***************************************/
+	    DefaultHttpClient dhc = new DefaultHttpClient();
+	    
+		HttpResponse hr = null;
+		
+		try {
+			
+			hr = dhc.execute(httpPost);
+			
+		} catch (ClientProtocolException e) {
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", e.toString());
+			
+			return CONS.ReturnValues.HttpPostFailed;
+			
+		} catch (IOException e) {
+			
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", e.toString());
+			
+			return CONS.ReturnValues.HttpPostFailed;
+			
+		}
+		
+		if (hr == null) {
+		
+			// Log
+			Log.d("TaskHTTP.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "hr => null");
+			
+			return CONS.ReturnValues.HttpPostFailed;
+			
+		}//if (hr == null)
+
+		// Log
+		Log.d("[" + "Task_PostData.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "hr => " + hr.getStatusLine().getStatusCode());
 		
 		return CONS.ReturnValues.NOP;
 		
-//	    /***************************************
-//		 * Post
-//		 ***************************************/
-//	    DefaultHttpClient dhc = new DefaultHttpClient();
-//	    
-//		HttpResponse hr = null;
-//		
-//		try {
-//			
-//			hr = dhc.execute(httpPost);
-//			
-//		} catch (ClientProtocolException e) {
-//			// Log
-//			Log.d("TaskHTTP.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", e.toString());
-//			
-//		} catch (IOException e) {
-//			
-//			// Log
-//			Log.d("TaskHTTP.java" + "["
-//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", e.toString());
-//			
-//		}
-//		
 //		/***************************************
 //		 * Validate: Return
 //		 ***************************************/
@@ -276,6 +301,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	}//_doInBackground__2_getHttpPost(String url, JSONObject joBody)
 	
 
+	@SuppressWarnings("unused")
 	private JSONObject
 	_doInBackground__1_getJSONBody(ShoppingItem si) {
 		
@@ -368,6 +394,31 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				+ "]", "Start => get JSON body");
 		
 		JSONObject joBody = Methods_sl.get_json_body_SI(keys, values);
+		
+		// Add password parameter
+		try {
+			
+//			joBody.put("passwd[sl]", "abc");
+//			joBody.put("pass_sl", "abc");
+			joBody.put("passwd_sl", "abc");
+//			joBody.put("password_sl", "abc");
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			
+			// Log
+			Log.d("["
+					+ "Task_PostData.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					
+					"add password param => Failed"
+					+ "(" + e.getMessage() + ")");
+		
+			return null;
+		}
 		
 		if (joBody == null) {
 			

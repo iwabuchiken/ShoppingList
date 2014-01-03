@@ -244,19 +244,30 @@ public class CONS {
 	public static class HTTPData {
 		
 		public static String UrlPostSI
-					= "http://cosmos-jqm-1.herokuapp.com/items";
+//				= "http://cosmos-jqm-1.herokuapp.com/items/new";
+		= "http://cosmos-jqm-1.herokuapp.com/sl/items/new";
+//		= "http://cosmos-jqm-1.herokuapp.com/sl/items/new_data_from_device";
+//		= "http://cosmos-jqm-1.herokuapp.com/sl/items/new_data_from_device";
+//		= "http://cosmos-jqm-1.herokuapp.com/sl/items/new";
+//		= "http://cosmos-jqm-1.herokuapp.com/items/new";
+//		= "http://cosmos-jqm-1.herokuapp.com/items";
+		
+		// http://cosmos-jqm-1.herokuapp.com/items/new
 		
 		public static String[] siKeys = {
-						"item[store_id]",	"item[name]",
-						"item[price]",		"item[genre_id]",
-						"item[yomi]",		"item[mobile_id]",
+						"item_store_id",	"item_name",
+						"item_price",		"item_genre_id",
+						"item_yomi",		"item_mobile_id",
+//						"item[store_id]",	"item[name]",
+//						"item[price]",		"item[genre_id]",
+//						"item[yomi]",		"item[mobile_id]",
 						};
 		
 	}
 	
 	public static class ReturnValues {
 		/*********************************
-		 * No data
+		 * No data: -1 ~
 		 *********************************/
 		public static int PostSI_NoSIList	= -1;
 		
@@ -265,7 +276,7 @@ public class CONS {
 		public static int NoGenreData		= -3;
 		
 		/*********************************
-		 * Operation failed
+		 * Operation failed: -10 ~
 		 *********************************/
 		public static int QueryFailed		= -10;
 		
@@ -275,8 +286,10 @@ public class CONS {
 		
 		public static int BuildHttpPostFailed	= -13;
 		
+		public static int HttpPostFailed	= -14;
+		
 		/*********************************
-		 * Others
+		 * Others: > 0, <= -90
 		 *********************************/
 		public static int OK				= 1;
 		
