@@ -1,8 +1,10 @@
 package sl.main;
 
+import sl.items.ShoppingItem;
 import sl.main.R;
 import sl.main.R.id;
 import sl.main.R.layout;
+import sl.tasks.Task_PostData;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
 import android.app.Activity;
@@ -134,17 +136,12 @@ public class RegisterItemActv extends Activity {
 //			@Override
 			public void onClick(View v) {
 				// Get views
-//				EditText et_store = (EditText) findViewById(R.id.v1_et_store);
-				
 				EditText et_name = (EditText) findViewById(R.id.v1_et_name);
 				EditText et_price = (EditText) findViewById(R.id.v1_et_price);
 				
 				EditText et_yomi = (EditText) findViewById(R.id.v1_et_yomi);
 //				
-//				EditText et_genre = (EditText) findViewById(R.id.v1_et_genre);
-				
 				// All written?
-//				if(et_store.getText().toString().equals("") ||
 				if(
 						et_name.getText().toString().equals("") ||
 						et_price.getText().toString().equals("") //||
@@ -154,23 +151,6 @@ public class RegisterItemActv extends Activity {
 					Toast.makeText(RegisterItemActv.this, "Empty item exists", 2000)
 							.show();
 				}//if
-				
-				// Log
-				Log.d("RegisterItem.java"
-						+ "["
-						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber() + "]", "Spinner item => " + 
-								sp_store_name.getSelectedItem().toString() +
-								" / " + "position => " + sp_store_name.getSelectedItemPosition());
-				
-//				//
-//				String yomi;
-//				if (condition) {
-//					line1
-//				} else {//if (condition)
-//					line2
-//				}//if (condition)
-				
 				
 				//
 				DBUtils dbm = new DBUtils(RegisterItemActv.this);
@@ -204,6 +184,29 @@ public class RegisterItemActv extends Activity {
 					// debug
 					Toast.makeText(RegisterItemActv.this, "Data stored", 2000)
 							.show();
+					
+					/*********************************
+					 * Post data to remote
+					 * 		Build: ShoppingItem instance
+					 * 		Post data
+					 *********************************/
+					// Build: ShoppingItem instance
+					ShoppingItem si = 
+							new ShoppingItem.Builder()
+								.setName(et_name.getText().toString())
+								.setPrice(Integer.parseInt(
+											et_price.getText().toString()))
+								.setStore(sp_store_name.getSelectedItem().toString())
+								.setGenre(sp_genre_name.getSelectedItem().toString())
+								.setYomi(et_yomi.getText().toString())
+								.build();
+					
+					
+					Task_PostData task = new Task_PostData(actv, si);
+					
+					task.execute(
+							CONS.HTTPData.registerChoice.single_item.toString());
+					
 					
 				} else {//if (result == true)
 					// Log

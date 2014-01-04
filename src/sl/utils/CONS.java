@@ -263,6 +263,13 @@ public class CONS {
 //						"item[yomi]",		"item[mobile_id]",
 						};
 		
+		/*********************************
+		 * Posting data => Types
+		 *********************************/
+		public static enum registerChoice {
+			single_item,
+		};
+		
 	}
 	
 	public static class ReturnValues {

@@ -29,6 +29,8 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	
 	Dialog dlg;
 
+	ShoppingItem si;
+	
 	public static Vibrator vib;
 	
 	public Task_PostData(Activity actv) {
@@ -49,6 +51,18 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		
 	}
 
+	public Task_PostData(Activity actv, ShoppingItem si) {
+		// TODO Auto-generated constructor stub
+		
+		this.actv	= actv;
+		
+		this.si		= si;
+		
+		vib			=
+				(Vibrator) actv.getSystemService(Context.VIBRATOR_SERVICE);
+		
+	}
+
 	/*********************************
 	 * doInBackground(String... params)
 	 * 
@@ -57,6 +71,25 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	 *********************************/
 	@Override
 	protected Integer doInBackground(String... params) {
+		/*********************************
+		 * Post => single item when registering
+		 *********************************/
+		if (params[0].equals(
+				CONS.HTTPData.registerChoice.single_item.toString())) {
+			
+			int count = 0;
+			
+			int result = _exec_post(si);
+			
+			if (result == CONS.ReturnValues.OK) {
+				
+				count += 1;
+				
+			}
+			
+			return count;
+			
+		}//if (params[0].equals(
 		
 		/*********************************
 		 * Build: JSONObject
@@ -69,17 +102,6 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		}
 		
 		int num = 3;
-//		int num = si_list.size();
-		
-//		if (si_list.size() < 10) {
-//			
-//			num = si_list.size();
-//			
-//		} else {//if (si_list.size() < 10)
-//			
-//			num = 10;
-//			
-//		}//if (si_list.size() < 10)
 		
 		int count = 0;
 		int result;
@@ -100,6 +122,12 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		
 	}//doInBackground(String... params)
 
+	/*********************************
+	 * 
+	 * @return CONS.ReturnValues.OK(1)<br>
+	 * 		
+	 * 
+	 *********************************/
 	private int _exec_post(ShoppingItem si) {
 		// TODO Auto-generated method stub
 		JSONObject joBody =
