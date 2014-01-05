@@ -26,6 +26,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -41,27 +42,6 @@ public class MainActv extends Activity {
 	
 	public static Vibrator vib;
 
-//	/*********************************
-//	 * Paths
-//	 *********************************/
-//	String dirName_ExternalStorage = "/mnt/sdcard-ext";
-//
-//	String dirPath_db = "/data/data/shoppinglist.main/databases";
-//
-//	String fileName_db_backup_trunk = "shoppinglist_backup";
-//
-//	String fileName_db_backup_ext = ".bk";
-//
-//	String dirPath_db_backup = dirName_ExternalStorage + "/ShoppingList_backup";
-//	
-////	public static String[] registerItems = {"�i��", "�X��", "�W������"};
-//	
-////	public static enum registerChoice = {
-//	public static enum registerChoice {
-//		items, stores, genres,
-//	};
-//			
-	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,6 +67,8 @@ public class MainActv extends Activity {
 		add_listeners();
         
         //debug
+//		do_debugs();
+		
 //		backup_db();
 //        debug_restore_db();
 //		debug_B13_v_1_0();
@@ -97,6 +79,70 @@ public class MainActv extends Activity {
     }//public void onCreate(Bundle savedInstanceState)
 
     
+	private void do_debugs() {
+		_debug_1_d_44_seg_5();
+		
+	}//private void do_debugs()
+
+
+	private void _debug_1_d_44_seg_5() {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		String[] sqls = CONS.SQLs.a_20140105_113651_ChangeTableName_shopping_item_new;
+//		String[] sqls = CONS.SQLs.a_20140105_113308_DropTable_shopping_item;
+//		String[] sqls = CONS.SQLs.a_20140105_112910_AddColumn_created_at;
+//		String[] sqls = CONS.SQLs.a_20140105_112211_DropTable_shopping_item_new;
+//		String[] sqls = CONS.SQLs.a_20140105_104744_create_table_shopping_item_new;
+//		String[] sqls = CONS.SQLs.a_20140105_102851_add_column_created_at_etc;
+//		String sql = CONS.SQLs.a_20140105_102851_add_column;
+		
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		int count = 0;
+		
+		for (String sql : sqls) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql=" + sql);
+			
+			try {
+				wdb.execSQL(sql);
+				
+				count += 1;
+				
+				// debug
+				
+//				Toast.makeText(this, "debug done", Toast.LENGTH_LONG).show();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				Toast.makeText(this, "SQLException", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		Toast.makeText(this,
+				"SQL done => "
+				+ String.valueOf(count)
+				+ " out of "
+				+ String.valueOf(sqls.length),
+				Toast.LENGTH_LONG).show();
+		
+		wdb.close();
+
+	}//private void _debug_1_d_44_seg_5()
+
+
 	private void admin_createTable_purchaseSchedule() {
 		// TODO Auto-generated method stub
 		

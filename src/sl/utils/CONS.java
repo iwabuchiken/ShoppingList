@@ -188,6 +188,8 @@ public class CONS {
 		
 		public static final String tname_genres	= "genres";
 		
+		public static final String tname_si	= "shopping_item";
+		
 		/*********************************
 		 * 
 		 *********************************/
@@ -225,6 +227,83 @@ public class CONS {
 		final static int DB_DATA_UPDATE_FAILED = -3;
 		
 	}
+	
+	public static class SQLs {
+		
+		public static final String[]
+		a_20140105_102851_add_column_created_at_etc
+			= {"ALTER TABLE shopping_item"
+					+ " ADD COLUMN"
+					+ " created_at INTEGER",
+					
+				"ALTER TABLE shopping_item"
+						+ " ADD COLUMN"
+						+ " updated_at INTEGER",
+				
+				"ALTER TABLE shopping_item"
+						+ " ADD COLUMN"
+						+ " posted_at INTEGER"
+			};
+		
+/*		public static final String
+		a_20140105_110023_add_column_updated_at
+		= "ALTER TABLE shopping_item"
+				+ " ADD COLUMN"
+				+ " updated_at INTEGER";
+		
+		public static final String
+		a_20140105_110043_add_column_posted_at
+		= "ALTER TABLE shopping_item"
+				+ " ADD COLUMN"
+				+ " posted_at INTEGER";
+*/		
+		
+		/*REF http://stackoverflow.com/questions/7993809/android-sqlite-copy-table-to-another-table answered Nov 3 '11 at 11:16 */
+		public static final String[]
+		a_20140105_104744_create_table_shopping_item_new
+			= {"CREATE TABLE shopping_item_new"
+				+ " as select"
+				+ " store, name, price, genre"
+				+ ", updated_at"
+				+ ", posted_at"
+				+ ", " + android.provider.BaseColumns._ID
+				+ " FROM"
+				+ " " + CONS.DBAdmin.tname_si};
+//				+ " created_at INTEGER"
+//				+ " updated_at INTEGER"
+//				+ " posted_at INTEGER";
+		
+		public static final String[]
+			a_20140105_112211_DropTable_shopping_item_new
+				= {"DROP TABLE shopping_item_new"
+				};
+//				+ " created_at INTEGER"
+//				+ " updated_at INTEGER"
+//				+ " posted_at INTEGER";
+		
+		public static final String[]
+			a_20140105_112910_AddColumn_created_at
+				= {"ALTER TABLE shopping_item_new"
+						+ " ADD COLUMN"
+						+ " created_at INTEGER",
+
+		};
+		
+		public static final String[]
+				a_20140105_113308_DropTable_shopping_item
+				= {"DROP TABLE shopping_item"
+		};
+		
+		/* REF http://stackoverflow.com/questions/426495/how-do-you-rename-a-table-in-sqlite-3-0 answered Jan 8 '09 at 23:41 */
+		public static final String[]
+				a_20140105_113651_ChangeTableName_shopping_item_new
+				= {"ALTER TABLE" +
+						" shopping_item_new" +
+						" RENAME TO" +
+						" shopping_item"
+				};
+
+	}//public static class SQLs
 	
 	public static class MagicConstants {
 		
