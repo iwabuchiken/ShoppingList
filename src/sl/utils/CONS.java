@@ -71,13 +71,24 @@ public class CONS {
 	
 	public static String[]
 		cols_SI_full = { 
-		//		0							1		2
-		android.provider.BaseColumns._ID, "name", "yomi",
+		//	0		1		2
+		"store", "name", "price",
 		//	3		4			5
-		"genre", "store", "price",
+		"genre", "yomi", android.provider.BaseColumns._ID, 
 		//	6			7				8
 		"created_at", "updated_at", "posted_at"
 	};
+	/*		cid   name
+	----  ------------
+	0     store
+	1     name
+	2     price
+	3     genre
+	4     yomi
+	5     _id
+	6     created_at
+	7     updated_at
+	8     posted_at*/
 
 	public static String[] columns_for_table_stores = 
 					{"store_name", "memo"};
@@ -338,6 +349,25 @@ public class CONS {
 						+ " updated_at INTEGER",
 						
 					"ALTER TABLE shopping_item_new"
+						+ " ADD COLUMN"
+						+ " posted_at INTEGER"
+		};
+		
+		public static final String[]
+				a_20140108_220957_AddColumns_created_at_etc
+				= {
+					"ALTER TABLE"
+						+ " " + CONS.tableName
+						+ " ADD COLUMN"
+						+ " created_at INTEGER",
+					
+					"ALTER TABLE"
+						+ " " + CONS.tableName
+						+ " ADD COLUMN"
+						+ " updated_at INTEGER",
+							
+					"ALTER TABLE"
+						+ " " + CONS.tableName
 						+ " ADD COLUMN"
 						+ " posted_at INTEGER"
 		};

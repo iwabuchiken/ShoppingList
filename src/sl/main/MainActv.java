@@ -81,15 +81,109 @@ public class MainActv extends Activity {
 //		_debug_1_d_44_seg_5();
 //		_debug_1_d_44();
 		_debug_D_44_V_3_0_2_TestMethod_getSI_FromDbId();
+//		_debug_D_44_V_3_0_3_TestMethod_getSI_FromNameAndStore();
+//		_debug_D_44_V_3_0_3_AddColumns();
+//		_debug_D_44_V_3_0_3_AddColumns();
 		
 	}//private void do_debugs()
+
+
+	private void _debug_D_44_V_3_0_3_AddColumns() {
+		// TODO Auto-generated method stub
+		String[] sqls =
+				CONS.SQLs.a_20140108_220957_AddColumns_created_at_etc;
+		
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		int count = 0;
+		
+		for (String sql : sqls) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql=" + sql);
+			
+			try {
+				wdb.execSQL(sql);
+				
+				count += 1;
+				
+				// debug
+				
+//				Toast.makeText(this, "debug done", Toast.LENGTH_LONG).show();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				Toast.makeText(this, "SQLException", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		Toast.makeText(this,
+				"SQL done => "
+				+ String.valueOf(count)
+				+ " out of "
+				+ String.valueOf(sqls.length),
+				Toast.LENGTH_LONG).show();
+		
+		wdb.close();
+		
+	}//private void _debug_D_44_V_3_0_3_AddColumns()
+	
+
+
+	private void
+	_debug_D_44_V_3_0_3_TestMethod_getSI_FromNameAndStore() {
+		// TODO Auto-generated method stub
+		
+		ShoppingItem si =
+				Methods_sl.getSI_FromNameAndStore(this, "消毒液", "クリエイト");
+		
+		if (si == null) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "si => null");
+			
+		} else {//if (si == null)
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"name => " + si.getName()
+					+ " / "
+					+ "price => " + String.valueOf(si.getPrice())
+					+ " / "
+					+ "id => " + si.getId());
+//			+ "price => " + si.getPrice());
+			
+		}//if (si == null)
+		
+	}//_debug_D_44_V_3_0_3_TestMethod_getSI_FromNameAndStore()
 
 
 	private void
 	_debug_D_44_V_3_0_2_TestMethod_getSI_FromDbId() {
 		// TODO Auto-generated method stub
 		
-		ShoppingItem si = Methods_sl.getSI_FromDbId(this, 3);
+		ShoppingItem si = Methods_sl.getSI_FromDbId(this, 100);
 		
 		// Log
 		Log.d("[" + "MainActv.java : "
@@ -98,7 +192,12 @@ public class MainActv extends Activity {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]",
 				"id=3 => " + si.getName()
-					+ "(" + si.getCreated_at() + ")");
+					+ "(" + si.getCreated_at()
+					+ " / "
+					+ "price="
+					+ si.getPrice()
+					+ ")"
+					);
 		
 //		List<String> names = Methods.get_ColumnNames(this, CONS.tableName);
 //		

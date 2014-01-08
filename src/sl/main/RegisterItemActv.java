@@ -7,6 +7,7 @@ import sl.main.R.layout;
 import sl.tasks.Task_PostData;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
+import sl.utils.Methods_sl;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -200,8 +201,28 @@ public class RegisterItemActv extends Activity {
 				 * 		Build: ShoppingItem instance
 				 * 		Post data
 				 *********************************/
-//				// Build: ShoppingItem instance
-//				ShoppingItem si = 
+				// Build: ShoppingItem instance
+				ShoppingItem si = Methods_sl.getSI_FromNameAndStore(
+							actv,
+							et_name.getText().toString(),
+							sp_store_name.getSelectedItem().toString());
+				
+				// Log
+				Log.d("["
+						+ "RegisterItemActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ " : "
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]",
+						"New item => "
+						+ "name=" + si.getName()
+						+ " / "
+						+ "store=" + si.getStore()
+						+ " / "
+						+ "id=" + si.getId()
+						);
+				
 //						new ShoppingItem.Builder()
 //							.setName(et_name.getText().toString())
 //							.setPrice(Integer.parseInt(
@@ -212,10 +233,10 @@ public class RegisterItemActv extends Activity {
 //							.build();
 //				
 //				
-//				Task_PostData task = new Task_PostData(actv, si);
-//				
-//				task.execute(
-//						CONS.HTTPData.registerChoice.single_item.toString());
+				Task_PostData task = new Task_PostData(actv, si);
+				
+				task.execute(
+						CONS.HTTPData.registerChoice.single_item.toString());
 				
 			}//public void onClick(View v)
 		});
