@@ -7,9 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
+import sl.items.ShoppingItem;
 import sl.listeners.ButtonOnClickListener;
 import sl.listeners.ButtonOnTouchListener;
 import sl.main.R;
@@ -67,7 +69,7 @@ public class MainActv extends Activity {
 		add_listeners();
         
         //debug
-//		do_debugs();
+		do_debugs();
 		
 		//admin
 		admin_createTable_purchaseSchedule();
@@ -77,9 +79,42 @@ public class MainActv extends Activity {
     
 	private void do_debugs() {
 //		_debug_1_d_44_seg_5();
-		_debug_1_d_44();
+//		_debug_1_d_44();
+		_debug_D_44_V_3_0_2_TestMethod_getSI_FromDbId();
 		
 	}//private void do_debugs()
+
+
+	private void
+	_debug_D_44_V_3_0_2_TestMethod_getSI_FromDbId() {
+		// TODO Auto-generated method stub
+		
+		ShoppingItem si = Methods_sl.getSI_FromDbId(this, 3);
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"id=3 => " + si.getName()
+					+ "(" + si.getCreated_at() + ")");
+		
+//		List<String> names = Methods.get_ColumnNames(this, CONS.tableName);
+//		
+//		for (String name : names) {
+//			
+//			// Log
+//			Log.d("["
+//					+ "MainActv.java : "
+//					+ +Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + " : "
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "name=" + name);
+//			
+//		}
+		
+	}//_debug_D_44_V_3_0_2_TestMethod_getSI_FromDbId()
 
 
 	private void _debug_1_d_44() {

@@ -2862,4 +2862,29 @@ public class Methods {
 		
 	}//public static int[] getDateArrayFromLongData(long dueDate)
 
+	public static List<String>
+	get_ColumnNames(Activity actv, String tname) {
+		
+		List<String> names = new ArrayList<String>();
+		
+		DBUtils dbu = new DBUtils(actv, CONS.dbName);
+		
+		SQLiteDatabase rdb = dbu.getReadableDatabase();
+		
+		Cursor c = rdb.rawQuery("PRAGMA table_info(" + tname + ")", null);
+		
+		if ( c.moveToFirst() ) {
+		    do {
+		    	
+		    	names.add(c.getString(1));
+		        
+		    } while (c.moveToNext());
+		}
+		
+		rdb.close();
+		
+		return names;
+		
+	}//get_ColumnNames(Activity actv, String tname)
+	
 }//public class Methods

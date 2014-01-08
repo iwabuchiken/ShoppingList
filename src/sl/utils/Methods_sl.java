@@ -2446,6 +2446,93 @@ public class Methods_sl {
 		return si_list;
 		
 	}//List<ShoppingItem> getSIList(Activity actv)
+	
+	/*********************************
+	 * getSI_FromDbId(Activity actv, int dbId)
+	 * @return null => Query exception
+	 *********************************/
+	public static ShoppingItem
+	getSI_FromDbId(Activity actv, int dbId) {
+		// TODO Auto-generated method stub
+		
+		ShoppingItem si;
+		
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase rdb = dbm.getReadableDatabase();
+		
+		Cursor c = null;
+		
+		try {
+			
+			c = rdb.query(
+					CONS.tableName, 
+//					CONS.columns_with_index2,
+					CONS.cols_SI_full,
+					String.valueOf(CONS.cols_SI_full[0]) + " = ?",
+//					String.valueOf(CONS.columns_with_index2[0]) + " = ?",
+					new String[]{String.valueOf(dbId)},
+					null, null, null);
+			
+		} catch (Exception e) {
+			
+			// Log
+			Log.d("["
+					+ "Methods_sl.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			rdb.close();
+			
+			return null;
+			
+		}//try
+		
+		//
+		c.moveToFirst();
+		
+//			0									1		2		3		4			5
+//			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
+		si = new ShoppingItem.Builder()
+				.setId(c.getInt(5))
+				.setName(c.getString(1))
+				.setPrice(c.getInt(2))
+				.setGenre(c.getString(3))
+				.setYomi(c.getString(4))
+				.setStore(c.getString(0))
+				.setCreated_at(c.getLong(6))
+				.setUpdated_at(c.getLong(7))
+				.setPosted_at(c.getLong(8))
+				.build();
+		
+/*		cid   name
+		----  ------------
+		0     store
+		1     name
+		2     price
+		3     genre
+		4     yomi
+		5     _id
+		6     created_at
+		7     updated_at
+		8     posted_at*/
+		
+//			si = new ShoppingItem(
+//					c.getInt(0),		// id store
+//					c.getString(1),		// name
+//					c.getString(2),		// yomi
+//					c.getString(3),		// genre
+//					c.getString(4),		//	store
+//					c.getInt(5)			// price
+//					);
+			
+		rdb.close();
+		
+		return si;
+		
+	}//getSI_FromDbId(Activity actv)
 
 	/*********************************
 	 * get_StoreId_from_StoreName

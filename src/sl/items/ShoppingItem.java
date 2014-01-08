@@ -104,6 +104,10 @@ public class ShoppingItem {
 	
 	
 	
+	public long getCreated_at() {
+		return created_at;
+	}
+
 	public long getUpdated_at() {
 		return updated_at;
 	}
