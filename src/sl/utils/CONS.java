@@ -300,9 +300,38 @@ public class CONS {
 				= {"ALTER TABLE" +
 						" shopping_item_new" +
 						" RENAME TO" +
-						" shopping_item"
+						" " + CONS.DBAdmin.tname_si
 				};
+		
+		public static final String[]
+				a_20140108_094802_CreateTable_shopping_item_new
+				= {
+					"CREATE TABLE shopping_item_new"
+						+ " as select"
+						+ " store, name, price, genre, yomi"
+						+ ", " + android.provider.BaseColumns._ID
+						+ " FROM"
+						+ " " + CONS.DBAdmin.tname_si
+		};
 
+		
+		public static final String[]
+				a_20140108_105402_AddColumn_created_at_etc
+				= {
+					"ALTER TABLE shopping_item_new"
+						+ " ADD COLUMN"
+						+ " created_at INTEGER",
+						
+					"ALTER TABLE shopping_item_new"
+						+ " ADD COLUMN"
+						+ " updated_at INTEGER",
+						
+					"ALTER TABLE shopping_item_new"
+						+ " ADD COLUMN"
+						+ " posted_at INTEGER"
+		};
+		
+		
 	}//public static class SQLs
 	
 	public static class MagicConstants {

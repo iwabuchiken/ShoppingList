@@ -67,7 +67,7 @@ public class MainActv extends Activity {
 		add_listeners();
         
         //debug
-//		do_debugs();
+		do_debugs();
 		
 //		backup_db();
 //        debug_restore_db();
@@ -89,13 +89,16 @@ public class MainActv extends Activity {
 		// TODO Auto-generated method stub
 		// TODO Auto-generated method stub
 		String[] sqls = CONS.SQLs.a_20140105_113651_ChangeTableName_shopping_item_new;
+//		String[] sqls = CONS.SQLs.a_20140108_094802_CreateTable_shopping_item_new;
+//		String[] sqls = CONS.SQLs.a_20140105_113651_ChangeTableName_shopping_item_new;
+/*
 //		String[] sqls = CONS.SQLs.a_20140105_113308_DropTable_shopping_item;
 //		String[] sqls = CONS.SQLs.a_20140105_112910_AddColumn_created_at;
 //		String[] sqls = CONS.SQLs.a_20140105_112211_DropTable_shopping_item_new;
 //		String[] sqls = CONS.SQLs.a_20140105_104744_create_table_shopping_item_new;
 //		String[] sqls = CONS.SQLs.a_20140105_102851_add_column_created_at_etc;
 //		String sql = CONS.SQLs.a_20140105_102851_add_column;
-		
+*/
 		DBUtils dbu = new DBUtils(this, CONS.dbName);
 		
 		SQLiteDatabase wdb = dbu.getWritableDatabase();
