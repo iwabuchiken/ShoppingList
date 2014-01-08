@@ -66,6 +66,7 @@ public class CONS {
 
 	public static String[]
 	columns_with_index2 = 
+		//		0							1		2		3		4			5
 		{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"};
 
 	public static String[] columns_for_table_stores = 

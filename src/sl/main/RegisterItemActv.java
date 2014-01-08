@@ -185,29 +185,6 @@ public class RegisterItemActv extends Activity {
 					Toast.makeText(RegisterItemActv.this, "Data stored", 2000)
 							.show();
 					
-					/*********************************
-					 * Post data to remote
-					 * 		Build: ShoppingItem instance
-					 * 		Post data
-					 *********************************/
-					// Build: ShoppingItem instance
-					ShoppingItem si = 
-							new ShoppingItem.Builder()
-								.setName(et_name.getText().toString())
-								.setPrice(Integer.parseInt(
-											et_price.getText().toString()))
-								.setStore(sp_store_name.getSelectedItem().toString())
-								.setGenre(sp_genre_name.getSelectedItem().toString())
-								.setYomi(et_yomi.getText().toString())
-								.build();
-					
-					
-					Task_PostData task = new Task_PostData(actv, si);
-					
-					task.execute(
-							CONS.HTTPData.registerChoice.single_item.toString());
-					
-					
 				} else {//if (result == true)
 					// Log
 					Log.d("RegisterItem.java"
@@ -217,6 +194,29 @@ public class RegisterItemActv extends Activity {
 				}//if (result == true)
 				
 				db.close();
+				
+				/*********************************
+				 * Post data to remote
+				 * 		Build: ShoppingItem instance
+				 * 		Post data
+				 *********************************/
+//				// Build: ShoppingItem instance
+//				ShoppingItem si = 
+//						new ShoppingItem.Builder()
+//							.setName(et_name.getText().toString())
+//							.setPrice(Integer.parseInt(
+//										et_price.getText().toString()))
+//							.setStore(sp_store_name.getSelectedItem().toString())
+//							.setGenre(sp_genre_name.getSelectedItem().toString())
+//							.setYomi(et_yomi.getText().toString())
+//							.build();
+//				
+//				
+//				Task_PostData task = new Task_PostData(actv, si);
+//				
+//				task.execute(
+//						CONS.HTTPData.registerChoice.single_item.toString());
+				
 			}//public void onClick(View v)
 		});
 

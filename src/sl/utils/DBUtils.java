@@ -1084,6 +1084,85 @@ public class DBUtils extends SQLiteOpenHelper {
 		return si;
 		
 	}//public ShoppingItem getSIFromDbId(String dbId)
+	
+	
+	public ShoppingItem getSI_FromItemName(String itemName) {
+		// TODO Auto-generated method stub
+		
+		// Log
+		Log.d("DBUtils.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ ":"
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "itemName=" + itemName);
+		
+		SQLiteDatabase rdb = this.getReadableDatabase();
+		
+		String sql = "SELECT " + "*"
+				+ " FROM " + CONS.tableName
+				+ " WHERE " + CONS.columns_with_index2[1]
+						+ " = "
+						+ itemName;
+		
+		Cursor cursor = null;
+		
+		try {
+			
+			cursor = rdb.rawQuery(sql, null);
+			
+		} catch (Exception e) {
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			rdb.close();
+			
+			return null;
+			
+		}
+		
+		if (cursor == null) {
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "cursor => null");
+			
+			return null;
+			
+		}//if (cursor == null)
+		
+		/***************************************
+		 * Build item
+		 ***************************************/
+		cursor.moveToFirst();
+		
+		ShoppingItem si = new ShoppingItem();
+		
+		si.setId((int)cursor.getLong(cursor.getColumnIndex(CONS.columns_with_index2[0])));
+		si.setStore(cursor.getString(cursor.getColumnIndex("store")));
+		si.setName(cursor.getString(cursor.getColumnIndex("name")));
+		si.setPrice(cursor.getInt(cursor.getColumnIndex("price")));
+		si.setGenre(cursor.getString(cursor.getColumnIndex("genre")));
+		si.setYomi(cursor.getString(cursor.getColumnIndex("yomi")));
+		
+		/***************************************
+		 * Close db
+		 ***************************************/
+		rdb.close();
+		
+		/***************************************
+		 * Return
+		 ***************************************/
+		return si;
+		
+	}//public ShoppingItem getSIFromDbId(String dbId)
 
 	
 	public boolean

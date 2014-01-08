@@ -67,12 +67,8 @@ public class MainActv extends Activity {
 		add_listeners();
         
         //debug
-		do_debugs();
+//		do_debugs();
 		
-//		backup_db();
-//        debug_restore_db();
-//		debug_B13_v_1_0();
-        
 		//admin
 		admin_createTable_purchaseSchedule();
 		
@@ -80,9 +76,20 @@ public class MainActv extends Activity {
 
     
 	private void do_debugs() {
-		_debug_1_d_44_seg_5();
+//		_debug_1_d_44_seg_5();
+		_debug_1_d_44();
 		
 	}//private void do_debugs()
+
+
+	private void _debug_1_d_44() {
+		// TODO Auto-generated method stub
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		wdb.close();
+	}
 
 
 	private void _debug_1_d_44_seg_5() {

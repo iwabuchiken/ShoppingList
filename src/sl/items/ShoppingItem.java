@@ -4,9 +4,13 @@ package sl.items;
 public class ShoppingItem {
 
 	//
-	String store, name, genre, yomi;
-	int price;
-	int id;
+	String	store, name, genre, yomi;
+	int		price;
+	int		id;
+	
+	long	created_at;
+	long	updated_at;
+	long	posted_at;
 
 	public ShoppingItem(Builder builder) {
 
@@ -16,6 +20,10 @@ public class ShoppingItem {
 		yomi = builder.yomi;
 		price = builder.price;
 		id = builder.id;
+		
+		this.created_at	= builder.created_at;
+		this.updated_at	= builder.updated_at;
+		this.posted_at	= builder.posted_at;
 		
 	}//public BM(Builder builder)
 
@@ -35,6 +43,26 @@ public class ShoppingItem {
 		this.price = price;
 		this.genre = genre;
 		this.id = id;
+		
+	}//public ShoppingItem(String store, String name, int price, String genre)
+	
+	public ShoppingItem
+		(String store, String name,
+		int price, String genre, int id,
+		long	created_at,
+		long	updated_at,
+		long	posted_at)
+	{
+		
+		this.store = store;
+		this.name = name;
+		this.price = price;
+		this.genre = genre;
+		this.id = id;
+		
+		this.created_at = created_at;
+		this.updated_at = updated_at;
+		this.posted_at = posted_at;
 		
 	}//public ShoppingItem(String store, String name, int price, String genre)
 
@@ -71,6 +99,29 @@ public class ShoppingItem {
 
 	public ShoppingItem() {
 		// TODO Auto-generated constructor stub
+	}
+
+	
+	
+	
+	public long getUpdated_at() {
+		return updated_at;
+	}
+
+	public void setUpdated_at(long updated_at) {
+		this.updated_at = updated_at;
+	}
+
+	public long getPosted_at() {
+		return posted_at;
+	}
+
+	public void setPosted_at(long posted_at) {
+		this.posted_at = posted_at;
+	}
+
+	public void setCreated_at(long created_at) {
+		this.created_at = created_at;
 	}
 
 	public String getStore() {
@@ -127,6 +178,10 @@ public class ShoppingItem {
 		private int price;
 		private int id;
 		
+		private long	created_at;
+		private long	updated_at;
+		private long	posted_at;
+		
 		public ShoppingItem build() {
 			
 			return new ShoppingItem(this);
@@ -136,6 +191,18 @@ public class ShoppingItem {
 		public Builder setStore(String store) {
 			this.store = store;	return this;
 		}
+		public Builder setCreated_at(long created_at) {
+			this.created_at = created_at;	return this;
+		}
+
+		public Builder setUpdated_at(long updated_at) {
+			this.updated_at = updated_at;	return this;
+		}
+
+		public Builder setPosted_at(long posted_at) {
+			this.posted_at = posted_at;	return this;
+		}
+
 		public Builder setName(String name) {
 			this.name = name;	return this;
 		}
