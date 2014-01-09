@@ -79,7 +79,7 @@ public class MainActv extends Activity {
     
 	private void do_debugs() {
 		
-		_debug_D_44_V_3_0_6_Test_update_SI_V2();
+//		_debug_D_44_V_3_0_6_Test_update_SI_V2();
 //		_debug_D_44_V_3_0_6_Test_update_SI();
 //		_debug_D_44_V_3_0_6_GetColumnNames();
 //		_debug_1_d_44_seg_5();

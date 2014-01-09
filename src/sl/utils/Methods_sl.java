@@ -2826,16 +2826,9 @@ public class Methods_sl {
 	public static boolean
 	update_SI(Activity actv, ShoppingItem si) {
 		
-		DBUtils dbm = new DBUtils(actv);
+		DBUtils dbu = new DBUtils(actv);
 		
-		SQLiteDatabase wdb = dbm.getWritableDatabase();
-				
-		
-		
-		
-		wdb.close();
-		
-		return false;
+		return dbu.updateData_SI_all_V2(si);
 		
 	}//update_SI(Activity actv, ShoppingItem si)
 	

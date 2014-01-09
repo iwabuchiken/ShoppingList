@@ -78,6 +78,16 @@ public class CONS {
 		//	6			7				8
 		"created_at", "updated_at", "posted_at"
 	};
+	
+	public static String[]
+			cols_SI_Register = { 
+		//	0		1		2
+		"store", "name", "price",
+		//	3		4	
+		"genre", "yomi", 
+		//	5			6	
+		"created_at", "updated_at"
+	};
 	/*		cid   name
 	----  ------------
 	0     store

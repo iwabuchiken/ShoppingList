@@ -1,6 +1,7 @@
 package sl.main;
 
 import sl.items.ShoppingItem;
+import sl.listeners.ButtonOnClickListener;
 import sl.main.R;
 import sl.main.R.id;
 import sl.main.R.layout;
@@ -9,6 +10,7 @@ import sl.utils.CONS;
 import sl.utils.DBUtils;
 import sl.utils.Methods;
 import sl.utils.Methods_sl;
+import sl.utils.Tags;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -132,108 +134,14 @@ public class RegisterItemActv extends Activity {
 		//
 		Button bt = (Button) findViewById(R.id.v1_btn_register);
 		
+		bt.setTag(Tags.ButtonTags.register);
+		
 		//
-		bt.setOnClickListener(new OnClickListener(){
-
-//			@Override
-			public void onClick(View v) {
-				// Get views
-				EditText et_name = (EditText) findViewById(R.id.v1_et_name);
-				EditText et_price = (EditText) findViewById(R.id.v1_et_price);
-				
-				EditText et_yomi = (EditText) findViewById(R.id.v1_et_yomi);
-//				
-				// All written?
-				if(
-						et_name.getText().toString().equals("") ||
-						et_price.getText().toString().equals("") //||
-//						et_genre.getText().toString().equals("")
-						) {
-					// debug
-					Toast.makeText(RegisterItemActv.this, "Empty item exists", 2000)
-							.show();
-				}//if
-				
-				//
-				DBUtils dbm = new DBUtils(RegisterItemActv.this);
-				
-				SQLiteDatabase db = dbm.getWritableDatabase();
-				
-//				columns => {"store", "name", "price", "genre", "yomi"};
-				boolean result = dbm.storeData(
-								db, 
-								CONS.tableName, 
-								CONS.columns,
-								new String[]{
-//										et_store.getText().toString(),
-										sp_store_name.getSelectedItem().toString(),
-										
-										et_name.getText().toString(),
-//										et_yomi.getText().toString(),
-										et_price.getText().toString(),
-										
-//										et_genre.getText().toString()
-										sp_genre_name.getSelectedItem().toString(),
-										et_yomi.getText().toString()
-								});
-				
-				if (result == true) {
-					// Log
-					Log.d("RegisterItem.java"
-							+ "["
-							+ Thread.currentThread().getStackTrace()[2]
-									.getLineNumber() + "]", "Data stored");
-					// debug
-					Toast.makeText(RegisterItemActv.this, "Data stored", 2000)
-							.show();
-					
-				} else {//if (result == true)
-					// Log
-					Log.d("RegisterItem.java"
-							+ "["
-							+ Thread.currentThread().getStackTrace()[2]
-									.getLineNumber() + "]", "Data not stored");
-				}//if (result == true)
-				
-				db.close();
-				
-				/*********************************
-				 * Post data to remote
-				 * 		Build: ShoppingItem instance
-				 * 		Post data
-				 *********************************/
-				// Build: ShoppingItem instance
-				ShoppingItem si = Methods_sl.getSI_FromNameAndStore(
-							actv,
-							et_name.getText().toString(),
-							sp_store_name.getSelectedItem().toString());
-				
-				si.setPosted_at(Methods.getMillSeconds_now());
-				
-				// Log
-				Log.d("["
-						+ "RegisterItemActv.java : "
-						+ +Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-						+ " : "
-						+ Thread.currentThread().getStackTrace()[2]
-								.getMethodName() + "]",
-						"New item => "
-						+ "name=" + si.getName()
-						+ " / "
-						+ "store=" + si.getStore()
-						+ " / "
-						+ "id=" + si.getId()
-						);
-				
-				Task_PostData task = new Task_PostData(actv, si);
-				
-				task.execute(
-						CONS.HTTPData.registerChoice.single_item.toString());
-				
-			}//public void onClick(View v)
-		});
-
+		bt.setOnClickListener(new ButtonOnClickListener(
+								this,
+								sp_store_name,
+								sp_genre_name));
+		
 		bt.setOnTouchListener(new OnTouchListener(){
 
 //			@Override

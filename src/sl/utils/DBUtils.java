@@ -1571,7 +1571,14 @@ public class DBUtils extends SQLiteOpenHelper {
 		}//try
 		
 	}//public boolean updateData_SI_all(ShoppingItem si)
-	
+	/*********************************
+	 * updateData_SI_all_V2(ShoppingItem si)
+	 * 
+	 * @return true => update successful<br>
+	 * 	false =>
+	 * 	<pre>1. Transaction unsuccessful
+	 * 2. Exception</pre>
+	 *********************************/
 	public boolean updateData_SI_all_V2(ShoppingItem si) {
 		// TODO Auto-generated method stub
 		/***************************************
@@ -1629,10 +1636,11 @@ public class DBUtils extends SQLiteOpenHelper {
 				Log.d("DBUtils.java"
 						+ "["
 						+ Thread.currentThread().getStackTrace()[2]
-								.getLineNumber()
-								+ ":"
-								+ Thread.currentThread().getStackTrace()[2]
-										.getMethodName() + "]", "Update => Returned less than 1");
+							.getLineNumber()
+							+ ":"
+							+ Thread.currentThread().getStackTrace()[2]
+									.getMethodName() + "]",
+						"Update => Returned less than 1");
 				
 				wdb.close();
 				

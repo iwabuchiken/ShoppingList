@@ -8,8 +8,11 @@ import sl.items.ShoppingItem;
 import sl.main.DBActv;
 import sl.main.ItemListActv;
 import sl.main.R;
+import sl.main.RegisterItemActv;
 import sl.tasks.TaskAudioTrack;
+import sl.tasks.Task_PostData;
 import sl.utils.CONS;
+import sl.utils.DBUtils;
 import sl.utils.Methods;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
@@ -17,11 +20,13 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class ButtonOnClickListener implements OnClickListener {
@@ -31,6 +36,9 @@ public class ButtonOnClickListener implements OnClickListener {
 	//
 	Activity actv;
 
+	Spinner sp_store_name;
+	Spinner sp_genre_name;
+	
 	//
 	Vibrator vib;
 	
@@ -42,13 +50,32 @@ public class ButtonOnClickListener implements OnClickListener {
 		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
 	}
 
-//	@Override
+	public ButtonOnClickListener(Activity actv,
+			Spinner sp_store_name, Spinner sp_genre_name) {
+		
+		this.actv			= actv;
+		
+		this.sp_store_name	= sp_store_name;
+		this.sp_genre_name	= sp_genre_name;
+		
+		//
+		vib = (Vibrator) actv.getSystemService(actv.VIBRATOR_SERVICE);
+		
+	}
+
+	//	@Override
 	public void onClick(View v) {
 		//
 		Tags.ButtonTags tag_name = (Tags.ButtonTags) v.getTag();
 
 		//
 		switch (tag_name) {
+		
+		case register:
+			
+			case_register(v);
+			
+			break;//case register
 		
 		case db_manager_activity_create_table://-----------------------------------
 			
@@ -219,6 +246,117 @@ public class ButtonOnClickListener implements OnClickListener {
 			break;
 		}//switch (tag_name)
 	}
+
+	private void case_register(View v) {
+		// TODO Auto-generated method stub
+		EditText et_name = (EditText) actv.findViewById(R.id.v1_et_name);
+		EditText et_price = (EditText) actv.findViewById(R.id.v1_et_price);
+		
+		EditText et_yomi = (EditText) actv.findViewById(R.id.v1_et_yomi);
+		
+		// All written?
+		if(
+				et_name.getText().toString().equals("") ||
+				et_price.getText().toString().equals("") //||
+//				et_genre.getText().toString().equals("")
+				) {
+			// debug
+			Toast.makeText(actv, "Empty item exists", 2000)
+					.show();
+		}//if
+		
+
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase db = dbm.getWritableDatabase();
+		
+//		columns => {"store", "name", "price", "genre", "yomi"};
+		/*
+		//	0		1		2
+		"store", "name", "price",
+		//	3		4			5
+		"genre", "yomi", android.provider.BaseColumns._ID, 
+		//	6			7				8
+		"created_at", "updated_at", "posted_at"
+		*/
+		boolean result = dbm.storeData(
+						db, 
+						CONS.tableName, 
+						CONS.cols_SI_Register,
+//						CONS.columns,
+						new String[]{
+//								et_store.getText().toString(),
+								sp_store_name.getSelectedItem().toString(),
+								
+								et_name.getText().toString(),
+//								et_yomi.getText().toString(),
+								et_price.getText().toString(),
+								
+//								et_genre.getText().toString()
+								sp_genre_name.getSelectedItem().toString(),
+								et_yomi.getText().toString(),
+								String.valueOf(Methods.getMillSeconds_now()),
+								String.valueOf(Methods.getMillSeconds_now())
+						});
+		
+		if (result == true) {
+			// Log
+			Log.d("RegisterItem.java"
+					+ "["
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "Data stored");
+			// debug
+			Toast.makeText(actv, "Data stored", Toast.LENGTH_LONG)
+					.show();
+			
+		} else {//if (result == true)
+			// Log
+			Log.d("RegisterItem.java"
+					+ "["
+					+ Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + "]", "Data not stored");
+		}//if (result == true)
+		
+		db.close();
+		
+		/*********************************
+		 * Post data to remote
+		 * 		Build: ShoppingItem instance
+		 * 		Post data
+		 *********************************/
+		// Build: ShoppingItem instance
+		ShoppingItem si = Methods_sl.getSI_FromNameAndStore(
+					actv,
+					et_name.getText().toString(),
+					sp_store_name.getSelectedItem().toString());
+		
+		si.setPosted_at(Methods.getMillSeconds_now());
+		
+		// Log
+		Log.d("["
+				+ "RegisterItemActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2]
+						.getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2]
+						.getMethodName() + "]",
+				"New item => "
+				+ "name=" + si.getName()
+				+ " / "
+				+ "store=" + si.getStore()
+				+ " / "
+				+ "id=" + si.getId()
+				);
+		
+		boolean res = Methods_sl.update_SI(actv, si);
+		
+//		Task_PostData task = new Task_PostData(actv, si);
+//		
+//		task.execute(
+//				CONS.HTTPData.registerChoice.single_item.toString());
+
+
+	}//private void case_register(View v)
 
 	private void itemlist_tabs_bt_choose() {
 		// TODO Auto-generated method stub

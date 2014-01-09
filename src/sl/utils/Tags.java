@@ -81,6 +81,9 @@ public class Tags {
 		// itemlist_tabs.xml
 		itemlist_tabs_bt_choose,
 		
+		//
+		register,
+		
 	}//public static enum ButtonTags
 
 	public static enum ViewNames {
