@@ -591,12 +591,55 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 
 	private void dlg_db_admin_lv_RestoreDb() {
 		
-		String src = StringUtils.join(
-						new String[]{
-								CONS.dirPath_db_backup,
-								"shoppinglist_backup_20131218_160952.bk"},
-//								"shoppinglist_backup_20130213_121226.bk"},
-						File.separator);
+		String src_dir = CONS.dirPath_db_backup;
+		
+		File f_dir = new File(src_dir);
+		
+		File[] src_dir_files = f_dir.listFiles();
+		
+		// If no files in the src dir, quit the method
+		if (src_dir_files.length < 1) {
+			
+			// Log
+			Log.d("DialogOnItemClickListener.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "No files in the dir: " + src_dir);
+			
+			return;
+			
+		}//if (src_dir_files.length == condition)
+
+		File f_src_latest = src_dir_files[0];
+		
+		
+		for (File file : src_dir_files) {
+			
+			if (f_src_latest.lastModified() < file.lastModified()) {
+						
+				f_src_latest = file;
+				
+			}//if (variable == condition)
+			
+		}//for (File file : src_dir_files)
+		
+		// Show the path of the latest file
+		// Log
+		Log.d("Methods.java" + "["
+				+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ "]", "f_src_latest=" + f_src_latest.getAbsolutePath());
+		
+		/*********************************
+		 * Restore file
+		 *********************************/
+		String src = f_src_latest.getAbsolutePath();
+
+		
+//		String src = StringUtils.join(
+//						new String[]{
+//								CONS.dirPath_db_backup,
+//								"shoppinglist_backup_20131218_160952.bk"},
+////								"shoppinglist_backup_20130213_121226.bk"},
+//						File.separator);
 		
 		String dst = StringUtils.join(
 						new String[]{

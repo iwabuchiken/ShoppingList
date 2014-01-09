@@ -78,14 +78,160 @@ public class MainActv extends Activity {
 
     
 	private void do_debugs() {
+		
+		_debug_D_44_V_3_0_6_Test_update_SI_V2();
+//		_debug_D_44_V_3_0_6_Test_update_SI();
+//		_debug_D_44_V_3_0_6_GetColumnNames();
 //		_debug_1_d_44_seg_5();
 //		_debug_1_d_44();
-		_debug_D_44_V_3_0_2_TestMethod_getSI_FromDbId();
+//		_debug_D_44_V_3_0_2_TestMethod_getSI_FromDbId();
 //		_debug_D_44_V_3_0_3_TestMethod_getSI_FromNameAndStore();
 //		_debug_D_44_V_3_0_3_AddColumns();
 //		_debug_D_44_V_3_0_3_AddColumns();
 		
 	}//private void do_debugs()
+
+
+	private void _debug_D_44_V_3_0_6_GetColumnNames() {
+		// TODO Auto-generated method stub
+		List<String> names = Methods.get_ColumnNames(this, CONS.tableName);
+		
+		for (String name : names) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "name=" + name);
+			
+		} 
+	}
+
+
+	private void _debug_D_44_V_3_0_6_Test_update_SI() {
+		// TODO Auto-generated method stub
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		ShoppingItem si =
+				Methods_sl.getSI_FromDbId(this, 203);
+//		Methods_sl.getSI_FromNameAndStore(this, "なにぬねの", "キャン・ドゥ");
+//		Methods_sl.getSI_FromNameAndStore(this, "消毒液", "クリエイト");
+		
+		if (si == null) {
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "si => null");
+			
+			return;
+		}
+		
+		int id = si.getId();
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"item=" + si.getName()
+				+ "("
+				+ "posted=" + si.getPosted_at()
+				+ ")");
+		
+		si.setPosted_at(Methods.getMillSeconds_now());
+		
+		si.setName("なにぬねの!!");
+
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"item=" + si.getName()
+				+ "("
+				+ "posted=" + si.getPosted_at()
+				+ ")");
+
+		boolean res = dbu.update_SI(this, wdb, id, si);
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "result => " + res);
+		
+		wdb.close();
+		
+	}//private void _debug_D_44_V_3_0_6_update_SI()
+	
+	private void _debug_D_44_V_3_0_6_Test_update_SI_V2() {
+		// TODO Auto-generated method stub
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		ShoppingItem si =
+				Methods_sl.getSI_FromDbId(this, 203);
+//		Methods_sl.getSI_FromNameAndStore(this, "なにぬねの", "キャン・ドゥ");
+//		Methods_sl.getSI_FromNameAndStore(this, "消毒液", "クリエイト");
+		
+		if (si == null) {
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+							+ Thread.currentThread().getStackTrace()[2].getMethodName()
+							+ "]", "si => null");
+			
+			return;
+		}
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"item=" + si.getName()
+				+ "("
+				+ "posted=" + si.getPosted_at()
+				+ ")");
+		
+		si.setPosted_at(Methods.getMillSeconds_now());
+		
+		si.setName("なにぬねの!!");
+		
+		si.setStore("キャン・ドゥ");
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"item=" + si.getName()
+				+ "("
+				+ "posted=" + si.getPosted_at()
+				+ ")");
+
+		boolean res = dbu.updateData_SI_all_V2(si);
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "result => " + res);
+		
+	}//private void _debug_D_44_V_3_0_6_update_SI()
 
 
 	private void _debug_D_44_V_3_0_3_AddColumns() {

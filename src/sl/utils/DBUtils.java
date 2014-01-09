@@ -803,6 +803,93 @@ public class DBUtils extends SQLiteOpenHelper {
 		}//try
 		
 	}//public int updateData_shoppingItem
+	
+	public boolean update_SI(
+			Activity actv,
+			SQLiteDatabase wdb,
+			int id,
+			ShoppingItem si) {
+		
+		/*----------------------------
+		 * Steps
+		 * 1. 
+		----------------------------*/
+		/*
+		//	0		1		2
+		"store", "name", "price",
+		//	3		4			5
+		"genre", "yomi", android.provider.BaseColumns._ID, 
+		//	6			7				8
+		"created_at", "updated_at", "posted_at"
+		*/
+		String sql =
+				"UPDATE " + CONS.tableName
+				+ " SET "
+				+ CONS.cols_SI_full[0] + "='" + si.getStore() + "'"
+				
+				+ " AND "
+				+ CONS.cols_SI_full[1] + "='" + si.getName() + "'"
+				
+				+ " AND "
+				+ CONS.cols_SI_full[2] + "='" + String.valueOf(si.getPrice()) + "'"
+				
+				+ " AND "
+				+ CONS.cols_SI_full[3] + "='" + si.getGenre() + "'"
+				
+				+ " AND "
+				+ CONS.cols_SI_full[4] + "='" + si.getYomi() + "'"
+				
+				+ " AND "
+				+ CONS.cols_SI_full[6] + "='" + String.valueOf(si.getCreated_at()) + "'"
+				
+				+ " AND "
+				+ CONS.cols_SI_full[7] + "='" + String.valueOf(si.getUpdated_at()) + "'"
+				
+				+ " AND "
+				+ CONS.cols_SI_full[8] + "='" + String.valueOf(si.getPosted_at()) + "'"
+				
+//					+ " WHERE file_id = '" + dbId + "'";
+				+ " WHERE "
+				+ android.provider.BaseColumns._ID + " = '" + id + "'";
+		
+//		// Log
+//		Log.d("[" + "DBUtils.java : "
+//				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ " : "
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "sql=" + sql);
+		
+		try {
+			
+			wdb.execSQL(sql);
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql => Done: " + sql);
+			
+			//Methods.toastAndLog(actv, "Data updated", 2000);
+			
+			return true;
+			
+			
+		} catch (SQLException e) {
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]",
+					"Exception => " + e.toString() + " / " + "sql: " + sql);
+			
+			return false;
+			
+		}//try
+		
+	}//update_SI()
 
 	public boolean createTable(
 			SQLiteDatabase db, String tableName, String[] columns, String[] types) {
@@ -1484,6 +1571,105 @@ public class DBUtils extends SQLiteOpenHelper {
 		}//try
 		
 	}//public boolean updateData_SI_all(ShoppingItem si)
+	
+	public boolean updateData_SI_all_V2(ShoppingItem si) {
+		// TODO Auto-generated method stub
+		/***************************************
+		 * Build value set
+		 ***************************************/
+		ContentValues cv = new ContentValues();
+		
+		/*
+		//	0		1		2
+		"store", "name", "price",
+		//	3		4			5
+		"genre", "yomi", android.provider.BaseColumns._ID, 
+		//	6			7				8
+		"created_at", "updated_at", "posted_at"
+		*/
+		
+		cv.put(CONS.cols_SI_full[0], si.getStore());
+		cv.put(CONS.cols_SI_full[1], si.getName());
+		cv.put(CONS.cols_SI_full[2], si.getPrice());
+		cv.put(CONS.cols_SI_full[3], si.getGenre());
+		cv.put(CONS.cols_SI_full[4], si.getYomi());
+		
+		cv.put(CONS.cols_SI_full[6], si.getCreated_at());
+		cv.put(CONS.cols_SI_full[7], si.getUpdated_at());
+		cv.put(CONS.cols_SI_full[8], si.getPosted_at());
+		
+		/***************************************
+		 * Setup db
+		 ***************************************/
+		SQLiteDatabase wdb = this.getWritableDatabase();
+		
+		try {
+			//
+			wdb.beginTransaction();
+			
+//			//
+//			ContentValues cv = new ContentValues();
+//			
+//			// Put values
+//			for (int i = 0; i < cols.length; i++) {
+//				cv.put(cols[i], values[i]);
+//			}//for (int i = 0; i < columnNames.length; i++)
+			
+			// Insert data
+//			long res = wdb.insert(CONS.tableName, null, cv);
+			long res = wdb.update(
+					CONS.tableName,
+					cv,
+					android.provider.BaseColumns._ID + " = ?",
+					new String[]{String.valueOf(si.getId())});
+			
+			if (res < 1) {
+				
+				// Log
+				Log.d("DBUtils.java"
+						+ "["
+						+ Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+								+ ":"
+								+ Thread.currentThread().getStackTrace()[2]
+										.getMethodName() + "]", "Update => Returned less than 1");
+				
+				wdb.close();
+				
+				return false;
+				
+			}	
+			
+			// Set as successful
+			wdb.setTransactionSuccessful();
+			
+			// End transaction
+			wdb.endTransaction();
+			
+			// Log
+			Log.d("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "Update => Successful");
+			
+			wdb.close();
+			
+			return true;
+			
+		} catch (Exception e) {
+			// Log
+			Log.e("DBUtils.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ "]", "Exception => " + e.toString());
+			
+			wdb.close();
+			
+			return false;
+			
+		}//try
+		
+	}//public boolean updateData_SI_all_V2(ShoppingItem si)
 
 }//public class DBUtils extends SQLiteOpenHelper
 

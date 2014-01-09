@@ -2822,5 +2822,21 @@ public class Methods_sl {
 		return joBody;
 		
 	}//JSONObject get_json_body_SI
+
+	public static boolean
+	update_SI(Activity actv, ShoppingItem si) {
+		
+		DBUtils dbm = new DBUtils(actv);
+		
+		SQLiteDatabase wdb = dbm.getWritableDatabase();
+				
+		
+		
+		
+		wdb.close();
+		
+		return false;
+		
+	}//update_SI(Activity actv, ShoppingItem si)
 	
 }//public class Methods_sl

@@ -7,6 +7,7 @@ import sl.main.R.layout;
 import sl.tasks.Task_PostData;
 import sl.utils.CONS;
 import sl.utils.DBUtils;
+import sl.utils.Methods;
 import sl.utils.Methods_sl;
 import android.app.Activity;
 import android.database.Cursor;
@@ -207,6 +208,8 @@ public class RegisterItemActv extends Activity {
 							et_name.getText().toString(),
 							sp_store_name.getSelectedItem().toString());
 				
+				si.setPosted_at(Methods.getMillSeconds_now());
+				
 				// Log
 				Log.d("["
 						+ "RegisterItemActv.java : "
@@ -223,16 +226,6 @@ public class RegisterItemActv extends Activity {
 						+ "id=" + si.getId()
 						);
 				
-//						new ShoppingItem.Builder()
-//							.setName(et_name.getText().toString())
-//							.setPrice(Integer.parseInt(
-//										et_price.getText().toString()))
-//							.setStore(sp_store_name.getSelectedItem().toString())
-//							.setGenre(sp_genre_name.getSelectedItem().toString())
-//							.setYomi(et_yomi.getText().toString())
-//							.build();
-//				
-//				
 				Task_PostData task = new Task_PostData(actv, si);
 				
 				task.execute(
