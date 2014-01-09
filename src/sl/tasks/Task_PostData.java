@@ -101,7 +101,8 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 			return CONS.ReturnValues.FAILED;
 		}
 		
-		int num = 3;
+		int num = si_list.size();
+//		int num = 3;
 		
 		int count = 0;
 		int result;
@@ -425,7 +426,11 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				
 				store_id,		si.getName(),
 				si.getPrice(),	genre_id,
-				si.getYomi(),	si.getId()
+				si.getYomi(),	si.getId(),
+				
+				si.getCreated_at(),
+				si.getUpdated_at(),
+				si.getPosted_at()
 				
 		};
 //		"item[store_id]",	"item[name]",		1 2

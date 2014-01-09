@@ -407,6 +407,10 @@ public class CONS {
 						"item_store_id",	"item_name",
 						"item_price",		"item_genre_id",
 						"item_yomi",		"item_mobile_id",
+						
+						"item_mobile_created_at",
+						"item_mobile_updated_at",
+						"item_mobile_posted_at"
 //						"item[store_id]",	"item[name]",
 //						"item[price]",		"item[genre_id]",
 //						"item[yomi]",		"item[mobile_id]",
