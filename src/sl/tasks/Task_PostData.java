@@ -357,32 +357,12 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	private JSONObject
 	_doInBackground__1_getJSONBody(ShoppingItem si) {
 		
-//		/*********************************
-//		 * Get: SI list
-//		 *********************************/
-//		List<ShoppingItem> si_list = Methods_sl.getSIList(actv);
-//		
-//		if (si_list == null) {
-//			
-//			// Log
-//			Log.d("["
-//					+ "Task_PostData.java : "
-//					+ +Thread.currentThread().getStackTrace()[2]
-//							.getLineNumber() + " : "
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "No SI list");
-//			
-//			return null;
-////			return CONS.ReturnValues.PostSI_NoSIList;
-//		}
-		
 		/*********************************
 		 * Prep: values
 		 *********************************/
 		int store_id = 
 				Methods_sl.get_StoreId_from_StoreName(actv,
 						si.getStore());
-//		si_list.get(0).getStore());
 		
 		if (store_id == CONS.ReturnValues.NoStoreData) {
 			

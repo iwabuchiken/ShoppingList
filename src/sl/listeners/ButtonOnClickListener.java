@@ -295,8 +295,12 @@ public class ButtonOnClickListener implements OnClickListener {
 //								et_genre.getText().toString()
 								sp_genre_name.getSelectedItem().toString(),
 								et_yomi.getText().toString(),
-								String.valueOf(Methods.getMillSeconds_now()),
-								String.valueOf(Methods.getMillSeconds_now())
+								Methods.getTimeLabel_V2(
+										Methods.getMillSeconds_now(), 2),
+								Methods.getTimeLabel_V2(
+										Methods.getMillSeconds_now(), 2)
+//								String.valueOf(Methods.getMillSeconds_now()),
+//								String.valueOf(Methods.getMillSeconds_now())
 						});
 		
 		if (result == true) {
@@ -330,7 +334,10 @@ public class ButtonOnClickListener implements OnClickListener {
 					et_name.getText().toString(),
 					sp_store_name.getSelectedItem().toString());
 		
-		si.setPosted_at(Methods.getMillSeconds_now());
+		si.setPosted_at(
+				Methods.getTimeLabel_V2(
+						Methods.getMillSeconds_now(), 2));
+//		si.setPosted_at(Methods.getMillSeconds_now());
 		
 		// Log
 		Log.d("["
@@ -349,6 +356,18 @@ public class ButtonOnClickListener implements OnClickListener {
 				);
 		
 		boolean res = Methods_sl.update_SI(actv, si);
+		
+		if (res == false) {
+			
+			// debug
+			Toast.makeText(actv,
+					"Data 'posted_at' => Not added",
+					Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}//if (res == false)
+		
 		
 //		Task_PostData task = new Task_PostData(actv, si);
 //		

@@ -8,9 +8,9 @@ public class ShoppingItem {
 	int		price;
 	int		id;
 	
-	long	created_at;
-	long	updated_at;
-	long	posted_at;
+	String	created_at;
+	String	updated_at;
+	String	posted_at;
 
 	public ShoppingItem(Builder builder) {
 
@@ -49,9 +49,9 @@ public class ShoppingItem {
 	public ShoppingItem
 		(String store, String name,
 		int price, String genre, int id,
-		long	created_at,
-		long	updated_at,
-		long	posted_at)
+		String	created_at,
+		String	updated_at,
+		String	posted_at)
 	{
 		
 		this.store = store;
@@ -104,27 +104,27 @@ public class ShoppingItem {
 	
 	
 	
-	public long getCreated_at() {
+	public String getCreated_at() {
 		return created_at;
 	}
 
-	public long getUpdated_at() {
+	public String getUpdated_at() {
 		return updated_at;
 	}
 
-	public void setUpdated_at(long updated_at) {
+	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
 	}
 
-	public long getPosted_at() {
+	public String getPosted_at() {
 		return posted_at;
 	}
 
-	public void setPosted_at(long posted_at) {
+	public void setPosted_at(String posted_at) {
 		this.posted_at = posted_at;
 	}
 
-	public void setCreated_at(long created_at) {
+	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
 
@@ -182,9 +182,9 @@ public class ShoppingItem {
 		private int price;
 		private int id;
 		
-		private long	created_at;
-		private long	updated_at;
-		private long	posted_at;
+		private String	created_at;
+		private String	updated_at;
+		private String	posted_at;
 		
 		public ShoppingItem build() {
 			
@@ -195,15 +195,15 @@ public class ShoppingItem {
 		public Builder setStore(String store) {
 			this.store = store;	return this;
 		}
-		public Builder setCreated_at(long created_at) {
+		public Builder setCreated_at(String created_at) {
 			this.created_at = created_at;	return this;
 		}
 
-		public Builder setUpdated_at(long updated_at) {
+		public Builder setUpdated_at(String updated_at) {
 			this.updated_at = updated_at;	return this;
 		}
 
-		public Builder setPosted_at(long posted_at) {
+		public Builder setPosted_at(String posted_at) {
 			this.posted_at = posted_at;	return this;
 		}
 

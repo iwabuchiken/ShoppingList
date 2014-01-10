@@ -2276,6 +2276,39 @@ public class Methods {
 		return sdf1.format(new Date(millSec));
 		
 	}//public static String get_TimeLabel(long millSec)
+	
+	/*********************************
+	 * @param
+	 *********************************/
+	public static String getTimeLabel_V2(long millSec, int type) {
+		
+		SimpleDateFormat sdf1 = null;
+		
+		switch(type) {
+		
+		case 1:
+			
+			sdf1 = new SimpleDateFormat("yyyyMMdd_HHmmss");
+			
+			break;
+			
+		case 2:
+			
+			sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+			
+			break;
+			
+		default:
+			
+			sdf1 = new SimpleDateFormat("yyyyMMdd_HHmmss");
+			
+			break;
+		
+		}
+		
+		return sdf1.format(new Date(millSec));
+		
+	}//public static String get_TimeLabel(long millSec)
 
 	public static String getTimeLabel_Japanese(long millSec) {
 		

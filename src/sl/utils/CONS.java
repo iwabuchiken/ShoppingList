@@ -262,6 +262,102 @@ public class CONS {
 	
 	public static class SQLs {
 		
+		//REF http://stackoverflow.com/questions/25969/sql-insert-into-values-select-from answered Aug 25 '08 at 12:47
+//		+ ", store, name, price, genre, yomi";
+		public static String PARAM_20140110_105949 =
+				"INSERT INTO"
+						+ " " + "shopping_item_new" + " "
+						+ " " + "(" + " "
+						+ "store," + " "
+						+ "name," + " "
+						+ "price," + " "
+						+ "genre," + " "
+						+ "yomi"
+						+ " "
+						+ " "+ ")"
+						
+//						+ " " + "(" + " "
+						+ "SELECT" + " "
+						+ "store," + " "
+						+ "name," + " "
+						+ "price," + " "
+						+ "genre," + " "
+						+ "yomi"
+						+ " " + "FROM" + " "
+						+ CONS.DBAdmin.tname_si
+//						+ " "+ ")"
+						;
+//				"INSERT INTO"
+//					+ " " + "shopping_item_new" + " "
+//					+ " " + "(" + " "
+//					+ "SELECT" + " "
+//						+ "store," + " "
+//						+ "name," + " "
+//						+ "price," + " "
+//						+ "genre," + " "
+//						+ "yomi"
+//					+ " " + "FROM" + " "
+//						+ CONS.DBAdmin.tname_si
+//						+ " "+ ")";
+		
+		public static final String[]
+				a_20140110_105949_InsertInto_ShoppingItemNew
+				= {
+					
+					PARAM_20140110_105949
+				};
+		
+//		+ ", store, name, price, genre, yomi";
+		public static String PARAM_20140110_104629 =
+			"CREATE TABLE"
+				+ " " + "shopping_item_new" + " "
+			+ "("
+			+ android.provider.BaseColumns._ID + " "
+				+ "INTEGER PRIMARY KEY,"
+			+ "store	TEXT,"
+			+ "name		TEXT,"
+			+ "price	INTEGER,"
+			+ "genre	TEXT,"
+			+ "yomi		TEXT,"
+			
+			+ "created_at	TEXT,"
+			+ "updated_at	TEXT,"
+			+ "posted_at	TEXT"
+			+ ")";
+		
+		public static final String[]
+			a_20140110_104629_Createtable_ShoppingItemNew
+				= {PARAM_20140110_104629};
+				
+		public static final String[]
+			a_20140110_095304_AddColumns_CreatedAt_ToShoppingItemNew
+				= {
+					"ALTER TABLE shopping_item_new"
+						+ " ADD COLUMN"
+						+ " created_at TEXT",
+						
+					"ALTER TABLE shopping_item_new"
+						+ " ADD COLUMN"
+						+ " updated_at TEXT",
+						
+					"ALTER TABLE shopping_item_new"
+						+ " ADD COLUMN"
+						+ " posted_at TEXT"
+				};
+		
+		public static String param_20140110_071149 = 
+				android.provider.BaseColumns._ID
+				+ ", store, name, price, genre, yomi";
+		
+		public static final String[]
+		a_20140110_071149_CreateTable_shopping_item_new
+			= {"CREATE TABLE"
+				+ " shopping_item_new "
+				+ " as select "
+				+ param_20140110_071149
+				+ " FROM "
+				+ CONS.DBAdmin.tname_si};
+		
 		public static final String[]
 		a_20140105_102851_add_column_created_at_etc
 			= {"ALTER TABLE shopping_item"

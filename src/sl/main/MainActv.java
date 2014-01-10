@@ -79,6 +79,14 @@ public class MainActv extends Activity {
     
 	private void do_debugs() {
 		
+//		_debug_D_44_V_3_0_7_SQL_Generic(
+//				CONS.SQLs.a_20140110_105949_InsertInto_ShoppingItemNew);
+//		_debug_D_44_V_3_0_7_DropTable_ShoppingItemNew();
+//		_debug_D_44_V_3_0_7_CreateTable_ShoppingItemNew();
+		_debug_D_44_V_3_0_7_DropTable_ShoppingItem();
+		_debug_D_44_V_3_0_7_RenameTable_ShoppingItemNew();
+//		_debug_D_44_V_3_0_7_Test_GetTimeLabel();
+//		_debug_D_44_V_3_0_7_UpdateColumns();
 //		_debug_D_44_V_3_0_6_Test_update_SI_V2();
 //		_debug_D_44_V_3_0_6_Test_update_SI();
 //		_debug_D_44_V_3_0_6_GetColumnNames();
@@ -90,6 +98,335 @@ public class MainActv extends Activity {
 //		_debug_D_44_V_3_0_3_AddColumns();
 		
 	}//private void do_debugs()
+
+
+	private void _debug_D_44_V_3_0_7_SQL_Generic(String[] sqls) {
+		// TODO Auto-generated method stub
+//		String[] sqls =
+//				CONS.SQLs.a_20140105_112211_DropTable_shopping_item_new;
+//		CONS.SQLs.a_20140110_071149_CreateTable_shopping_item_new;
+		
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		int count = 0;
+		
+		for (String sql : sqls) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+							+ Thread.currentThread().getStackTrace()[2].getMethodName()
+							+ "]", "sql=" + sql);
+			
+			try {
+				wdb.execSQL(sql);
+				
+				count += 1;
+				
+				// debug
+				
+//				Toast.makeText(this, "debug done", Toast.LENGTH_LONG).show();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				Toast.makeText(this, "SQLException", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		Toast.makeText(this,
+				"SQL done => "
+						+ String.valueOf(count)
+						+ " out of "
+						+ String.valueOf(sqls.length),
+						Toast.LENGTH_LONG).show();
+		
+		wdb.close();
+
+	}
+	
+	private void _debug_D_44_V_3_0_7_DropTable_ShoppingItemNew() {
+		// TODO Auto-generated method stub
+		String[] sqls =
+				CONS.SQLs.a_20140105_112211_DropTable_shopping_item_new;
+//		CONS.SQLs.a_20140110_071149_CreateTable_shopping_item_new;
+		
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		int count = 0;
+		
+		for (String sql : sqls) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+							+ Thread.currentThread().getStackTrace()[2].getMethodName()
+							+ "]", "sql=" + sql);
+			
+			try {
+				wdb.execSQL(sql);
+				
+				count += 1;
+				
+				// debug
+				
+//				Toast.makeText(this, "debug done", Toast.LENGTH_LONG).show();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				Toast.makeText(this, "SQLException", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		Toast.makeText(this,
+				"SQL done => "
+						+ String.valueOf(count)
+						+ " out of "
+						+ String.valueOf(sqls.length),
+						Toast.LENGTH_LONG).show();
+		
+		wdb.close();
+		
+	}
+
+
+	private void _debug_D_44_V_3_0_7_CreateTable_ShoppingItemNew() {
+		// TODO Auto-generated method stub
+		String[] sqls =
+				CONS.SQLs.a_20140110_104629_Createtable_ShoppingItemNew;
+//		CONS.SQLs.a_20140110_071149_CreateTable_shopping_item_new;
+		
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		int count = 0;
+		
+		for (String sql : sqls) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql=" + sql);
+			
+			try {
+				wdb.execSQL(sql);
+				
+				count += 1;
+				
+				// debug
+				
+//				Toast.makeText(this, "debug done", Toast.LENGTH_LONG).show();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				Toast.makeText(this, "SQLException", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		Toast.makeText(this,
+				"SQL done => "
+				+ String.valueOf(count)
+				+ " out of "
+				+ String.valueOf(sqls.length),
+				Toast.LENGTH_LONG).show();
+		
+		wdb.close();
+		
+	}//private void _debug_D_44_V_3_0_7_CreateTable_ShoppingItemNew()
+
+
+	private void _debug_D_44_V_3_0_7_RenameTable_ShoppingItemNew() {
+		// TODO Auto-generated method stub
+		String[] sqls =
+				CONS.SQLs.a_20140105_113651_ChangeTableName_shopping_item_new;
+//		CONS.SQLs.a_20140110_071149_CreateTable_shopping_item_new;
+		
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		int count = 0;
+		
+		for (String sql : sqls) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql=" + sql);
+			
+			try {
+				wdb.execSQL(sql);
+				
+				count += 1;
+				
+				// debug
+				
+//				Toast.makeText(this, "debug done", Toast.LENGTH_LONG).show();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				Toast.makeText(this, "SQLException", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		Toast.makeText(this,
+				"SQL done => "
+				+ String.valueOf(count)
+				+ " out of "
+				+ String.valueOf(sqls.length),
+				Toast.LENGTH_LONG).show();
+		
+		wdb.close();
+		
+	}
+	
+	private void _debug_D_44_V_3_0_7_DropTable_ShoppingItem() {
+		// TODO Auto-generated method stub
+		String[] sqls =
+				CONS.SQLs.a_20140105_113308_DropTable_shopping_item;
+//		CONS.SQLs.a_20140110_071149_CreateTable_shopping_item_new;
+		
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+		
+		int count = 0;
+		
+		for (String sql : sqls) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+							+ Thread.currentThread().getStackTrace()[2].getMethodName()
+							+ "]", "sql=" + sql);
+			
+			try {
+				wdb.execSQL(sql);
+				
+				count += 1;
+				
+				// debug
+				
+//				Toast.makeText(this, "debug done", Toast.LENGTH_LONG).show();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				Toast.makeText(this, "SQLException", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		Toast.makeText(this,
+				"SQL done => "
+						+ String.valueOf(count)
+						+ " out of "
+						+ String.valueOf(sqls.length),
+						Toast.LENGTH_LONG).show();
+		
+		wdb.close();
+		
+	}
+
+
+	private void _debug_D_44_V_3_0_7_Test_GetTimeLabel() {
+		// TODO Auto-generated method stub
+		String label = Methods.getTimeLabel_V2(Methods.getMillSeconds_now(), 2);
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "time=" + label);
+	}
+
+
+	private void _debug_D_44_V_3_0_7_UpdateColumns() {
+		// TODO Auto-generated method stub
+		String[] sqls =
+				CONS.SQLs.a_20140110_095304_AddColumns_CreatedAt_ToShoppingItemNew;
+//		CONS.SQLs.a_20140110_071149_CreateTable_shopping_item_new;
+		
+		DBUtils dbu = new DBUtils(this, CONS.dbName);
+		
+		SQLiteDatabase wdb = dbu.getWritableDatabase();
+
+		int count = 0;
+		
+		for (String sql : sqls) {
+			
+			// Log
+			Log.d("["
+					+ "MainActv.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "sql=" + sql);
+			
+			try {
+				wdb.execSQL(sql);
+				
+				count += 1;
+				
+				// debug
+				
+//				Toast.makeText(this, "debug done", Toast.LENGTH_LONG).show();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				
+				Toast.makeText(this, "SQLException", Toast.LENGTH_LONG).show();
+				e.printStackTrace();
+				
+			}
+			
+		}
+		
+		Toast.makeText(this,
+				"SQL done => "
+				+ String.valueOf(count)
+				+ " out of "
+				+ String.valueOf(sqls.length),
+				Toast.LENGTH_LONG).show();
+		
+		wdb.close();
+
+	}//private void _debug_D_44_V_3_0_7_UpdateColumns()
 
 
 	private void _debug_D_44_V_3_0_6_GetColumnNames() {
@@ -146,7 +483,7 @@ public class MainActv extends Activity {
 				+ "posted=" + si.getPosted_at()
 				+ ")");
 		
-		si.setPosted_at(Methods.getMillSeconds_now());
+//		si.setPosted_at(Methods.getMillSeconds_now());
 		
 		si.setName("なにぬねの!!");
 
@@ -206,7 +543,7 @@ public class MainActv extends Activity {
 				+ "posted=" + si.getPosted_at()
 				+ ")");
 		
-		si.setPosted_at(Methods.getMillSeconds_now());
+//		si.setPosted_at(Methods.getMillSeconds_now());
 		
 		si.setName("なにぬねの!!");
 		

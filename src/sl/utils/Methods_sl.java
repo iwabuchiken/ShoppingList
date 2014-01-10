@@ -2506,9 +2506,12 @@ public class Methods_sl {
 				.setGenre(c.getString(3))
 				.setYomi(c.getString(4))
 				.setStore(c.getString(0))
-				.setCreated_at(c.getLong(6))
-				.setUpdated_at(c.getLong(7))
-				.setPosted_at(c.getLong(8))
+				.setCreated_at(c.getString(6))
+				.setUpdated_at(c.getString(7))
+				.setPosted_at(c.getString(8))
+//				.setCreated_at(c.getLong(6))
+//				.setUpdated_at(c.getLong(7))
+//				.setPosted_at(c.getLong(8))
 				.build();
 		
 /*		cid   name
@@ -2623,9 +2626,9 @@ public class Methods_sl {
 		.setGenre(c.getString(3))
 		.setYomi(c.getString(4))
 		.setStore(c.getString(0))
-		.setCreated_at(c.getLong(6))
-		.setUpdated_at(c.getLong(7))
-		.setPosted_at(c.getLong(8))
+		.setCreated_at(c.getString(6))
+		.setUpdated_at(c.getString(7))
+		.setPosted_at(c.getString(8))
 		.build();
 		
 		/*		cid   name
