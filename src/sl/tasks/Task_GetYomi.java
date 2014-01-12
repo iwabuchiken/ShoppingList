@@ -4301,8 +4301,12 @@ public class Task_GetYomi extends AsyncTask<String, Integer, Integer> {
 			// debug
 			Toast.makeText(actv,
 					"Get yomi => Done", Toast.LENGTH_LONG).show();
-			
-			dlg.dismiss();
+
+			if (dlg != null) {
+				
+				dlg.dismiss();
+				
+			}
 			
 			break;
 			

@@ -353,6 +353,8 @@ public class ButtonOnClickListener implements OnClickListener {
 				+ "store=" + si.getStore()
 				+ " / "
 				+ "id=" + si.getId()
+				+ " / "
+				+ "created_at=" + si.getCreated_at()
 				);
 		
 		boolean res = Methods_sl.update_SI(actv, si);
@@ -369,10 +371,10 @@ public class ButtonOnClickListener implements OnClickListener {
 		}//if (res == false)
 		
 		
-//		Task_PostData task = new Task_PostData(actv, si);
-//		
-//		task.execute(
-//				CONS.HTTPData.registerChoice.single_item.toString());
+		Task_PostData task = new Task_PostData(actv, si);
+		
+		task.execute(
+				CONS.HTTPData.registerChoice.single_item.toString());
 
 
 	}//private void case_register(View v)

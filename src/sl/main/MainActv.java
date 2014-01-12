@@ -83,8 +83,8 @@ public class MainActv extends Activity {
 //				CONS.SQLs.a_20140110_105949_InsertInto_ShoppingItemNew);
 //		_debug_D_44_V_3_0_7_DropTable_ShoppingItemNew();
 //		_debug_D_44_V_3_0_7_CreateTable_ShoppingItemNew();
-		_debug_D_44_V_3_0_7_DropTable_ShoppingItem();
-		_debug_D_44_V_3_0_7_RenameTable_ShoppingItemNew();
+//		_debug_D_44_V_3_0_7_DropTable_ShoppingItem();
+//		_debug_D_44_V_3_0_7_RenameTable_ShoppingItemNew();
 //		_debug_D_44_V_3_0_7_Test_GetTimeLabel();
 //		_debug_D_44_V_3_0_7_UpdateColumns();
 //		_debug_D_44_V_3_0_6_Test_update_SI_V2();

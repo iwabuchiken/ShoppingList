@@ -130,6 +130,23 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	 * 
 	 *********************************/
 	private int _exec_post(ShoppingItem si) {
+		// Log
+		Log.d("[" + "Task_PostData.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "Starting _exec_post");
+		// Log
+		Log.d("[" + "Task_PostData.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"si.name=" + si.getName()
+				+ "/"
+				+ "si.created_at=" + si.getCreated_at());
+		
+		
 		// TODO Auto-generated method stub
 		JSONObject joBody =
 				_doInBackground__1_getJSONBody(si);
@@ -360,6 +377,9 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		/*********************************
 		 * Prep: values
 		 *********************************/
+		/*********************************
+		 * store_id
+		 *********************************/
 		int store_id = 
 				Methods_sl.get_StoreId_from_StoreName(actv,
 						si.getStore());
@@ -378,6 +398,9 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 			
 		}
 		
+		/*********************************
+		 * genre_id
+		 *********************************/
 		int genre_id = 
 				Methods_sl.get_GenreId_from_GenreName(actv,
 						si.getGenre());
