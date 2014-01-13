@@ -535,34 +535,60 @@ public class CONS {
 		/*********************************
 		 * No data: -1 ~
 		 *********************************/
-		public static int PostSI_NoSIList	= -1;
+		public static final int PostSI_NoSIList	= -1;
 		
-		public static int NoStoreData		= -2;
+		public static final int NoStoreData		= -2;
 		
-		public static int NoGenreData		= -3;
+		public static final int NoGenreData		= -3;
 		
 		/*********************************
 		 * Operation failed: -10 ~
 		 *********************************/
-		public static int QueryFailed		= -10;
+		public static final int QueryFailed		= -10;
 		
-		public static int BuildJOBodyFailed	= -11;
+		public static final int BuildJOBodyFailed	= -11;
 		
-		public static int BuildEntityFailed	= -12;
+		public static final int BuildEntityFailed	= -12;
 		
-		public static int BuildHttpPostFailed	= -13;
+		public static final int BuildHttpPostFailed	= -13;
 		
-		public static int HttpPostFailed	= -14;
+		public static final int HttpPostFailed		= -14;
+		
+		public static final int PostedButNotUpdated	= -15;
+		
+		public static final int ServerError		= -16;
+		
+		public static final int ClientError		= -17;
 		
 		/*********************************
 		 * Others: > 0, <= -90
 		 *********************************/
-		public static int OK				= 1;
+		public static final int OK				= 1;
 		
-		public static int NOP				= -90;
+		public static final int NOP				= -90;
 		
-		public static int FAILED			= -91;
+		public static final int FAILED			= -91;
 		
+		public static final int MAGINITUDE_ONE	= 1000;
 	}
-	
+
+	public static class HTTPResponse {
+		/*********************************
+		 * 2xx
+		 *********************************/
+		public static final int ServiceReady	= 220;
+		
+		/*********************************
+		 * 4xx
+		 *********************************/
+		public static final int BadRequest	= 400;
+		
+		public static final int NotFound		= 404;
+		
+		/*********************************
+		 * 5xx
+		 *********************************/
+		public static final int ServerError	= 500;
+	}
+
 }//public class CONS

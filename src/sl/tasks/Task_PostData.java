@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import sl.items.ShoppingItem;
 import sl.utils.CONS;
+import sl.utils.Methods;
 import sl.utils.Methods_sl;
 import android.app.Activity;
 import android.app.Dialog;
@@ -87,7 +88,8 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				
 			}
 			
-			return count;
+			return count + CONS.ReturnValues.MAGINITUDE_ONE;
+//			return count;
 			
 		}//if (params[0].equals(
 		
@@ -119,7 +121,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 			
 		}
 		
-		return count;
+		return count + CONS.ReturnValues.MAGINITUDE_ONE;
 		
 	}//doInBackground(String... params)
 
@@ -146,6 +148,12 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				+ "/"
 				+ "si.created_at=" + si.getCreated_at());
 		
+		/*********************************
+		 * Update: posted_at
+		 *********************************/
+		si.setPosted_at(
+				Methods.getTimeLabel_V2(
+						Methods.getMillSeconds_now(), 2));
 		
 		// TODO Auto-generated method stub
 		JSONObject joBody =
@@ -214,59 +222,96 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	    /***************************************
 		 * Post
 		 ***************************************/
-	    DefaultHttpClient dhc = new DefaultHttpClient();
-	    
-		HttpResponse hr = null;
+		int iRes = _doInBackground__4_PostData(httpPost);
 		
-//		/***************************************
-//		 * Validate: Return
-//		 ***************************************/
-//		if (hr == null) {
+		if (iRes != CONS.ReturnValues.OK) {
+			
+			return iRes;
+			
+		}
+		
+//	    DefaultHttpClient dhc = new DefaultHttpClient();
+//	    
+//		HttpResponse hr = null;
+//		
+//
+//		try {
 //			
-////			// debug
-////			Toast.makeText(actv, "hr == null", 2000).show();
+//			hr = dhc.execute(httpPost);
+//			
+//		} catch (ClientProtocolException e) {
+//			// Log
+//			Log.d("TaskHTTP.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ "]", e.toString());
+//			
+//			return CONS.ReturnValues.HttpPostFailed;
+//			
+//		} catch (IOException e) {
 //			
 //			// Log
 //			Log.d("TaskHTTP.java" + "["
 //					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ "]", "hr == null");
+//					+ "]", e.toString());
 //			
-////			return CONS.Task_GetTexts.EXECUTE_POST_NULL;
-//			return null;
+//			return CONS.ReturnValues.HttpPostFailed;
 //			
-//		} else {//if (hr == null)
-//			
+//		}
+//		
+//		if (hr == null) {
+//		
 //			// Log
-//			Log.d("Task_GetTexts.java" + "["
+//			Log.d("TaskHTTP.java" + "["
 //					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
-//					+ ":"
-//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-//					+ "]", "Http response => Obtained");
-//
+//					+ "]", "hr => null");
 //			
-////			return null;
+//			return CONS.ReturnValues.HttpPostFailed;
 //			
 //		}//if (hr == null)
-//
-//		/***************************************
-//		 * Status code
-//		 ***************************************/
-//		/*********************************
-//		 * Status code
-//		 *********************************/
+//	
+//		// Log
+//		Log.d("[" + "Task_PostData.java : "
+//				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+//				+ " : "
+//				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//				+ "]", "hr => " + hr.getStatusLine().getStatusCode());
+		
+		/*********************************
+		 * HTTP return codes
+		 *********************************/
+//		iRes = _doInBackground__3_CheckHTTPCodes(hr);
+//		
+//		if (iRes != CONS.ReturnValues.OK) {
+//			
+//			return iRes;
+//			
+//		}
+//		
 //		int status = hr.getStatusLine().getStatusCode();
 //		
-//		if (status == CONS.HTTP_Response.CREATED
-//				|| status == CONS.HTTP_Response.OK) {
-//
+//		if (status >= CONS.HTTPResponse.ServerError) {
+//		
 //			// Log
 //			Log.d("Task_GetYomi.java" + "["
 //					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //					+ ":"
 //					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 //					+ "]", "status=" + status);
-//
-////			return CONS.HTTP_Response.CREATED;
+//		
+//			return CONS.ReturnValues.ServerError;
+//		//	return CONS.HTTP_Response.CREATED;
+//			
+//		} else if (status < CONS.HTTPResponse.ServerError
+//					&& status >= CONS.HTTPResponse.BadRequest){//if (status == CONS.HTTP_Response.CREATED)
+//			
+//			// Log
+//			Log.d("Task_GetYomi.java" + "["
+//					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+//					+ ":"
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]", "status=" + status);
+//		
+//			return CONS.ReturnValues.ClientError;
 //			
 //		} else {//if (status == CONS.HTTP_Response.CREATED)
 //			
@@ -277,11 +322,34 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 //					+ Thread.currentThread().getStackTrace()[2].getMethodName()
 //					+ "]", "status=" + status);
 //			
-//			return CONS.HTTP_Response.NOT_CREATED;
+////			return CONS.HTTP_Response.NOT_CREATED;
 //			
 //		}//if (status == CONS.HTTP_Response.CREATED)
-//		
-//		return null;
+		
+		
+		/*********************************
+		 * Update: SI.posted_at
+		 *********************************/
+		boolean res = Methods_sl.update_SI(actv, si);
+		
+		if (res == false) {
+			
+			return CONS.ReturnValues.PostedButNotUpdated;
+			
+		}
+		
+		return CONS.ReturnValues.OK;
+//		return CONS.ReturnValues.NOP;
+
+	}//private int _exec_post()
+
+	private int
+	_doInBackground__4_PostData(HttpPost httpPost) {
+		// TODO Auto-generated method stub
+	    DefaultHttpClient dhc = new DefaultHttpClient();
+	    
+		HttpResponse hr = null;
+		
 
 		try {
 			
@@ -324,10 +392,66 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				+ Thread.currentThread().getStackTrace()[2].getMethodName()
 				+ "]", "hr => " + hr.getStatusLine().getStatusCode());
 		
+		/*********************************
+		 * Check: HTTP return code
+		 *********************************/
+		int iRes = _doInBackground__3_CheckHTTPCodes(hr);
+		
+		if (iRes != CONS.ReturnValues.OK) {
+			
+			return iRes;
+			
+		}
+		
 		return CONS.ReturnValues.OK;
-//		return CONS.ReturnValues.NOP;
+		
+	}//_doInBackground__4_PostData(HttpPost httpPost)
 
-	}//private int _exec_post()
+	private int 
+	_doInBackground__3_CheckHTTPCodes(HttpResponse hr) {
+		// TODO Auto-generated method stub
+		int status = hr.getStatusLine().getStatusCode();
+		
+		if (status >= CONS.HTTPResponse.ServerError) {
+		
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "status=" + status);
+		
+			return CONS.ReturnValues.ServerError;
+		//	return CONS.HTTP_Response.CREATED;
+			
+		} else if (status < CONS.HTTPResponse.ServerError
+					&& status >= CONS.HTTPResponse.BadRequest){//if (status == CONS.HTTP_Response.CREATED)
+			
+			// Log
+			Log.d("Task_GetYomi.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "status=" + status);
+		
+			return CONS.ReturnValues.ClientError;
+			
+		} else {//if (status == CONS.HTTP_Response.CREATED)
+			
+			// Log
+			Log.d("Task_GetTexts.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "status=" + status);
+			
+//			return CONS.HTTP_Response.NOT_CREATED;
+			
+		}//if (status == CONS.HTTP_Response.CREATED)
+
+		return CONS.ReturnValues.OK;
+		
+	}//_doInBackground__3_CheckHTTPCodes(HttpResponse hr)
 
 	private HttpPost
 	_doInBackground__2_getHttpPost(String url, JSONObject joBody) {
@@ -514,10 +638,32 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 			
 			message = "Posting => Failed";
 			
-		} else {//if (res.intValue() == CONS.ReturnValues.FAILED)
+		} else if (res.intValue() == 
+						CONS.ReturnValues.PostedButNotUpdated) {//if (res.intValue() == CONS.ReturnValues.FAILED)
+			
+			message = "Posted but device data => not updated";
+			
+		} else if (res.intValue() == 
+				CONS.ReturnValues.ServerError) {//if (res.intValue() == CONS.ReturnValues.FAILED)
+			
+			message = "Remote => Server error";
+			
+		} else if (res.intValue() == 
+				CONS.ReturnValues.ClientError) {//if (res.intValue() == CONS.ReturnValues.FAILED)
+			
+			message = "Remote => Client error";
+			
+		} else if (res.intValue() >= CONS.ReturnValues.MAGINITUDE_ONE) {//if (res.intValue() == CONS.ReturnValues.FAILED)
 			
 			message = "Posting => Done(" 
-					+ String.valueOf(res.intValue()) + " items)";
+					+ String.valueOf(
+							res.intValue() - CONS.ReturnValues.MAGINITUDE_ONE)
+					+ " items)";
+			
+		} else {//if (res.intValue() == CONS.ReturnValues.FAILED)
+			
+			message = "Posting => Done(Unknown result => " 
+					+ String.valueOf(res.intValue()) + ")";
 			
 		}//if (res.intValue() == CONS.ReturnValues.FAILED)
 		

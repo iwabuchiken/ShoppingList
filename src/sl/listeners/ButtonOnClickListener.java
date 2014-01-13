@@ -5,10 +5,8 @@ import java.util.List;
 
 import sl.adapters.ItemListAdapter;
 import sl.items.ShoppingItem;
-import sl.main.DBActv;
 import sl.main.ItemListActv;
 import sl.main.R;
-import sl.main.RegisterItemActv;
 import sl.tasks.TaskAudioTrack;
 import sl.tasks.Task_PostData;
 import sl.utils.CONS;
@@ -17,7 +15,6 @@ import sl.utils.Methods;
 import sl.utils.Methods_sl;
 import sl.utils.Tags;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -305,7 +302,7 @@ public class ButtonOnClickListener implements OnClickListener {
 		
 		if (result == true) {
 			// Log
-			Log.d("RegisterItem.java"
+			Log.d("ButtonOnClickListener.java"
 					+ "["
 					+ Thread.currentThread().getStackTrace()[2]
 							.getLineNumber() + "]", "Data stored");
@@ -315,7 +312,7 @@ public class ButtonOnClickListener implements OnClickListener {
 			
 		} else {//if (result == true)
 			// Log
-			Log.d("RegisterItem.java"
+			Log.d("ButtonOnClickListener.java"
 					+ "["
 					+ Thread.currentThread().getStackTrace()[2]
 							.getLineNumber() + "]", "Data not stored");
@@ -334,14 +331,14 @@ public class ButtonOnClickListener implements OnClickListener {
 					et_name.getText().toString(),
 					sp_store_name.getSelectedItem().toString());
 		
-		si.setPosted_at(
-				Methods.getTimeLabel_V2(
-						Methods.getMillSeconds_now(), 2));
+//		si.setPosted_at(
+//				Methods.getTimeLabel_V2(
+//						Methods.getMillSeconds_now(), 2));
 //		si.setPosted_at(Methods.getMillSeconds_now());
 		
 		// Log
 		Log.d("["
-				+ "RegisterItemActv.java : "
+				+ "ButtonOnClickListener.java : "
 				+ +Thread.currentThread().getStackTrace()[2]
 						.getLineNumber()
 				+ " : "
@@ -357,18 +354,18 @@ public class ButtonOnClickListener implements OnClickListener {
 				+ "created_at=" + si.getCreated_at()
 				);
 		
-		boolean res = Methods_sl.update_SI(actv, si);
+//		boolean res = Methods_sl.update_SI(actv, si);
 		
-		if (res == false) {
-			
-			// debug
-			Toast.makeText(actv,
-					"Data 'posted_at' => Not added",
-					Toast.LENGTH_LONG).show();
-			
-			return;
-			
-		}//if (res == false)
+//		if (res == false) {
+//			
+//			// debug
+//			Toast.makeText(actv,
+//					"Data 'posted_at' => Not added",
+//					Toast.LENGTH_LONG).show();
+//			
+//			return;
+//			
+//		}//if (res == false)
 		
 		
 		Task_PostData task = new Task_PostData(actv, si);
