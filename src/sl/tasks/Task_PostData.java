@@ -103,13 +103,18 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 			return CONS.ReturnValues.FAILED;
 		}
 		
-		int num = si_list.size();
-//		int num = 3;
+//		int num = si_list.size();
+		int num = 180;
+		int num2 = si_list.size();
+//		int num = 30;
+//		int num2 = 60;
+		
 		
 		int count = 0;
 		int result;
 		
-		for (int i = 0; i < num; i++) {
+		for (int i = num; i < num2; i++) {
+//			for (int i = 0; i < num; i++) {
 			
 			result = _exec_post(si_list.get(i));
 			
@@ -132,6 +137,22 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	 * 
 	 *********************************/
 	private int _exec_post(ShoppingItem si) {
+		
+		if (si == null) {
+			
+			// Log
+			Log.d("["
+					+ "Task_PostData.java : "
+					+ +Thread.currentThread().getStackTrace()[2]
+							.getLineNumber() + " : "
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", "si => null");
+			
+			return CONS.ReturnValues.ParamVariableNull;
+			
+		}
+		
+		
 		// Log
 		Log.d("[" + "Task_PostData.java : "
 				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
@@ -241,7 +262,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 //			
 //		} catch (ClientProtocolException e) {
 //			// Log
-//			Log.d("TaskHTTP.java" + "["
+//			Log.d("Task_PostData.java" + "["
 //					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //					+ "]", e.toString());
 //			
@@ -250,7 +271,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 //		} catch (IOException e) {
 //			
 //			// Log
-//			Log.d("TaskHTTP.java" + "["
+//			Log.d("Task_PostData.java" + "["
 //					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //					+ "]", e.toString());
 //			
@@ -261,7 +282,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 //		if (hr == null) {
 //		
 //			// Log
-//			Log.d("TaskHTTP.java" + "["
+//			Log.d("Task_PostData.java" + "["
 //					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 //					+ "]", "hr => null");
 //			
@@ -357,7 +378,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 			
 		} catch (ClientProtocolException e) {
 			// Log
-			Log.d("TaskHTTP.java" + "["
+			Log.d("Task_PostData.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", e.toString());
 			
@@ -366,7 +387,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		} catch (IOException e) {
 			
 			// Log
-			Log.d("TaskHTTP.java" + "["
+			Log.d("Task_PostData.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", e.toString());
 			
@@ -377,7 +398,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		if (hr == null) {
 		
 			// Log
-			Log.d("TaskHTTP.java" + "["
+			Log.d("Task_PostData.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ "]", "hr => null");
 			
@@ -466,7 +487,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 			se = new StringEntity(joBody.toString(), "UTF-8");
 			
 			// Log
-			Log.d("TaskHTTP.java" + "["
+			Log.d("Task_PostData.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -475,7 +496,7 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		} catch (UnsupportedEncodingException e) {
 			
 			// Log
-			Log.d("TaskHTTP.java" + "["
+			Log.d("Task_PostData.java" + "["
 					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
 					+ ":"
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
@@ -537,9 +558,11 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 					+ +Thread.currentThread().getStackTrace()[2]
 							.getLineNumber() + " : "
 					+ Thread.currentThread().getStackTrace()[2].getMethodName()
-					+ "]", "No genre data");
+//					+ "]", "No genre data");
+					+ "]",
+					"No genre data => " + si.getName());
 			
-			return null;
+//			return null;
 			
 		}
 		

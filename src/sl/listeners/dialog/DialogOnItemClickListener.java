@@ -563,7 +563,7 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		} else if (choice.equals(actv.getString(
 				R.string.dlg_db_admin_item_post_data))) {
 			
-			dlg_db_admin_lv_PostData();
+//			dlg_db_admin_lv_PostData();
 			
 		}//if
 		

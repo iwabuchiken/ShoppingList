@@ -560,6 +560,8 @@ public class CONS {
 		
 		public static final int ClientError		= -17;
 		
+		public static final int ParamVariableNull	= -17;
+		
 		/*********************************
 		 * Others: > 0, <= -90
 		 *********************************/
