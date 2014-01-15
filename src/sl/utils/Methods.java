@@ -2278,7 +2278,8 @@ public class Methods {
 	}//public static String get_TimeLabel(long millSec)
 	
 	/*********************************
-	 * @param
+	 * @param type => 1 ---> yyyyMMdd_HHmmss<br>
+	 * 				2 ---> yyyy-MM-dd HH:mm:ss.S
 	 *********************************/
 	public static String getTimeLabel_V2(long millSec, int type) {
 		

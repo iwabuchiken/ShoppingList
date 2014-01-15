@@ -79,6 +79,7 @@ public class MainActv extends Activity {
     
 	private void do_debugs() {
 		
+//		_debug_D_44_V_3_0_11_EnterCreatedAtData();
 //		_debug_D_44_V_3_0_7_SQL_Generic(
 //				CONS.SQLs.a_20140110_105949_InsertInto_ShoppingItemNew);
 //		_debug_D_44_V_3_0_7_DropTable_ShoppingItemNew();
@@ -98,6 +99,79 @@ public class MainActv extends Activity {
 //		_debug_D_44_V_3_0_3_AddColumns();
 		
 	}//private void do_debugs()
+
+
+	private void
+	_debug_D_44_V_3_0_11_EnterCreatedAtData() {
+		// TODO Auto-generated method stub
+		List<ShoppingItem> si_list = Methods_sl.getSIList(this);
+		
+		int counter = 0;
+		
+		int updated = 0;
+		
+		for (ShoppingItem si : si_list) {
+			
+//			// Log
+//			Log.d("["
+//					+ "MainActv.java : "
+//					+ +Thread.currentThread().getStackTrace()[2]
+//							.getLineNumber() + " : "
+//					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+//					+ "]",
+//					"name=" + si.getName()
+//					+ "/"
+//					+ "created_at="
+//					+ si.getCreated_at());
+			
+			if (si.getCreated_at() == null
+					|| si.getCreated_at().equals("")) {
+//				|| si.getCreated_at() == "") {
+				
+				si.setCreated_at(
+						Methods.getTimeLabel_V2(Methods.getMillSeconds_now(), 2));
+				si.setUpdated_at(
+						Methods.getTimeLabel_V2(Methods.getMillSeconds_now(), 2));
+				
+				boolean bRes = Methods_sl.update_SI(this, si);
+				
+				counter += 1;
+				
+				if (bRes == true) {
+					
+					updated += 1;
+					
+				}//if (bRes == true) {
+				
+				// Log
+				Log.d("["
+						+ "MainActv.java : "
+						+ +Thread.currentThread().getStackTrace()[2]
+								.getLineNumber()
+						+ " : "
+						+ Thread.currentThread().getStackTrace()[2]
+								.getMethodName() + "]", "si.getCreated_at() == null");
+				
+			}//if (si.getCreated_at() == null
+			
+		}//for (ShoppingItem si : si_list) {
+		
+		// Log
+		Log.d("[" + "MainActv.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]",
+				"total=" + si_list.size()
+				+ "/"
+				+ "target=" + counter
+				+ "/"
+				+ "updated=" + updated);
+//				"counter => " + counter
+//				+ "/"
+//				+ "total=" + si_list.size());
+		
+	}//_debug_D_44_V_3_0_11_EnterCreatedAtData()
 
 
 	private void _debug_D_44_V_3_0_7_SQL_Generic(String[] sqls) {

@@ -2405,7 +2405,8 @@ public class Methods_sl {
 			
 			c = rdb.query(
 					CONS.tableName, 
-					CONS.columns_with_index2,
+					CONS.cols_SI_full,
+//					CONS.columns_with_index2,
 											null, null, null, null, null);
 		} catch (Exception e) {
 			
@@ -2418,19 +2419,41 @@ public class Methods_sl {
 		
 		//
 		c.moveToFirst();
-		
+		/*
+		cols_SI_full = { 
+				//	0		1		2
+				"store", "name", "price",
+				//	3		4			5
+				"genre", "yomi", android.provider.BaseColumns._ID, 
+				//	6			7				8
+				"created_at", "updated_at", "posted_at"
+				*/
 		for (int i = 0; i < c.getCount(); i++) {
 
 //			0									1		2		3		4			5
 //			{android.provider.BaseColumns._ID, "name", "yomi", "genre", "store", "price"}
-			ShoppingItem item = new ShoppingItem(
-					c.getInt(0),		// id store
-					c.getString(1),		// name
-					c.getString(2),		// yomi
-					c.getString(3),		// genre
-					c.getString(4),		//	store
-					c.getInt(5)			// price
-					);
+			ShoppingItem item = new ShoppingItem.Builder()
+						.setId(c.getInt(5))
+						
+						.setName(c.getString(1))
+						.setPrice(c.getInt(2))
+						.setGenre(c.getString(3))
+						.setYomi(c.getString(4))
+						.setStore(c.getString(0))
+						
+						.setCreated_at(c.getString(6))
+						.setUpdated_at(c.getString(7))
+						.setPosted_at(c.getString(8))
+						.build();
+			
+//					ShoppingItem item = new ShoppingItem(
+//					c.getInt(0),		// id store
+//					c.getString(1),		// name
+//					c.getString(2),		// yomi
+//					c.getString(3),		// genre
+//					c.getString(4),		//	store
+//					c.getInt(5)			// price
+//					);
 			
 			//
 			si_list.add(item);
