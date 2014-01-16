@@ -495,6 +495,11 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 	
 			Methods_dlg.dlg_DeleteToBuyList(actv, dlg);
 			
+		} else if (choice.equals(actv.getString(	// Upload bought items
+				R.string.menu_listitem_tabToBuy_admin_db_upload_tobuy_list))) {
+			
+			Methods_dlg.dlg_UploadToBuyList(actv, dlg);
+			
 		}//if (choice.equals(actv.getString(R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list)))
 		
 	}//private void case_dlg_tabActv_adminDb(String choice)

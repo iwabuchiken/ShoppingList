@@ -42,6 +42,7 @@ public class DB_TL implements OnTouchListener {
 			
 			case tab1_delete_item_ok:
 			case generic_cancel_second_dialog:			
+			case tab2_post_items_ok:			
 				
 				//
 				v.setBackgroundColor(Color.GRAY);
@@ -57,6 +58,7 @@ public class DB_TL implements OnTouchListener {
 				//
 			case tab1_delete_item_ok:
 			case generic_cancel_second_dialog:			
+			case tab2_post_items_ok:			
 				
 				v.setBackgroundColor(Color.WHITE);
 				

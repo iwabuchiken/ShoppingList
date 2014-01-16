@@ -48,7 +48,12 @@ public class CONS {
 	 * Dialog button tags
 	 *********************************/
 	public static enum DialogButtonTags {
-		tab1_delete_item_ok, generic_cancel_second_dialog,
+		tab1_delete_item_ok,
+		
+		generic_cancel_second_dialog,
+		
+		tab2_post_items_ok,
+		
 	};
 	
 	
@@ -522,12 +527,36 @@ public class CONS {
 //						"item[yomi]",		"item[mobile_id]",
 						};
 		
+		public static String[] Keys_PurHistory = {
+			
+			"sl_BoughtItemIds",
+			
+			"sl_PurHistory_time"
+			
+		};
+		
 		/*********************************
 		 * Posting data => Types
 		 *********************************/
 		public static enum registerChoice {
 			single_item,
+			
+			pur_history,
 		};
+		
+		/*********************************
+		 * Passwords
+		 *********************************/
+		public static final String passwdSL		= "passwd_sl";
+		
+		public static final String passwdPurHistory
+												= "sl_PurHistory";
+		
+		/*********************************
+		 * Others
+		 *********************************/
+		public static final String PostItems_SeparatorString
+					= " ";
 		
 	}
 	
@@ -572,7 +601,8 @@ public class CONS {
 		public static final int FAILED			= -91;
 		
 		public static final int MAGINITUDE_ONE	= 1000;
-	}
+		
+	}//public static class ReturnValues
 
 	public static class HTTPResponse {
 		/*********************************

@@ -14,6 +14,7 @@ import sl.listeners.dialog.DialogOnItemClickListener;
 import sl.listeners.list.ListOnItemClickListener;
 import sl.main.R;
 import sl.main.RegisterItemActv;
+import sl.utils.CONS.DialogButtonTags;
 import sl.utils.Tags;
 import sl.utils.Tags.DialogTags;
 
@@ -21,6 +22,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
@@ -125,9 +127,14 @@ public class Methods_dlg {
 		 * 2. Prep => List
 			----------------------------*/
 		String[] choices = {
-				actv.getString(R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list),
-				actv.getString(R.string.menu_listitem_tabToBuy_admin_db_load_tobuy_list),
-				actv.getString(R.string.menu_listitem_tabToBuy_admin_db_delete_tobuy_list),
+				actv.getString(
+					R.string.menu_listitem_tabToBuy_admin_db_save_tobuy_list),
+				actv.getString(
+					R.string.menu_listitem_tabToBuy_admin_db_load_tobuy_list),
+				actv.getString(
+					R.string.menu_listitem_tabToBuy_admin_db_delete_tobuy_list),
+				actv.getString(
+					R.string.menu_listitem_tabToBuy_admin_db_upload_tobuy_list),
 				
 		};
 		
@@ -547,8 +554,11 @@ public class Methods_dlg {
 	Dialog dlg_template_okCancel_2Dialogues
 	(Activity actv,
 			int layoutId, int titleStringId,
+			
 			int okButtonId, int cancelButtonId,
+			
 			DialogTags okTag, DialogTags cancelTag,
+			
 			Dialog dlg1) {
 		/*----------------------------
 		* Steps
@@ -1718,7 +1728,8 @@ public class Methods_dlg {
 						R.id.dlg_template_ok_cancel_tv_message);
 //		R.id.dlg_template_ok_cancel_tv_string);
 		
-		tv_message.setText("Delete the item?");
+		tv_message.setText(actv.getString(R.string.generic_message_delete_item));
+//		tv_message.setText("Delete the item?");
 		
 		/*********************************
 		 * Set: Item name
@@ -1736,5 +1747,111 @@ public class Methods_dlg {
 		dlg2.show();
 		
 	}//dlg_tab1_delete_item
+
+	public static void
+	dlg_UploadToBuyList(Activity actv, Dialog dlg1) {
+		// TODO Auto-generated method stub
+		Dialog dlg2 = Methods_dlg.dlg_template_okCancel_2Dialogues(
+				actv,
+				R.layout.dlg_template_ok_cancel,
+				R.string.generic_title_reconfirm,
+				
+				R.id.dlg_template_ok_cancel_btn_ok,
+//				R.id.dlg_template_ok_cancel_btn_ok,
+				R.id.dlg_template_ok_cancel_btn_cancel,
+				
+				CONS.DialogButtonTags.tab2_post_items_ok,
+				CONS.DialogButtonTags.generic_cancel_second_dialog,
+		
+				dlg1);
+		
+		/*********************************
+		 * Get: Views
+		 *********************************/
+		TextView tv_Message = (TextView) dlg2.findViewById(
+				R.id.dlg_template_ok_cancel_tv_message);
+		
+		TextView tv_Value = (TextView) dlg2.findViewById(
+				R.id.dlg_template_ok_cancel_tv_item_name);
+		
+		/*********************************
+		 * Modify: Views
+		 *********************************/
+		//REF http://stackoverflow.com/questions/4602902/how-to-set-text-color-of-textview-in-code answered Jan 5 '11 at 10:17
+		tv_Message.setTextColor(Color.WHITE);
+		
+		/*********************************
+		 * Add: Message
+		 *********************************/
+		tv_Message.setText(actv.getString(
+						R.string.dlg_post_bought_items_message));
+		
+		tv_Value.setText(String.valueOf(CONS.tab_toBuyItemIds.size()) + " items");
+		
+		dlg2.show();
+		
+	}//dlg_UploadToBuyList(Activity actv, Dialog dlg)
+
+	private static Dialog
+	dlg_template_okCancel_2Dialogues(
+			Activity actv,
+			int layoutId, int dlgTitle,
+			
+			int okButtonId, int cancelButtonId,
+			
+			DialogButtonTags btnTagOK,
+			DialogButtonTags btnTagCancel,
+
+			Dialog dlg1) {
+		/*----------------------------
+		* Steps
+		* 1. Set up
+		* 2. Add listeners => OnTouch
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		
+		// 
+		Dialog dlg2 = new Dialog(actv);
+		
+		//
+		dlg2.setContentView(layoutId);
+		
+		// Title
+		dlg2.setTitle(dlgTitle);
+		
+		/*----------------------------
+		* 2. Add listeners => OnTouch
+		----------------------------*/
+		//
+		Button btn_ok = (Button) dlg2.findViewById(okButtonId);
+		Button btn_cancel = (Button) dlg2.findViewById(cancelButtonId);
+		
+		//
+		btn_ok.setTag(btnTagOK);
+		btn_cancel.setTag(btnTagCancel);
+		
+		//
+		btn_ok.setOnTouchListener(
+				new DB_TL(actv, dlg2));
+//		new DialogButtonOnTouchListener(actv, dlg2));
+		btn_cancel.setOnTouchListener(
+				new DB_TL(actv, dlg2));
+//		new DialogButtonOnTouchListener(actv, dlg2));
+		
+		/*----------------------------
+		* 3. Add listeners => OnClick
+		----------------------------*/
+		//
+		btn_ok.setOnClickListener(
+				new DB_CL(actv, dlg1, dlg2));
+		btn_cancel.setOnClickListener(
+				new DB_CL(actv, dlg1, dlg2));
+		
+		//
+		//dlg.show();
+		
+		return dlg2;
+
+	}//dlg_template_okCancel_2Dialogues
 
 }//public class Methods_dlg

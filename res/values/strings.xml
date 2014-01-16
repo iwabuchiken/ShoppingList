@@ -7,6 +7,8 @@
 	    <string name="generic_cancel">キャンセル</string>
 	    <string name="generic_message_register">登録してよろしいですか？</string>
 	    
+	    <string name="generic_message_delete_item">Delete the item?</string>
+	    
 	    <string name="dlg_reconfirm_genre_name">ジャンル名</string>
 	    <string name="generic_title_reconfirm">確認</string>
 	    <string name="generic_label_create">作成</string>
@@ -125,9 +127,14 @@
 		<string name="tabactv_tabtags_second">Second</string>
 		
 	<!-- menu_listitem_tabToBuy_admin_db -->
-		<string name="menu_listitem_tabToBuy_admin_db_save_tobuy_list">Save to-buy list</string>
-		<string name="menu_listitem_tabToBuy_admin_db_load_tobuy_list">Load to-buy list</string>
-		<string name="menu_listitem_tabToBuy_admin_db_delete_tobuy_list">Delete to-buy list</string>
+		<string name="menu_listitem_tabToBuy_admin_db_save_tobuy_list">
+		    		Save to-buy list</string>
+		<string name="menu_listitem_tabToBuy_admin_db_load_tobuy_list">
+		    		Load to-buy list</string>
+		<string name="menu_listitem_tabToBuy_admin_db_delete_tobuy_list">
+		    		Delete to-buy list</string>
+		<string name="menu_listitem_tabToBuy_admin_db_upload_tobuy_list">
+		    		Upload to-buylist</string>
 		
 	<!-- dlg_save_tobuy_list.xml -->
 		<string name="dlg_save_tobuy_list_scheduled_date">予定日</string>	
@@ -155,5 +162,8 @@
 	<!-- Dialog: Tab1, item list, long click -->
 		<string name="dlg_item_list_long_click_edit">Edit</string>
 		<string name="dlg_item_list_long_click_delete">Delete</string>
+		
+	<!-- Dialog: Upload boutght items -->
+		<string name="dlg_post_bought_items_message">Upload bought items?</string>
 		
 </resources>

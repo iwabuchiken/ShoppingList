@@ -43,6 +43,7 @@ import sl.items.PS;
 import sl.items.ShoppingItem;
 import sl.main.MainActv;
 import sl.main.R;
+import sl.tasks.Task_PostData;
 import sl.utils.Tags.SortTags;
 
 public class Methods_sl {
@@ -2857,5 +2858,45 @@ public class Methods_sl {
 		return dbu.updateData_SI_all_V2(si);
 		
 	}//update_SI(Activity actv, ShoppingItem si)
+
+	public static void
+	post_BoughtItems(Activity actv, Dialog dlg1, Dialog dlg2) {
+		// TODO Auto-generated method stub
+		
+		Task_PostData task = new Task_PostData(actv, dlg1, dlg2);
+		
+		task.execute(CONS.HTTPData.registerChoice.pur_history.toString());
+		
+	}//post_BoughtItems(Activity actv, Dialog dlg1, Dialog dlg2)
+
+	public static JSONObject
+	get_JsonBody_Generic
+	(String[] keys, Object[] values) {
+		
+		JSONObject joBody = new JSONObject();
+		
+		try {
+			
+			for(int i = 0; i < keys.length; i++) {
+				
+				joBody.put(keys[i], values[i]);
+				
+			}
+			
+		} catch (JSONException e) {
+			
+			// Log
+			Log.d("Methods_sl.java" + "["
+					+ Thread.currentThread().getStackTrace()[2].getLineNumber()
+					+ ":"
+					+ Thread.currentThread().getStackTrace()[2].getMethodName()
+					+ "]", e.toString());
+			
+			return null;
+			
+		}
+
+		return joBody;
+	}//get_json_body_PurHistory
 	
 }//public class Methods_sl

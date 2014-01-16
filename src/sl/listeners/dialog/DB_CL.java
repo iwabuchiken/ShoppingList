@@ -96,6 +96,14 @@ DB_CL implements OnClickListener {
 			
 			break;
 			
+		case tab2_post_items_ok:
+			
+			dlg2.dismiss();
+			
+			Methods_sl.post_BoughtItems(actv, dlg1, dlg2);
+			
+			break;
+			
 		default:
 			break;
 		}//switch (tag_name)
