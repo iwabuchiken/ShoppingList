@@ -332,6 +332,9 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 
 	}//_doInBackground__getJSONBody_PurHistory()
 
+	/*********************************
+	 * @return null => CONS.tab_toBuyItemIds == null
+	 *********************************/
 	private String
 	_doInBackground__getJSONBody_PurHistory_BuildItemIds() {
 		
@@ -339,12 +342,26 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		
 		if (CONS.tab_toBuyItemIds == null) {
 			
-			itemIds = "40,1 87,1 109,2";
+			return null;
+			
+//			itemIds = "40,1 87,1 109,2";
 			
 		} else {//if (CONS.tab_toBuyItemIds == null)
 			
+			String[] mixedLabel = new String[CONS.tab_toBuyItemIds.size()];
+				
+			for (int i = 0; i < mixedLabel.length; i++) {
+				
+				mixedLabel[i] =
+						String.valueOf(CONS.tab_toBuyItemIds.get(i))
+						+ ","
+						+ String.valueOf(1);
+				
+			}
+			
 			itemIds = StringUtils.join(
-					CONS.tab_toBuyItemIds.toArray(),
+					mixedLabel,
+//					CONS.tab_toBuyItemIds.toArray(),
 					CONS.HTTPData.PostItems_SeparatorString);
 			
 		}//if (CONS.tab_toBuyItemIds == null)
