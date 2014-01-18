@@ -2862,7 +2862,9 @@ public class Methods_sl {
 	public static void
 	post_BoughtItems(Activity actv, Dialog dlg1, Dialog dlg2) {
 		// TODO Auto-generated method stub
-		
+		/*********************************
+		 * Start: Task
+		 *********************************/
 		Task_PostData task = new Task_PostData(actv, dlg1, dlg2);
 		
 		task.execute(CONS.HTTPData.registerChoice.pur_history.toString());

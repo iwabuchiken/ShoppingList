@@ -62,8 +62,8 @@ public class Methods_dlg {
 				actv.getString(R.string.dlg_db_admin_item_refresh_db),
 				actv.getString(R.string.dlg_db_admin_item_refatcor_db),
 				actv.getString(R.string.dlg_db_admin_item_restore_db),
-				actv.getString(R.string.dlg_db_admin_item_get_yomi),
-				actv.getString(R.string.dlg_db_admin_item_post_data),
+				actv.getString(R.string.dlg_db_admin_item_get_yomi)
+//				actv.getString(R.string.dlg_db_admin_item_post_data),
 		};
 		
 		List<String> list = new ArrayList<String>();
@@ -134,7 +134,7 @@ public class Methods_dlg {
 				actv.getString(
 					R.string.menu_listitem_tabToBuy_admin_db_delete_tobuy_list),
 				actv.getString(
-					R.string.menu_listitem_tabToBuy_admin_db_upload_tobuy_list),
+					R.string.menu_listitem_tabToBuy_admin_db_post_tobuy_list),
 				
 		};
 		
@@ -1749,8 +1749,34 @@ public class Methods_dlg {
 	}//dlg_tab1_delete_item
 
 	public static void
-	dlg_UploadToBuyList(Activity actv, Dialog dlg1) {
+	dlg_PostToBuyList(Activity actv, Dialog dlg1) {
 		// TODO Auto-generated method stub
+		/*********************************
+		 * Validation
+		 *********************************/
+		if (CONS.tab_toBuyItemIds == null) {
+			
+			// debug
+			Toast.makeText(actv,
+					"To-buy list => Null", Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}
+		
+		if (CONS.tab_toBuyItemIds.size() < 1) {
+			
+			// debug
+			Toast.makeText(actv,
+					"To-buy list => No entry", Toast.LENGTH_LONG).show();
+			
+			return;
+			
+		}
+
+		/*********************************
+		 * Build: Dialog 2
+		 *********************************/
 		Dialog dlg2 = Methods_dlg.dlg_template_okCancel_2Dialogues(
 				actv,
 				R.layout.dlg_template_ok_cancel,

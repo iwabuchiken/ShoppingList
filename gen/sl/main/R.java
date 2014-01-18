@@ -357,10 +357,10 @@ public final class R {
         public static final int menu_listitem_tabToBuy_admin_db=0x7f070039;
         public static final int menu_listitem_tabToBuy_admin_db_delete_tobuy_list=0x7f070058;
         public static final int menu_listitem_tabToBuy_admin_db_load_tobuy_list=0x7f070057;
+        public static final int menu_listitem_tabToBuy_admin_db_post_tobuy_list=0x7f070059;
         /**  menu_listitem_tabToBuy_admin_db 
          */
         public static final int menu_listitem_tabToBuy_admin_db_save_tobuy_list=0x7f070056;
-        public static final int menu_listitem_tabToBuy_admin_db_upload_tobuy_list=0x7f070059;
         public static final int menu_listitem_tabToBuy_clear_basket=0x7f07003a;
         public static final int menu_listitem_tabToBuy_clear_checked_items=0x7f07003b;
         public static final int menu_listitem_tabToBuy_clear_selections=0x7f070038;

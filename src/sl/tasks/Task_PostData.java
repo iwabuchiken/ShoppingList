@@ -283,13 +283,17 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		 * Build: JOBody
 		 *
 		 ***************************************/
+		ShoppingItem si = Methods_sl.getSI_FromDbId(
+						actv,
+						CONS.tab_toBuyItemIds.get(0));
+		
 		Object[] values = new Object[]{
 				
 				itemIds,
 				
 				Methods.getTimeLabel_V2(Methods.getMillSeconds_now(), 2),
 				
-			2
+				Methods_sl.get_StoreId_from_StoreName(actv, si.getStore())
 				
 		};
 		

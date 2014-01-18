@@ -133,8 +133,8 @@
 		    		Load to-buy list</string>
 		<string name="menu_listitem_tabToBuy_admin_db_delete_tobuy_list">
 		    		Delete to-buy list</string>
-		<string name="menu_listitem_tabToBuy_admin_db_upload_tobuy_list">
-		    		Upload to-buylist</string>
+		<string name="menu_listitem_tabToBuy_admin_db_post_tobuy_list">
+		    		Post to-buylist</string>
 		
 	<!-- dlg_save_tobuy_list.xml -->
 		<string name="dlg_save_tobuy_list_scheduled_date">予定日</string>	
