@@ -568,7 +568,7 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		} else if (choice.equals(actv.getString(
 				R.string.dlg_db_admin_item_post_data))) {
 			
-//			dlg_db_admin_lv_PostData();
+			dlg_db_admin_lv_PostData();
 			
 		}//if
 		
@@ -578,7 +578,7 @@ public class DialogOnItemClickListener implements OnItemClickListener {
 		// TODO Auto-generated method stub
 		Task_PostData task = new Task_PostData(actv, dlg);
 		
-		task.execute("Start");
+		task.execute(CONS.HTTPData.registerChoice.pur_history.toString());
 		
 		dlg.dismiss();
 		

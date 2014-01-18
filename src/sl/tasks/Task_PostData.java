@@ -221,17 +221,27 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 	    /***************************************
 		 * Post
 		 ***************************************/
-//		int iRes = _doInBackground__4_PostData(httpPost);
-//		
-//		if (iRes != CONS.ReturnValues.OK) {
-//			
-//			return iRes;
-//			
-//		}
+		int iRes = _doInBackground__4_PostData(httpPost);
+		
+		if (iRes != CONS.ReturnValues.OK) {
+			
+			return iRes;
+			
+		}
 
 		//default
-		return CONS.tab_toBuyItemIds.size()
-				+ CONS.ReturnValues.MAGINITUDE_ONE;
+		if (CONS.tab_toBuyItemIds == null) {
+			
+			return 1
+					+ CONS.ReturnValues.MAGINITUDE_ONE;
+			
+		} else {//if (CONS.tab_toBuyItemIds == null)
+			
+			return CONS.tab_toBuyItemIds.size()
+					+ CONS.ReturnValues.MAGINITUDE_ONE;
+			
+		}//if (CONS.tab_toBuyItemIds == null)
+		
 		
 	}//private int _doInBackground__PurHistory()
 
@@ -251,9 +261,23 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		/*********************************
 		 * Prep: values
 		 *********************************/
-		String itemIds = StringUtils.join(
-				CONS.tab_toBuyItemIds.toArray(),
-				CONS.HTTPData.PostItems_SeparatorString);
+		String itemIds = _doInBackground__getJSONBody_PurHistory_BuildItemIds();
+//				String itemIds = StringUtils.join(
+//				CONS.tab_toBuyItemIds.toArray(),
+//				CONS.HTTPData.PostItems_SeparatorString);
+		
+		// Log
+		Log.d("[" + "Task_PostData.java : "
+				+ +Thread.currentThread().getStackTrace()[2].getLineNumber()
+				+ " : "
+				+ Thread.currentThread().getStackTrace()[2].getMethodName()
+				+ "]", "itemIds => " + itemIds);
+		
+		if (itemIds == null) {
+			
+			return null;
+			
+		}
 		
 		/***************************************
 		 * Build: JOBody
@@ -263,7 +287,9 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 				
 				itemIds,
 				
-				Methods.getTimeLabel_V2(Methods.getMillSeconds_now(), 2)
+				Methods.getTimeLabel_V2(Methods.getMillSeconds_now(), 2),
+				
+			2
 				
 		};
 		
@@ -277,8 +303,8 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		try {
 			
 			joBody.put(
-					CONS.HTTPData.passwdSL,
-					CONS.HTTPData.passwdPurHistory);
+					CONS.HTTPData.passwdKey_SL,
+					CONS.HTTPData.passwdSL_PurHistory);
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -301,6 +327,28 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 		return joBody;
 
 	}//_doInBackground__getJSONBody_PurHistory()
+
+	private String
+	_doInBackground__getJSONBody_PurHistory_BuildItemIds() {
+		
+		String itemIds = null;
+		
+		if (CONS.tab_toBuyItemIds == null) {
+			
+			itemIds = "40,1 87,1 109,2";
+			
+		} else {//if (CONS.tab_toBuyItemIds == null)
+			
+			itemIds = StringUtils.join(
+					CONS.tab_toBuyItemIds.toArray(),
+					CONS.HTTPData.PostItems_SeparatorString);
+			
+		}//if (CONS.tab_toBuyItemIds == null)
+		
+		return itemIds;
+		
+	}//_doInBackground__getJSONBody_PurHistory_BuildItemIds()
+	
 
 	/*********************************
 	 * 
@@ -678,7 +726,9 @@ public class Task_PostData extends AsyncTask<String, Integer, Integer> {
 			
 //			joBody.put("passwd[sl]", "abc");
 //			joBody.put("pass_sl", "abc");
-			joBody.put("passwd_sl", "abc");
+			joBody.put(
+					CONS.HTTPData.passwdKey_SL,
+					CONS.HTTPData.passwdSL_NewItem);
 //			joBody.put("password_sl", "abc");
 			
 		} catch (JSONException e) {

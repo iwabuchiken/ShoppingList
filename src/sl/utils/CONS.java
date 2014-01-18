@@ -531,7 +531,9 @@ public class CONS {
 			
 			"sl_BoughtItemIds",
 			
-			"sl_PurHistory_time"
+			"sl_PurHistory_Time",
+			
+			"sl_PurHistory_Store"
 			
 		};
 		
@@ -547,10 +549,13 @@ public class CONS {
 		/*********************************
 		 * Passwords
 		 *********************************/
-		public static final String passwdSL		= "passwd_sl";
+		public static final String passwdKey_SL		= "passwd_sl";
 		
-		public static final String passwdPurHistory
-												= "sl_PurHistory";
+		public static final String passwdSL_NewItem
+												= "sl_NewItem";
+		
+		public static final String passwdSL_PurHistory
+												= "sl_PurHist";
 		
 		/*********************************
 		 * Others
